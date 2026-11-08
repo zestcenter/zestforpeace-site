@@ -774,6 +774,19 @@ header.main .logo{background-color:transparent!important}
 @keyframes zjwg{0%,100%{box-shadow:0 0 0 0 rgba(19,128,184,.4)}50%{box-shadow:0 0 0 .5rem rgba(19,128,184,0)}}
 @keyframes zjws{0%{left:-60%}55%,100%{left:130%}}
 }
+
+/* Our Projects – bento mosaic */
+.zbento{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:7.5rem;grid-auto-flow:dense;gap:.6rem}
+.zb-t{position:relative;overflow:hidden;border-radius:1.1rem;background:var(--i) center/cover no-repeat,var(--surface);box-shadow:0 .4rem 1rem rgba(10,60,90,.12);isolation:isolate}
+.zb-t::before{content:"";position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;z-index:-2;transition:transform .8s ease}
+.zb-t::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(8,30,45,.85) 100%)}
+.zb-t.b{grid-column:span 2;grid-row:span 2}
+.zb-t.t{grid-row:span 2}
+.zb-t h3{position:absolute;left:.75rem;right:.75rem;bottom:.6rem;margin:0;color:#fff;font:800 .82rem/1.35 "Noto Sans Malayalam","Inter",sans-serif;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.zb-t.b h3{font-size:1.15rem;left:1rem;bottom:.9rem}
+.zb-t:hover::before{transform:scale(1.07)}
+@media (min-width:48rem){.zbento{grid-template-columns:repeat(4,1fr);grid-auto-rows:10rem;gap:.85rem}.zb-t:nth-child(1){grid-column:1/3;grid-row:1/3}.zb-t:nth-child(2){grid-column:3;grid-row:1}.zb-t:nth-child(3){grid-column:4;grid-row:1}.zb-t:nth-child(4){grid-column:3;grid-row:2/4}.zb-t:nth-child(5){grid-column:4;grid-row:2}.zb-t:nth-child(6){grid-column:4;grid-row:3}.zb-t:nth-child(7){grid-column:1/3;grid-row:3/5}.zb-t:nth-child(8){grid-column:3;grid-row:4}.zb-t:nth-child(9){grid-column:4;grid-row:4}.zb-t h3{font-size:.95rem}.zb-t.b h3{font-size:1.4rem}}
+@media (min-width:64rem){.zbento{grid-auto-rows:12rem}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -834,16 +847,16 @@ header.main .logo{background-color:transparent!important}
 
 <section id="programs"><div class="wrap">
 <p class="tag">Our Projects</p><h2 class="ml">ZESTന്റെ മുഖ്യ പദ്ധതികൾ</h2>
-<div class="pj">
-<div class="pc"><div class="ph" style="--i:var(--i-p-service)"></div><h3 class="ml">സർവീസ് സെന്റർ</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-ideal)"></div><h3 class="ml">ഐഡിയൽ സ്റ്റുഡന്റസ് ബാച്ച്</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-women)"></div><h3 class="ml">വുമൺ എംപവർമെന്റ് പ്രോഗ്രാം</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-library)"></div><h3 class="ml">ലൈബ്രറി &amp; റീഡിങ് റൂം</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-kalimuttam)"></div><h3 class="ml">കിഡ്സ്‌ ഡെവലപ്പ്മെന്റ് പ്രോഗ്രാംസ് - കളിമുറ്റം</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-turf)"></div><h3 class="ml">ഫുട്ബോൾ ടർഫ്</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-senior)"></div><h3 class="ml">സീനിയർ സിറ്റിസൺ കോർണർ</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-kidspark)"></div><h3 class="ml">കിഡ്സ്‌ പാർക്ക്‌</h3></div>
-<div class="pc"><div class="ph" style="--i:var(--i-p-playground)"></div><h3 class="ml">സ്ത്രീകളുടെ കളിസ്ഥലം</h3></div>
+<div class="zbento">
+<div class="zb-t b" style="--i:var(--i-p-ideal)"><h3 class="ml">ഐഡിയൽ സ്റ്റുഡന്റ്സ് ബാച്ച്</h3></div>
+<div class="zb-t" style="--i:var(--i-p-service)"><h3 class="ml">സർവീസ് സെന്റർ</h3></div>
+<div class="zb-t" style="--i:var(--i-p-women)"><h3 class="ml">വുമൺ എംപവർമെന്റ് പ്രോഗ്രാം</h3></div>
+<div class="zb-t t" style="--i:var(--i-p-library)"><h3 class="ml">ലൈബ്രറി &amp; റീഡിങ് റൂം</h3></div>
+<div class="zb-t" style="--i:var(--i-p-kalimuttam)"><h3 class="ml">കിഡ്സ്‌ ഡെവലപ്പ്മെന്റ് പ്രോഗ്രാംസ് - കളിമുറ്റം</h3></div>
+<div class="zb-t" style="--i:var(--i-p-turf)"><h3 class="ml">ഫുട്ബോൾ ടർഫ്</h3></div>
+<div class="zb-t b" style="--i:var(--i-p-senior)"><h3 class="ml">സീനിയർ സിറ്റിസൺ കോർണർ</h3></div>
+<div class="zb-t" style="--i:var(--i-p-kidspark)"><h3 class="ml">കിഡ്സ്‌ പാർക്ക്‌</h3></div>
+<div class="zb-t" style="--i:var(--i-p-playground)"><h3 class="ml">സ്ത്രീകളുടെ കളിസ്ഥലം</h3></div>
 </div></div></section>
 
 <section id="clubs" class="alt-bg"><div class="wrap">
