@@ -715,7 +715,7 @@ header.main .logo{width:8rem}
 .zci-btn::after{animation:zcish 3.4s ease-in-out infinite}
 @keyframes zcish{0%{left:-60%}50%,100%{left:130%}}
 }
-@media (min-width:64rem){.zci-btn{font-size:.7rem;padding:.5rem .9rem;margin-left:.25rem}#mn a[href="#centre-info"]{display:none}header.main .wrap{flex-wrap:nowrap}header.main nav{margin-left:auto}}
+@media (min-width:64rem){.zci-btn{font-size:.7rem;padding:.5rem .9rem;margin-left:.25rem}header.main .wrap{flex-wrap:nowrap}header.main nav{margin-left:auto}}
 
 /* header button v2: smaller, single row, livelier */
 header.main .wrap{flex-wrap:nowrap}
@@ -729,16 +729,19 @@ header.main .wrap{flex-wrap:nowrap}
 .zci-btn:hover{animation:none}
 }
 .zci-btn{flex:none}
-@media (max-width:24rem){header.main .logo{width:5.6rem}.zci-btn{font-size:.52rem;padding:.3rem .5rem;margin-left:.45rem;gap:.28rem}}
-@media (max-width:21rem){header.main .logo{width:4.9rem}.zci-btn{font-size:.48rem;letter-spacing:.03em}}
+@media (max-width:24rem){.zci-btn{font-size:.52rem;padding:.3rem .5rem;margin-left:.45rem;gap:.28rem}}
+@media (max-width:21rem){.zci-btn{font-size:.48rem;letter-spacing:.03em}}
 @media (min-width:64rem){.zci-btn{font-size:.68rem;padding:.48rem .9rem;margin-left:.5rem}}
+
+/* sticky header on every screen */
+header.main{position:sticky!important;top:0;z-index:70;background:#fff;box-shadow:0 .15rem .9rem rgba(10,60,120,.08)}
+html{scroll-padding-top:5rem}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <header class="main" id="top"><div class="wrap">
 <div class="logo ph" role="img" aria-label="ZEST for Peace"></div>
-<a class="zci-btn" href="#centre-info"><span class="zci-dot" aria-hidden="true"></span>ZEST CENTRE INFO</a>
 <button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><span></span><span></span><span></span></button>
 <nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">DAILY STORIES</a><a href="#contact">CONTACT US</a></nav>
 </div></header>
