@@ -436,7 +436,8 @@ header.main .logo{width:8rem}
 .zi-top,.zi-grid,.zi-cta{position:relative;z-index:1}
 .zi-tag{display:inline-flex;align-items:center;gap:.55rem;margin:0 0 .7rem;padding:.4rem .8rem;border-radius:999px;background:rgba(255,255,255,.14);font:600 .75rem/1 "Inter",system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#fff}
 .zi-live{width:.5rem;height:.5rem;border-radius:50%;background:#ffc44d;box-shadow:0 0 0 0 rgba(255,196,77,.7)}
-#centre-info h2.zi-h{margin:0 0 .5rem;white-space:normal;color:#fff;font:700 clamp(1.6rem,7vw,2.4rem)/1.2 "Inter","Noto Sans Malayalam",system-ui,sans-serif;letter-spacing:-.01em;text-transform:none}
+#centre-info h2.zi-h{display:flex;align-items:center;gap:.7rem;margin:0 0 1.3rem;white-space:normal;color:#fff;font:700 clamp(1.35rem,6vw,2rem)/1.2 "Inter",system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+#centre-info .zi-live{flex:none;width:.65rem;height:.65rem}
 .zi-sub{margin:0 0 1.5rem;color:#dff0fa;font-size:1rem;line-height:1.7}
 .zi-grid{display:grid;gap:.75rem;grid-template-columns:1fr}
 .zi-item{display:flex;align-items:center;gap:.9rem;padding:.9rem 1rem;border-radius:1.1rem;background:#fff;color:var(--ink);text-decoration:none;box-shadow:0 .6rem 1.4rem rgba(0,30,50,.18);transition:transform .25s ease,box-shadow .25s ease}
@@ -451,6 +452,20 @@ header.main .logo{width:8rem}
 .zi-go svg{width:1rem;height:1rem;fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 .zi-item:hover .zi-go{background:var(--blue)}
 .zi-item:hover .zi-go svg{stroke:#fff}
+.zi-go{position:relative;overflow:visible}
+.zi-go::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--sky);opacity:0}
+@media (prefers-reduced-motion:no-preference){
+.zi-go{animation:zigo 2.4s ease-in-out infinite}
+.zi-go svg{animation:ziarr 1.6s ease-in-out infinite}
+.zi-go::after{animation:ziring 2.4s ease-out infinite}
+.zi-item:nth-child(2) .zi-go,.zi-item:nth-child(2) .zi-go::after{animation-delay:.4s}
+.zi-item:nth-child(2) .zi-go svg{animation-delay:.3s}
+.zi-item:nth-child(3) .zi-go,.zi-item:nth-child(3) .zi-go::after{animation-delay:.8s}
+.zi-item:nth-child(3) .zi-go svg{animation-delay:.6s}
+@keyframes ziarr{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+@keyframes zigo{0%,70%,100%{background:var(--surface)}35%{background:#d7ecf8}}
+@keyframes ziring{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.6);opacity:0}}
+}
 .zi-cta{display:flex;justify-content:center;margin-top:1.4rem}
 .zi-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.95rem 1.7rem;border-radius:999px;background:#ffc44d;color:#1c2a32;font:700 .95rem/1 "Inter",system-ui,sans-serif;letter-spacing:.06em;text-decoration:none;box-shadow:0 .6rem 1.4rem rgba(0,0,0,.2);transition:transform .25s ease,box-shadow .25s ease}
 .zi-btn svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
@@ -507,28 +522,25 @@ header.main .logo{width:8rem}
 <section id="centre-info" class="zi-sec"><div class="wrap">
 <div class="zi-panel">
 <div class="zi-top">
-<p class="zi-tag"><span class="zi-live" aria-hidden="true"></span>ZEST Centre Info</p>
-<h2 class="zi-h">Stay updated with ZEST</h2>
-<p class="zi-sub ml">പരിപാടികൾ, സർവീസ് സെന്റർ അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ – എല്ലാം ഒരിടത്ത്.</p>
+<h2 class="zi-h"><span class="zi-live" aria-hidden="true"></span>ZEST CENTRE INFO</h2>
 </div>
 <div class="zi-grid">
-<a class="zi-item" href="https://zestcenter.github.io/" target="_blank" rel="noopener">
+<a class="zi-item" href="https://zestcenter.github.io/#sec-programs" target="_blank" rel="noopener">
 <span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="zi-acc" d="M8 14h3M8 17h6"/></svg></span>
 <span class="zi-txt"><b>ZEST Upcoming Programs</b><small>Events &amp; classes coming up</small></span>
 <span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </a>
-<a class="zi-item" href="https://zestcenter.github.io/" target="_blank" rel="noopener">
+<a class="zi-item" href="https://zestcenter.github.io/#sec-info" target="_blank" rel="noopener">
 <span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="zi-acc" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
 <span class="zi-txt"><b>Service Centre Bulletins</b><small>Schemes, notices &amp; services</small></span>
 <span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </a>
-<a class="zi-item" href="https://zestcenter.github.io/" target="_blank" rel="noopener">
+<a class="zi-item" href="https://zestcenter.github.io/#sec-jobs" target="_blank" rel="noopener">
 <span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="zi-acc" d="M3 13h18M12 12v2"/></svg></span>
 <span class="zi-txt"><b>Job Updates</b><small>Latest openings &amp; opportunities</small></span>
 <span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
 </a>
 </div>
-<div class="zi-cta"><a class="zi-btn" href="https://zestcenter.github.io/" target="_blank" rel="noopener">CLICK FOR UPDATES<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div>
 </div>
 </div></section>
 
