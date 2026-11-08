@@ -93,7 +93,7 @@
       '<label><span>Age / വയസ്സ് <span style="color:#e0352b;font-weight:800">*</span></span><input name="age" type="text" inputmode="numeric" required maxlength="3"></label>' +
       '<label><span>Class / Course (if student)</span><input name="cls" type="text" maxlength="120"></label>' +
       '<label><span>WhatsApp Number / വാട്സ്ആപ്പ് നമ്പർ <span style="color:#e0352b;font-weight:800">*</span></span><input name="wa" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
-      '<label><span>Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്? <span style="color:#e0352b;font-weight:800">*</span></span><select name="club" required><option value="" disabled selected>Choose</option>' + opts + "</select></label>" +
+      '<label><span>Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്?</span><select name="club"><option value="" selected>Choose</option>' + opts + "</select></label>" +
       '<label><span>Comments &amp; Suggestions / നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും</span><textarea name="fb" rows="3" maxlength="2000"></textarea></label>' +
       '<p class="zg-e" id="zgRegE" hidden></p>' +
       '<p class="zg-n">Your details are kept by ZEST for Peace for membership and are not shown publicly.</p>' +
@@ -150,7 +150,7 @@
       e.preventDefault();
       var f = reg.elements, E = g.querySelector("#zgRegE"), B = g.querySelector("#zgRegB");
       var name = f.name.value.trim().replace(/\s+/g, " "), d = digits(f.wa.value);
-      if (!name || !f.house.value.trim() || !f.age.value.trim() || !f.club.value) { err(E, "ദയവായി എല്ലാ ആവശ്യമായ കോളങ്ങളും പൂരിപ്പിക്കുക. (Please fill all required fields.)"); return; }
+      if (!name || !f.house.value.trim() || !f.age.value.trim()) { err(E, "ദയവായി എല്ലാ ആവശ്യമായ കോളങ്ങളും പൂരിപ്പിക്കുക. (Please fill all required fields.)"); return; }
       if (d.length < 10 || d.length > 15) { err(E, "ശരിയായ WhatsApp നമ്പർ നൽകുക. (Enter a valid WhatsApp number.)"); return; }
       if (!navigator.onLine) { err(E, "Internet connection ആവശ്യമാണ്. (Please connect to the internet.)"); return; }
       err(E, ""); B.disabled = true; B.textContent = "SENDING…";
@@ -159,7 +159,7 @@
           try {
             var fd = new FormData();
             fd.append("entry.1632416990", name); fd.append("entry.1816773413", f.house.value.trim()); fd.append("entry.678258537", f.age.value.trim());
-            fd.append("entry.2001662289", f.cls.value.trim() || "-"); fd.append("entry.143003087", f.wa.value.trim()); fd.append("entry.1402189304", f.club.value); fd.append("entry.402692972", f.fb.value.trim() || "-");
+            fd.append("entry.2001662289", f.cls.value.trim() || "-"); fd.append("entry.143003087", f.wa.value.trim()); if (f.club.value) fd.append("entry.1402189304", f.club.value); fd.append("entry.402692972", f.fb.value.trim() || "-");
             fetch(GFORM, { method: "POST", mode: "no-cors", body: fd }).catch(function () {});
           } catch (x) {}
           set("zestUser", name);
