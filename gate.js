@@ -10,7 +10,39 @@
   if (!standalone && !forced) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-  if (get("zestAuth")) { document.documentElement.classList.remove("zg-lock"); return; }
+  
+  var VAPID = "BNzyT2ZmUpxcjIi-yGdN2VZ_0uEhxPOFA-N5Cgz3Bh11KaiOUrYCbxgsw0rHi0wSdxudqLF284040ZzyNxDn5QY";
+  function b64u(s) { var p = "=".repeat((4 - s.length % 4) % 4), b = atob((s + p).replace(/-/g, "+").replace(/_/g, "/")), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a; }
+  function subscribe() {
+    return navigator.serviceWorker.ready.then(function (reg) {
+      return reg.pushManager.getSubscription().then(function (s) { return s || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64u(VAPID) }); });
+    }).then(function (sub) {
+      var j = sub.toJSON();
+      return fetch(SB + "zest_push_subscribe", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json" }, body: JSON.stringify({ p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth, p_name: get("zestAuth") || "" }) });
+    });
+  }
+  function notif() {
+    if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) return;
+    if (Notification.permission === "granted") { subscribe().catch(function () {}); return; }
+    if (Notification.permission === "denied" || get("zestNotifNo")) return;
+    var css2 = ".zn-box{position:fixed;left:.75rem;right:.75rem;bottom:.75rem;z-index:9998;max-width:26rem;margin:0 auto;display:flex;flex-direction:column;gap:.7rem;padding:1rem;border-radius:1.1rem;background:#fff;border:1px solid #d3e7f3;box-shadow:0 .8rem 2rem rgba(0,30,50,.28);font-family:Inter,'Noto Sans Malayalam',system-ui,sans-serif}" +
+      ".zn-top{display:flex;gap:.75rem;align-items:center}.zn-top img{width:2.75rem;height:2.75rem;border-radius:.7rem;border:1px solid #d3e7f3;flex:none}" +
+      ".zn-top b{display:block;font-size:.95rem;color:#1c2a32}.zn-top span{display:block;font-size:.8rem;line-height:1.4;color:#52636d}" +
+      ".zn-row{display:flex;gap:.5rem}.zn-row button{flex:1;min-height:2.75rem;border:0;border-radius:999px;font:700 .82rem/1 Inter,sans-serif;letter-spacing:.05em;cursor:pointer}" +
+      ".zn-on{background:#1380b8;color:#fff}.zn-no{background:#eef6fb;color:#52636d}";
+    var st2 = document.createElement("style"); st2.textContent = css2; document.head.appendChild(st2);
+    var box = document.createElement("div"); box.className = "zn-box"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "Turn on notifications");
+    box.innerHTML = '<div class="zn-top"><img src="/icons/icon-192.png" alt=""><div><b>Turn on notifications?</b><span>പുതിയ പരിപാടികൾ, അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ – ഉടൻ അറിയാം.</span></div></div>' +
+      '<div class="zn-row"><button type="button" class="zn-no">NOT NOW</button><button type="button" class="zn-on">TURN ON</button></div>';
+    var show = function () { if (!document.getElementById("zgate")) document.body.appendChild(box); };
+    setTimeout(show, 1500);
+    box.querySelector(".zn-no").addEventListener("click", function () { set("zestNotifNo", "1"); box.remove(); });
+    box.querySelector(".zn-on").addEventListener("click", function () {
+      box.remove();
+      Notification.requestPermission().then(function (p) { if (p === "granted") subscribe().catch(function () {}); else set("zestNotifNo", "1"); });
+    });
+  }
+  if (get("zestAuth")) { document.documentElement.classList.remove("zg-lock"); if (document.body) notif(); else document.addEventListener("DOMContentLoaded", notif); return; }
   document.documentElement.classList.add("zg-lock");
 
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -112,7 +144,7 @@
     });
 
     function err(el, msg) { el.textContent = msg; el.hidden = !msg; }
-    function unlock(name) { set("zestAuth", name); g.remove(); document.documentElement.classList.remove("zg-lock"); }
+    function unlock(name) { set("zestAuth", name); g.remove(); document.documentElement.classList.remove("zg-lock"); notif(); }
 
     reg.addEventListener("submit", function (e) {
       e.preventDefault();

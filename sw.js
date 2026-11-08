@@ -1,6 +1,6 @@
 /* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v6';
-const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/gate.js?v=6', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE = 'zest-app-v7';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/gate.js?v=7', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -30,4 +30,25 @@ self.addEventListener('fetch', e => {
       })
       .catch(() => caches.match(req, {ignoreSearch: true}).then(r => r || (req.mode === 'navigate' ? caches.match(url.pathname.startsWith('/centreinfo') ? '/centreinfo/' : '/') : undefined)))
   );
+});
+
+self.addEventListener('push', e => {
+  let d = {};
+  try { d = e.data ? e.data.json() : {}; } catch (_) { d = { body: e.data ? e.data.text() : '' }; }
+  e.waitUntil(self.registration.showNotification(d.title || 'ZEST APP', {
+    body: d.body || 'New update from ZEST',
+    icon: '/icons/icon-192.png',
+    tag: d.tag || 'zest',
+    renotify: true,
+    data: { url: d.url || '/centreinfo/' }
+  }));
+});
+
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  const url = new URL((e.notification.data && e.notification.data.url) || '/centreinfo/', self.location.origin).href;
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
+    for (const c of list) { if ('focus' in c) { c.navigate(url).catch(() => {}); return c.focus(); } }
+    return self.clients.openWindow(url);
+  }));
 });
