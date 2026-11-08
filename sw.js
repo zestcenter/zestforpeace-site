@@ -1,6 +1,6 @@
 /* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v1';
-const CORE = ['/', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE = 'zest-app-v2';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -24,11 +24,10 @@ self.addEventListener('fetch', e => {
       .then(res => {
         if (res.ok) {
           const copy = res.clone();
-          const key = req.mode === 'navigate' ? '/' : req;
-          caches.open(CACHE).then(c => c.put(key, copy));
+          caches.open(CACHE).then(c => c.put(req, copy));
         }
         return res;
       })
-      .catch(() => caches.match(req.mode === 'navigate' ? '/' : req).then(r => r || caches.match('/')))
+      .catch(() => caches.match(req, {ignoreSearch: true}).then(r => r || (req.mode === 'navigate' ? caches.match(url.pathname.startsWith('/centreinfo') ? '/centreinfo/' : '/') : undefined)))
   );
 });
