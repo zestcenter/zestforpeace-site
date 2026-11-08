@@ -539,6 +539,73 @@ header.main .logo{width:8rem}
 .zst .stats>div{display:flex;flex-direction:column;align-items:center}
 @media (min-width:48rem){#about.za #more .zcs{grid-template-columns:1fr 1fr}}
 @media (min-width:64rem){#about.za #more .zcs{grid-template-columns:1fr}}
+
+/* ===== Latest Updates (ZEST Centre Info feed) ===== */
+#centre-info{padding:3rem 0 1rem}
+.zu-panel{position:relative;overflow:hidden;border-radius:1.6rem;padding:1.8rem 0 1.6rem;background:linear-gradient(155deg,#1380b8 0%,#0b3d5c 100%);color:#fff}
+.zu-panel::before{content:"";position:absolute;width:18rem;height:18rem;right:-7rem;top:-8rem;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
+.zu-head,.zu-cats,.zu-dots,.zu-more{position:relative;padding:0 1.25rem}
+.zu-eye{display:flex;align-items:center;gap:.5rem;margin:0 0 .35rem;font:600 .72rem/1 "Inter",system-ui,sans-serif;letter-spacing:.2em;color:#bfe3f5}
+.zu-live{width:.55rem;height:.55rem;border-radius:50%;background:#ffc44d}
+#centre-info h2.zu-h{margin:0 0 1.1rem;white-space:normal;color:#fff;font:800 clamp(1.6rem,7vw,2.3rem)/1.15 "Inter",system-ui,sans-serif;letter-spacing:.02em;text-transform:none}
+.zu-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:0 0 1.25rem}
+.zu-cat{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;min-height:4.6rem;padding:.6rem .3rem;border-radius:1rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none;text-align:center;font:700 .68rem/1.2 "Inter",system-ui,sans-serif;letter-spacing:.06em;transition:background .25s ease,transform .25s ease}
+.zu-cat:hover,.zu-cat:focus-visible{background:#fff;color:#0b3d5c;transform:translateY(-2px)}
+.zu-ci{width:2.2rem;height:2.2rem;border-radius:.7rem;background:#fff;display:grid;place-items:center}
+.zu-ci svg{width:1.25rem;height:1.25rem;fill:none;stroke:#1380b8;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.zu-ci .a{stroke:#f2a516}
+.zu-cat:hover .zu-ci{background:#eef6fb}
+.zu-car{position:relative}
+.zu-trk{display:flex;gap:.85rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 1.25rem;padding:.25rem 1.25rem 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.zu-trk::-webkit-scrollbar{display:none}
+.zu-card{flex:0 0 78%;max-width:20rem;scroll-snap-align:start;display:flex;flex-direction:column;border-radius:1.25rem;background:#fff;color:var(--ink);text-decoration:none;overflow:hidden;box-shadow:0 .9rem 1.8rem rgba(0,20,40,.3);transition:transform .3s ease}
+.zu-card:hover{transform:translateY(-4px)}
+.zu-im{position:relative;aspect-ratio:1/1;background:linear-gradient(150deg,#d9ecf7,#bfe0f1);overflow:hidden}
+.zu-im img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.zu-ph{position:absolute;inset:0;display:grid;place-items:center;padding:1.2rem;text-align:center;font:700 1rem/1.5 "Noto Sans Malayalam","Inter",sans-serif;color:#0b3d5c}
+.zu-bg{position:absolute;top:.7rem;left:.7rem;padding:.35rem .6rem;border-radius:999px;background:#fff;font:700 .62rem/1 "Inter",sans-serif;letter-spacing:.08em;box-shadow:0 .2rem .6rem rgba(0,0,0,.15)}
+.zu-bg.program{color:#8a5a00}.zu-bg.info{color:#0b5d88}.zu-bg.job{color:#1d6b3c}
+.zu-new{position:absolute;top:.7rem;right:.7rem;padding:.35rem .55rem;border-radius:999px;background:#f2a516;color:#1c2a32;font:800 .58rem/1 "Inter",sans-serif;letter-spacing:.08em}
+.zu-bd{padding:.9rem 1rem 1rem;display:flex;flex-direction:column;gap:.45rem;flex:1}
+.zu-t{font:600 .98rem/1.5 "Noto Sans Malayalam","Inter",sans-serif;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zu-ft{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.zu-d{font:400 .78rem/1 "Inter",sans-serif;color:var(--muted)}
+.zu-go{width:2rem;height:2rem;border-radius:50%;background:var(--surface);display:grid;place-items:center;flex:none}
+.zu-go svg{width:1rem;height:1rem;fill:none;stroke:var(--blue);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.zu-sk .zu-im{background:linear-gradient(90deg,#dbeaf3 25%,#eef6fb 50%,#dbeaf3 75%);background-size:200% 100%}
+.zu-sk .zu-bd i{display:block;height:.8rem;border-radius:.4rem;background:#e6eff5}
+.zu-sk .zu-bd i:nth-child(2){width:70%}.zu-sk .zu-bd i:nth-child(3){width:40%}
+.zu-dots{display:flex;justify-content:center;gap:.15rem;margin:0 0 .9rem}
+.zu-dots button{width:1.8rem;height:1.8rem;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer}
+.zu-dots button::before{content:"";width:.45rem;height:.45rem;border-radius:.45rem;background:rgba(255,255,255,.45);transition:width .3s ease,background .3s ease}
+.zu-dots button[aria-current="true"]::before{width:1.4rem;background:#ffc44d}
+.zu-more{display:flex;justify-content:center}
+.zu-vm{display:inline-flex;align-items:center;gap:.5rem;min-height:3rem;padding:0 1.8rem;border-radius:999px;background:#ffc44d;color:#1c2a32;font:800 .92rem/1 "Inter",sans-serif;letter-spacing:.08em;text-decoration:none;box-shadow:0 .6rem 1.4rem rgba(0,0,0,.22);transition:transform .25s ease}
+.zu-vm:hover{transform:translateY(-2px)}
+.zu-vm svg{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion:no-preference){
+.zu-live{animation:zulv 1.8s ease-out infinite}
+@keyframes zulv{0%{box-shadow:0 0 0 0 rgba(255,196,77,.7)}100%{box-shadow:0 0 0 .55rem rgba(255,196,77,0)}}
+.zu-go svg,.zu-vm svg{animation:zuar 1.6s ease-in-out infinite}
+@keyframes zuar{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+.zu-sk .zu-im{animation:zusk 1.3s linear infinite}
+@keyframes zusk{to{background-position:-200% 0}}
+.zu-trk{scroll-behavior:smooth}
+}
+@media (min-width:48rem){
+.zu-panel{padding:2.4rem 0 2rem}
+.zu-head,.zu-cats,.zu-dots,.zu-more{padding:0 2.25rem}
+.zu-trk{padding:.25rem 2.25rem 1rem;scroll-padding:0 2.25rem}
+.zu-cats{display:flex;gap:.75rem}
+.zu-cat{flex-direction:row;min-height:3rem;padding:.4rem 1.1rem .4rem .45rem;font-size:.78rem;border-radius:999px}
+.zu-ci{width:2.1rem;height:2.1rem;border-radius:50%}
+.zu-card{flex-basis:16.5rem}
+}
+@media (min-width:64rem){
+#centre-info{padding:4rem 0 1rem}
+.zu-card{flex-basis:calc((100% - 2.55rem)/4)}
+.zu-more{justify-content:flex-start}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -573,28 +640,25 @@ header.main .logo{width:8rem}
 </div>
 </div></section>
 
-<section id="centre-info" class="zi-sec"><div class="wrap">
-<div class="zi-panel">
-<div class="zi-top">
-<h2 class="zi-h"><span class="zi-live" aria-hidden="true"></span>ZEST CENTRE INFO</h2>
+<section id="centre-info" class="zu-sec"><div class="wrap">
+<div class="zu-panel">
+<div class="zu-head">
+<p class="zu-eye"><span class="zu-live" aria-hidden="true"></span>ZEST CENTRE INFO</p>
+<h2 class="zu-h">LATEST UPDATES</h2>
 </div>
-<div class="zi-grid">
-<a class="zi-item" href="https://zestcenter.github.io/#sec-programs" target="_blank" rel="noopener">
-<span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="zi-acc" d="M8 14h3M8 17h6"/></svg></span>
-<span class="zi-txt"><b>ZEST Upcoming Programs</b><small>Events &amp; classes coming up</small></span>
-<span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</a>
-<a class="zi-item" href="https://zestcenter.github.io/#sec-info" target="_blank" rel="noopener">
-<span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="zi-acc" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
-<span class="zi-txt"><b>Service Centre Bulletins</b><small>Schemes, notices &amp; services</small></span>
-<span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</a>
-<a class="zi-item" href="https://zestcenter.github.io/#sec-jobs" target="_blank" rel="noopener">
-<span class="zi-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="zi-acc" d="M3 13h18M12 12v2"/></svg></span>
-<span class="zi-txt"><b>Job Updates</b><small>Latest openings &amp; opportunities</small></span>
-<span class="zi-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-</a>
+<div class="zu-cats" role="navigation" aria-label="ZEST Centre sections">
+<a class="zu-cat" href="https://zestcenter.github.io/#sec-programs" target="_blank" rel="noopener"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="a" d="M8 14h3M8 17h6"/></svg></span><span>ZEST PROGRAMS</span></a>
+<a class="zu-cat" href="https://zestcenter.github.io/#sec-info" target="_blank" rel="noopener"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><span>INFO CENTRE</span></a>
+<a class="zu-cat" href="https://zestcenter.github.io/#sec-jobs" target="_blank" rel="noopener"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg></span><span>JOB UPDATES</span></a>
 </div>
+<div class="zu-car" role="region" aria-roledescription="carousel" aria-label="Latest updates">
+<div class="zu-trk" id="zuTrk">
+<div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
+<div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
+</div>
+</div>
+<div class="zu-dots" id="zuDots" aria-label="Choose update"></div>
+<div class="zu-more"><a class="zu-vm" href="https://zestcenter.github.io/" target="_blank" rel="noopener">VIEW MORE<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div>
 <div class="zst"><div class="stats"><div><i class="zd" aria-hidden="true"></i><b data-od="10">10+</b><i class="ul" aria-hidden="true"></i><span>Years of<br>Service</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="8">8+</b><i class="ul" aria-hidden="true"></i><span>Active<br>Projects</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="5">5+</b><i class="ul" aria-hidden="true"></i><span>Various<br>Clubs</span></div></div></div>
 </div></section>
@@ -753,6 +817,32 @@ btn.addEventListener("click",function(){if(!ev){hide();return}ev.prompt();ev.use
 addEventListener("appinstalled",function(){box.hidden=true});
 var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!/crios|fxios/i.test(navigator.userAgent);
 if(ios){msg.textContent="Tap Share, then “Add to Home Screen”";btn.textContent="OK";setTimeout(function(){box.hidden=false},2500)}
+})();
+</script>
+<script>
+(function(){
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url&published=eq.true&order=created_at.desc&limit=5";
+var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
+var SITE="https://zestcenter.github.io/";
+var trk=document.getElementById("zuTrk"),dots=document.getElementById("zuDots");if(!trk)return;
+var LBL={program:"PROGRAM",info:"INFO CENTRE",job:"JOB UPDATE"};
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function title(b){var l=String(b||"").split(/\n/).map(function(x){return x.replace(/[*_~]/g,"").trim()}).filter(Boolean);return l[0]||"ZEST update"}
+function when(d){var t=new Date(d),days=Math.floor((Date.now()-t)/864e5);if(days<1)return"Today";if(days<2)return"Yesterday";if(days<7)return days+" days ago";return t.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}
+function card(p){var k=LBL[p.kind]?p.kind:"info",fresh=(Date.now()-new Date(p.created_at))<3*864e5,ti=esc(title(p.body));
+var im=p.image_url?'<img src="'+esc(p.image_url)+'" alt="" loading="lazy">':'<span class="zu-ph">'+ti+'</span>';
+return '<a class="zu-card" href="'+SITE+'#p-'+encodeURIComponent(p.id)+'" target="_blank" rel="noopener"><div class="zu-im">'+im+'<span class="zu-bg '+k+'">'+LBL[k]+'</span>'+(fresh?'<span class="zu-new">NEW</span>':'')+'</div><div class="zu-bd"><span class="zu-t">'+ti+'</span><div class="zu-ft"><span class="zu-d">'+when(p.created_at)+'</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>'}
+function empty(){trk.innerHTML='<a class="zu-card" href="'+SITE+'" target="_blank" rel="noopener"><div class="zu-im"><span class="zu-ph">ZEST Centre Info</span></div><div class="zu-bd"><span class="zu-t">See all programs, notices &amp; job updates</span><div class="zu-ft"><span class="zu-d">zestcenter.github.io</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>';dots.innerHTML=""}
+function setup(n){dots.innerHTML="";if(n<2)return;var items=[].slice.call(trk.children),cur=0,timer=null,rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+items.forEach(function(_,i){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label","Update "+(i+1));b.addEventListener("click",function(){go(i);restart()});dots.appendChild(b)});
+function mark(i){cur=i;[].forEach.call(dots.children,function(b,k){b.setAttribute("aria-current",k===i?"true":"false")})}
+function go(i){var c=items[i];if(!c)return;trk.scrollTo({left:c.offsetLeft-trk.offsetLeft-parseFloat(getComputedStyle(trk).paddingLeft),behavior:rm?"auto":"smooth"});mark(i)}
+var st;trk.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){var x=trk.scrollLeft,best=0,bd=1e9;items.forEach(function(c,i){var d=Math.abs(c.offsetLeft-trk.offsetLeft-parseFloat(getComputedStyle(trk).paddingLeft)-x);if(d<bd){bd=d;best=i}});mark(best)},80)},{passive:true});
+function restart(){clearInterval(timer);if(rm)return;timer=setInterval(function(){var max=trk.scrollWidth-trk.clientWidth-4;go(trk.scrollLeft>=max?0:(cur+1)%items.length)},4500)}
+["touchstart","mouseenter","focusin"].forEach(function(e){trk.addEventListener(e,function(){clearInterval(timer)},{passive:true})});
+["touchend","mouseleave","focusout"].forEach(function(e){trk.addEventListener(e,restart,{passive:true})});
+mark(0);restart()}
+fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}trk.innerHTML=rows.map(card).join("");setup(rows.length)}).catch(empty);
 })();
 </script>
 </body>
