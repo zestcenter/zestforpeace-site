@@ -805,6 +805,20 @@ header.main .logo{background-color:transparent!important}
 #about .ov h2{font-size:clamp(1.05rem,4.6vw,1.5rem)!important;line-height:1.3!important}
 .tl-ext{position:absolute;width:4px;margin-left:-2px;border-radius:0 0 4px 4px;background:var(--line);z-index:5;pointer-events:none}
 .tl-ext i{display:block;width:100%;height:0;border-radius:inherit;background:linear-gradient(180deg,var(--blue),var(--sky))}
+
+/* v10: dates, follow button, gap, line join */
+.zu-d b{font-weight:700;color:#0b3d5c}
+.zig-btn{display:none}
+@media (max-width:63.99rem){
+#news{padding-bottom:1.75rem}
+#stories{padding-top:1.75rem}
+.zig-btn{display:inline-flex;align-items:center;gap:.4rem;margin:0 0 .9rem;padding:.5rem .9rem;border-radius:999px;background:linear-gradient(90deg,#f58529,#dd2a7b 55%,#8134af);color:#fff;font:800 .66rem/1 "Inter",sans-serif;letter-spacing:.07em;text-decoration:none;box-shadow:0 .35rem .9rem rgba(221,42,123,.3);transition:transform .25s}
+.zig-btn:hover,.zig-btn:active{transform:translateY(-2px)}
+.zig-btn svg{width:.9rem;height:.9rem;fill:none;stroke:#fff;stroke-width:2}
+#stories .igw{overflow:hidden}
+#stories .igw iframe{display:block;margin-top:-142px!important}
+}
+#stories .ig-side .btn{min-height:2.5rem;padding:0 1.1rem;font-size:.75rem}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -903,8 +917,8 @@ header.main .logo{background-color:transparent!important}
 
 <section id="stories"><div class="wrap">
 <p class="tag">ZEST DAILY UPDATES</p>
-<div class="ig-side"><h2>@zest_for_peace</h2><p>Moments from the ZEST family &ndash; follow our daily stories on Instagram.</p><a class="btn lg" href="https://www.instagram.com/zest_for_peace?obrf=Z21jMjA4bHp6MTM=" target="_blank" rel="noopener">FOLLOW ON INSTAGRAM</a></div>
-<div class="igw">
+<div class="ig-side"><h2>@zest_for_peace</h2><p>Moments from the ZEST family &ndash; follow our daily stories on Instagram.</p><a class="btn lg" href="https://www.instagram.com/zest_for_peace?obrf=Z21jMjA4bHp6MTM=" target="_blank" rel="noopener">FOLLOW US ON INSTAGRAM</a></div>
+<a class="zig-btn" href="https://www.instagram.com/zest_for_peace?obrf=Z21jMjA4bHp6MTM=" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>FOLLOW US ON INSTAGRAM</a><div class="igw">
 <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="https://cdn.lightwidget.com/widgets/c5c6196707985293961f3f6d1ea6bedd.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" title="ZEST for Peace on Instagram" style="width:100%;border:0;overflow:hidden;"></iframe>
 </div>
 </div></section>
@@ -1020,7 +1034,7 @@ if(ios){msg.textContent="Tap Share, then “Add to Home Screen”";btn.textConte
 </script>
 <script>
 (function(){
-var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url&published=eq.true&order=created_at.desc&limit=30";
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&order=created_at.desc&limit=30";
 var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
 var SITE="/centreinfo/";
 var trk=document.getElementById("zuTrk"),dots=document.getElementById("zuDots");if(!trk)return;
@@ -1028,9 +1042,19 @@ var LBL={program:"ZEST PROGRAMS",info:"INFO CENTRE",job:"JOB UPDATE"};
 function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function title(b){var l=String(b||"").split(/\n/).map(function(x){return x.replace(/[*_~]/g,"").trim()}).filter(Boolean);return l[0]||"ZEST update"}
 function when(d){var t=new Date(d),days=Math.floor((Date.now()-t)/864e5);if(days<1)return"Today";if(days<2)return"Yesterday";if(days<7)return days+" days ago";return t.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}
+var MO=[["jan","ജനുവരി"],["feb","ഫെബ്രുവരി"],["mar","മാർച്ച്","മാര്ച്ച്"],["apr","ഏപ്രിൽ","ഏപ്രില്"],["may","മെയ്","മേയ്"],["jun","ജൂൺ","ജൂണ്"],["jul","ജൂലൈ","ജൂലായ്"],["aug","ഓഗസ്റ്റ്","ആഗസ്റ്റ്","ആഗസ്ത്"],["sep","സെപ്റ്റംബർ","സെപ്തംബർ","സെപ്റ്റംബര്"],["oct","ഒക്ടോബർ","ഒക്ടോബര്"],["nov","നവംബർ","നവംബര്"],["dec","ഡിസംബർ","ഡിസംബര്"]];
+function mIdx(w){w=w.toLowerCase();for(var i=0;i<12;i++){if(w.slice(0,3)===MO[i][0])return i;for(var j=1;j<MO[i].length;j++)if(w.indexOf(MO[i][j].slice(0,4))===0)return i}return -1}
+function dFind(txt,base){var out=[],re=/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})|((?:19|20)\d\d)?[\s,]*([A-Za-zഀ-ൿ]{3,}\.?)[\s,]*(\d{1,2})(?:st|nd|rd|th)?\b[\s,]*((?:19|20)\d\d)?|(\d{1,2})(?:st|nd|rd|th)?[\s,]+([A-Za-zഀ-ൿ]{3,})[\s,]*((?:19|20)\d\d)?/g,m;
+while((m=re.exec(txt))){var d,mo,y;if(m[1]){d=+m[1];mo=+m[2]-1;y=+m[3];if(y<100)y+=2000}else if(m[5]){mo=mIdx(m[5]);d=+m[6];y=+(m[4]||m[7]||0)}else{mo=mIdx(m[9]);d=+m[8];y=+(m[10]||0)}
+if(mo<0||mo>11||d<1||d>31)continue;var auto=!y;if(auto)y=base.getFullYear();var dt=new Date(y,mo,d);if(auto&&dt<base-60*864e5)dt=new Date(y+1,mo,d);out.push({d:dt,i:m.index})}return out}
+function fmt(d){return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}
+function iso(s){if(!s)return null;var a=String(s).split("-");return new Date(+a[0],a[1]-1,+a[2])}
+function dlab(p){var k=p.kind,base=new Date(p.created_at),d=iso(k==="program"?(p.event_date||p.last_date):(p.last_date||p.event_date)),txt=String(p.body||"");
+if(!d){var f=dFind(txt,base);if(f.length){if(k!=="program"){var hit=f.filter(function(x){var seg=txt.slice(Math.max(0,x.i-60),x.i+60);return/വരെ|last\s*date|അവസാന|deadline|before|till|until/i.test(seg)});d=(hit[0]||f[f.length-1]).d}else d=f[0].d}}
+if(!d)return when(p.created_at);return (k==="program"?"Program date: ":"Last date: ")+'<b>'+fmt(d)+'</b>'}
 function card(p){var k=LBL[p.kind]?p.kind:"info",fresh=(Date.now()-new Date(p.created_at))<3*864e5,ti=esc(title(p.body));
 var im=p.image_url?'<img src="'+esc(p.image_url)+'" alt="" loading="lazy">':'<span class="zu-ph">'+ti+'</span>';
-return '<a class="zu-card" href="'+SITE+'#p-'+encodeURIComponent(p.id)+'"><div class="zu-im">'+im+'<span class="zu-bg '+k+'">'+LBL[k]+'</span>'+(fresh?'<span class="zu-new">NEW</span>':'')+'</div><div class="zu-bd"><span class="zu-t">'+ti+'</span><div class="zu-ft"><span class="zu-d">'+when(p.created_at)+'</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>'}
+return '<a class="zu-card" href="'+SITE+'#p-'+encodeURIComponent(p.id)+'"><div class="zu-im">'+im+'<span class="zu-bg '+k+'">'+LBL[k]+'</span>'+(fresh?'<span class="zu-new">NEW</span>':'')+'</div><div class="zu-bd"><span class="zu-t">'+ti+'</span><div class="zu-ft"><span class="zu-d">'+dlab(p)+'</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>'}
 function auto(t,ri){var n=t.children.length;if(n<2)return;var cur=0,tm=null;function go(i){var c=t.children[i];if(!c)return;cur=i;t.scrollTo({left:c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft),behavior:"smooth"})}function start(){clearInterval(tm);tm=setInterval(function(){var max=t.scrollWidth-t.clientWidth-4;go(t.scrollLeft>=max?0:(cur+1)%n)},4500)}["touchstart","mouseenter","focusin"].forEach(function(e){t.addEventListener(e,function(){clearInterval(tm)},{passive:true})});["touchend","mouseleave","focusout"].forEach(function(e){t.addEventListener(e,start,{passive:true})});t.addEventListener("scroll",function(){var x=t.scrollLeft,b=0,bd=1e9;[].forEach.call(t.children,function(c,i){var d=Math.abs(c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft)-x);if(d<bd){bd=d;b=i}});cur=b},{passive:true});setTimeout(start,ri*1500)}
 function empty(){trk.innerHTML='<a class="zu-card" href="'+SITE+'" target="_blank" rel="noopener"><div class="zu-im"><span class="zu-ph">ZEST Centre Info</span></div><div class="zu-bd"><span class="zu-t">See all programs, notices &amp; job updates</span><div class="zu-ft"><span class="zu-d">zestforpeace.org/centreinfo</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>';if(dots)dots.innerHTML=""}
 function setup(n){dots.innerHTML="";if(n<2)return;var items=[].slice.call(trk.children),cur=0,timer=null,rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -1049,10 +1073,11 @@ fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){
 <script>
 (function(){var tl=document.getElementById("tl"),tg=document.querySelector("#stories .tag");if(!tl||!tg)return;
 var x=document.createElement("div");x.className="tl-ext";x.setAttribute("aria-hidden","true");x.innerHTML="<i></i>";document.body.appendChild(x);var f=x.firstChild,mq=matchMedia("(min-width:64rem)"),top=0,h=0;
-function pos(){if(mq.matches){x.style.display="none";return}x.style.display="";var a=tl.getBoundingClientRect(),b=tg.getBoundingClientRect(),v=getComputedStyle(tl).getPropertyValue("--lx").trim(),lx=/%$/.test(v)?a.width*parseFloat(v)/100:parseFloat(v)*parseFloat(getComputedStyle(document.documentElement).fontSize);
-top=a.bottom+scrollY;h=Math.max(0,b.top+b.height/2-a.bottom);x.style.left=(a.left+scrollX+lx)+"px";x.style.top=top+"px";x.style.height=h+"px";fill()}
+function pos(){if(mq.matches){x.style.display="none";tg.style.marginLeft="";return}x.style.display="";var a=tl.getBoundingClientRect(),v=getComputedStyle(tl).getPropertyValue("--lx").trim(),lx=/%$/.test(v)?a.width*parseFloat(v)/100:parseFloat(v)*parseFloat(getComputedStyle(document.documentElement).fontSize),X=a.left+lx;
+tg.style.marginLeft="";var b=tg.getBoundingClientRect(),bw=parseFloat(getComputedStyle(tg,"::before").width)||0,dx=X-(b.left+bw/2);if(Math.abs(dx)<40)tg.style.marginLeft=dx+"px";
+top=a.bottom+scrollY;h=Math.max(0,b.top+b.height/2-a.bottom);x.style.left=(X+scrollX)+"px";x.style.top=top+"px";x.style.height=h+"px";fill()}
 function fill(){if(!h)return;var p=(innerHeight*.6-(top-scrollY))/h;f.style.height=(Math.max(0,Math.min(1,p))*100)+"%"}
-addEventListener("scroll",fill,{passive:true});addEventListener("resize",pos);addEventListener("load",pos);if(window.ResizeObserver)new ResizeObserver(pos).observe(document.body);pos()})();
+var rq=0;addEventListener("scroll",function(){if(!rq){rq=1;requestAnimationFrame(function(){rq=0;pos()})}},{passive:true});addEventListener("resize",pos);addEventListener("load",pos);if(window.ResizeObserver)new ResizeObserver(pos).observe(document.body);pos()})();
 </script>
 </body>
 </html>
