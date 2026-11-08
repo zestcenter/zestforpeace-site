@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 <link rel="manifest" href="/manifest.webmanifest">
 <script src="/gate.js?v=10"></script>
 <meta name="theme-color" content="#1380b8">
@@ -819,6 +820,31 @@ header.main .logo{background-color:transparent!important}
 #stories .igw iframe{display:block;margin-top:-142px!important}
 }
 #stories .ig-side .btn{min-height:2.5rem;padding:0 1.1rem;font-size:.75rem}
+
+/* v11: Events – photos on a string */
+.zj{display:grid;gap:1.4rem;margin-top:1.2rem}
+.zj-row{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1.6rem .4rem 0;align-items:start}
+.zj-row::before{content:"";position:absolute;left:-3%;right:-3%;top:-1.3rem;height:2.5rem;border-bottom:2px solid #8a6b4a;border-radius:0 0 50% 50%/0 0 100% 100%;pointer-events:none}
+.zj-p{position:relative;margin:0;background:#fff;padding:.45rem .45rem .7rem;border-radius:.2rem;box-shadow:0 .7rem 1.3rem rgba(10,60,90,.2);transform-origin:50% -1rem;animation:zjS 5s ease-in-out infinite}
+.zj-row .zj-p:nth-child(1){--r:-3.5deg}
+.zj-row .zj-p:nth-child(2){--r:3deg;animation-delay:-2.5s}
+.zj-row:nth-child(even) .zj-p:nth-child(1){--r:3deg}
+.zj-row:nth-child(even) .zj-p:nth-child(2){--r:-3deg}
+@keyframes zjS{0%,100%{transform:rotate(var(--r,0deg))}50%{transform:rotate(calc(var(--r,0deg) * .55))}}
+.zj-pin{position:absolute;z-index:2;top:-.95rem;left:50%;width:.62rem;height:1.6rem;margin-left:-.31rem;border-radius:.2rem;background:linear-gradient(90deg,#d9a066,#b07a45);box-shadow:0 2px 3px rgba(0,0,0,.25)}
+.zj-im{aspect-ratio:4/3;border-radius:.12rem;background:var(--i) center/cover no-repeat,#dfe9ef}
+.zj-p figcaption{display:flex;flex-direction:column;gap:.12rem;padding-top:.5rem}
+.zj-y{font:700 1.35rem/1 "Chilanka",cursive;color:#1380b8}
+.zj-p time{font:400 .78rem/1.3 "Chilanka","Noto Sans Malayalam",cursive;color:#52636d}
+.zj-p b{font:700 .84rem/1.35 "Noto Sans Malayalam","Inter",sans-serif;color:#1c2a32}
+.zj-next{align-self:center;justify-self:center;width:4.2rem;height:4.2rem;border-radius:50%;background:#1380b8;display:grid;place-items:center;box-shadow:0 .7rem 1.4rem rgba(19,128,184,.35);animation:zjN 1.8s ease-out infinite;transition:transform .25s}
+.zj-next:hover{transform:scale(1.07)}
+.zj-next svg{width:1.7rem;height:1.7rem;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:zjA 1.4s ease-in-out infinite}
+@keyframes zjN{0%{box-shadow:0 0 0 0 rgba(19,128,184,.45)}100%{box-shadow:0 0 0 14px rgba(19,128,184,0)}}
+@keyframes zjA{0%,100%{transform:translateX(-2px)}50%{transform:translateX(4px)}}
+@media (min-width:48rem){.zj{grid-template-columns:1fr 1fr;column-gap:2.5rem}.zj-y{font-size:1.5rem}.zj-p b{font-size:.92rem}}
+@media (min-width:64rem){.zj{grid-template-columns:1fr 1fr;max-width:62rem;margin-left:auto;margin-right:auto}}
+#news .zj{grid-column:1/-1;grid-row:3}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -903,15 +929,11 @@ header.main .logo{background-color:transparent!important}
 
 <section id="news" class="alt-bg"><div class="wrap">
 <p class="tag">Events</p><h2 class="ml">ZEST - പിന്നിട്ട വഴികൾ</h2>
-<div class="tl-nav"><button type="button" id="tlp" aria-label="Previous events"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" id="tln" aria-label="Next events"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
-<div class="tl" id="tl"><i class="tl-fill"></i>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-study)"><span class="yr">2016</span></div><div class="tx"><time>ഫെബ്രുവരി 21</time><b>പൊതുപഠന ക്ലാസ്</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-sangamam)"><span class="yr">2016</span></div><div class="tx"><time>സെപ്തംബർ 25</time><b>സാഹോദര്യ സംഗമം</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-career)"><span class="yr">2017</span></div><div class="tx"><time>ഏപ്രിൽ 4</time><b>കരിയർ ഗൈഡൻസ് ക്ലാസ്</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-yatra)"><span class="yr">2017</span></div><div class="tx"><time>ഏപ്രിൽ 18</time><b>സ്നേഹയാത്ര</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-stone)"><span class="yr">2018</span></div><div class="tx"><time>ഏപ്രിൽ 7</time><b>ZEST സെന്റർ ശിലാസ്ഥാപനം</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-award)"><span class="yr">2019</span></div><div class="tx"><time>മെയ് 12</time><b>വിജയികൾക്ക് അനുമോദനം</b></div></div></div>
-<div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-p-opening)"><span class="yr">2022</span></div><div class="tx"><time>ജനുവരി 02</time><b>ZEST സെന്റർ സമർപ്പണം</b></div></div></div>
+<div class="zj">
+<div class="zj-row"><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-study)" role="img" aria-label="പൊതുപഠന ക്ലാസ്"></div><figcaption><span class="zj-y">2016</span><time>ഫെബ്രുവരി 21</time><b>പൊതുപഠന ക്ലാസ്</b></figcaption></figure><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-sangamam)" role="img" aria-label="സാഹോദര്യ സംഗമം"></div><figcaption><span class="zj-y">2016</span><time>സെപ്തംബർ 25</time><b>സാഹോദര്യ സംഗമം</b></figcaption></figure></div>
+<div class="zj-row"><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-career)" role="img" aria-label="കരിയർ ഗൈഡൻസ് ക്ലാസ്"></div><figcaption><span class="zj-y">2017</span><time>ഏപ്രിൽ 4</time><b>കരിയർ ഗൈഡൻസ് ക്ലാസ്</b></figcaption></figure><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-yatra)" role="img" aria-label="സ്നേഹയാത്ര"></div><figcaption><span class="zj-y">2017</span><time>ഏപ്രിൽ 18</time><b>സ്നേഹയാത്ര</b></figcaption></figure></div>
+<div class="zj-row"><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-stone)" role="img" aria-label="ZEST സെന്റർ ശിലാസ്ഥാപനം"></div><figcaption><span class="zj-y">2018</span><time>ഏപ്രിൽ 7</time><b>ZEST സെന്റർ ശിലാസ്ഥാപനം</b></figcaption></figure><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-award)" role="img" aria-label="വിജയികൾക്ക് അനുമോദനം"></div><figcaption><span class="zj-y">2019</span><time>മെയ് 12</time><b>വിജയികൾക്ക് അനുമോദനം</b></figcaption></figure></div>
+<div class="zj-row"><figure class="zj-p"><i class="zj-pin" aria-hidden="true"></i><div class="zj-im" style="--i:var(--i-p-opening)" role="img" aria-label="ZEST സെന്റർ സമർപ്പണം"></div><figcaption><span class="zj-y">2022</span><time>ജനുവരി 02</time><b>ZEST സെന്റർ സമർപ്പണം</b></figcaption></figure><a class="zj-next" href="#stories" aria-label="Go to ZEST Daily Updates"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div>
 </div></section>
 
