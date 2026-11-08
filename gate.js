@@ -67,10 +67,10 @@
       '<button class="zg-b" type="submit" id="zgRegB">SUBMIT</button></form>' +
       '<form class="zg-f" id="zgLog" hidden novalidate>' +
       '<label>Username (പേര്)<input name="u" type="text" autocomplete="username" required></label>' +
-      '<label>Password<input name="p" type="password" autocomplete="current-password" required placeholder="Zest@____"></label>' +
+      '<label>Password<input name="p" type="password" autocomplete="current-password" required ></label>' +
       '<p class="zg-e" id="zgLogE" hidden></p>' +
       '<button class="zg-b blue" type="submit" id="zgLogB">LOGIN</button>' +
-      '<p class="zg-n">Password = Zest@ + last 4 digits of your WhatsApp number.</p></form>' +
+      '</form>' +
       "</div></div>";
     document.body.appendChild(g);
 
