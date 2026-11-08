@@ -42,6 +42,7 @@
     ".zg-n{margin:0;font-size:.75rem;line-height:1.5;color:#52636d}" +
     ".zg-cr{display:flex;flex-direction:column;gap:.5rem;padding:.9rem 1rem;border-radius:1rem;background:#eef6fb}" +
     ".zg-cr div{display:flex;justify-content:space-between;gap:.75rem;font-size:.9rem}.zg-cr span{color:#52636d}.zg-cr b{color:#0b3d5c;word-break:break-word;text-align:right}" +
+    ".zg-l{display:block;width:100%;min-height:2.75rem;border:0;background:none;color:#1380b8;font:600 .88rem/1.3 Inter,sans-serif;text-align:center;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:.4rem}" +
     ".zg-ok{margin:0 0 .3rem;font:700 1.1rem/1.4 Inter,sans-serif;color:#1c2a32;text-align:center}";
 
   function build() {
@@ -70,15 +71,45 @@
       '<label>Password<input name="p" type="password" autocomplete="current-password" required ></label>' +
       '<p class="zg-e" id="zgLogE" hidden></p>' +
       '<button class="zg-b blue" type="submit" id="zgLogB">LOGIN</button>' +
-      '</form>' +
+      '<button type="button" class="zg-l" id="zgFg">Forgot login?</button></form>' +
+      '<form class="zg-f" id="zgRec" hidden novalidate>' +
+      '<p class="zg-ok" style="text-align:left;font-size:1rem">Forgot login?</p>' +
+      '<label>Registered WhatsApp Number<input name="w" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
+      '<p class="zg-e" id="zgRecE" hidden></p>' +
+      '<div class="zg-cr" id="zgRecR" hidden></div>' +
+      '<button class="zg-b blue" type="submit" id="zgRecB">SHOW MY LOGIN</button>' +
+      '<button type="button" class="zg-l" id="zgBack">← Back to login</button></form>' +
       "</div></div>";
     document.body.appendChild(g);
 
     var t1 = g.querySelector("#zgT1"), t2 = g.querySelector("#zgT2"), reg = g.querySelector("#zgReg"), log = g.querySelector("#zgLog");
-    function tab(i) { t1.setAttribute("aria-selected", i === 1); t2.setAttribute("aria-selected", i === 2); reg.hidden = i !== 1; log.hidden = i !== 2; }
+    var rec = g.querySelector("#zgRec");
+    function tab(i) { t1.setAttribute("aria-selected", i === 1); t2.setAttribute("aria-selected", i !== 1); reg.hidden = i !== 1; log.hidden = i !== 2; rec.hidden = i !== 3; }
     t1.addEventListener("click", function () { tab(1); });
     t2.addEventListener("click", function () { tab(2); });
     if (get("zestUser")) tab(2);
+    g.querySelector("#zgFg").addEventListener("click", function () { tab(3); });
+    g.querySelector("#zgBack").addEventListener("click", function () { tab(2); });
+    rec.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var E = g.querySelector("#zgRecE"), R = g.querySelector("#zgRecR"), B = g.querySelector("#zgRecB"), d = digits(rec.elements.w.value);
+      R.hidden = true;
+      if (d.length < 10) { err(E, "ശരിയായ WhatsApp നമ്പർ നൽകുക. (Enter a valid WhatsApp number.)"); return; }
+      if (!navigator.onLine) { err(E, "Internet connection ആവശ്യമാണ്. (Please connect to the internet.)"); return; }
+      err(E, ""); B.disabled = true; B.textContent = "CHECKING…";
+      rpc("zest_recover", { p_whatsapp: rec.elements.w.value })
+        .then(function (name) {
+          B.disabled = false; B.textContent = "SHOW MY LOGIN";
+          if (!name) { err(E, "ഈ നമ്പറിൽ registration കണ്ടെത്തിയില്ല. REGISTER ചെയ്യുക. (No registration found for this number.)"); return; }
+          var pass = "Zest@" + d.slice(-4);
+          R.innerHTML = '<div><span>Username</span><b>' + esc(name) + '</b></div><div><span>Password</span><b>' + esc(pass) + '</b></div>';
+          R.hidden = false;
+          log.elements.u.value = name; log.elements.p.value = pass;
+          B.textContent = "LOGIN NOW"; B.type = "button";
+          B.onclick = function () { unlock(name); };
+        })
+        .catch(function () { B.disabled = false; B.textContent = "SHOW MY LOGIN"; err(E, "വീണ്ടും ശ്രമിക്കുക. (Please try again.)"); });
+    });
 
     function err(el, msg) { el.textContent = msg; el.hidden = !msg; }
     function unlock(name) { set("zestAuth", name); g.remove(); document.documentElement.classList.remove("zg-lock"); }
@@ -110,9 +141,9 @@
       var card = g.querySelector("#zgCard");
       card.innerHTML = '<div class="zg-f"><p class="zg-ok">നന്ദി! Registration complete ✓</p>' +
         '<div class="zg-cr"><div><span>Username</span><b>' + esc(name) + "</b></div><div><span>Password</span><b>" + esc(pass) + "</b></div></div>" +
-        '<a class="zg-b zg-wa" id="zgWa" href="https://wa.me/' + num + "?text=" + encodeURIComponent(msg) + '" target="_blank" rel="noopener">SEND TO MY WHATSAPP</a>' +
-        '<p class="zg-n">Tap the green button, then tap Send in WhatsApp to save your login details.</p>' +
-        '<button type="button" class="zg-b blue" id="zgGo">OPEN ZEST APP</button></div>';
+        '<button type="button" class="zg-b" id="zgGo">OPEN ZEST APP</button>' +
+        '<p class="zg-n" style="text-align:center">You stay logged in on this phone.</p>' +
+        '<a class="zg-l" id="zgWa" href="https://wa.me/' + num + "?text=" + encodeURIComponent(msg) + '" target="_blank" rel="noopener">Save login details to my WhatsApp (optional)</a></div>';
       card.querySelector("#zgGo").addEventListener("click", function () { unlock(name); });
     }
 

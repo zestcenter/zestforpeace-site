@@ -1,5 +1,5 @@
 /* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v4';
+const CACHE = 'zest-app-v5';
 const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/gate.js', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
