@@ -88,25 +88,25 @@
       '<div class="zg-c" id="zgCard">' +
       '<div class="zg-tabs" role="tablist"><button type="button" class="zg-tab" role="tab" aria-selected="true" id="zgT1">REGISTER</button><button type="button" class="zg-tab" role="tab" aria-selected="false" id="zgT2">LOGIN</button></div>' +
       '<form class="zg-f" id="zgReg" novalidate>' +
-      '<label>പേര്<input name="name" type="text" autocomplete="name" required maxlength="80"></label>' +
-      '<label>വീട്ടുപേര്<input name="house" type="text" required maxlength="120"></label>' +
-      '<label>വയസ്സ്<input name="age" type="text" inputmode="numeric" required maxlength="3"></label>' +
-      '<label>ക്ലാസ്സ്‌ / കോഴ്സ് (വിദ്യാർത്ഥി ആണെങ്കിൽ)<input name="cls" type="text" maxlength="120"></label>' +
-      '<label>Whatsapp Number<input name="wa" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
-      '<label>Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്?<select name="club" required><option value="" disabled selected>Choose</option>' + opts + "</select></label>" +
-      '<label>നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും<textarea name="fb" rows="3" maxlength="2000"></textarea></label>' +
+      '<label><span>Name / പേര് <span style="color:#e0352b;font-weight:800">*</span></span><input name="name" type="text" autocomplete="name" required maxlength="80"></label>' +
+      '<label><span>House Name / വീട്ടുപേര് <span style="color:#e0352b;font-weight:800">*</span></span><input name="house" type="text" required maxlength="120"></label>' +
+      '<label><span>Age / വയസ്സ് <span style="color:#e0352b;font-weight:800">*</span></span><input name="age" type="text" inputmode="numeric" required maxlength="3"></label>' +
+      '<label><span>Class / Course (if student) / ക്ലാസ്സ്‌ / കോഴ്സ് (വിദ്യാർത്ഥി ആണെങ്കിൽ)</span><input name="cls" type="text" maxlength="120"></label>' +
+      '<label><span>WhatsApp Number / വാട്സ്ആപ്പ് നമ്പർ <span style="color:#e0352b;font-weight:800">*</span></span><input name="wa" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
+      '<label><span>Which ZEST Club would you like to join? / Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്? <span style="color:#e0352b;font-weight:800">*</span></span><select name="club" required><option value="" disabled selected>Choose</option>' + opts + "</select></label>" +
+      '<label><span>Comments &amp; Suggestions / നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും</span><textarea name="fb" rows="3" maxlength="2000"></textarea></label>' +
       '<p class="zg-e" id="zgRegE" hidden></p>' +
       '<p class="zg-n">Your details are kept by ZEST for Peace for membership and are not shown publicly.</p>' +
       '<button class="zg-b" type="submit" id="zgRegB">SUBMIT</button></form>' +
       '<form class="zg-f" id="zgLog" hidden novalidate>' +
-      '<label>Username (പേര്)<input name="u" type="text" autocomplete="username" required></label>' +
-      '<label>Password<input name="p" type="password" autocomplete="current-password" required ></label>' +
+      '<label><span>Username / യൂസർനെയിം <span style="color:#e0352b;font-weight:800">*</span></span><input name="u" type="text" autocomplete="username" required></label>' +
+      '<label><span>Password / പാസ്‌വേഡ് <span style="color:#e0352b;font-weight:800">*</span></span><input name="p" type="password" autocomplete="current-password" required ></label>' +
       '<p class="zg-e" id="zgLogE" hidden></p>' +
       '<button class="zg-b blue" type="submit" id="zgLogB">LOGIN</button>' +
       '<button type="button" class="zg-l" id="zgFg">Forgot login?</button></form>' +
       '<form class="zg-f" id="zgRec" hidden novalidate>' +
       '<p class="zg-ok" style="text-align:left;font-size:1rem">Forgot login?</p>' +
-      '<label>Registered WhatsApp Number<input name="w" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
+      '<label><span>Registered WhatsApp Number / രജിസ്റ്റർ ചെയ്ത വാട്സ്ആപ്പ് നമ്പർ <span style="color:#e0352b;font-weight:800">*</span></span><input name="w" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
       '<p class="zg-e" id="zgRecE" hidden></p>' +
       '<div class="zg-cr" id="zgRecR" hidden></div>' +
       '<button class="zg-b blue" type="submit" id="zgRecB">SHOW MY LOGIN</button>' +

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=7"></script>
+<script src="/gate.js?v=8"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -787,6 +787,21 @@ header.main .logo{background-color:transparent!important}
 .zb-t:hover::before{transform:scale(1.07)}
 @media (min-width:48rem){.zbento{grid-template-columns:repeat(4,1fr);grid-auto-rows:10rem;gap:.85rem}.zb-t:nth-child(1){grid-column:1/3;grid-row:1/3}.zb-t:nth-child(2){grid-column:3;grid-row:1}.zb-t:nth-child(3){grid-column:4;grid-row:1}.zb-t:nth-child(4){grid-column:3;grid-row:2/4}.zb-t:nth-child(5){grid-column:4;grid-row:2}.zb-t:nth-child(6){grid-column:4;grid-row:3}.zb-t:nth-child(7){grid-column:1/3;grid-row:3/5}.zb-t:nth-child(8){grid-column:3;grid-row:4}.zb-t:nth-child(9){grid-column:4;grid-row:4}.zb-t h3{font-size:.95rem}.zb-t.b h3{font-size:1.4rem}}
 @media (min-width:64rem){.zbento{grid-auto-rows:12rem}}
+
+/* v8: required marks, daily updates node */
+.zrq{color:#e0352b;font-weight:800;margin-left:.1rem}
+.zrq-note{margin:0 0 .8rem;font:600 .78rem/1.3 "Inter","Noto Sans Malayalam",sans-serif;color:#6b7c86}
+.zu-bg{white-space:nowrap}
+.ti.zdu .tc{display:block;text-decoration:none;color:inherit;outline-offset:3px}
+.ti.zdu .ph{background:linear-gradient(135deg,#0b7fc0,#25b4e8 55%,#7fd6f5)!important;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ti.zdu .ph::after{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%);animation:zduP 3.2s ease-in-out infinite}
+.zdu-ic svg{width:3rem;height:3rem;fill:none;stroke:#fff;stroke-width:1.8;position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+.ti.zdu::before{background:#e0352b!important;animation:zduD 1.6s ease-in-out infinite}
+.ti.zdu b{color:#0b7fc0}
+.zdu-ar{display:inline-block;transition:transform .3s}
+.ti.zdu .tc:hover .zdu-ar{transform:translateX(.3rem)}
+@keyframes zduP{0%,100%{transform:translate(-10%,-10%)}50%{transform:translate(10%,10%)}}
+@keyframes zduD{0%,100%{box-shadow:0 0 0 3px rgba(224,53,43,.35)}50%{box-shadow:0 0 0 8px rgba(224,53,43,0)}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -794,7 +809,7 @@ header.main .logo{background-color:transparent!important}
 <header class="main" id="top"><div class="wrap">
 <div class="logo ph" role="img" aria-label="ZEST for Peace"></div>
 <button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><span></span><span></span><span></span></button>
-<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">DAILY STORIES</a><a href="#contact">CONTACT US</a></nav>
+<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">ZEST DAILY UPDATES</a><a href="#contact">CONTACT US</a></nav>
 </div></header>
 
 <div class="hero"><video id="hv" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div>
@@ -852,9 +867,9 @@ header.main .logo{background-color:transparent!important}
 <div class="zb-t" style="--i:var(--i-p-service)"><h3 class="ml">സർവീസ് സെന്റർ</h3></div>
 <div class="zb-t" style="--i:var(--i-p-women)"><h3 class="ml">വുമൺ എംപവർമെന്റ് പ്രോഗ്രാം</h3></div>
 <div class="zb-t t" style="--i:var(--i-p-library)"><h3 class="ml">ലൈബ്രറി &amp; റീഡിങ് റൂം</h3></div>
-<div class="zb-t" style="--i:var(--i-p-kalimuttam)"><h3 class="ml">കിഡ്സ്‌ ഡെവലപ്പ്മെന്റ് പ്രോഗ്രാംസ് - കളിമുറ്റം</h3></div>
+<div class="zb-t" style="--i:var(--i-p-senior)"><h3 class="ml">സീനിയർ സിറ്റിസൺ കോർണർ</h3></div>
 <div class="zb-t" style="--i:var(--i-p-turf)"><h3 class="ml">ഫുട്ബോൾ ടർഫ്</h3></div>
-<div class="zb-t b" style="--i:var(--i-p-senior)"><h3 class="ml">സീനിയർ സിറ്റിസൺ കോർണർ</h3></div>
+<div class="zb-t b" style="--i:var(--i-p-kalimuttam)"><h3 class="ml">കിഡ്സ്‌ ഡെവലപ്പ്മെന്റ് പ്രോഗ്രാംസ് - കളിമുറ്റം</h3></div>
 <div class="zb-t" style="--i:var(--i-p-kidspark)"><h3 class="ml">കിഡ്സ്‌ പാർക്ക്‌</h3></div>
 <div class="zb-t" style="--i:var(--i-p-playground)"><h3 class="ml">സ്ത്രീകളുടെ കളിസ്ഥലം</h3></div>
 </div></div></section>
@@ -881,11 +896,12 @@ header.main .logo{background-color:transparent!important}
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-stone)"><span class="yr">2018</span></div><div class="tx"><time>ഏപ്രിൽ 7</time><b>ZEST സെന്റർ ശിലാസ്ഥാപനം</b></div></div></div>
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-award)"><span class="yr">2019</span></div><div class="tx"><time>മെയ് 12</time><b>വിജയികൾക്ക് അനുമോദനം</b></div></div></div>
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-p-opening)"><span class="yr">2022</span></div><div class="tx"><time>ജനുവരി 02</time><b>ZEST സെന്റർ സമർപ്പണം</b></div></div></div>
+<div class="ti zdu"><a class="tc" href="#stories"><div class="ph"><span class="yr">TODAY</span><span class="zdu-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span></div><div class="tx"><time>Every day</time><b>ZEST DAILY UPDATES <span class="zdu-ar" aria-hidden="true">&rarr;</span></b></div></a></div>
 </div>
 </div></section>
 
 <section id="stories"><div class="wrap">
-<p class="tag">Our Daily Stories</p>
+<p class="tag">ZEST DAILY UPDATES</p>
 <div class="ig-side"><h2>@zest_for_peace</h2><p>Moments from the ZEST family &ndash; follow our daily stories on Instagram.</p><a class="btn lg" href="https://www.instagram.com/zest_for_peace?obrf=Z21jMjA4bHp6MTM=" target="_blank" rel="noopener">FOLLOW ON INSTAGRAM</a></div>
 <div class="igw">
 <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="https://cdn.lightwidget.com/widgets/c5c6196707985293961f3f6d1ea6bedd.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" title="ZEST for Peace on Instagram" style="width:100%;border:0;overflow:hidden;"></iframe>
@@ -895,14 +911,14 @@ header.main .logo{background-color:transparent!important}
 <section id="join" class="alt-bg"><div class="wrap">
 <p class="tag">Join With Us</p><h2>Be a Part of ZEST</h2>
 <div class="jf"><p id="jok" class="jok ml" role="status" hidden>നന്ദി! നിങ്ങളുടെ പ്രതികരണം ലഭിച്ചു.</p>
-<form id="jf" class="ml" action="https://docs.google.com/forms/d/e/1FAIpQLSfdYugcqISkylbvGGBLAn_7zS9dXT53f35QFFnwdqgQ_dPhtQ/formResponse" method="POST" target="jfr">
-<label>പേര്<input name="entry.1632416990" type="text" autocomplete="name" required></label>
-<label>വീട്ടുപേര്<input name="entry.1816773413" type="text" required></label>
-<label>വയസ്സ്<input name="entry.678258537" type="text" inputmode="numeric" required></label>
-<label>ക്ലാസ്സ്‌ / കോഴ്സ് (വിദ്യാർത്ഥി ആണെങ്കിൽ)<input name="entry.2001662289" type="text" data-dash></label>
-<label class="full">Whatsapp Number<input name="entry.143003087" type="tel" inputmode="tel" autocomplete="tel" required></label>
-<label class="full">Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്?<select name="entry.1402189304" required><option value="" disabled selected>Choose</option><option value="ZEST LIBRARY CLUB">ZEST LIBRARY CLUB</option><option value="ZEST KIDS CLUB">ZEST KIDS CLUB</option><option value="GOLDEN BOYS CLUB">GOLDEN BOYS CLUB</option><option value="GOLDEN GIRLS CLUB">GOLDEN GIRLS CLUB</option><option value="SENIOR CITIZEN CLUB">SENIOR CITIZEN CLUB</option><option value="ZEST LADIES CLUB">ZEST LADIES CLUB</option><option value="ZEST FITNESS CLUB">ZEST FITNESS CLUB</option><option value="IDEAL STUDENTS BATCH">IDEAL STUDENTS BATCH</option><option value="OTHER">OTHER</option></select></label>
-<label class="full">നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും<textarea name="entry.402692972" rows="4" data-dash></textarea></label>
+<p class="zrq-note"><span class="zrq">*</span> Required / നിർബന്ധം</p><form id="jf" class="ml" action="https://docs.google.com/forms/d/e/1FAIpQLSfdYugcqISkylbvGGBLAn_7zS9dXT53f35QFFnwdqgQ_dPhtQ/formResponse" method="POST" target="jfr">
+<label><span>Name / പേര് <span class="zrq" aria-hidden="true">*</span></span><input name="entry.1632416990" type="text" autocomplete="name" required></label>
+<label><span>House Name / വീട്ടുപേര് <span class="zrq" aria-hidden="true">*</span></span><input name="entry.1816773413" type="text" required></label>
+<label><span>Age / വയസ്സ് <span class="zrq" aria-hidden="true">*</span></span><input name="entry.678258537" type="text" inputmode="numeric" required></label>
+<label><span>Class / Course (if student) / ക്ലാസ്സ്‌ / കോഴ്സ് (വിദ്യാർത്ഥി ആണെങ്കിൽ)</span><input name="entry.2001662289" type="text" data-dash></label>
+<label class="full"><span>WhatsApp Number / വാട്സ്ആപ്പ് നമ്പർ <span class="zrq" aria-hidden="true">*</span></span><input name="entry.143003087" type="tel" inputmode="tel" autocomplete="tel" required></label>
+<label class="full"><span>Which ZEST Club would you like to join? / Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്? <span class="zrq" aria-hidden="true">*</span></span><select name="entry.1402189304" required><option value="" disabled selected>Choose</option><option value="ZEST LIBRARY CLUB">ZEST LIBRARY CLUB</option><option value="ZEST KIDS CLUB">ZEST KIDS CLUB</option><option value="GOLDEN BOYS CLUB">GOLDEN BOYS CLUB</option><option value="GOLDEN GIRLS CLUB">GOLDEN GIRLS CLUB</option><option value="SENIOR CITIZEN CLUB">SENIOR CITIZEN CLUB</option><option value="ZEST LADIES CLUB">ZEST LADIES CLUB</option><option value="ZEST FITNESS CLUB">ZEST FITNESS CLUB</option><option value="IDEAL STUDENTS BATCH">IDEAL STUDENTS BATCH</option><option value="OTHER">OTHER</option></select></label>
+<label class="full"><span>Comments &amp; Suggestions / നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും</span><textarea name="entry.402692972" rows="4" data-dash></textarea></label>
 <div class="full"><button class="btn lg" type="submit">SUBMIT</button></div>
 </form><iframe name="jfr" id="jfr" title="Form response" hidden></iframe></div>
 <p class="vlink" style="text-align:left"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfdYugcqISkylbvGGBLAn_7zS9dXT53f35QFFnwdqgQ_dPhtQ/viewform" target="_blank" rel="noopener">Open the form in Google Forms</a></p>
@@ -911,7 +927,7 @@ header.main .logo{background-color:transparent!important}
 <footer id="contact"><div class="wrap">
 <div class="fg">
 <div><div class="logo ph" role="img" aria-label="ZEST for Peace" style="margin-bottom:1rem;--i:var(--i-logowhite);background-color:transparent"></div></div>
-<div><h3>Quick links</h3><ul><li><a href="#about">About us</a></li><li><a href="#programs">Projects</a></li><li><a href="#clubs">Clubs</a></li><li><a href="#documentary">Documentary</a></li><li><a href="#news">Events</a></li><li><a href="#stories">Daily Stories</a></li><li><a href="#join">Join With Us</a></li></ul></div>
+<div><h3>Quick links</h3><ul><li><a href="#about">About us</a></li><li><a href="#programs">Projects</a></li><li><a href="#clubs">Clubs</a></li><li><a href="#documentary">Documentary</a></li><li><a href="#news">Events</a></li><li><a href="#stories">ZEST Daily Updates</a></li><li><a href="#join">Join With Us</a></li></ul></div>
 <div><h3>Contact</h3><ul><li class="ct"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg><a href="tel:+918848313837">+91 88483 13837</a></li><li class="ct"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg><a href="tel:+914962993552">0496 2993552</a></li><li class="ct"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg><a href="mailto:zestforpeace@gmail.com">zestforpeace@gmail.com</a></li><li class="ct"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Velloor, Kottembram Road, PO Kodancheri, Kozhikode, Kerala – 673503</span></li></ul></div>
 </div>
 </div></footer>
@@ -1003,11 +1019,11 @@ if(ios){msg.textContent="Tap Share, then “Add to Home Screen”";btn.textConte
 </script>
 <script>
 (function(){
-var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url&published=eq.true&order=created_at.desc&limit=5";
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url&published=eq.true&order=created_at.desc&limit=30";
 var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
 var SITE="/centreinfo/";
 var trk=document.getElementById("zuTrk"),dots=document.getElementById("zuDots");if(!trk)return;
-var LBL={program:"PROGRAM",info:"INFO CENTRE",job:"JOB UPDATE"};
+var LBL={program:"ZEST PROGRAMS",info:"INFO CENTRE",job:"JOB UPDATE"};
 function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function title(b){var l=String(b||"").split(/\n/).map(function(x){return x.replace(/[*_~]/g,"").trim()}).filter(Boolean);return l[0]||"ZEST update"}
 function when(d){var t=new Date(d),days=Math.floor((Date.now()-t)/864e5);if(days<1)return"Today";if(days<2)return"Yesterday";if(days<7)return days+" days ago";return t.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}
@@ -1025,7 +1041,7 @@ function restart(){clearInterval(timer);timer=setInterval(function(){var max=trk
 ["touchend","mouseleave","focusout"].forEach(function(e){trk.addEventListener(e,restart,{passive:true})});
 mark(0);restart()}
 fetch("https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=kind&published=eq.true",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).then(function(all){var c={program:0,info:0,job:0};(all||[]).forEach(function(x){var k=x.kind==="program"||x.kind==="job"?x.kind:"info";c[k]++});[].forEach.call(document.querySelectorAll(".zu-cnt"),function(el){var n=c[el.getAttribute("data-k")]||0;el.textContent=n>99?"99+":n;el.hidden=false;el.parentNode.parentNode.setAttribute("aria-label",el.parentNode.nextSibling.textContent+": "+n+" posts")})}).catch(function(){});
-fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}trk.innerHTML=rows.map(card).join("");setup(rows.length)}).catch(empty);
+fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}rows=rows.filter(function(x){return x.kind==="program"}).concat(rows.filter(function(x){return x.kind!=="program"})).slice(0,5);trk.innerHTML=rows.map(card).join("");setup(rows.length)}).catch(empty);
 })();
 </script>
 </body>
