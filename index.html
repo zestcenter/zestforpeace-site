@@ -751,6 +751,29 @@ header.main .logo{background-color:transparent!important}
 @media (min-width:48rem){.zu-photo{margin:0 2rem 1.4rem;aspect-ratio:21/7}}
 #centre-info{padding-top:2.5rem}
 #about{padding-top:3rem}
+
+/* v4 tweaks */
+#centre-info h2.zu-h{font-size:clamp(1.25rem,5.6vw,1.9rem)}
+.zu-sub{font-size:.8rem;margin-bottom:.9rem}
+.zu-photo{aspect-ratio:4/3.3;margin:0 .7rem 1.1rem;background:var(--i-p-about1) center/cover no-repeat,#d9ecf7}
+.zu-photo::after,.zu-photo::before{display:none}
+@media (min-width:48rem){.zu-photo{aspect-ratio:16/8}}
+.zu-ci{position:relative}
+.zu-cnt{position:absolute;top:-.45rem;right:-.6rem;min-width:1.15rem;height:1.15rem;padding:0 .3rem;border-radius:999px;background:#f2a516;color:#1c2a32;border:2px solid #fff;font:800 .62rem/1 "Inter",sans-serif;display:grid;place-items:center;box-shadow:0 .15rem .4rem rgba(0,0,0,.25)}
+.zu-cnt[hidden]{display:none}
+@media (prefers-reduced-motion:no-preference){.zu-cnt:not([hidden]){animation:zucnt .5s cubic-bezier(.2,1.6,.4,1)}@keyframes zucnt{from{transform:scale(0)}}}
+#about.za .ov{padding-bottom:1.3rem}
+.btn.lg.zjw{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:.45rem;padding:.62rem 1.25rem;font-size:.82rem;letter-spacing:.06em}
+.zjw svg{width:1rem;height:1rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.zjw::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);z-index:-1}
+.zjw:hover{transform:translateY(-2px)}
+@media (prefers-reduced-motion:no-preference){
+.zjw{animation:zjwg 2.6s ease-in-out infinite}
+.zjw::before{animation:zjws 3.2s ease-in-out infinite}
+.zjw svg{animation:zuar 1.6s ease-in-out infinite}
+@keyframes zjwg{0%,100%{box-shadow:0 0 0 0 rgba(19,128,184,.4)}50%{box-shadow:0 0 0 .5rem rgba(19,128,184,0)}}
+@keyframes zjws{0%{left:-60%}55%,100%{left:130%}}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -773,9 +796,9 @@ header.main .logo{background-color:transparent!important}
 <div class="zu-photo" role="img" aria-label="ZEST Centre building"></div>
 </div>
 <div class="zu-cats" role="navigation" aria-label="ZEST Centre sections">
-<a class="zu-cat" href="/centreinfo/#sec-programs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="a" d="M8 14h3M8 17h6"/></svg></span><span>ZEST PROGRAMS</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-<a class="zu-cat" href="/centreinfo/#sec-info"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><span>INFO CENTRE</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-<a class="zu-cat" href="/centreinfo/#sec-jobs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg></span><span>JOB UPDATES</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+<a class="zu-cat" href="/centreinfo/#sec-programs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="a" d="M8 14h3M8 17h6"/></svg><b class="zu-cnt" data-k="program" hidden></b></span><span>ZEST PROGRAMS</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+<a class="zu-cat" href="/centreinfo/#sec-info"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><b class="zu-cnt" data-k="info" hidden></b></span><span>INFO CENTRE</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+<a class="zu-cat" href="/centreinfo/#sec-jobs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg><b class="zu-cnt" data-k="job" hidden></b></span><span>JOB UPDATES</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
 </div>
 <div class="zu-car" role="region" aria-roledescription="carousel" aria-label="Latest updates">
 <div class="zu-trk" id="zuTrk">
@@ -826,7 +849,7 @@ header.main .logo{background-color:transparent!important}
 <section id="clubs" class="alt-bg"><div class="wrap">
 <p class="tag">Our Primary Clubs</p>
 </div>
-<div class="lm"><div class="lm-t"><div class="lm-g"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240" role="img" aria-label="Ideal Students Batch"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240" role="img" aria-label="Zest Kids Club"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240" role="img" aria-label="Zest Golden Girls"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240" role="img" aria-label="Zest Golden Boys"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240" role="img" aria-label="Zest Ladies Club"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240" role="img" aria-label="Zest for Fit Health Club"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240" role="img" aria-label="Zest Senior Citizens Club"></div></div><div class="lm-g" aria-hidden="true"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240"></div></div></div></div><div class="wrap joinrow"><a class="btn lg" href="#join">JOIN WITH US</a></div></section>
+<div class="lm"><div class="lm-t"><div class="lm-g"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240" role="img" aria-label="Ideal Students Batch"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240" role="img" aria-label="Zest Kids Club"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240" role="img" aria-label="Zest Golden Girls"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240" role="img" aria-label="Zest Golden Boys"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240" role="img" aria-label="Zest Ladies Club"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240" role="img" aria-label="Zest for Fit Health Club"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240" role="img" aria-label="Zest Senior Citizens Club"></div></div><div class="lm-g" aria-hidden="true"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240"></div></div></div></div><div class="wrap joinrow"><a class="btn lg zjw" href="#join"><span>JOIN WITH US</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
 
 <section id="documentary"><div class="wrap">
 <p class="tag">ZEST Documentary</p><h2 class="ml">ഒരു നാടിന്റെ സ്വപ്നസാഫല്യം</h2>
@@ -984,10 +1007,11 @@ items.forEach(function(_,i){var b=document.createElement("button");b.type="butto
 function mark(i){cur=i;[].forEach.call(dots.children,function(b,k){b.setAttribute("aria-current",k===i?"true":"false")})}
 function go(i){var c=items[i];if(!c)return;trk.scrollTo({left:c.offsetLeft-trk.offsetLeft-parseFloat(getComputedStyle(trk).paddingLeft),behavior:rm?"auto":"smooth"});mark(i)}
 var st;trk.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){var x=trk.scrollLeft,best=0,bd=1e9;items.forEach(function(c,i){var d=Math.abs(c.offsetLeft-trk.offsetLeft-parseFloat(getComputedStyle(trk).paddingLeft)-x);if(d<bd){bd=d;best=i}});mark(best)},80)},{passive:true});
-function restart(){clearInterval(timer);if(rm)return;timer=setInterval(function(){var max=trk.scrollWidth-trk.clientWidth-4;go(trk.scrollLeft>=max?0:(cur+1)%items.length)},4500)}
+function restart(){clearInterval(timer);timer=setInterval(function(){var max=trk.scrollWidth-trk.clientWidth-4;go(trk.scrollLeft>=max?0:(cur+1)%items.length)},4500)}
 ["touchstart","mouseenter","focusin"].forEach(function(e){trk.addEventListener(e,function(){clearInterval(timer)},{passive:true})});
 ["touchend","mouseleave","focusout"].forEach(function(e){trk.addEventListener(e,restart,{passive:true})});
 mark(0);restart()}
+fetch("https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=kind&published=eq.true",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).then(function(all){var c={program:0,info:0,job:0};(all||[]).forEach(function(x){var k=x.kind==="program"||x.kind==="job"?x.kind:"info";c[k]++});[].forEach.call(document.querySelectorAll(".zu-cnt"),function(el){var n=c[el.getAttribute("data-k")]||0;el.textContent=n>99?"99+":n;el.hidden=false;el.parentNode.parentNode.setAttribute("aria-label",el.parentNode.nextSibling.textContent+": "+n+" posts")})}).catch(function(){});
 fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}trk.innerHTML=rows.map(card).join("");setup(rows.length)}).catch(empty);
 })();
 </script>
