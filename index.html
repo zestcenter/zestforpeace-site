@@ -788,20 +788,23 @@ header.main .logo{background-color:transparent!important}
 @media (min-width:48rem){.zbento{grid-template-columns:repeat(4,1fr);grid-auto-rows:10rem;gap:.85rem}.zb-t:nth-child(1){grid-column:1/3;grid-row:1/3}.zb-t:nth-child(2){grid-column:3;grid-row:1}.zb-t:nth-child(3){grid-column:4;grid-row:1}.zb-t:nth-child(4){grid-column:3;grid-row:2/4}.zb-t:nth-child(5){grid-column:4;grid-row:2}.zb-t:nth-child(6){grid-column:4;grid-row:3}.zb-t:nth-child(7){grid-column:1/3;grid-row:3/5}.zb-t:nth-child(8){grid-column:3;grid-row:4}.zb-t:nth-child(9){grid-column:4;grid-row:4}.zb-t h3{font-size:.95rem}.zb-t.b h3{font-size:1.4rem}}
 @media (min-width:64rem){.zbento{grid-auto-rows:12rem}}
 
-/* v8: required marks, daily updates node */
+/* v8: required marks */
 .zrq{color:#e0352b;font-weight:800;margin-left:.1rem}
 .zrq-note{margin:0 0 .8rem;font:600 .78rem/1.3 "Inter","Noto Sans Malayalam",sans-serif;color:#6b7c86}
 .zu-bg{white-space:nowrap}
-.ti.zdu .tc{display:block;text-decoration:none;color:inherit;outline-offset:3px}
-.ti.zdu .ph{background:linear-gradient(135deg,#0b7fc0,#25b4e8 55%,#7fd6f5)!important;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.ti.zdu .ph::after{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%);animation:zduP 3.2s ease-in-out infinite}
-.zdu-ic svg{width:3rem;height:3rem;fill:none;stroke:#fff;stroke-width:1.8;position:relative;z-index:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
-.ti.zdu::before{background:#e0352b!important;animation:zduD 1.6s ease-in-out infinite}
-.ti.zdu b{color:#0b7fc0}
-.zdu-ar{display:inline-block;transition:transform .3s}
-.ti.zdu .tc:hover .zdu-ar{transform:translateX(.3rem)}
-@keyframes zduP{0%,100%{transform:translate(-10%,-10%)}50%{transform:translate(10%,10%)}}
-@keyframes zduD{0%,100%{box-shadow:0 0 0 3px rgba(224,53,43,.35)}50%{box-shadow:0 0 0 8px rgba(224,53,43,0)}}
+
+/* v9: rows per category, shorter CTA, about subheading, events line to Daily Updates */
+.zu-row+.zu-row{margin-top:.15rem}
+.zu-row .zu-trk{padding-bottom:.7rem}
+.zu-card{flex:0 0 87%;max-width:24rem}
+@media (min-width:48rem){.zu-card{flex:0 0 calc((100% - 1.6rem)/2.3);max-width:none}}
+@media (min-width:64rem){.zu-card{flex:0 0 calc((100% - 2.4rem)/3.3)}}
+.zu-more{margin-top:.5rem}
+.zu-vm{min-height:2rem!important;padding:0 .9rem!important;font-size:.64rem!important;gap:.3rem!important}
+.zu-vm svg{width:.75rem!important;height:.75rem!important}
+#about .ov h2{font-size:clamp(1.05rem,4.6vw,1.5rem)!important;line-height:1.3!important}
+.tl-ext{position:absolute;width:4px;margin-left:-2px;border-radius:0 0 4px 4px;background:var(--line);z-index:5;pointer-events:none}
+.tl-ext i{display:block;width:100%;height:0;border-radius:inherit;background:linear-gradient(180deg,var(--blue),var(--sky))}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -828,13 +831,12 @@ header.main .logo{background-color:transparent!important}
 <a class="zu-cat" href="/centreinfo/#sec-info"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><b class="zu-cnt" data-k="info" hidden></b></span><span>INFO CENTRE</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
 <a class="zu-cat" href="/centreinfo/#sec-jobs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg><b class="zu-cnt" data-k="job" hidden></b></span><span>JOB UPDATES</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
 </div>
-<div class="zu-car" role="region" aria-roledescription="carousel" aria-label="Latest updates">
+<div class="zu-car" id="zuRows" role="region" aria-label="Latest updates">
 <div class="zu-trk" id="zuTrk">
 <div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
 <div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
 </div>
 </div>
-<div class="zu-dots" id="zuDots" aria-label="Choose update"></div>
 <div class="zu-more"><a class="zu-vm" href="/centreinfo/">VIEW MORE DETAILS<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div>
 </div></section>
@@ -896,7 +898,6 @@ header.main .logo{background-color:transparent!important}
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-stone)"><span class="yr">2018</span></div><div class="tx"><time>ഏപ്രിൽ 7</time><b>ZEST സെന്റർ ശിലാസ്ഥാപനം</b></div></div></div>
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-award)"><span class="yr">2019</span></div><div class="tx"><time>മെയ് 12</time><b>വിജയികൾക്ക് അനുമോദനം</b></div></div></div>
 <div class="ti"><div class="tc"><div class="ph" style="--i:var(--i-p-opening)"><span class="yr">2022</span></div><div class="tx"><time>ജനുവരി 02</time><b>ZEST സെന്റർ സമർപ്പണം</b></div></div></div>
-<div class="ti zdu"><a class="tc" href="#stories"><div class="ph"><span class="yr">TODAY</span><span class="zdu-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></span></div><div class="tx"><time>Every day</time><b>ZEST DAILY UPDATES <span class="zdu-ar" aria-hidden="true">&rarr;</span></b></div></a></div>
 </div>
 </div></section>
 
@@ -1030,7 +1031,8 @@ function when(d){var t=new Date(d),days=Math.floor((Date.now()-t)/864e5);if(days
 function card(p){var k=LBL[p.kind]?p.kind:"info",fresh=(Date.now()-new Date(p.created_at))<3*864e5,ti=esc(title(p.body));
 var im=p.image_url?'<img src="'+esc(p.image_url)+'" alt="" loading="lazy">':'<span class="zu-ph">'+ti+'</span>';
 return '<a class="zu-card" href="'+SITE+'#p-'+encodeURIComponent(p.id)+'"><div class="zu-im">'+im+'<span class="zu-bg '+k+'">'+LBL[k]+'</span>'+(fresh?'<span class="zu-new">NEW</span>':'')+'</div><div class="zu-bd"><span class="zu-t">'+ti+'</span><div class="zu-ft"><span class="zu-d">'+when(p.created_at)+'</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>'}
-function empty(){trk.innerHTML='<a class="zu-card" href="'+SITE+'" target="_blank" rel="noopener"><div class="zu-im"><span class="zu-ph">ZEST Centre Info</span></div><div class="zu-bd"><span class="zu-t">See all programs, notices &amp; job updates</span><div class="zu-ft"><span class="zu-d">zestforpeace.org/centreinfo</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>';dots.innerHTML=""}
+function auto(t,ri){var n=t.children.length;if(n<2)return;var cur=0,tm=null;function go(i){var c=t.children[i];if(!c)return;cur=i;t.scrollTo({left:c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft),behavior:"smooth"})}function start(){clearInterval(tm);tm=setInterval(function(){var max=t.scrollWidth-t.clientWidth-4;go(t.scrollLeft>=max?0:(cur+1)%n)},4500)}["touchstart","mouseenter","focusin"].forEach(function(e){t.addEventListener(e,function(){clearInterval(tm)},{passive:true})});["touchend","mouseleave","focusout"].forEach(function(e){t.addEventListener(e,start,{passive:true})});t.addEventListener("scroll",function(){var x=t.scrollLeft,b=0,bd=1e9;[].forEach.call(t.children,function(c,i){var d=Math.abs(c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft)-x);if(d<bd){bd=d;b=i}});cur=b},{passive:true});setTimeout(start,ri*1500)}
+function empty(){trk.innerHTML='<a class="zu-card" href="'+SITE+'" target="_blank" rel="noopener"><div class="zu-im"><span class="zu-ph">ZEST Centre Info</span></div><div class="zu-bd"><span class="zu-t">See all programs, notices &amp; job updates</span><div class="zu-ft"><span class="zu-d">zestforpeace.org/centreinfo</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>';if(dots)dots.innerHTML=""}
 function setup(n){dots.innerHTML="";if(n<2)return;var items=[].slice.call(trk.children),cur=0,timer=null,rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
 items.forEach(function(_,i){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label","Update "+(i+1));b.addEventListener("click",function(){go(i);restart()});dots.appendChild(b)});
 function mark(i){cur=i;[].forEach.call(dots.children,function(b,k){b.setAttribute("aria-current",k===i?"true":"false")})}
@@ -1041,8 +1043,16 @@ function restart(){clearInterval(timer);timer=setInterval(function(){var max=trk
 ["touchend","mouseleave","focusout"].forEach(function(e){trk.addEventListener(e,restart,{passive:true})});
 mark(0);restart()}
 fetch("https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=kind&published=eq.true",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).then(function(all){var c={program:0,info:0,job:0};(all||[]).forEach(function(x){var k=x.kind==="program"||x.kind==="job"?x.kind:"info";c[k]++});[].forEach.call(document.querySelectorAll(".zu-cnt"),function(el){var n=c[el.getAttribute("data-k")]||0;el.textContent=n>99?"99+":n;el.hidden=false;el.parentNode.parentNode.setAttribute("aria-label",el.parentNode.nextSibling.textContent+": "+n+" posts")})}).catch(function(){});
-fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}rows=rows.filter(function(x){return x.kind==="program"}).concat(rows.filter(function(x){return x.kind!=="program"})).slice(0,5);trk.innerHTML=rows.map(card).join("");setup(rows.length)}).catch(empty);
+fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}var by={program:[],info:[],job:[]};rows.forEach(function(x){var k=by[x.kind]?x.kind:"info";if(by[k].length<5)by[k].push(x)});var box=document.getElementById("zuRows");box.innerHTML="";["program","info","job"].forEach(function(k,ri){if(!by[k].length)return;var r=document.createElement("div");r.className="zu-row";var t=document.createElement("div");t.className="zu-trk";t.innerHTML=by[k].map(card).join("");r.appendChild(t);box.appendChild(r);auto(t,ri)})}).catch(empty);
 })();
+</script>
+<script>
+(function(){var tl=document.getElementById("tl"),tg=document.querySelector("#stories .tag");if(!tl||!tg)return;
+var x=document.createElement("div");x.className="tl-ext";x.setAttribute("aria-hidden","true");x.innerHTML="<i></i>";document.body.appendChild(x);var f=x.firstChild,mq=matchMedia("(min-width:64rem)"),top=0,h=0;
+function pos(){if(mq.matches){x.style.display="none";return}x.style.display="";var a=tl.getBoundingClientRect(),b=tg.getBoundingClientRect(),v=getComputedStyle(tl).getPropertyValue("--lx").trim(),lx=/%$/.test(v)?a.width*parseFloat(v)/100:parseFloat(v)*parseFloat(getComputedStyle(document.documentElement).fontSize);
+top=a.bottom+scrollY;h=Math.max(0,b.top+b.height/2-a.bottom);x.style.left=(a.left+scrollX+lx)+"px";x.style.top=top+"px";x.style.height=h+"px";fill()}
+function fill(){if(!h)return;var p=(innerHeight*.6-(top-scrollY))/h;f.style.height=(Math.max(0,Math.min(1,p))*100)+"%"}
+addEventListener("scroll",fill,{passive:true});addEventListener("resize",pos);addEventListener("load",pos);if(window.ResizeObserver)new ResizeObserver(pos).observe(document.body);pos()})();
 </script>
 </body>
 </html>
