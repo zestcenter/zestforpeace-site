@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js"></script>
+<script src="/gate.js?v=6"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -702,14 +702,29 @@ header.main .logo{width:8rem}
 .zu-card{flex-basis:20rem}
 }
 @media (min-width:64rem){#centre-info{padding:3.5rem 0 1rem}.zu-card{flex-basis:calc((100% - 1.6rem)/3);max-width:none}}
+
+/* header ZEST CENTRE INFO button */
+.zci-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.4rem;margin:0 auto 0 0;padding:.42rem .75rem;border-radius:999px;background:#eef6fb;border:1px solid #cfe6f2;color:#0b5d88;font:700 .62rem/1 "Inter",system-ui,sans-serif;letter-spacing:.08em;text-decoration:none;white-space:nowrap;transition:background .25s ease,color .25s ease,transform .25s ease}
+.zci-btn:hover,.zci-btn:focus-visible{background:#1380b8;color:#fff;border-color:#1380b8}
+.zci-btn:active{transform:scale(.96)}
+.zci-dot{flex:none;width:.42rem;height:.42rem;border-radius:50%;background:#f2a516}
+.zci-btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg)}
+@media (prefers-reduced-motion:no-preference){
+.zci-dot{animation:zcid 1.8s ease-out infinite}
+@keyframes zcid{0%{box-shadow:0 0 0 0 rgba(242,165,22,.6)}100%{box-shadow:0 0 0 .4rem rgba(242,165,22,0)}}
+.zci-btn::after{animation:zcish 3.4s ease-in-out infinite}
+@keyframes zcish{0%{left:-60%}50%,100%{left:130%}}
+}
+@media (min-width:64rem){.zci-btn{font-size:.7rem;padding:.5rem .9rem;margin-left:.25rem}#mn a[href="#centre-info"]{display:none}header.main .wrap{flex-wrap:nowrap}header.main nav{margin-left:auto}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <header class="main" id="top"><div class="wrap">
 <div class="logo ph" role="img" aria-label="ZEST for Peace"></div>
+<a class="zci-btn" href="#centre-info"><span class="zci-dot" aria-hidden="true"></span>ZEST CENTRE INFO</a>
 <button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><span></span><span></span><span></span></button>
-<nav id="mn"><a href="#top">HOME</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">DAILY STORIES</a><a href="#contact">CONTACT US</a></nav>
+<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">DAILY STORIES</a><a href="#contact">CONTACT US</a></nav>
 </div></header>
 
 <div class="hero"><video id="hv" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div>

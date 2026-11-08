@@ -1,6 +1,6 @@
 /* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v5';
-const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/gate.js', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE = 'zest-app-v6';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/gate.js?v=6', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -20,7 +20,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
   e.respondWith(
-    fetch(req)
+    fetch(req, {cache: 'no-cache'})
       .then(res => {
         if (res.ok) {
           const copy = res.clone();
