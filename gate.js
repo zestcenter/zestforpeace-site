@@ -2,7 +2,7 @@
 (function () {
   var SB = "https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/rpc/";
   var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
-  var GFORM = "https://docs.google.com/forms/d/e/1FAIpQLSfdYugcqISkylbvGGBLAn_7zS9dXT53f35QFFnwdqgQ_dPhtQ/formResponse";
+  var GFORM = "https://docs.google.com/forms/d/e/1FAIpQLSce8eDmKZwhRSEmUfslZPudFT6VcYH2KHYF39ttL_CMp0tCqA/formResponse";
   var CLUBS = ["ZEST LIBRARY CLUB", "ZEST KIDS CLUB", "GOLDEN BOYS CLUB", "GOLDEN GIRLS CLUB", "SENIOR CITIZEN CLUB", "ZEST LADIES CLUB", "ZEST FITNESS CLUB", "IDEAL STUDENTS BATCH", "OTHER"];
 
   var standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
@@ -91,9 +91,9 @@
       '<label><span>Name / പേര് <span style="color:#e0352b;font-weight:800">*</span></span><input name="name" type="text" autocomplete="name" required maxlength="80"></label>' +
       '<label><span>House Name / വീട്ടുപേര് <span style="color:#e0352b;font-weight:800">*</span></span><input name="house" type="text" required maxlength="120"></label>' +
       '<label><span>Age / വയസ്സ് <span style="color:#e0352b;font-weight:800">*</span></span><input name="age" type="text" inputmode="numeric" required maxlength="3"></label>' +
-      '<label><span>Class / Course (if student) / ക്ലാസ്സ്‌ / കോഴ്സ് (വിദ്യാർത്ഥി ആണെങ്കിൽ)</span><input name="cls" type="text" maxlength="120"></label>' +
+      '<label><span>Class / Course (if student)</span><input name="cls" type="text" maxlength="120"></label>' +
       '<label><span>WhatsApp Number / വാട്സ്ആപ്പ് നമ്പർ <span style="color:#e0352b;font-weight:800">*</span></span><input name="wa" type="tel" inputmode="tel" autocomplete="tel" required placeholder="e.g. 9876543210"></label>' +
-      '<label><span>Which ZEST Club would you like to join? / Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്? <span style="color:#e0352b;font-weight:800">*</span></span><select name="club" required><option value="" disabled selected>Choose</option>' + opts + "</select></label>" +
+      '<label><span>Zest Clubൽ അംഗമാവാൻ താല്പര്യമുണ്ടോ? ഏതിലാണ്? <span style="color:#e0352b;font-weight:800">*</span></span><select name="club" required><option value="" disabled selected>Choose</option>' + opts + "</select></label>" +
       '<label><span>Comments &amp; Suggestions / നിങ്ങളുടെ അഭിപ്രായങ്ങളും നിർദ്ദേശങ്ങളും</span><textarea name="fb" rows="3" maxlength="2000"></textarea></label>' +
       '<p class="zg-e" id="zgRegE" hidden></p>' +
       '<p class="zg-n">Your details are kept by ZEST for Peace for membership and are not shown publicly.</p>' +
