@@ -420,18 +420,18 @@ header.main .logo{width:8rem}
 #about.za .btn.zrm{margin:.5rem 0 0;padding:.85rem 1.6rem;border:1.5px solid var(--blue);border-radius:999px;background:#fff;color:var(--blue);font:600 .9rem/1 "Inter",system-ui,sans-serif;letter-spacing:.06em}
 #about.za .btn.zrm:hover{background:var(--blue);color:#fff}
 /* Numbers strip */
-#about.za .stats{margin:2.5rem 0 0;padding:1.9rem .5rem 1.6rem;border-radius:1.5rem;background:var(--surface);grid-template-columns:repeat(3,1fr)}
-#about.za .stats>div{gap:.6rem;padding:0 .25rem}
-#about.za .stats>div+div{border-left:1px solid var(--line)}
-#about.za .stats b{font-size:clamp(2.4rem,11vw,3.4rem);font-weight:800;color:var(--blue)}
-#about.za .stats>div>span{font:500 .85rem/1.3 "Inter",system-ui,sans-serif;color:#33444e}
-#about.za .zd{display:block;width:.5rem;height:.5rem;border-radius:50%;background:#f2a516}
-#about.za .ul{display:block;width:2.25rem;height:3px;border-radius:3px;background:var(--sky);transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .4s}
-#about.za .stats.rv:not(.in) .ul{transform:scaleX(0)}
+.zst .stats{margin:2.5rem 0 0;padding:1.9rem .5rem 1.6rem;border-radius:1.5rem;background:var(--surface);grid-template-columns:repeat(3,1fr)}
+.zst .stats>div{gap:.6rem;padding:0 .25rem}
+.zst .stats>div+div{border-left:1px solid var(--line)}
+.zst .stats b{font-size:clamp(2.4rem,11vw,3.4rem);font-weight:800;color:var(--blue)}
+.zst .stats>div>span{font:500 .85rem/1.3 "Inter",system-ui,sans-serif;color:#33444e}
+.zst .zd{display:block;width:.5rem;height:.5rem;border-radius:50%;background:#f2a516}
+.zst .ul{display:block;width:2.25rem;height:3px;border-radius:3px;background:var(--sky);transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .4s}
+.zst .stats.rv:not(.in) .ul{transform:scaleX(0)}
 @media (prefers-reduced-motion:no-preference){
-#about.za .zd{animation:zpl 2s ease-in-out infinite}
-#about.za .stats>div:nth-child(2) .zd{animation-delay:.4s}
-#about.za .stats>div:nth-child(3) .zd{animation-delay:.8s}
+.zst .zd{animation:zpl 2s ease-in-out infinite}
+.zst .stats>div:nth-child(2) .zd{animation-delay:.4s}
+.zst .stats>div:nth-child(3) .zd{animation-delay:.8s}
 @keyframes zpl{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.4}}
 }
 @media (min-width:48rem){
@@ -445,7 +445,7 @@ header.main .logo{width:8rem}
 #about.za .sl{aspect-ratio:4/4.2}
 #about.za .zcs{grid-template-columns:1fr}
 #about.za .rmw{justify-content:flex-start}
-#about.za .stats{grid-row:2;margin:3rem auto 0}
+.zst .stats{max-width:52rem;margin:2.5rem auto 0}
 }
 
 /* ===== ZEST Centre Info (Nov 2026) ===== */
@@ -518,6 +518,27 @@ header.main .logo{width:8rem}
 .za-ix{flex:none;width:2.5rem;height:2.5rem;border:0;border-radius:50%;background:var(--surface);display:grid;place-items:center;cursor:pointer}
 .za-ix svg{width:1rem;height:1rem;fill:none;stroke:var(--muted);stroke-width:2.4;stroke-linecap:round}
 @media (prefers-reduced-motion:no-preference){.za-ins:not([hidden]){animation:zaup .5s cubic-bezier(.2,.8,.2,1)}@keyframes zaup{from{transform:translateY(120%);opacity:0}}}
+
+/* Read more CTA effects + moved stats */
+#about.za #more{margin-top:1.25rem}
+#about.za #more .zcs{margin:0 0 1.5rem}
+#about.za .btn.zrm{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.5rem;isolation:isolate}
+#about.za .btn.zrm .zrc{width:1.1rem;height:1.1rem;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s ease}
+#about.za .btn.zrm.open .zrc{transform:rotate(180deg)}
+#about.za .btn.zrm::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,transparent,rgba(63,167,214,.35),transparent);transform:skewX(-20deg);z-index:-1}
+@media (prefers-reduced-motion:no-preference){
+#about.za .btn.zrm{animation:zrglow 2.6s ease-in-out infinite}
+#about.za .btn.zrm::before{animation:zrshine 3.2s ease-in-out infinite}
+#about.za .btn.zrm:not(.open) .zrc{animation:zrbob 1.4s ease-in-out infinite}
+#about.za .btn.zrm.open,#about.za .btn.zrm.open::before{animation:none}
+@keyframes zrglow{0%,100%{box-shadow:0 0 0 0 rgba(19,128,184,.35)}50%{box-shadow:0 0 0 .5rem rgba(19,128,184,0)}}
+@keyframes zrshine{0%{left:-60%}55%,100%{left:120%}}
+@keyframes zrbob{0%,100%{transform:translateY(-1px)}50%{transform:translateY(3px)}}
+}
+.zst .stats{display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.zst .stats>div{display:flex;flex-direction:column;align-items:center}
+@media (min-width:48rem){#about.za #more .zcs{grid-template-columns:1fr 1fr}}
+@media (min-width:64rem){#about.za #more .zcs{grid-template-columns:1fr}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -537,19 +558,19 @@ header.main .logo{width:8rem}
 <div class="abt ml">
 <p class="q"><span class="q1">എന്താണ് Zest for Peace?</span><span class="q2">ആരാണ് ഇതിനു പിന്നിൽ, എന്താണ് ഇതിൻ്റെ പ്രചോദനം...?</span></p>
 <div class="ans"><svg class="qm" viewBox="0 0 40 32" aria-hidden="true"><path d="M2 30V18C2 9 7 3 16 2v6c-4 1-6 4-6 8h6v14H2Zm22 0V18c0-9 5-15 14-16v6c-4 1-6 4-6 8h6v14H24Z"/></svg><p>ഈ ചോദ്യങ്ങൾക്കെല്ലാം ഒറ്റ ഉത്തരമേയുള്ളൂ; മനുഷ്യനന്മ ആഗ്രഹിക്കുന്ന, ദൈവത്തിന്റെ പ്രീതി കാംക്ഷിക്കുന്ന, ഒരു പറ്റം മനുഷ്യ സ്നേഹികളുടെ കൂട്ടായ്‌മയാണ് Zest for Peace.</p></div>
-<div class="zcs">
-<div class="zc"><div class="zh"><span class="ic ic-sun" aria-hidden="true"><svg viewBox="6 15 52 46"><g class="rays"><path d="M17.3 35.5L11.2 32M23.5 29.3L20 23.2M32 27V20M40.5 29.3L44 23.2M46.7 35.5L52.8 32"/></g><g class="sunb"><path class="sd" d="M20 44a12 12 0 0 1 24 0Z"/></g><path class="hz" d="M8 44h48"/><path class="wv" d="M16 51h32M23 57h18"/></svg></span><div><span class="zn">01</span><h3>Our Vision</h3></div></div><div class="zb"><p class="zt" id="zt1">പലകാരണങ്ങളാലും ഭിന്നിച്ചു കൊണ്ടിരിക്കുന്ന മനുഷ്യരെ ഒരുമിപ്പിക്കുകയാണ് Zest ലക്ഷ്യം. നഷ്ടപ്പെട്ടു പോകുന്ന പൊതു ഇടങ്ങൾ പുനസ്ഥാപിക്കുക Zest ൻ്റെ സ്വപ്നമാണ്. പൊതു വിദ്യാലയങ്ങൾ, കളിക്കളങ്ങൾ, ക്ലബ്ബുകൾ, വായനശാലകൾ, ചായപ്പീടിയകൾ... പണ്ടുകാലത്ത് ഇവയെല്ലാം സൃഷ്ടിച്ച സാമൂഹിക നന്മകൾ നമുക്ക് തിരിച്ചുപിടിക്കണം. ഇതിന് പ്രതിജ്ഞാബദ്ധമാണ് Zest.</p><button type="button" class="fv" aria-expanded="false" aria-controls="zt1"><span>FULL VIEW</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
-<div class="zc zc2"><div class="zh"><span class="ic ic-tgt" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="pulse" cx="30" cy="34" r="22"/><circle class="r1" cx="30" cy="34" r="22"/><circle class="r2" cx="30" cy="34" r="14"/><circle class="r3" cx="30" cy="34" r="6"/><g class="arrow"><path d="M30 34L53 11"/><path d="M53 11l-1 7M53 11l-7 1M48 6l-1 7M58 16l-7 1"/></g></svg></span><div><span class="zn">02</span><h3>Our Goals</h3></div></div><div class="zb"><p class="zt" id="zt2">നമ്മുടെ കുട്ടികൾ വിദ്യാഭ്യാസ രംഗത്ത് ഉന്നതിയുടെ പടവുകൾ കയറണം, നമ്മുടെ ആരോഗ്യം സുരക്ഷിതമാകണം, ഗവൺമെൻ്റ് തലത്തിലെ ആനുകൂല്യങ്ങൾ മുടക്കമില്ലാതെ നമുക്ക് ലഭ്യമാക്കണം.. ഇതിനെല്ലാമുള്ള വിപുലമായ സംവിധാനങ്ങളുടെ സമുച്ചയമാണ് Zest.</p><button type="button" class="fv" aria-expanded="false" aria-controls="zt2"><span>FULL VIEW</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
-</div>
 <div id="more" hidden>
+<div class="zcs">
+<div class="zc"><div class="zh"><span class="ic ic-sun" aria-hidden="true"><svg viewBox="6 15 52 46"><g class="rays"><path d="M17.3 35.5L11.2 32M23.5 29.3L20 23.2M32 27V20M40.5 29.3L44 23.2M46.7 35.5L52.8 32"/></g><g class="sunb"><path class="sd" d="M20 44a12 12 0 0 1 24 0Z"/></g><path class="hz" d="M8 44h48"/><path class="wv" d="M16 51h32M23 57h18"/></svg></span><div><span class="zn">01</span><h3>Our Vision</h3></div></div><div class="zb"><p class="zt open">പലകാരണങ്ങളാലും ഭിന്നിച്ചു കൊണ്ടിരിക്കുന്ന മനുഷ്യരെ ഒരുമിപ്പിക്കുകയാണ് Zest ലക്ഷ്യം. നഷ്ടപ്പെട്ടു പോകുന്ന പൊതു ഇടങ്ങൾ പുനസ്ഥാപിക്കുക Zest ൻ്റെ സ്വപ്നമാണ്. പൊതു വിദ്യാലയങ്ങൾ, കളിക്കളങ്ങൾ, ക്ലബ്ബുകൾ, വായനശാലകൾ, ചായപ്പീടിയകൾ... പണ്ടുകാലത്ത് ഇവയെല്ലാം സൃഷ്ടിച്ച സാമൂഹിക നന്മകൾ നമുക്ക് തിരിച്ചുപിടിക്കണം. ഇതിന് പ്രതിജ്ഞാബദ്ധമാണ് Zest.</p></div></div>
+<div class="zc zc2"><div class="zh"><span class="ic ic-tgt" aria-hidden="true"><svg viewBox="0 0 64 64"><circle class="pulse" cx="30" cy="34" r="22"/><circle class="r1" cx="30" cy="34" r="22"/><circle class="r2" cx="30" cy="34" r="14"/><circle class="r3" cx="30" cy="34" r="6"/><g class="arrow"><path d="M30 34L53 11"/><path d="M53 11l-1 7M53 11l-7 1M48 6l-1 7M58 16l-7 1"/></g></svg></span><div><span class="zn">02</span><h3>Our Goals</h3></div></div><div class="zb"><p class="zt open">നമ്മുടെ കുട്ടികൾ വിദ്യാഭ്യാസ രംഗത്ത് ഉന്നതിയുടെ പടവുകൾ കയറണം, നമ്മുടെ ആരോഗ്യം സുരക്ഷിതമാകണം, ഗവൺമെൻ്റ് തലത്തിലെ ആനുകൂല്യങ്ങൾ മുടക്കമില്ലാതെ നമുക്ക് ലഭ്യമാക്കണം.. ഇതിനെല്ലാമുള്ള വിപുലമായ സംവിധാനങ്ങളുടെ സമുച്ചയമാണ് Zest.</p></div></div>
+</div>
+
 <p>പരസ്പരം സ്പർധയില്ലാത്ത, ആരെയും വേദനിപ്പിക്കാത്ത, മനസ്സുകളെ ഭയം ഭരിക്കാത്ത ഒരു നല്ല നാടിനു വേണ്ടി ദൈവ പ്രചോദിതമായ യത്നമാണിത്. Zest ഒരു സ്ഥാപനത്തിന്റെ പേരല്ല ഒരു ആദർശത്തിന്റെ അടയാളവാക്യമാണ്, ഒരു ചരിത്രദൗത്യത്തിൻ്റെ മേൽവിലാസമാണ്. ഇവിടെ ഞങ്ങളും നിങ്ങളുമില്ല, നമ്മൾ മാത്രമേയുള്ളൂ!</p>
 <p>ഏതെങ്കിലുമൊരു സങ്കുചിത മത സാമുദായികതയോട്, കക്ഷി രാഷ്ട്രീയത്തോട് ഞങ്ങൾക്ക് യാതൊരു ആഭിമുഖ്യവുമില്ല. ദൈവമല്ലാതെ മറ്റാരോടും വിധേയത്വവുമില്ല. ഈ ലോകജീവിതത്തിലെ മനുഷ്യ നന്മയും സമാധാനവും മരണാനന്തര ജീവിതത്തിലെ ദൈവ പ്രീതിയും മോക്ഷവും മാത്രമാണ് ഞങ്ങളുടെ ലക്ഷ്യം!</p>
 <p>ഉദിച്ചുയരുന്ന സൂര്യൻ്റെ കിരണങ്ങളേറ്റ് തിളങ്ങുന്ന മഞ്ഞുകണങ്ങൾ ! നീലിമ മാഞ്ഞ ആകാശത്തിന്റെ ഇരുട്ടിനെ വകഞ്ഞ് മാറ്റിയ നക്ഷത്രങ്ങളുടെ നറുനിലാവ്! കാട്ടാറുകളിൽ പതഞ്ഞൊഴുകുന്ന തെളിനീർ പ്രവാഹം! വർണച്ചിറകുകൾ വിടർത്തി പറന്നുയരുന്ന ചിത്രശലഭങ്ങൾ! ഈ പ്രകൃതി സൗന്ദര്യങ്ങളിലേക്ക് ഇഴുകിച്ചേർന്ന്, ഇനി ഈ നാടിന്റെ തണൽ വൃക്ഷമായി Zest പച്ചപ്പണിഞ്ഞ് നിൽക്കും.</p>
 <p class="sig">നാട് വളരാൻ നാടിനൊപ്പം</p>
 </div>
-<div class="rmw"><button class="btn zrm" id="rm" type="button" aria-expanded="false" aria-controls="more">READ MORE ABOUT ZEST</button></div>
+<div class="rmw"><button class="btn zrm" id="rm" type="button" aria-expanded="false" aria-controls="more"><span class="zrl">READ MORE ABOUT ZEST</span><svg class="zrc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
 </div>
-<div class="stats"><div><i class="zd" aria-hidden="true"></i><b data-od="10">10+</b><i class="ul" aria-hidden="true"></i><span>Years of<br>Service</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="8">8+</b><i class="ul" aria-hidden="true"></i><span>Active<br>Projects</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="5">5+</b><i class="ul" aria-hidden="true"></i><span>Various<br>Clubs</span></div></div>
 </div></section>
 
 <section id="centre-info" class="zi-sec"><div class="wrap">
@@ -575,6 +596,7 @@ header.main .logo{width:8rem}
 </a>
 </div>
 </div>
+<div class="zst"><div class="stats"><div><i class="zd" aria-hidden="true"></i><b data-od="12">12+</b><i class="ul" aria-hidden="true"></i><span>Years of<br>Service</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="8">8+</b><i class="ul" aria-hidden="true"></i><span>Active<br>Projects</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="5">5+</b><i class="ul" aria-hidden="true"></i><span>Various<br>Clubs</span></div></div></div>
 </div></section>
 
 <section id="programs"><div class="wrap">
@@ -697,7 +719,7 @@ fr.addEventListener("load",function(){if(!sent)return;sent=false;f.reset();bt.di
 </script>
 <script>
 (function(){var b=document.getElementById("rm"),m=document.getElementById("more");if(!b||!m)return;
-b.addEventListener("click",function(){var o=m.hidden;m.hidden=!o;b.textContent=o?"READ LESS":"READ MORE ABOUT ZEST";b.setAttribute("aria-expanded",String(o))})})();
+b.addEventListener("click",function(){var o=m.hidden;m.hidden=!o;var l=b.querySelector(".zrl");(l||b).textContent=o?"SHOW LESS":"READ MORE ABOUT ZEST";b.classList.toggle("open",o);if(!o){var t=document.getElementById("about");if(t&&t.getBoundingClientRect().top<0)t.scrollIntoView({behavior:"smooth"})}b.setAttribute("aria-expanded",String(o))})})();
 </script>
 <script>
 (function(){var tl=document.getElementById("tl"),p=document.getElementById("tlp"),n=document.getElementById("tln");if(!tl||!p||!n)return;
