@@ -1009,6 +1009,65 @@ html.zdv-on .zdv.in{opacity:1;transform:none}
 #centre-info #zuRows .zu-row .zu-card{flex:0 0 88%!important}
 #centre-info #zuRows .zu-row .zu-card:only-child{flex-basis:100%!important}
 }
+
+/* v20: desktop motion pack */
+@media (min-width:64rem){
+.zprog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#3fa7d6,#1380b8,#ffc44d);z-index:100;pointer-events:none}
+/* headings: accent bar grows in */
+section h2{position:relative}
+html.zdv-on section .wrap>h2.zh2::after,html.zdv-on #programs h2::after{content:"";position:absolute;left:0;bottom:-.45rem;height:3px;width:3.5rem;border-radius:3px;background:linear-gradient(90deg,#1380b8,#3fa7d6);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1) .25s}
+html.zdv-on section h2.zh2.in::after{transform:scaleX(1)}
+.tag::before{transition:transform .5s ease}
+section:hover .tag::before{transform:rotate(180deg) scale(1.1)}
+/* marquee pauses on hover */
+.mq:hover *{animation-play-state:paused!important}
+/* Centre Info live accents */
+#centre-info .zu-panel{position:relative;overflow:hidden}
+#centre-info .zu-panel::before{content:"";position:absolute;width:38rem;height:38rem;right:-12rem;top:-16rem;border-radius:50%;background:radial-gradient(circle,rgba(63,167,214,.35),transparent 65%);animation:zFloat 14s ease-in-out infinite;pointer-events:none}
+#centre-info .zu-panel::after{content:"";position:absolute;width:28rem;height:28rem;left:-10rem;bottom:-14rem;border-radius:50%;background:radial-gradient(circle,rgba(255,196,77,.18),transparent 65%);animation:zFloat 18s ease-in-out infinite reverse;pointer-events:none}
+#centre-info .zu-panel>*{position:relative;z-index:1}
+#centre-info .zu-cat{position:relative;overflow:hidden}
+#centre-info .zu-cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%);transform:translateX(-100%);animation:zShine 5s ease-in-out infinite}
+#centre-info .zu-cats .zu-cat:nth-child(2)::after{animation-delay:1.2s}
+#centre-info .zu-cats .zu-cat:nth-child(3)::after{animation-delay:2.4s}
+@keyframes zFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-3rem,2rem)}}
+@keyframes zShine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+/* 3D tilt (JS sets --rx/--ry) */
+.ztilt{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px));transition:transform .25s ease-out,box-shadow .35s ease}
+.zbento .zb-t.ztilt:hover{--ty:-4px}
+/* Clubs: gentle float */
+#clubs .cl{animation:zBob 4s ease-in-out infinite}
+#clubs .cl:nth-child(2n){animation-delay:-1.3s}
+#clubs .cl:nth-child(3n){animation-delay:-2.6s}
+@keyframes zBob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+/* Documentary */
+#documentary .vid{transition:transform .5s ease,box-shadow .5s ease}
+#documentary .vid:hover{transform:translateY(-6px);box-shadow:0 1.8rem 3.4rem rgba(10,112,168,.35)}
+#documentary .vid .pl{animation:zRing 2s ease-out infinite}
+#documentary .vid img{transition:transform 1.2s ease}
+#documentary .vid:hover img{transform:scale(1.06)}
+@keyframes zRing{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 22px rgba(255,255,255,0)}}
+/* Events: photo zoom */
+#news .tc .ph{transition:transform .8s ease}
+#news .tc{overflow:hidden}
+#news .tc:hover .ph{transform:scale(1.07)}
+/* Daily updates button */
+#stories .ig-side .btn{background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af,#f58529)!important;background-size:300% 100%!important;color:#fff!important;border:0!important;animation:zGrad 6s linear infinite;transition:transform .25s}
+#stories .ig-side .btn:hover{transform:translateY(-2px)}
+@keyframes zGrad{to{background-position:300% 0}}
+/* Join form card + submit shine */
+#join form{transition:box-shadow .4s ease,transform .4s ease}
+#join form:focus-within{transform:translateY(-4px);box-shadow:0 1.6rem 3rem rgba(10,60,120,.16)}
+#join form button[type=submit],#join form .btn{position:relative;overflow:hidden}
+#join form button[type=submit]::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-100%);animation:zShine 4s ease-in-out infinite}
+/* Footer links slide */
+footer a{position:relative;transition:color .25s,padding .25s}
+footer li a:hover{text-decoration:none!important;padding-left:.3rem}
+/* Header: shrink + stronger glass after scrolling */
+header.main{transition:box-shadow .35s ease,background .35s ease}
+html.zsc header.main{box-shadow:0 .5rem 1.6rem rgba(10,60,120,.14)!important}
+html.zsc header.main .logo{transform:scale(.9);transform-origin:left center;transition:transform .35s ease}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
@@ -1282,6 +1341,27 @@ document.documentElement.classList.add("zdv-on");
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -8% 0px"});
 els.forEach(function(e){if(!e.classList.contains("in"))io.observe(e)});
 setTimeout(function(){els.forEach(function(e){e.classList.add("in")})},6000);})();
+</script>
+<script>
+(function(){if(!window.matchMedia||!matchMedia("(min-width:64rem)").matches)return;var d=document,root=d.documentElement;
+var bar=d.createElement("div");bar.className="zprog";bar.setAttribute("aria-hidden","true");d.body.appendChild(bar);
+var tk=0;function sc(){tk=0;var h=root.scrollHeight-innerHeight;bar.style.transform="scaleX("+(h>0?scrollY/h:0)+")";root.classList.toggle("zsc",scrollY>40)}
+addEventListener("scroll",function(){if(!tk){tk=1;requestAnimationFrame(sc)}},{passive:true});sc();
+/* heading accents */
+var hs=d.querySelectorAll("section .wrap > h2");if("IntersectionObserver" in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -10% 0px"});hs.forEach(function(h){h.classList.add("zh2");io.observe(h)})}
+/* 3D tilt */
+function tilt(sel,max){d.querySelectorAll(sel).forEach(function(el){el.classList.add("ztilt");el.addEventListener("mousemove",function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty("--ry",(x*max)+"deg");el.style.setProperty("--rx",(-y*max)+"deg")});el.addEventListener("mouseleave",function(){el.style.setProperty("--ry","0deg");el.style.setProperty("--rx","0deg")})})}
+tilt(".zbento .zb-t",8);tilt("#centre-info .zu-photo",5);tilt("#about.za .car",5);
+/* stagger project tiles + events */
+d.querySelectorAll(".zbento .zb-t").forEach(function(t,i){if(!t.classList.contains("zdv")){t.classList.add("zdv");t.style.transitionDelay=(i*70)+"ms"}});
+d.querySelectorAll("#news .ti").forEach(function(t,i){if(!t.classList.contains("zdv")){t.classList.add("zdv");t.style.transitionDelay=(Math.min(i,4)*90)+"ms"}});
+if("IntersectionObserver" in window){var io2=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io2.unobserve(x.target)}})},{rootMargin:"0px 0px -8% 0px"});d.querySelectorAll(".zbento .zb-t.zdv,#news .ti.zdv").forEach(function(e){if(e.getBoundingClientRect().top<innerHeight)e.classList.add("in");else io2.observe(e)});setTimeout(function(){d.querySelectorAll(".zdv").forEach(function(e){e.classList.add("in")})},7000)}
+/* Centre Info count-up */
+function countUp(){d.querySelectorAll("#centre-info .zu-cnt:not([hidden])").forEach(function(b){var n=parseInt(b.textContent,10);if(!n||b.dataset.cu)return;b.dataset.cu=1;var t0=null;function st(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/900);b.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st);else b.textContent=n}requestAnimationFrame(st)})}
+var tries=0,iv=setInterval(function(){countUp();if(++tries>20)clearInterval(iv)},500);
+/* About photo parallax */
+var car=d.querySelector("#about.za .car .ph");if(car){addEventListener("scroll",function(){var r=car.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var p=(r.top+r.height/2-innerHeight/2)/innerHeight;car.style.transform="scale(1.12) translateY("+(p*-18)+"px)"},{passive:true})}
+})();
 </script>
 </body>
 </html>
