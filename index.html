@@ -945,6 +945,46 @@ body>.mq{order:2}
 #about.za .zst-d .stats{margin:0!important;max-width:none!important;padding:1rem 1.25rem!important;display:grid!important;grid-template-columns:repeat(3,1fr)}
 #about.za{padding-bottom:3.5rem}
 }
+
+/* v18: desktop – landscape Centre Info photo, tidy details, motion */
+@media (min-width:64rem){
+#centre-info .zu-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.55fr)!important;grid-template-areas:"h car" "sub car" "photo car" "cats car" "more car"!important;grid-template-rows:auto auto auto auto 1fr!important;row-gap:.3rem!important}
+#centre-info .zu-photo{aspect-ratio:16/10!important;min-height:0!important;align-self:start!important;height:auto!important;margin-top:.9rem!important;transition:transform .6s ease,box-shadow .6s ease}
+#centre-info .zu-photo:hover{transform:scale(1.015);box-shadow:0 1.2rem 2.4rem rgba(0,20,40,.35)}
+#centre-info .zu-cats{flex-direction:row!important;display:grid!important;grid-template-columns:repeat(3,1fr);justify-content:stretch!important;align-self:start!important;gap:.6rem!important;margin-top:.9rem!important}
+#centre-info .zu-cat{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center;gap:.45rem!important;padding:.85rem .5rem!important;border-radius:1rem!important;font-size:.68rem!important;line-height:1.25;transition:transform .3s ease,background .3s ease,box-shadow .3s ease}
+#centre-info .zu-cat>svg:last-child{display:none}
+#centre-info .zu-cat .zu-ci{width:2.4rem!important;height:2.4rem!important}
+#centre-info .zu-cat:hover{transform:translateY(-4px);background:rgba(255,255,255,.22)!important;box-shadow:0 .8rem 1.6rem rgba(0,20,40,.3)}
+#centre-info .zu-more{align-self:start!important;margin-top:.8rem!important}
+#centre-info .zu-car{margin-top:.9rem!important}
+#centre-info .zu-card{transition:transform .35s ease,box-shadow .35s ease}
+#centre-info .zu-card:hover{transform:translateY(-6px);box-shadow:0 1.2rem 2.2rem rgba(0,20,40,.35)}
+/* Projects tiles */
+.zbento .zb-t{transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease,filter .45s ease}
+.zbento .zb-t:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 1.4rem 2.6rem rgba(10,40,70,.3);filter:saturate(1.15);z-index:2}
+.zbento .zb-t h3{transition:transform .45s ease}
+.zbento .zb-t:hover h3{transform:translateY(-4px)}
+/* About */
+#about.za .car{transition:transform .6s ease,box-shadow .6s ease}
+#about.za .car:hover{transform:translateY(-4px);box-shadow:0 1.4rem 2.8rem rgba(10,40,70,.28)}
+#about.za .zst-d .stats>div{transition:transform .3s ease}
+#about.za .zst-d .stats>div:hover{transform:translateY(-4px)}
+/* Clubs logos */
+#clubs .cl{transition:transform .35s ease,filter .35s ease}
+#clubs .cl:hover{transform:scale(1.08);filter:drop-shadow(0 .5rem .8rem rgba(10,60,120,.25))}
+/* Events cards */
+#news .tc{transition:transform .35s ease,box-shadow .35s ease}
+#news .tc:hover{transform:translateY(-6px);box-shadow:0 1.2rem 2.2rem rgba(10,60,90,.22)}
+/* Form & buttons */
+#join form input,#join form select,#join form textarea{transition:border-color .25s,box-shadow .25s}
+#join form input:focus,#join form select:focus,#join form textarea:focus{box-shadow:0 0 0 4px rgba(19,128,184,.15)}
+/* Scroll reveal */
+html.zdv-on .zdv{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+html.zdv-on .zdv.zdv-l{transform:translateX(-36px)}
+html.zdv-on .zdv.zdv-r{transform:translateX(36px)}
+html.zdv-on .zdv.in{opacity:1;transform:none}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
@@ -1208,6 +1248,16 @@ tg.style.marginLeft="";var b=tg.getBoundingClientRect(),bw=parseFloat(getCompute
 top=a.bottom+scrollY;h=Math.max(0,b.top+b.height/2-a.bottom);x.style.left=(X+scrollX)+"px";x.style.top=top+"px";x.style.height=h+"px";fill()}
 function fill(){if(!h)return;var p=(innerHeight*.6-(top-scrollY))/h;f.style.height=(Math.max(0,Math.min(1,p))*100)+"%"}
 var rq=0;addEventListener("scroll",function(){if(!rq){rq=1;requestAnimationFrame(function(){rq=0;pos()})}},{passive:true});addEventListener("resize",pos);addEventListener("load",pos);if(window.ResizeObserver)new ResizeObserver(pos).observe(document.body);pos()})();
+</script>
+<script>
+(function(){if(!window.matchMedia||!matchMedia("(min-width:64rem)").matches||!("IntersectionObserver" in window))return;
+var pick=[["#centre-info .zu-panel",""],["#about.za .car","zdv-l"],["#about.za .abt","zdv-r"],["#programs .wrap > *",""],["#clubs .wrap > *",""],["#documentary .wrap > *:first-child","zdv-l"],["#documentary .wrap > *:last-child","zdv-r"],["#news .wrap > *",""],["#stories .wrap > *",""],["#join .wrap > *:first-child","zdv-l"],["#join .wrap > *:last-child","zdv-r"]];
+var els=[];pick.forEach(function(p){document.querySelectorAll(p[0]).forEach(function(e,i){if(e.classList.contains("rv")||e.classList.contains("zdv"))return;e.classList.add("zdv");if(p[1])e.classList.add(p[1]);e.style.transitionDelay=Math.min(i,4)*90+"ms";els.push(e)})});
+var vh=innerHeight;els.forEach(function(e){if(e.getBoundingClientRect().top<vh)e.classList.add("in")});
+document.documentElement.classList.add("zdv-on");
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -8% 0px"});
+els.forEach(function(e){if(!e.classList.contains("in"))io.observe(e)});
+setTimeout(function(){els.forEach(function(e){e.classList.add("in")})},6000);})();
 </script>
 </body>
 </html>
