@@ -908,6 +908,33 @@ body>.mq{order:2}
 .wrap{max-width:none!important;width:auto!important;padding-left:clamp(1.5rem,3.2vw,3.5rem)!important;padding-right:clamp(1.5rem,3.2vw,3.5rem)!important;margin-left:auto;margin-right:auto}
 }
 @media (min-width:100rem){.wrap{max-width:110rem!important}}
+
+/* v16: desktop – Centre Info & About redesign */
+@media (min-width:64rem){
+#centre-info .zu-panel{grid-template-columns:minmax(0,1fr) minmax(0,1.9fr)!important;grid-template-areas:"h cats" "sub cats" "photo car" "more car"!important;grid-template-rows:auto auto 1fr auto!important;column-gap:2.25rem!important;row-gap:.35rem!important;padding:2rem 2.25rem 2.25rem!important}
+#centre-info .zu-head{display:contents}
+#centre-info .zu-h{grid-area:h;margin:0}
+#centre-info .zu-sub{grid-area:sub;margin:0}
+#centre-info .zu-photo{grid-area:photo;align-self:stretch;aspect-ratio:auto!important;min-height:16rem;max-height:none!important;background-position:center!important;margin-top:1rem!important;border-radius:1rem}
+#centre-info .zu-cats{grid-area:cats;flex-direction:row!important;justify-content:flex-end;align-self:center;align-items:center;gap:.6rem!important}
+#centre-info .zu-cat{width:auto!important;padding:.55rem .95rem!important}
+#centre-info .zu-more{grid-area:more;margin-top:1rem!important}
+#centre-info .zu-vm{width:100%;justify-content:center}
+#centre-info .zu-car{margin-top:1rem!important}
+#centre-info .zu-card{flex:0 0 calc((100% - 1rem)/2.35)!important}
+/* About */
+#about.za .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:3rem;align-items:center}
+#about.za .car{height:25rem!important;min-height:0;aspect-ratio:auto!important;align-self:center;border-radius:1.5rem}
+#about.za .car .trk,#about.za .car .ph{height:100%!important;aspect-ratio:auto!important}
+#about.za .abt{padding:1rem 0}
+#about.za .q1{font-size:clamp(1.8rem,2.4vw,2.5rem)!important}
+#about.za .q2{font-size:1.15rem!important;margin-top:.4rem}
+#about.za .ans{padding:1.4rem 1.5rem!important;margin-top:1.2rem}
+#about.za .ans p{font-size:1.05rem!important;line-height:1.8!important}
+#about.za .rmw{margin-top:.5rem}
+#about.za #more:not([hidden]){margin-top:1rem}
+#numbers .zst .stats{padding:1.4rem 2rem}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
