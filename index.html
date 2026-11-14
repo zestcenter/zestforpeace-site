@@ -1068,6 +1068,41 @@ header.main{transition:box-shadow .35s ease,background .35s ease}
 html.zsc header.main{box-shadow:0 .5rem 1.6rem rgba(10,60,120,.14)!important}
 html.zsc header.main .logo{transform:scale(.9);transform-origin:left center;transition:transform .35s ease}
 }
+
+/* v21: mobile motion pack (phones & tablets) */
+@media (max-width:63.99rem){
+.zprog{position:fixed;left:0;top:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#3fa7d6,#1380b8,#ffc44d);z-index:100;pointer-events:none}
+html.zsc header.main{box-shadow:0 .4rem 1.2rem rgba(10,60,120,.14)!important}
+html.zdv-on .zdv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+html.zdv-on .zdv.zdv-l{transform:translateX(-24px)}
+html.zdv-on .zdv.zdv-r{transform:translateX(24px)}
+html.zdv-on .zdv.in{opacity:1;transform:none}
+section h2.zh2{position:relative}
+section h2.zh2::after{content:"";position:absolute;left:0;bottom:-.4rem;height:3px;width:3rem;border-radius:3px;background:linear-gradient(90deg,#1380b8,#3fa7d6);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1) .2s}
+section h2.zh2.in::after{transform:scaleX(1)}
+#centre-info .zu-panel{position:relative;overflow:hidden}
+#centre-info .zu-panel::before{content:"";position:absolute;width:22rem;height:22rem;right:-9rem;top:-10rem;border-radius:50%;background:radial-gradient(circle,rgba(63,167,214,.35),transparent 65%);animation:zFloat2 12s ease-in-out infinite;pointer-events:none}
+#centre-info .zu-panel>*{position:relative;z-index:1}
+#centre-info .zu-cat{position:relative;overflow:hidden}
+#centre-info .zu-cat::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-100%);animation:zShine2 5s ease-in-out infinite;pointer-events:none}
+#centre-info .zu-cats .zu-cat:nth-child(2)::after{animation-delay:1.2s}
+#centre-info .zu-cats .zu-cat:nth-child(3)::after{animation-delay:2.4s}
+@keyframes zFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-2rem,1.5rem)}}
+@keyframes zShine2{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+#clubs .cl{animation:zBob2 4s ease-in-out infinite}
+#clubs .cl:nth-child(2n){animation-delay:-1.3s}
+#clubs .cl:nth-child(3n){animation-delay:-2.6s}
+@keyframes zBob2{0%,100%{translate:0 0}50%{translate:0 -5px}}
+#documentary .vid .pl{animation:zRing2 2s ease-out infinite}
+@keyframes zRing2{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 18px rgba(255,255,255,0)}}
+.zig-btn{background:linear-gradient(90deg,#f58529,#dd2a7b,#8134af,#f58529)!important;background-size:300% 100%!important;animation:zGrad2 6s linear infinite}
+@keyframes zGrad2{to{background-position:300% 0}}
+#join form button[type=submit]{position:relative;overflow:hidden}
+#join form button[type=submit]::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-100%);animation:zShine2 4s ease-in-out infinite;pointer-events:none}
+/* tap feedback */
+.zu-card,.zu-cat,.zb-t,#news .tc,.btn,.zu-vm,.zig-btn,.yt,.zrm{transition:transform .18s ease}
+.zu-card:active,.zu-cat:active,.zb-t:active,#news .tc:active,.btn:active,.zu-vm:active,.zig-btn:active,.yt:active{transform:scale(.97)}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
@@ -1333,7 +1368,7 @@ function fill(){if(!h)return;var p=(innerHeight*.6-(top-scrollY))/h;f.style.heig
 var rq=0;addEventListener("scroll",function(){if(!rq){rq=1;requestAnimationFrame(function(){rq=0;pos()})}},{passive:true});addEventListener("resize",pos);addEventListener("load",pos);if(window.ResizeObserver)new ResizeObserver(pos).observe(document.body);pos()})();
 </script>
 <script>
-(function(){if(!window.matchMedia||!matchMedia("(min-width:64rem)").matches||!("IntersectionObserver" in window))return;
+(function(){if(!("IntersectionObserver" in window))return;
 var pick=[["#centre-info .zu-panel",""],["#about.za .car","zdv-l"],["#about.za .abt","zdv-r"],["#programs .wrap > *",""],["#clubs .wrap > *",""],["#documentary .wrap > *:first-child","zdv-l"],["#documentary .wrap > *:last-child","zdv-r"],["#news .wrap > *",""],["#stories .wrap > *",""],["#join .wrap > *:first-child","zdv-l"],["#join .wrap > *:last-child","zdv-r"]];
 var els=[];pick.forEach(function(p){document.querySelectorAll(p[0]).forEach(function(e,i){if(e.classList.contains("rv")||e.classList.contains("zdv"))return;e.classList.add("zdv");if(p[1])e.classList.add(p[1]);e.style.transitionDelay=Math.min(i,4)*90+"ms";els.push(e)})});
 var vh=innerHeight;els.forEach(function(e){if(e.getBoundingClientRect().top<vh)e.classList.add("in")});
@@ -1343,7 +1378,7 @@ els.forEach(function(e){if(!e.classList.contains("in"))io.observe(e)});
 setTimeout(function(){els.forEach(function(e){e.classList.add("in")})},6000);})();
 </script>
 <script>
-(function(){if(!window.matchMedia||!matchMedia("(min-width:64rem)").matches)return;var d=document,root=d.documentElement;
+(function(){var d=document,root=d.documentElement,HOV=window.matchMedia&&matchMedia("(hover:hover) and (min-width:64rem)").matches;
 var bar=d.createElement("div");bar.className="zprog";bar.setAttribute("aria-hidden","true");d.body.appendChild(bar);
 var tk=0;function sc(){tk=0;var h=root.scrollHeight-innerHeight;bar.style.transform="scaleX("+(h>0?scrollY/h:0)+")";root.classList.toggle("zsc",scrollY>40)}
 addEventListener("scroll",function(){if(!tk){tk=1;requestAnimationFrame(sc)}},{passive:true});sc();
@@ -1351,7 +1386,7 @@ addEventListener("scroll",function(){if(!tk){tk=1;requestAnimationFrame(sc)}},{p
 var hs=d.querySelectorAll("section .wrap > h2");if("IntersectionObserver" in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{rootMargin:"0px 0px -10% 0px"});hs.forEach(function(h){h.classList.add("zh2");io.observe(h)})}
 /* 3D tilt */
 function tilt(sel,max){d.querySelectorAll(sel).forEach(function(el){el.classList.add("ztilt");el.addEventListener("mousemove",function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty("--ry",(x*max)+"deg");el.style.setProperty("--rx",(-y*max)+"deg")});el.addEventListener("mouseleave",function(){el.style.setProperty("--ry","0deg");el.style.setProperty("--rx","0deg")})})}
-tilt(".zbento .zb-t",8);tilt("#centre-info .zu-photo",5);tilt("#about.za .car",5);
+if(HOV){tilt(".zbento .zb-t",8);tilt("#centre-info .zu-photo",5);tilt("#about.za .car",5);}
 /* stagger project tiles + events */
 d.querySelectorAll(".zbento .zb-t").forEach(function(t,i){if(!t.classList.contains("zdv")){t.classList.add("zdv");t.style.transitionDelay=(i*70)+"ms"}});
 d.querySelectorAll("#news .ti").forEach(function(t,i){if(!t.classList.contains("zdv")){t.classList.add("zdv");t.style.transitionDelay=(Math.min(i,4)*90)+"ms"}});
@@ -1360,7 +1395,7 @@ if("IntersectionObserver" in window){var io2=new IntersectionObserver(function(e
 function countUp(){d.querySelectorAll("#centre-info .zu-cnt:not([hidden])").forEach(function(b){var n=parseInt(b.textContent,10);if(!n||b.dataset.cu)return;b.dataset.cu=1;var t0=null;function st(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/900);b.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(st);else b.textContent=n}requestAnimationFrame(st)})}
 var tries=0,iv=setInterval(function(){countUp();if(++tries>20)clearInterval(iv)},500);
 /* About photo parallax */
-var car=d.querySelector("#about.za .car .ph");if(car){addEventListener("scroll",function(){var r=car.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var p=(r.top+r.height/2-innerHeight/2)/innerHeight;car.style.transform="scale(1.12) translateY("+(p*-18)+"px)"},{passive:true})}
+var car=d.querySelector("#about.za .car .ph");if(car){addEventListener("scroll",function(){var r=car.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var p=(r.top+r.height/2-innerHeight/2)/innerHeight;car.style.transform="scale(1.12) translateY("+(p*(HOV?-18:-10))+"px)"},{passive:true})}
 })();
 </script>
 </body>
