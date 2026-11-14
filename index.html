@@ -935,6 +935,16 @@ body>.mq{order:2}
 #about.za #more:not([hidden]){margin-top:1rem}
 #numbers .zst .stats{padding:1.4rem 2rem}
 }
+
+/* v17: numbers beside About photo on desktop; a bit more side space */
+.zst-d{display:none}
+@media (min-width:64rem){
+.wrap{padding-left:clamp(2rem,5vw,5.5rem)!important;padding-right:clamp(2rem,5vw,5.5rem)!important}
+#numbers{display:none!important}
+#about.za .zst-d{display:block;margin-top:1.4rem}
+#about.za .zst-d .stats{margin:0!important;max-width:none!important;padding:1rem 1.25rem!important;display:grid!important;grid-template-columns:repeat(3,1fr)}
+#about.za{padding-bottom:3.5rem}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
@@ -1003,6 +1013,7 @@ body>.mq{order:2}
 <p class="sig">നാട് വളരാൻ നാടിനൊപ്പം</p>
 </div>
 <div class="rmw"><button class="btn zrm" id="rm" type="button" aria-expanded="false" aria-controls="more"><span class="zrl">READ MORE ABOUT ZEST</span><svg class="zrc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></div>
+<div class="zst zst-d"><div class="stats"><div><i class="zd" aria-hidden="true"></i><b data-od="10">10+</b><i class="ul" aria-hidden="true"></i><span>Years of<br>Service</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="8">8+</b><i class="ul" aria-hidden="true"></i><span>Active<br>Projects</span></div><div><i class="zd" aria-hidden="true"></i><b data-od="5">5+</b><i class="ul" aria-hidden="true"></i><span>Various<br>Clubs</span></div></div></div>
 </div>
 
 </div></section>
