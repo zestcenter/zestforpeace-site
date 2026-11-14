@@ -1103,6 +1103,38 @@ section h2.zh2.in::after{transform:scaleX(1)}
 .zu-card,.zu-cat,.zb-t,#news .tc,.btn,.zu-vm,.zig-btn,.yt,.zrm{transition:transform .18s ease}
 .zu-card:active,.zu-cat:active,.zb-t:active,#news .tc:active,.btn:active,.zu-vm:active,.zig-btn:active,.yt:active{transform:scale(.97)}
 }
+
+/* v22: ZEST Centre Info – extra motion (all screens) */
+#centre-info .zu-photo{animation:zKB 18s ease-in-out infinite alternate;background-size:115%!important}
+@keyframes zKB{0%{background-position:30% 40%;background-size:112%}100%{background-position:70% 60%;background-size:125%}}
+#centre-info .zu-h{background:linear-gradient(90deg,#fff 0%,#fff 40%,#ffe39a 50%,#fff 60%,#fff 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:zTxt 6s linear infinite}
+@keyframes zTxt{0%{background-position:100% 0}100%{background-position:-150% 0}}
+#centre-info .zu-sub{animation:zSub 1s ease .3s both}
+@keyframes zSub{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#centre-info .zu-card{animation:zIn .7s cubic-bezier(.2,.8,.2,1) both}
+#centre-info .zu-trk .zu-card:nth-child(2){animation-delay:.12s}
+#centre-info .zu-trk .zu-card:nth-child(3){animation-delay:.24s}
+#centre-info .zu-trk .zu-card:nth-child(4){animation-delay:.36s}
+#centre-info .zu-trk .zu-card:nth-child(5){animation-delay:.48s}
+#centre-info .zu-row:nth-child(2) .zu-card{animation-delay:.2s}
+#centre-info .zu-row:nth-child(3) .zu-card{animation-delay:.4s}
+@keyframes zIn{from{opacity:0;transform:translateX(30px) scale(.97)}to{opacity:1;transform:none}}
+#centre-info .zu-new{animation:zNew 1.6s ease-in-out infinite}
+@keyframes zNew{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(242,165,22,.6)}50%{transform:scale(1.08);box-shadow:0 0 0 6px rgba(242,165,22,0)}}
+#centre-info .zu-go{animation:zGo 1.8s ease-in-out infinite}
+@keyframes zGo{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+#centre-info .zu-ph{background:linear-gradient(120deg,#d9eef9,#eef8fd,#cfe8f6,#e6f4fb);background-size:300% 300%;animation:zPh 8s ease infinite}
+@keyframes zPh{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+#centre-info .zu-cnt:not([hidden]){animation:zCnt 3.5s ease-in-out infinite}
+@keyframes zCnt{0%,85%,100%{transform:scale(1)}90%{transform:scale(1.25)}95%{transform:scale(.95)}}
+#centre-info .zu-ci{transition:transform .3s}
+#centre-info .zu-cat:hover .zu-ci,#centre-info .zu-cat:active .zu-ci{transform:rotate(-8deg) scale(1.08)}
+#centre-info .zu-vm{position:relative;overflow:hidden}
+#centre-info .zu-vm::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-100%);animation:zVm 3.5s ease-in-out infinite;pointer-events:none}
+@keyframes zVm{0%,55%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+#centre-info .zu-vm svg{animation:zGo 1.4s ease-in-out infinite}
+#centre-info .zu-live{animation:zLive 1.6s ease-out infinite}
+@keyframes zLive{0%{box-shadow:0 0 0 0 rgba(255,196,77,.7)}100%{box-shadow:0 0 0 9px rgba(255,196,77,0)}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
