@@ -1172,6 +1172,30 @@ section h2.zh2.in::after{transform:scaleX(1)}
 #centre-info .zu-card img{animation:none!important}
 #centre-info .zu-bg{animation:none!important}
 #centre-info .zu-trk{scroll-behavior:auto}
+
+/* v25: Our Projects – more dynamic (phone + computer) */
+.zbento .zb-t{position:relative;overflow:hidden;isolation:isolate}
+.zbento .zb-t::before{content:"";position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;z-index:-2;animation:zPKB 14s ease-in-out infinite alternate}
+.zbento .zb-t:nth-child(2n)::before{animation-duration:17s;animation-direction:alternate-reverse}
+.zbento .zb-t:nth-child(3n)::before{animation-duration:20s}
+@keyframes zPKB{from{transform:scale(1)}to{transform:scale(1.12)}}
+.zbento .zb-t::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.3) 50%,transparent 60%) no-repeat,linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(8,30,45,.85) 100%);background-size:250% 100%,100% 100%;background-position:200% 0,0 0;transform:none;animation:zPShine 7s ease-in-out infinite;pointer-events:none;z-index:-1}
+.zbento .zb-t:nth-child(1)::after{animation-delay:0s}
+.zbento .zb-t:nth-child(2)::after{animation-delay:.8s}
+.zbento .zb-t:nth-child(3)::after{animation-delay:1.6s}
+.zbento .zb-t:nth-child(4)::after{animation-delay:2.4s}
+.zbento .zb-t:nth-child(5)::after{animation-delay:3.2s}
+.zbento .zb-t:nth-child(6)::after{animation-delay:4s}
+.zbento .zb-t:nth-child(7)::after{animation-delay:4.8s}
+.zbento .zb-t:nth-child(8)::after{animation-delay:5.6s}
+.zbento .zb-t:nth-child(9)::after{animation-delay:6.4s}
+@keyframes zPShine{0%,80%{background-position:200% 0,0 0}100%{background-position:-100% 0,0 0}}
+.zbento .zb-t h3{z-index:2}
+.zbento .zb-t h3::after{content:"";display:block;height:3px;width:0;margin-top:.35rem;border-radius:3px;background:linear-gradient(90deg,#ffc44d,#3fa7d6);transition:width .6s cubic-bezier(.2,.8,.2,1) .3s}
+.zbento .zb-t.in h3::after,.zbento .zb-t:hover h3::after{width:2.5rem}
+html.zdv-on .zbento .zb-t.zdv{opacity:0;transform:translateY(26px) scale(.94);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
+.zbento .zb-t:active{transform:scale(.97)!important}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.org/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.org/", "logo": "https://zestforpeace.org/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.org/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.org"], "url": "https://zestforpeace.org/", "publisher": {"@id": "https://zestforpeace.org/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.org/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.org/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.org/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.org/#org"}}]}</script>
