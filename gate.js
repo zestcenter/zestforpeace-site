@@ -22,7 +22,8 @@
         ".zab a{flex:none;padding:.6rem .95rem;border-radius:999px;background:linear-gradient(90deg,#0a70a8,#1380b8);color:#fff;text-decoration:none;font:800 .72rem/1 Inter,sans-serif;letter-spacing:.06em;box-shadow:0 .35rem .9rem rgba(19,128,184,.35)}" +
         ".zab .x{flex:none;width:1.8rem;height:1.8rem;border:0;border-radius:50%;background:#eef6fb;color:#52636d;font:700 1rem/1 Inter,sans-serif;cursor:pointer}" +
         ".zab i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,#3fa7d6,#1380b8,#ffc44d);transform-origin:left;animation:zabT 10s linear forwards}" +
-        "@keyframes zabT{from{transform:scaleX(1)}to{transform:scaleX(0)}}";
+        "@keyframes zabT{from{transform:scaleX(1)}to{transform:scaleX(0)}}" +
+        ".zab{gap:.6rem;padding:.6rem .6rem .6rem .65rem}.zab img{width:2.4rem;height:2.4rem}.zab b{white-space:nowrap;font-size:.88rem}.zab span{font-size:.7rem}.zab a{padding:.5rem .75rem;font-size:.66rem}.zab .x{width:1.6rem;height:1.6rem;font-size:.9rem}";
       var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
       var b = document.createElement("div"); b.className = "zab"; b.setAttribute("role", "dialog"); b.setAttribute("aria-label", "Get ZEST APP");
       b.innerHTML = '<img src="/icons/icon-192.png" alt=""><div class="t"><b>Get ZEST APP</b><span>Download the app for a better experience</span></div><a href="/app/">DOWNLOAD</a><button class="x" type="button" aria-label="Close">×</button><i></i>';
