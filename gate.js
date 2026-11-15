@@ -10,6 +10,31 @@
   /* App not installed (prompt offered) or being installed again → forget old login, so a reinstall asks again */
   function forget() { try { localStorage.removeItem("zestAuth"); } catch (e) {} }
   if (!standalone) { addEventListener("beforeinstallprompt", forget); addEventListener("appinstalled", forget); }
+  /* Website (not app): "Get ZEST APP" banner at the bottom for 10 seconds on first open of each visit */
+  if (!standalone && !forced && !/^\/app\/?$/.test(location.pathname)) (function () {
+    var dp = null; addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); dp = e; });
+    var seen = false; try { seen = sessionStorage.getItem("zestBan") === "1"; sessionStorage.setItem("zestBan", "1"); } catch (e) {}
+    if (seen) return;
+    function go() {
+      var css = ".zab{position:fixed;left:.75rem;right:.75rem;bottom:calc(.75rem + env(safe-area-inset-bottom,0px));z-index:2147483000;max-width:30rem;margin:0 auto;display:flex;align-items:center;gap:.75rem;padding:.7rem .75rem .7rem .7rem;border-radius:1.1rem;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 .8rem 2rem rgba(10,60,120,.28);border:1px solid #d3e7f3;font-family:Inter,'Noto Sans Malayalam',system-ui,sans-serif;transform:translateY(140%);transition:transform .5s cubic-bezier(.2,.9,.2,1);overflow:hidden}" +
+        ".zab.on{transform:none}.zab img{width:2.9rem;height:2.9rem;border-radius:.8rem;flex:none}" +
+        ".zab .t{flex:1;min-width:0}.zab b{display:block;font-size:.92rem;color:#0b3d5c}.zab span{display:block;font-size:.74rem;line-height:1.35;color:#52636d}" +
+        ".zab a{flex:none;padding:.6rem .95rem;border-radius:999px;background:linear-gradient(90deg,#0a70a8,#1380b8);color:#fff;text-decoration:none;font:800 .72rem/1 Inter,sans-serif;letter-spacing:.06em;box-shadow:0 .35rem .9rem rgba(19,128,184,.35)}" +
+        ".zab .x{flex:none;width:1.8rem;height:1.8rem;border:0;border-radius:50%;background:#eef6fb;color:#52636d;font:700 1rem/1 Inter,sans-serif;cursor:pointer}" +
+        ".zab i{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,#3fa7d6,#1380b8,#ffc44d);transform-origin:left;animation:zabT 10s linear forwards}" +
+        "@keyframes zabT{from{transform:scaleX(1)}to{transform:scaleX(0)}}";
+      var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
+      var b = document.createElement("div"); b.className = "zab"; b.setAttribute("role", "dialog"); b.setAttribute("aria-label", "Get ZEST APP");
+      b.innerHTML = '<img src="/icons/icon-192.png" alt=""><div class="t"><b>Get ZEST APP</b><span>കൂടുതൽ സൗകര്യത്തിന് ആപ്പ് ഡൗൺലോഡ് ചെയ്യൂ</span></div><a href="/app/">DOWNLOAD</a><button class="x" type="button" aria-label="Close">×</button><i></i>';
+      document.body.appendChild(b);
+      var hide = function () { b.classList.remove("on"); setTimeout(function () { b.remove(); }, 600); };
+      b.querySelector(".x").addEventListener("click", hide);
+      b.querySelector("a").addEventListener("click", function (e) { if (dp) { e.preventDefault(); dp.prompt(); dp = null; hide(); } });
+      requestAnimationFrame(function () { requestAnimationFrame(function () { b.classList.add("on"); }); });
+      setTimeout(hide, 10000);
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setTimeout(go, 1200); }); else setTimeout(go, 1200);
+  })();
   if (!standalone && !forced) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
