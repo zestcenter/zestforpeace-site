@@ -25,7 +25,7 @@
         "@keyframes zabT{from{transform:scaleX(1)}to{transform:scaleX(0)}}";
       var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
       var b = document.createElement("div"); b.className = "zab"; b.setAttribute("role", "dialog"); b.setAttribute("aria-label", "Get ZEST APP");
-      b.innerHTML = '<img src="/icons/icon-192.png" alt=""><div class="t"><b>Get ZEST APP</b><span>കൂടുതൽ സൗകര്യത്തിന് ആപ്പ് ഡൗൺലോഡ് ചെയ്യൂ</span></div><a href="/app/">DOWNLOAD</a><button class="x" type="button" aria-label="Close">×</button><i></i>';
+      b.innerHTML = '<img src="/icons/icon-192.png" alt=""><div class="t"><b>Get ZEST APP</b><span>Download the app for a better experience</span></div><a href="/app/">DOWNLOAD</a><button class="x" type="button" aria-label="Close">×</button><i></i>';
       document.body.appendChild(b);
       var hide = function () { b.classList.remove("on"); setTimeout(function () { b.remove(); }, 600); };
       b.querySelector(".x").addEventListener("click", hide);
