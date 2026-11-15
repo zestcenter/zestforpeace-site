@@ -197,7 +197,7 @@
     });
 
     function done(name, pass, num) {
-      var msg = "ZEST APP login\n\nUsername: " + name + "\nPassword: " + pass + "\n\nOpen the app: https://zestforpeace.org/app/";
+      var msg = "ZEST APP login\n\nUsername: " + name + "\nPassword: " + pass + "\n\nOpen the app: https://zestforpeace.com/app/";
       var card = g.querySelector("#zgCard");
       card.innerHTML = '<div class="zg-f"><p class="zg-ok">നന്ദി! Registration complete ✓</p>' +
         '<div class="zg-cr"><div><span>Username</span><b>' + esc(name) + "</b></div><div><span>Password</span><b>" + esc(pass) + "</b></div></div>" +
