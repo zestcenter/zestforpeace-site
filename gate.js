@@ -7,6 +7,9 @@
 
   var standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   var forced = /[?&]zestgate=1/.test(location.search);
+  /* App not installed (prompt offered) or being installed again → forget old login, so a reinstall asks again */
+  function forget() { try { localStorage.removeItem("zestAuth"); } catch (e) {} }
+  if (!standalone) { addEventListener("beforeinstallprompt", forget); addEventListener("appinstalled", forget); }
   if (!standalone && !forced) return;
   function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
