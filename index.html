@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=18"></script>
+<script src="/gate.js?v=19"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -1332,6 +1332,13 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 #about.za .abt{grid-row:3!important}
 #about.za .zst-d{grid-column:2}
 }
+
+/* nav: Join + Notification settings */
+#mn a.nn,.zmh-nav a.nn{display:inline-flex!important;align-items:center;gap:7px;background:linear-gradient(135deg,#0a70a8,#3fa7d6)!important;color:#fff!important;border-radius:999px;padding:9px 15px!important;font-weight:800!important;box-shadow:0 6px 14px rgba(10,112,168,.3)}
+#mn a.nn svg,.zmh-nav a.nn svg{width:15px;height:15px;fill:none;stroke:#ffc44d;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;animation:nnb 2.4s ease-in-out infinite;transform-origin:50% 10%}
+@keyframes nnb{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(14deg)}85%{transform:rotate(-12deg)}93%{transform:rotate(6deg)}}
+#mn a.nj,.zmh-nav a.nj{color:#0b5d8f!important;font-weight:800!important}
+@media (max-width:63.99rem){#mn a.nn,.zmh-nav a.nn{display:flex!important;justify-content:center;margin:10px 16px 6px}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.com/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.com"], "url": "https://zestforpeace.com/", "publisher": {"@id": "https://zestforpeace.com/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
@@ -1340,7 +1347,7 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 <header class="main" id="top"><div class="wrap">
 <div class="logo ph" role="img" aria-label="ZEST for Peace"></div>
 <button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><span></span><span></span><span></span></button>
-<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#news">EVENTS</a><a href="#stories">ZEST DAILY UPDATES</a><a href="#contact">CONTACT US</a></nav>
+<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#join" class="nj">JOIN WITH ZEST</a><a href="#notify" class="nn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>NOTIFICATION SETTINGS</a></nav>
 </div></header>
 
 <div class="hero"><video id="hv" src="/media/hero.mp4" poster="/media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div>
@@ -1669,5 +1676,6 @@ chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n")
 show("week")});
 })();
 </script>
+<script src="/notify.js?v=1" defer></script>
 </body>
 </html>

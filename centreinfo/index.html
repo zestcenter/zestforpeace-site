@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0F78A8">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=18"></script>
+<script src="/gate.js?v=19"></script>
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -288,13 +288,20 @@ header.zmh{position:sticky;top:0;z-index:70;padding:env(safe-area-inset-top,0px)
 .fb .acts{margin:0!important;padding:0!important;border:0!important;flex:none}
 .fb .acts .ic{width:40px;height:40px}
 .card .badges:empty,.card .badges:not(:has(*)){display:none}
+
+/* nav: Join + Notification settings */
+#mn a.nn,.zmh-nav a.nn{display:inline-flex!important;align-items:center;gap:7px;background:linear-gradient(135deg,#0a70a8,#3fa7d6)!important;color:#fff!important;border-radius:999px;padding:9px 15px!important;font-weight:800!important;box-shadow:0 6px 14px rgba(10,112,168,.3)}
+#mn a.nn svg,.zmh-nav a.nn svg{width:15px;height:15px;fill:none;stroke:#ffc44d;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;animation:nnb 2.4s ease-in-out infinite;transform-origin:50% 10%}
+@keyframes nnb{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(14deg)}85%{transform:rotate(-12deg)}93%{transform:rotate(6deg)}}
+#mn a.nj,.zmh-nav a.nj{color:#0b5d8f!important;font-weight:800!important}
+@media (max-width:63.99rem){#mn a.nn,.zmh-nav a.nn{display:flex!important;justify-content:center;margin:10px 16px 6px}}
 </style>
 </head>
 <body>
 <header class="zmh"><div class="zmh-w">
 <a class="zmh-logo" href="/" aria-label="ZEST for Peace – home"></a>
 <button class="zmh-bg" id="zmhb" type="button" aria-label="Menu" aria-expanded="false" aria-controls="zmhn"><span></span><span></span><span></span></button>
-<nav class="zmh-nav" id="zmhn" aria-label="Main menu"><a href="/#top">HOME</a><a href="/centreinfo/" class="ci">ZEST CENTRE INFO</a><a href="/#about">ABOUT US</a><a href="/#programs">PROJECTS</a><a href="/#clubs">CLUBS</a><a href="/#documentary">DOCUMENTARY</a><a href="/#news">EVENTS</a><a href="/#stories">ZEST DAILY UPDATES</a><a href="/#contact">CONTACT US</a></nav>
+<nav class="zmh-nav" id="zmhn" aria-label="Main menu"><a href="/#top">HOME</a><a href="/centreinfo/" class="ci">ZEST CENTRE INFO</a><a href="/#about">ABOUT US</a><a href="/#programs">PROJECTS</a><a href="/#clubs">CLUBS</a><a href="/#documentary">DOCUMENTARY</a><a href="/#join" class="nj">JOIN WITH ZEST</a><a href="#notify" class="nn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>NOTIFICATION SETTINGS</a></nav>
 </div></header>
 
 <div class="zsc">
@@ -671,5 +678,6 @@ fromHash();var tries=0,iv=setInterval(function(){var h=location.hash.slice(1);if
 var hi=0;if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(function(){var off=[].filter.call(chips,function(x){return!x.classList.contains('on')});if(!off.length)return;var c=off[hi++%off.length];c.classList.add('hv');setTimeout(function(){c.classList.remove('hv')},900)},1300);
 })();
 </script>
+<script src="/notify.js?v=1" defer></script>
 </body>
 </html>
