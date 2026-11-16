@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=21"></script>
+<script src="/gate.js?v=22"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -1334,19 +1334,20 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 }
 
 /* nav: Join + Notification settings */
-#mn a.nn,.zmh-nav a.nn{display:inline-flex!important;align-items:center;gap:7px;background:linear-gradient(135deg,#0a70a8,#3fa7d6)!important;color:#fff!important;border-radius:999px;padding:9px 15px!important;font-weight:800!important;box-shadow:0 6px 14px rgba(10,112,168,.3)}
-#mn a.nn svg,.zmh-nav a.nn svg{width:15px;height:15px;fill:none;stroke:#ffc44d;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;animation:nnb 2.4s ease-in-out infinite;transform-origin:50% 10%}
+#mn a.nsc,.zmh-nav a.nsc{display:inline-flex!important;align-items:center;gap:7px;background:linear-gradient(135deg,#0a70a8,#3fa7d6)!important;color:#fff!important;border-radius:999px;padding:9px 15px!important;font-weight:800!important;box-shadow:0 6px 14px rgba(10,112,168,.3)}
+#mn a.nsc svg,.zmh-nav a.nsc svg{width:15px;height:15px;fill:none;stroke:#ffc44d;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:nsc 2.6s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes nsc{0%,70%,100%{transform:translateY(0) rotate(0)}78%{transform:translateY(-2px) rotate(-10deg)}88%{transform:translateY(0) rotate(6deg)}}
 @keyframes nnb{0%,70%,100%{transform:rotate(0)}75%{transform:rotate(14deg)}85%{transform:rotate(-12deg)}93%{transform:rotate(6deg)}}
 #mn a.nj,.zmh-nav a.nj{color:#0b5d8f!important;font-weight:800!important}
-@media (max-width:63.99rem){#mn a.nn,.zmh-nav a.nn{display:flex!important;justify-content:center;margin:10px 16px 6px}}
+@media (max-width:63.99rem){#mn a.nsc,.zmh-nav a.nsc{display:flex!important;justify-content:center;margin:10px 16px 6px}}
 
 /* smaller menu + notification button */
-#mn a.nn,.zmh-nav a.nn{padding:6px 11px!important;font-size:.72rem!important;gap:5px;box-shadow:0 4px 10px rgba(10,112,168,.25)}
-#mn a.nn svg,.zmh-nav a.nn svg{width:12px;height:12px}
-#mn a.nn::after,.zmh-nav a.nn::after{display:none}
+#mn a.nsc,.zmh-nav a.nsc{padding:6px 11px!important;font-size:.72rem!important;gap:5px;box-shadow:0 4px 10px rgba(10,112,168,.25)}
+#mn a.nsc svg,.zmh-nav a.nsc svg{width:12px;height:12px}
+#mn a.nsc::after,.zmh-nav a.nsc::after{display:none}
 @media (max-width:63.99rem){
 #mn a,.zmh-nav a{font-size:.8rem!important;padding:.42rem 1.1rem!important;line-height:1.4!important}
-#mn a.nn,.zmh-nav a.nn{display:inline-flex!important;align-self:flex-start;margin:8px 1.1rem 6px!important;padding:6px 12px!important;font-size:.7rem!important}
+#mn a.nsc,.zmh-nav a.nsc{display:inline-flex!important;align-self:flex-start;margin:8px 1.1rem 6px!important;padding:6px 12px!important;font-size:.7rem!important}
 }
 
 .z3row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}
@@ -1361,7 +1362,7 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 <header class="main" id="top"><div class="wrap">
 <div class="logo ph" role="img" aria-label="ZEST for Peace"></div>
 <button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mn"><span></span><span></span><span></span></button>
-<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#join" class="nj">JOIN WITH ZEST</a><a href="#notify" class="nn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>NOTIFICATION SETTINGS</a></nav>
+<nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#students" class="nsc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>STUDENTS CORNER</a><a href="#join">JOIN WITH ZEST</a><a href="#settings" class="nset">SETTINGS</a></nav>
 </div></header>
 
 <div class="hero"><video id="hv" src="/media/hero.mp4" poster="/media/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div>
@@ -1690,6 +1691,6 @@ chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n")
 show("week")});
 })();
 </script>
-<script src="/notify.js?v=4" defer></script>
+<script src="/notify.js?v=6" defer></script>
 </body>
 </html>
