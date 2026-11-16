@@ -1,9 +1,9 @@
 /* ZEST Students Corner – Pocket Money tracker (data stays on this phone) */
 (function () {
   if (window.ZestMoney) return;
-  var KEY = "zestMoney";
-  function load() { try { var d = JSON.parse(localStorage.getItem(KEY) || "null"); if (d && d.tx) return d; } catch (e) {} return { tx: [], goals: [] }; }
-  function save(d) { try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+  function KEYF() { return window.ZestPK ? ZestPK("zestMoney") : "zestMoney"; }
+  function load() { try { var d = JSON.parse(localStorage.getItem(KEYF()) || "null"); if (d && d.tx) return d; } catch (e) {} return { tx: [], goals: [] }; }
+  function save(d) { try { localStorage.setItem(KEYF(), JSON.stringify(d)); } catch (e) {} }
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function rs(n) { return "₹" + Math.round(n).toLocaleString("en-IN"); }
   var MS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -32,7 +32,7 @@
     document.documentElement.style.overflow = "hidden";
     return el.querySelector(".wrap");
   }
-  function close() { if (!el) return; el.classList.remove("on"); document.documentElement.style.overflow = ""; }
+  function close() { if (!el) return; el.classList.remove("on"); document.documentElement.style.overflow = (window.ZestCornerRefresh && ZestCornerRefresh()) ? "hidden" : ""; }
 
   function sheet(html) {
     var bg = document.createElement("div"); bg.className = "zmy-bg";

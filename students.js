@@ -1,10 +1,10 @@
 /* ZEST Students Corner – Revision Planner (data stays on this phone) */
 (function () {
   if (window.ZestRev) return;
-  var KEY = "zestRevPlan";
+  function KEYF() { return window.ZestPK ? ZestPK("zestRevPlan") : "zestRevPlan"; }
   var DAY = 864e5;
-  function load() { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; } }
-  function save(p) { try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) {} }
+  function load() { try { return JSON.parse(localStorage.getItem(KEYF()) || "null"); } catch (e) { return null; } }
+  function save(p) { try { localStorage.setItem(KEYF(), JSON.stringify(p)); } catch (e) {} }
   function d0(d) { var x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
   function iso(d) { d = new Date(d); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
   function parse(s) { var a = String(s).split("-"); return new Date(+a[0], a[1] - 1, +a[2]); }
@@ -80,7 +80,7 @@
     document.documentElement.style.overflow = "hidden";
     return el.querySelector(".wrap");
   }
-  function close() { if (!el) return; el.classList.remove("on"); document.documentElement.style.overflow = ""; }
+  function close() { if (!el) return; el.classList.remove("on"); document.documentElement.style.overflow = (window.ZestCornerRefresh && ZestCornerRefresh()) ? "hidden" : ""; }
 
   /* setup form */
   function setup(old) {
@@ -180,7 +180,7 @@
       t.onclick = function () { var id = t.dataset.id; if (p.done[id]) delete p.done[id]; else p.done[id] = tk; save(p); var y = el.scrollTop; view(false); el.scrollTop = y; };
     });
     w.querySelector("#rv-ed").onclick = function () { setup(p); };
-    w.querySelector("#rv-del").onclick = function () { if (confirm("Delete this revision plan?")) { try { localStorage.removeItem(KEY); } catch (e) {} setup(); } };
+    w.querySelector("#rv-del").onclick = function () { if (confirm("Delete this revision plan?")) { try { localStorage.removeItem(KEYF()); } catch (e) {} setup(); } };
   }
 
   window.ZestRev = { open: function () { load() ? view(false) : setup(); }, close: close };

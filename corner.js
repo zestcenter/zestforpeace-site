@@ -1,0 +1,171 @@
+/* ZEST Students Corner – student profiles (data stays on this phone) */
+(function () {
+  if (window.ZestCorner) return;
+  var PK = "zestProfiles";
+  var EM = ["👦", "👧", "🧒", "🧑", "🧕", "👩", "👨", "👳"];
+  var BG = ["#cfe9ff", "#ffd6e3", "#d8f5e3", "#fff0c7", "#e6dcff", "#ffe2cc", "#d9f2f7", "#f1e2d3"];
+  function esc(t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+  function load() { try { var d = JSON.parse(get(PK) || "null"); if (d && d.list) return d; } catch (e) {} return { list: [], cur: null }; }
+  function save(d) { set(PK, JSON.stringify(d)); }
+  function hash(s) { var h = 2166136261; s = "zest:" + s; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(36); }
+  function cur() { var d = load(); return d.list.filter(function (p) { return p.id === d.cur; })[0] || null; }
+  /* storage key for the current student; other modules call this */
+  window.ZestPK = function (base) { var p = cur(); return p ? base + "_" + p.id : base; };
+
+  var css = document.createElement("style");
+  css.textContent = '.zsc2{position:fixed;inset:0;z-index:2147483645;overflow:auto;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#1c2a32;background:#f2f7fb;transform:translateY(100%);transition:transform .3s ease}.zsc2.on{transform:none}.zsc2 *{box-sizing:border-box}.zsc2.who{background:linear-gradient(165deg,#0b3d5c,#1380b8 60%,#3fa7d6);color:#fff;text-align:center}.zsc2 .x0{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font:700 17px Inter;cursor:pointer}.zsc2 h2{margin:70px 16px 6px!important;font:900 24px Inter,sans-serif!important;color:#fff!important;letter-spacing:0!important}.zsc2 .sub0{margin:0 16px;font:600 13px Inter,sans-serif;color:#bfe3f5}.zsc2 .pfs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));justify-items:center;gap:22px 16px;max-width:22rem;margin:0 auto;padding:36px 30px 30px}.zsc2 .pf{background:none;border:0;color:#fff;cursor:pointer;font:inherit;padding:0}.zsc2 .pf .av{width:96px;height:96px;margin:0 auto;border-radius:28px;display:grid;place-items:center;font-size:46px;box-shadow:0 8px 18px rgba(0,0,0,.25);position:relative}.zsc2 .pf b{display:block;margin-top:9px;font:800 15px Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.zsc2 .pf small{font:600 11px Inter,sans-serif;color:#bfe3f5}.zsc2 .pf .lk{position:absolute;right:-6px;bottom:-6px;width:28px;height:28px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:13px;box-shadow:0 2px 6px rgba(0,0,0,.25)}.zsc2 .pf.add .av{background:rgba(255,255,255,.14);border:2px dashed rgba(255,255,255,.55);box-shadow:none;font:300 44px Inter;color:#fff}.zsc2 .first{margin:24px auto 0;max-width:20rem;padding:0 20px;font:600 13px/1.5 Inter,sans-serif;color:#d8eefa}' +
+    '.zsc2 .hd{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:12px 14px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05)}.zsc2 .hd b{font:800 17px Inter,sans-serif;color:#0b5d8f;flex:1;white-space:nowrap}.zsc2 .chip{display:inline-flex;align-items:center;gap:7px;max-width:44%;padding:5px 11px 5px 5px;border-radius:999px;background:#eef6fb;border:1.5px solid #cfe3ef;font:800 13px Inter,sans-serif;color:#0b3d5c;cursor:pointer}.zsc2 .chip span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.zsc2 .chip i{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-size:16px;flex:none}.zsc2 .hd .x1{width:34px;height:34px;border-radius:50%;border:0;background:#eef3f6;font:700 16px Inter;color:#3c4d57;cursor:pointer;flex:none}.zsc2 .wrap{max-width:30rem;margin:0 auto;padding-bottom:40px}.zsc2 .hi{margin:16px 16px 4px;font:900 21px Inter,sans-serif;color:#0b3d5c}.zsc2 .hi small{display:block;font:600 12px Inter,sans-serif;color:#6a8796;margin-top:3px}.zsc2 .zctl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 14px}.zsc2 .t{position:relative;text-align:left;padding:14px 12px;border-radius:18px;border:0;font:inherit;background:linear-gradient(155deg,#1380b8,#0b3d5c);color:#fff;box-shadow:0 8px 18px rgba(11,61,92,.22);cursor:pointer}.zsc2 .t span{font-size:24px}.zsc2 .t b{display:block;margin-top:6px;font:800 13.5px Inter,sans-serif}.zsc2 .t small{display:block;font:600 10.5px/1.35 Inter,sans-serif;color:#d8eefa;min-height:14px}.zsc2 .t .s{display:block;margin-top:9px;padding:6px 8px;border-radius:10px;background:rgba(255,255,255,.14);font:800 11px Inter,sans-serif;color:#ffc44d}.zsc2 .t.cs{background:#eef6fb;color:#52636d;box-shadow:none;border:1.5px solid #dbe9f2;opacity:.75;cursor:default}.zsc2 .t.cs small{color:#6a8796}.zsc2 .t.cs .s{background:#fff4dc;color:#8a5a00}' +
+    '.zsc2-bg{position:fixed;inset:0;z-index:2147483646;background:rgba(5,25,40,.5)}.zsc2-sh{position:fixed;z-index:2147483647;left:50%;bottom:0;width:min(100%,26rem);max-height:92vh;overflow:auto;transform:translateX(-50%);background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 22px;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#1c2a32;box-shadow:0 -10px 30px rgba(0,0,0,.2)}.zsc2-sh *{box-sizing:border-box}.zsc2-sh .gr{width:40px;height:5px;border-radius:3px;background:#cfdbe3;margin:0 auto 12px}.zsc2-sh h4{margin:0 0 12px;padding-right:36px;font:800 16px Inter,sans-serif;color:#0b3d5c}.zsc2-sh .xx{position:absolute;top:12px;right:14px;width:32px;height:32px;border-radius:50%;border:0;background:#eef3f6;font:700 16px Inter;color:#3c4d57;cursor:pointer}.zsc2-sh .row{display:flex;align-items:center;gap:12px;width:100%;padding:10px;border-radius:14px;margin-bottom:6px;border:1.5px solid transparent;background:none;font:inherit;text-align:left;cursor:pointer}.zsc2-sh .row.on{background:#eef6fb;border-color:#1380b8}.zsc2-sh .row i{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-size:20px;flex:none}.zsc2-sh .row b{display:block;font:800 14px Inter,sans-serif;color:#1c2a32}.zsc2-sh .row small{font:600 11px Inter,sans-serif;color:#6a8796}.zsc2-sh .row em{margin-left:auto;font-style:normal;font:800 12px Inter,sans-serif;color:#1380b8;white-space:nowrap}.zsc2-sh .add2{width:100%;padding:12px;border-radius:14px;border:2px dashed #9ec9e2;background:none;font:800 13px Inter,sans-serif;color:#1380b8;margin-top:6px;cursor:pointer}.zsc2-sh .mn{width:100%;margin-top:8px;padding:12px;border-radius:14px;border:0;background:#eef3f6;font:800 12.5px Inter,sans-serif;color:#3c4d57;cursor:pointer}.zsc2-sh label{display:block;font:800 10px Inter,sans-serif;letter-spacing:.06em;color:#6a8796;margin:12px 0 5px}.zsc2-sh input{width:100%;padding:11px 12px;border-radius:12px;border:1.5px solid #cfe3ef;font:700 14px Inter,sans-serif;color:#1c2a32;background:#fff}.zsc2-sh input:focus{outline:none;border-color:#1380b8}.zsc2-sh .ems{display:flex;gap:7px;flex-wrap:wrap}.zsc2-sh .ems button{width:44px;height:44px;border-radius:13px;border:2px solid transparent;font-size:22px;cursor:pointer}.zsc2-sh .ems .on{border-color:#1380b8;box-shadow:0 0 0 2px #fff inset}.zsc2-sh .sv{width:100%;margin-top:16px;padding:13px;border-radius:14px;border:0;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;font:800 14px Inter,sans-serif;cursor:pointer}.zsc2-sh .err{color:#c0392b;font:700 12px Inter,sans-serif;min-height:16px;margin-top:8px}.zsc2-sh .lnk{display:flex;gap:8px;margin-top:10px}.zsc2-sh .lnk button{flex:1;padding:11px;border-radius:12px;border:0;background:#eaf4fa;font:800 12px Inter,sans-serif;color:#0b5d8f;cursor:pointer}.zsc2-sh .lnk .rd{background:#fdecee;color:#c0392b}' +
+    '.zsc2-pin{position:fixed;inset:0;z-index:2147483647;background:linear-gradient(165deg,#0b3d5c,#1380b8 60%,#3fa7d6);color:#fff;text-align:center;font-family:Inter,sans-serif}.zsc2-pin .av{width:84px;height:84px;margin:70px auto 0;border-radius:26px;display:grid;place-items:center;font-size:42px;box-shadow:0 8px 18px rgba(0,0,0,.25)}.zsc2-pin h3{margin:12px 0 4px;font:900 20px Inter,sans-serif}.zsc2-pin p{margin:0;font:600 12.5px Inter,sans-serif;color:#bfe3f5;min-height:17px}.zsc2-pin p.bad{color:#ffd0d6}.zsc2-pin .zpd{display:flex;justify-content:center;gap:16px;margin:22px 0 26px}.zsc2-pin .zpd i{width:16px;height:16px;border-radius:50%;border:2px solid #fff}.zsc2-pin .zpd i.f{background:#fff}.zsc2-pin .kp{display:grid;grid-template-columns:repeat(3,64px);gap:14px 26px;justify-content:center}.zsc2-pin .kp button{width:64px;height:64px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font:600 24px Inter,sans-serif;cursor:pointer}.zsc2-pin .kp button.e{background:none}.zsc2-pin .x0{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font:700 17px Inter;cursor:pointer}@keyframes zsc2sh{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}.zsc2-pin .zpd.sh{animation:zsc2sh .35s}';
+  document.head.appendChild(css);
+
+  var el;
+  function screen(cls) {
+    if (!el) { el = document.createElement("div"); el.setAttribute("role", "dialog"); document.body.appendChild(el); }
+    el.className = "zsc2 " + (cls || "");
+    requestAnimationFrame(function () { el.classList.add("on"); });
+    document.documentElement.style.overflow = "hidden";
+    return el;
+  }
+  function close() { if (!el) return; el.classList.remove("on"); document.documentElement.style.overflow = ""; }
+  function sheet(html) {
+    var bg = document.createElement("div"); bg.className = "zsc2-bg";
+    var s = document.createElement("div"); s.className = "zsc2-sh"; s.innerHTML = '<button class="xx" aria-label="Close">×</button><div class="gr"></div>' + html;
+    document.body.appendChild(bg); document.body.appendChild(s);
+    function c() { bg.remove(); s.remove(); }
+    bg.onclick = c; s.querySelector(".xx").onclick = c; s.close = c; return s;
+  }
+
+  /* move data saved before profiles existed into the first student */
+  function migrate(id) {
+    ["zestRevPlan", "zestMoney"].forEach(function (k) { var v = get(k); if (v && !get(k + "_" + id)) { set(k + "_" + id, v); del(k); } });
+  }
+
+  /* ---------- screens ---------- */
+  function who() {
+    var d = load(), s = screen("who");
+    s.innerHTML = '<button class="x0" aria-label="Close">✕</button><h2>' + (d.list.length ? "Who's studying? 🎓" : "Welcome to Students Corner 🎓") + '</h2><div class="sub0">Students Corner · ZEST APP</div>' +
+      (d.list.length ? '' : '<div class="first">Add your name to start. Brothers and sisters can each add their own name later.</div>') +
+      '<div class="pfs">' + d.list.map(function (p) { return '<button class="pf" data-id="' + p.id + '"><div class="av" style="background:' + p.bg + '">' + p.e + (p.pin ? '<span class="lk">🔒</span>' : '') + '</div><b>' + esc(p.n) + '</b><small>' + esc(p.c || '') + '</small></button>'; }).join("") +
+      '<button class="pf add"><div class="av">＋</div><b>Add student</b></button></div>';
+    s.querySelector(".x0").onclick = close;
+    s.querySelectorAll(".pf[data-id]").forEach(function (b) { b.onclick = function () { pick(b.dataset.id); }; });
+    s.querySelector(".pf.add").onclick = function () { edit(null); };
+  }
+  function pick(id) {
+    var p = load().list.filter(function (x) { return x.id === id; })[0]; if (!p) return;
+    function go() { var d = load(); d.cur = id; save(d); corner(); }
+    if (p.pin) pin(p, "Enter your 4-digit PIN", function (v, ok) { if (hash(v) === p.pin) { ok(true); go(); } else ok(false); }); else go();
+  }
+
+  function summary(p) {
+    var out = { rev: ["Make your study plan", "Start ›"], mon: ["Track spending & savings", "Start ›"] };
+    try {
+      var r = JSON.parse(get("zestRevPlan_" + p.id) || "null");
+      if (r && r.date) { var a = r.date.split("-"), ex = new Date(+a[0], a[1] - 1, +a[2]), t = new Date(); t.setHours(0, 0, 0, 0); var n = Math.round((ex - t) / 864e5); out.rev = [esc(r.exam) + (n >= 0 ? " · " + n + (n === 1 ? " day" : " days") : ""), n < 0 ? "Exam over 🎉" : "Open plan ›"]; }
+    } catch (e) {}
+    try {
+      var m = JSON.parse(get("zestMoney_" + p.id) || "null");
+      if (m && m.tx && m.tx.length) {
+        var now = new Date(), mk = now.getFullYear() * 12 + now.getMonth(), g = 0, sp = 0;
+        m.tx.forEach(function (x) { var d = new Date(x.ts); if (d.getFullYear() * 12 + d.getMonth() !== mk) return; if (x.k === "in") g += x.a; else sp += x.a; });
+        var l = g - sp; out.mon = [["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][now.getMonth()], (l < 0 ? "₹" + Math.round(-l).toLocaleString("en-IN") + " over" : "₹" + Math.round(l).toLocaleString("en-IN") + " left")];
+      }
+    } catch (e) {}
+    return out;
+  }
+  function corner() {
+    var p = cur(); if (!p) { who(); return; }
+    var s = screen(""), sm = summary(p);
+    s.innerHTML = '<div class="hd"><b>🎓 Students Corner</b><button class="chip" aria-label="Switch student"><i style="background:' + p.bg + '">' + p.e + '</i><span>' + esc(p.n) + '</span> ▾</button><button class="x1" aria-label="Close">✕</button></div><div class="wrap">' +
+      '<div class="hi">Hi ' + esc(p.n) + ' 👋<small>' + (p.c ? esc(p.c) + ' · ' : '') + 'your own study space</small></div><div class="zctl">' +
+      '<button class="t" data-go="rev"><span>📖</span><b>Revision Planner</b><small>' + sm.rev[0] + '</small><span class="s">' + sm.rev[1] + '</span></button>' +
+      '<button class="t" data-go="mon"><span>💰</span><b>Pocket Money</b><small>' + sm.mon[0] + '</small><span class="s">' + sm.mon[1] + '</span></button>' +
+      [["📚", "My Timetable"], ["📝", "Homework"], ["⏱️", "Focus Timer"]].map(function (t) { return '<div class="t cs"><span>' + t[0] + '</span><b>' + t[1] + '</b><small></small><span class="s">Coming soon</span></div>'; }).join("") + '</div></div>';
+    s.querySelector(".x1").onclick = close;
+    s.querySelector(".chip").onclick = switcher;
+    s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=4", "ZestRev"); };
+    s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=2", "ZestMoney"); };
+  }
+  function tool(src, g) {
+    if (window[g]) return window[g].open();
+    var sc = document.createElement("script"); sc.src = src; sc.onload = function () { window[g] && window[g].open(); }; document.head.appendChild(sc);
+  }
+  window.ZestCornerRefresh = function () { if (el && el.classList.contains("on") && !el.classList.contains("who")) { corner(); return true; } return !!(el && el.classList.contains("on")); };
+
+  function switcher() {
+    var d = load(), sh = sheet('<h4>Switch student</h4>' + d.list.map(function (p) { return '<button class="row' + (p.id === d.cur ? ' on' : '') + '" data-id="' + p.id + '"><i style="background:' + p.bg + '">' + p.e + '</i><span><b>' + esc(p.n) + (p.pin ? ' 🔒' : '') + '</b><small>' + esc(p.c || '') + (p.pin ? (p.c ? ' · ' : '') + 'PIN protected' : '') + '</small></span>' + (p.id === d.cur ? '<em>✓ Now</em>' : '') + '</button>'; }).join("") +
+      '<button class="add2">＋ Add student</button><button class="mn">⚙️ Edit my profile · Set PIN</button>');
+    sh.querySelectorAll(".row").forEach(function (r) { r.onclick = function () { sh.close(); if (r.dataset.id !== d.cur) pick(r.dataset.id); }; });
+    sh.querySelector(".add2").onclick = function () { sh.close(); edit(null); };
+    sh.querySelector(".mn").onclick = function () { sh.close(); edit(cur()); };
+  }
+
+  function edit(p) {
+    var isNew = !p, d = load(), em = p ? p.e : EM[d.list.length % EM.length];
+    var sh = sheet('<h4>' + (isNew ? '＋ Add student' : '⚙️ Edit profile') + '</h4><label>NAME</label><input id="zp-n" maxlength="20" placeholder="e.g. Ameen" value="' + esc(p ? p.n : '') + '"><label>CLASS (optional)</label><input id="zp-c" maxlength="20" placeholder="e.g. Plus Two / Class 9" value="' + esc(p ? p.c || '' : '') + '"><label>PICTURE</label><div class="ems">' + EM.map(function (e, i) { return '<button data-e="' + e + '" style="background:' + BG[i] + '"' + (e === em ? ' class="on"' : '') + '>' + e + '</button>'; }).join("") + '</div>' +
+      '<div class="err" id="zp-e"></div><button class="sv">' + (isNew ? 'Add student' : 'Save') + '</button>' +
+      (isNew ? '' : '<div class="lnk"><button id="zp-pin">' + (p.pin ? '🔓 Remove PIN' : '🔒 Set PIN') + '</button><button class="rd" id="zp-del">🗑 Delete</button></div>'));
+    sh.querySelectorAll(".ems button").forEach(function (b) { b.onclick = function () { sh.querySelectorAll(".ems button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); em = b.dataset.e; }; });
+    setTimeout(function () { if (isNew) sh.querySelector("#zp-n").focus(); }, 60);
+    sh.querySelector(".sv").onclick = function () {
+      var n = sh.querySelector("#zp-n").value.trim(), c = sh.querySelector("#zp-c").value.trim();
+      if (!n) { sh.querySelector("#zp-e").textContent = "Please enter the name"; return; }
+      var dd = load(), bg = BG[EM.indexOf(em)] || BG[0];
+      if (isNew) {
+        var id = Date.now().toString(36); dd.list.push({ id: id, n: n, c: c, e: em, bg: bg, pin: null });
+        if (dd.list.length === 1) migrate(id);
+        dd.cur = id; save(dd); sh.close(); corner();
+      } else {
+        dd.list.forEach(function (x) { if (x.id === p.id) { x.n = n; x.c = c; x.e = em; x.bg = bg; } }); save(dd); sh.close(); corner();
+      }
+    };
+    if (!isNew) {
+      sh.querySelector("#zp-pin").onclick = function () {
+        sh.close();
+        if (p.pin) { pin(p, "Enter current PIN to remove it", function (v, ok) { if (hash(v) === p.pin) { ok(true); setPin(p.id, null); corner(); } else ok(false); }); return; }
+        pin(p, "Choose a 4-digit PIN", function (v1, ok1) { ok1(true); pin(p, "Enter the same PIN again", function (v2, ok2) { if (v2 === v1) { ok2(true); setPin(p.id, hash(v1)); corner(); } else ok2(false, "PINs did not match – try again"); }); });
+      };
+      sh.querySelector("#zp-del").onclick = function () {
+        if (!confirm("Delete " + p.n + "'s profile? Their revision plan and pocket money on this phone will also be deleted.")) return;
+        var dd = load(); dd.list = dd.list.filter(function (x) { return x.id !== p.id; }); dd.cur = null; save(dd);
+        del("zestRevPlan_" + p.id); del("zestMoney_" + p.id); sh.close(); who();
+      };
+    }
+  }
+  function setPin(id, h) { var d = load(); d.list.forEach(function (x) { if (x.id === id) x.pin = h; }); save(d); }
+
+  function pin(p, msg, done) {
+    var v = "", w = document.createElement("div"); w.className = "zsc2-pin"; w.setAttribute("role", "dialog");
+    w.innerHTML = '<button class="x0" aria-label="Cancel">✕</button><div class="av" style="background:' + p.bg + '">' + p.e + '</div><h3>' + esc(p.n) + '</h3><p>' + esc(msg) + '</p><div class="zpd"><i></i><i></i><i></i><i></i></div><div class="kp">' + [1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, "⌫"].map(function (k) { return '<button' + (k === "" ? ' class="e" disabled' : k === "⌫" ? ' class="e" data-k="b"' : ' data-k="' + k + '"') + '>' + k + '</button>'; }).join("") + '</div>';
+    document.body.appendChild(w);
+    var dots = w.querySelectorAll(".zpd i"), P = w.querySelector("p");
+    function draw() { dots.forEach(function (d, i) { d.classList.toggle("f", i < v.length); }); }
+    w.querySelector(".x0").onclick = function () { w.remove(); };
+    w.querySelectorAll("[data-k]").forEach(function (b) {
+      b.onclick = function () {
+        if (b.dataset.k === "b") { v = v.slice(0, -1); draw(); return; }
+        if (v.length >= 4) return; v += b.dataset.k; draw();
+        if (v.length === 4) setTimeout(function () {
+          done(v, function (ok, m) {
+            if (ok) { w.remove(); return; }
+            var dd = w.querySelector(".zpd"); dd.classList.remove("sh"); void dd.offsetWidth; dd.classList.add("sh");
+            P.textContent = m || "Wrong PIN – try again"; P.className = "bad"; v = ""; draw();
+          });
+        }, 120);
+      };
+    });
+  }
+
+  window.ZestCorner = {
+    open: function () {
+      var d = load();
+      if (d.list.length === 1 && !d.list[0].pin) { d.cur = d.list[0].id; save(d); corner(); }
+      else who();
+    },
+    close: close
+  };
+})();
