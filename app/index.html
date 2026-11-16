@@ -69,6 +69,16 @@ h1{margin:0;color:#fff;font-size:2rem;font-weight:800;letter-spacing:.02em;text-
 @keyframes tap{0%,100%{box-shadow:0 0 0 0 rgba(19,128,184,.55)}50%{box-shadow:0 0 0 8px rgba(19,128,184,0)}}
 .nt-note{margin:.3rem 0 0;font-size:.78rem;line-height:1.5;color:#52636d}
 .hint{margin:.8rem 0 0;padding:.7rem .9rem;border-radius:.9rem;background:#eef6fb;color:#1c2a32;font-size:.88rem;line-height:1.5;text-align:center}
+
+/* INSTALL APP – clearly tappable */
+#ins{position:relative;overflow:hidden;animation:insPulse 2s ease-in-out infinite;transition:transform .2s ease,box-shadow .2s ease}
+#ins::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-120%);animation:insShine 2.8s ease-in-out infinite;pointer-events:none}
+#ins svg{animation:insIcon 1.4s ease-in-out infinite}
+#ins:hover,#ins:focus-visible{transform:translateY(-3px) scale(1.03);box-shadow:0 1rem 2rem rgba(255,196,77,.55)}
+#ins:active{transform:scale(.96)}
+@keyframes insPulse{0%,100%{box-shadow:0 .5rem 1.2rem rgba(255,196,77,.35),0 0 0 0 rgba(255,196,77,.6)}50%{box-shadow:0 .5rem 1.2rem rgba(255,196,77,.35),0 0 0 12px rgba(255,196,77,0)}}
+@keyframes insShine{0%,50%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes insIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
 <script src="/gate.js?v=15"></script>
