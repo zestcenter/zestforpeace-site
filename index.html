@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=15"></script>
+<script src="/gate.js?v=16"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -1245,6 +1245,76 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 #centre-info #zuRows .zu-row:nth-child(3){background:linear-gradient(160deg,rgba(120,210,255,.2),rgba(120,210,255,.05))}
 #centre-info #zuRows .zu-row .zu-trk{padding-left:1.1rem!important;padding-right:1.1rem!important;scroll-padding:0 1.1rem!important;padding-bottom:1.1rem!important}
 @media (min-width:64rem){#centre-info #zuRows .zu-row{margin:0}}
+
+/* v33: Centre Info – ticket design (T3) */
+#centre-info .z3{position:relative;grid-area:car;min-width:0}
+.z3cs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:18px 1.2rem 6px}
+.z3c{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;min-width:0;padding:7px 4px 6px;border-radius:13px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,196,77,.75);color:#fff;font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .45s ease,background .3s,color .3s,box-shadow .3s,border-color .3s}
+.z3c:active{transform:scale(.92)}
+.z3c.on{background:#fff;border-color:#fff;color:#0b3d5c;box-shadow:0 8px 18px rgba(0,30,60,.3);transform:translateY(-3px)}
+.z3c.hv,.z3c:not(.on):hover{background:rgba(255,255,255,.18);border-color:#ffd76a;transform:translateY(-4px);box-shadow:0 10px 20px rgba(0,30,60,.3)}
+.z3i{position:relative;width:27px;height:27px;border-radius:9px;background:#fff;display:grid;place-items:center;flex:none}
+.z3c.on .z3i{background:#eef6fb}
+.z3i svg{width:15px;height:15px;fill:none;stroke:#1380b8;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.z3i .a{stroke:#f2a516}
+.z3n{box-sizing:border-box;position:absolute;top:-6px;right:-6px;min-width:17px;height:17px;padding:0 3px;border-radius:999px;background:#f2a516;color:#1c2a32;border:2px solid #fff;font:800 9.5px/1 "Inter",sans-serif;display:grid;place-items:center;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.z3l{display:block;font:700 10.5px/1.1 "Inter",sans-serif;white-space:nowrap}
+.z3l small{display:block;font:600 9px/1.2 "Inter",sans-serif;opacity:.85}
+.z3a{position:absolute;top:5px;right:4px;width:10px;height:10px;fill:none;stroke:#ffc44d;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;animation:z3ar 1.6s ease-in-out infinite}
+.z3c.on .z3a{stroke:#1380b8}
+@keyframes z3ar{50%{transform:translate(2px,-2px)}}
+.z3h{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px;font:600 10px/1 "Inter",sans-serif;color:#bfe3f5}
+.z3h svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:z3tp 1.6s ease-in-out infinite}
+@keyframes z3tp{50%{transform:translateY(2px) scale(.9)}}
+.z3s{display:flex;gap:14px;padding:12px 1.2rem 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 1.2rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.z3s::-webkit-scrollbar{display:none}
+.z3k{scroll-snap-align:start;flex:none;width:250px;display:block;color:#1c2a32;text-decoration:none;filter:drop-shadow(0 10px 16px rgba(0,20,40,.35));animation:z3in .45s cubic-bezier(.2,.8,.3,1.2) both}
+@keyframes z3in{from{opacity:0;transform:translateY(16px) scale(.96)}}
+.z3t{background:#fff;border-radius:20px 20px 0 0;overflow:hidden;-webkit-mask:radial-gradient(circle 10px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 10px at 0 100%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 100%,#0000 98%,#000) right/51% 100% no-repeat}
+.z3b{background:#fff;border-radius:0 0 20px 20px;-webkit-mask:radial-gradient(circle 10px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 10px at 0 0,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 10px at 100% 0,#0000 98%,#000) right/51% 100% no-repeat}
+.z3im{position:relative;height:160px;background:linear-gradient(135deg,#dcefff,#bfe3f5)}
+.z3im img{display:block;width:100%;height:100%;object-fit:cover}
+.z3im .ph{position:absolute;inset:0;display:grid;place-items:center;padding:14px;text-align:center;font:700 14px/1.4 "Noto Sans Malayalam","Inter",sans-serif;color:#0b3d5c}
+.z3new{position:absolute;top:10px;right:10px;padding:4px 8px;border-radius:999px;background:#ffc44d;color:#12303f;font:800 9px/1 "Inter",sans-serif;letter-spacing:.06em}
+.z3in{padding:12px 14px 14px}
+.z3tg{display:inline-flex;gap:4px;align-items:center;color:#1380b8;font:800 9px/1 "Inter",sans-serif;letter-spacing:.06em}
+.z3tg svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.z3ti{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:36.5px;margin-top:5px;font:700 13.5px/1.35 "Noto Sans Malayalam","Inter",sans-serif}
+.z3md{position:relative;overflow:hidden;margin-top:8px;display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;border:1.2px solid #1380b8;color:#1380b8;font:700 9.5px/1 "Inter",sans-serif;letter-spacing:.02em;transition:background .2s}
+.z3k:hover .z3md{background:#eef6fb}
+.z3md::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(63,167,214,.28) 50%,transparent 70%);transform:translateX(-120%);animation:z3sh 2.6s ease-in-out infinite}
+.z3md svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;animation:z3mv 1.3s ease-in-out infinite}
+@keyframes z3sh{0%,40%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+@keyframes z3mv{50%{transform:translateX(3px)}}
+.z3ln{margin:0 12px;border-top:2px dashed #c9d6de}
+.z3st{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:10px 14px 12px}
+.z3dt{display:flex;align-items:center;gap:8px}
+.z3cal{width:34px;border-radius:8px;overflow:hidden;text-align:center;box-shadow:0 2px 6px rgba(11,61,92,.15)}
+.z3cal span{display:block;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;font:800 7px/1 "Inter",sans-serif;letter-spacing:.06em;padding:3px 0}
+.z3cal b{display:block;background:#fff;color:#0b3d5c;font:800 14px/1 "Inter",sans-serif;padding:4px 0;border:1px solid #e1edf4;border-top:0;border-radius:0 0 8px 8px}
+.z3dl{font:700 8.5px/1.3 "Inter",sans-serif;letter-spacing:.05em;color:#6a8796}
+.z3cd{display:inline-flex;align-items:center;gap:4px;padding:6px 9px;border-radius:999px;background:#eaf4fa;color:#0b5d8f;font:700 10px/1 "Inter",sans-serif;white-space:nowrap}
+.z3cd svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+.z3e{flex:1;padding:36px 16px;border-radius:20px;border:1.5px dashed rgba(255,255,255,.35);text-align:center;font:600 13px/1.5 "Inter",sans-serif;color:#d8eefa}
+.z3d{display:flex;justify-content:center;gap:6px;min-height:6px}
+.z3d span{height:6px;width:6px;border-radius:3px;background:rgba(255,255,255,.4);transition:all .3s}
+.z3d span.on{width:18px;background:#fff}
+@media (min-width:64rem){
+#centre-info .z3{display:contents}
+#centre-info .z3top{grid-area:cats;align-self:center;min-width:0}
+#centre-info .z3bot{grid-area:car;min-width:0;margin-top:1.4rem}
+.z3cs{padding:0 0 6px;gap:10px;grid-template-columns:repeat(2,1fr)}
+.z3c{flex-direction:row!important;justify-content:flex-start;text-align:left;gap:12px!important;padding:14px 16px!important}
+.z3i{width:40px;height:40px;border-radius:12px}.z3i svg{width:22px;height:22px}
+.z3l{font-size:15px!important}.z3l small{font-size:12px!important}
+.z3a{width:13px;height:13px;top:9px;right:9px}
+.z3h{margin-top:10px;font-size:12px}
+.z3c{padding:10px 6px 9px}
+.z3l{font-size:12px}.z3l small{font-size:10px}
+.z3s{padding:14px 2px 20px;scroll-padding:0}
+.z3k{width:260px}
+}
+@media (prefers-reduced-motion:reduce){.z3a,.z3h svg,.z3md::before,.z3md svg,.z3k{animation:none}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.com/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.com"], "url": "https://zestforpeace.com/", "publisher": {"@id": "https://zestforpeace.com/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
@@ -1267,16 +1337,11 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 <p class="zu-sub ml">പരിപാടികൾ / അറിയിപ്പുകൾ</p>
 <div class="zu-photo" role="img" aria-label="ZEST Centre building"></div>
 </div>
-<div class="zu-cats" role="navigation" aria-label="ZEST Centre sections">
-<a class="zu-cat" href="/centreinfo/#sec-programs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="a" d="M8 14h3M8 17h6"/></svg><b class="zu-cnt" data-k="program" hidden></b></span><span>ZEST PROGRAMS</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-<a class="zu-cat" href="/centreinfo/#sec-info"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><b class="zu-cnt" data-k="info" hidden></b></span><span>INFO CENTRE</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-<a class="zu-cat" href="/centreinfo/#sec-jobs"><span class="zu-ci" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg><b class="zu-cnt" data-k="job" hidden></b></span><span>JOB UPDATES</span><svg class="zu-ca" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-</div>
-<div class="zu-car" id="zuRows" role="region" aria-label="Latest updates">
-<div class="zu-trk" id="zuTrk">
-<div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
-<div class="zu-card zu-sk" aria-hidden="true"><div class="zu-im"></div><div class="zu-bd"><i></i><i></i><i></i></div></div>
-</div>
+<div class="z3" id="z3">
+<div class="z3top"><div class="z3cs" role="group" aria-label="Filter updates"><button type="button" class="z3c on" data-k="week" aria-pressed="true"><span class="z3i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/><path class="a" d="M12 8v3.5M12 14h.01M3 6.5 5 8M21 6.5 19 8"/></svg><b class="z3n">0</b></span><span class="z3l">This<small>Week</small></span><svg class="z3a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button><button type="button" class="z3c" data-k="program" aria-pressed="false"><span class="z3i"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path class="a" d="M8 14h3M8 17h6"/></svg><b class="z3n">0</b></span><span class="z3l">Zest<small>Programs</small></span><svg class="z3a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button><button type="button" class="z3c" data-k="info" aria-pressed="false"><span class="z3i"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path class="a" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg><b class="z3n">0</b></span><span class="z3l">Info<small>Centre</small></span><svg class="z3a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button><button type="button" class="z3c" data-k="job" aria-pressed="false"><span class="z3i"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path class="a" d="M3 13h18M12 12v2"/></svg><b class="z3n">0</b></span><span class="z3l">Job<small>Updates</small></span><svg class="z3a" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></div>
+<div class="z3h"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5a2 2 0 0 1 4 0v6"/><path d="M13 10.5a2 2 0 0 1 4 0V12a2 2 0 0 1 3 1.5V16a6 6 0 0 1-6 6h-1.5a6 6 0 0 1-5-2.7L5 15.5a1.8 1.8 0 0 1 3-2L9 15"/></svg>Tap a button to filter</div></div>
+<div class="z3bot"><div class="z3s" id="z3s" role="region" aria-label="Updates"><div class="z3e">Loading updates…</div></div>
+<div class="z3d" id="z3d" aria-hidden="true"></div></div>
 </div>
 <div class="zu-more"><a class="zu-vm" href="/centreinfo/">VIEW MORE DETAILS<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 </div>
@@ -1544,6 +1609,47 @@ var car=d.querySelector("#about.za .car .ph");if(car){addEventListener("scroll",
 (function(){var p=document.querySelector("#centre-info .zu-panel");if(!p)return;var b=document.createElement("div");b.className="zu-bub";b.setAttribute("aria-hidden","true");
 for(var i=0;i<14;i++){var e=document.createElement("i"),z=.4+Math.random()*1.8;e.style.width=e.style.height=z+"rem";e.style.left=(Math.random()*100)+"%";e.style.animationDuration=(9+Math.random()*12)+"s";e.style.animationDelay=(-Math.random()*20)+"s";b.appendChild(e)}
 p.insertBefore(b,p.firstChild);})();
+</script>
+<script>
+(function(){
+var box=document.getElementById("z3");if(!box)return;
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&order=created_at.desc&limit=60";
+var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
+var LBL={program:"ZEST PROGRAMS",info:"INFO CENTRE",job:"JOB UPDATE"},SEC={program:"sec-programs",info:"sec-info",job:"sec-jobs"};
+var IC={program:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',info:'<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6"/>',job:'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>'};
+var MS=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+function esc(t){return String(t).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function title(b){var l=String(b||"").split(/\n/).map(function(x){return x.replace(/[*_~]/g,"").trim()}).filter(Boolean);return l[0]||"ZEST update"}
+var MO=[["jan","ജനുവരി"],["feb","ഫെബ്രുവരി"],["mar","മാർച്ച്","മാര്ച്ച്"],["apr","ഏപ്രിൽ","ഏപ്രില്"],["may","മെയ്","മേയ്"],["jun","ജൂൺ","ജൂണ്"],["jul","ജൂലൈ","ജൂലായ്"],["aug","ഓഗസ്റ്റ്","ആഗസ്റ്റ്","ആഗസ്ത്"],["sep","സെപ്റ്റംബർ","സെപ്തംബർ","സെപ്റ്റംബര്"],["oct","ഒക്ടോബർ","ഒക്ടോബര്"],["nov","നവംബർ","നവംബര്"],["dec","ഡിസംബർ","ഡിസംബര്"]];
+function mIdx(w){w=w.toLowerCase();for(var i=0;i<12;i++){if(w.slice(0,3)===MO[i][0])return i;for(var j=1;j<MO[i].length;j++)if(w.indexOf(MO[i][j].slice(0,4))===0)return i}return -1}
+function dFind(txt,base){var out=[],re=/(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})|((?:19|20)\d\d)?[\s,]*([A-Za-zഀ-ൿ]{3,}\.?)[\s,]*(\d{1,2})(?:st|nd|rd|th)?\b[\s,]*((?:19|20)\d\d)?|(\d{1,2})(?:st|nd|rd|th)?[\s,]+([A-Za-zഀ-ൿ]{3,})[\s,]*((?:19|20)\d\d)?/g,m;
+while((m=re.exec(txt))){var d,mo,y;if(m[1]){d=+m[1];mo=+m[2]-1;y=+m[3];if(y<100)y+=2000}else if(m[5]){mo=mIdx(m[5]);d=+m[6];y=+(m[4]||m[7]||0)}else{mo=mIdx(m[9]);d=+m[8];y=+(m[10]||0)}
+if(mo<0||mo>11||d<1||d>31)continue;var auto=!y;if(auto)y=base.getFullYear();var dt=new Date(y,mo,d);if(auto&&dt<base-60*864e5)dt=new Date(y+1,mo,d);out.push({d:dt,i:m.index})}return out}
+function iso(s){if(!s)return null;var a=String(s).split("-");return new Date(+a[0],a[1]-1,+a[2])}
+function dateOf(p){var k=p.kind,base=new Date(p.created_at),d=iso(k==="program"?(p.event_date||p.last_date):(p.last_date||p.event_date)),txt=String(p.body||"");
+if(!d){var f=dFind(txt,base);if(f.length){if(k!=="program"){var hit=f.filter(function(x){var seg=txt.slice(Math.max(0,x.i-60),x.i+60);return/വരെ|last\s*date|അവസാന|deadline|before|till|until/i.test(seg)});d=(hit[0]||f[f.length-1]).d}else d=f[0].d}}return d}
+var t0=new Date();t0.setHours(0,0,0,0);
+var CLK='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+function left(p){var n=p.n,k=p.k;if(n==null){var a=Math.floor((Date.now()-new Date(p.c))/864e5);return a<1?"Today":a<2?"Yesterday":a+" days ago"}if(n<0)return k==="program"?"Completed":"Closed";return n===0?"Today":n===1?"Tomorrow":n+" days left"}
+function card(p,i){var d=p.d||new Date(p.c),fresh=(Date.now()-new Date(p.c))<3*864e5;
+var lab=p.d?(p.k==="program"?"PROGRAM<br>DATE":"LAST<br>DATE"):"POSTED<br>ON";
+var im=p.im?'<img src="'+esc(p.im)+'" alt="" loading="lazy">':'<span class="ph">'+esc(p.t)+'</span>';
+return '<a class="z3k" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
+var P=[],s=document.getElementById("z3s"),dots=document.getElementById("z3d"),chips=box.querySelectorAll(".z3c");
+function sortL(L){return L.sort(function(a,b){var ua=a.n!=null&&a.n>=0,ub=b.n!=null&&b.n>=0;if(ua&&ub)return a.n-b.n;if(ua)return -1;if(ub)return 1;return new Date(b.c)-new Date(a.c)})}
+function list(k){return sortL(P.filter(function(p){return k==="week"?(p.n!=null&&p.n>=0&&p.n<=7):p.k===k}))}
+function step(){var c=s.querySelector(".z3k");return c?c.offsetWidth+14:264}
+function draw(){var n=s.querySelectorAll(".z3k").length,i=Math.round(s.scrollLeft/step());dots.innerHTML="";if(n<2)return;for(var k=0;k<n;k++){var e=document.createElement("span");if(k===i)e.className="on";dots.appendChild(e)}}
+var EMP={week:"No programs or updates in the next 7 days.<br>Tap the other buttons to see all.",program:"No programs right now.",info:"No info updates right now.",job:"No job updates right now."};
+function show(k){var L=list(k);s.scrollLeft=0;s.innerHTML=L.length?L.map(card).join(""):'<div class="z3e">'+EMP[k]+'</div>';draw()}
+var st;s.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(draw,60)},{passive:true});
+chips.forEach(function(c){c.addEventListener("click",function(){chips.forEach(function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false")});c.classList.add("on");c.setAttribute("aria-pressed","true");show(c.dataset.k)})});
+var hi=0;if(!matchMedia("(prefers-reduced-motion:reduce)").matches)setInterval(function(){var off=[].filter.call(chips,function(x){return!x.classList.contains("on")});if(!off.length)return;var c=off[hi++%off.length];c.classList.add("hv");setTimeout(function(){c.classList.remove("hv")},900)},1300);
+fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(all){
+P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{k:k,t:title(x.body),im:x.image_url,d:d,n:n,c:x.created_at}});
+chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n").textContent=n>99?"99+":n});
+show("week")});
+})();
 </script>
 </body>
 </html>
