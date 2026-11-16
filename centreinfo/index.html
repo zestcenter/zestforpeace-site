@@ -263,12 +263,31 @@ header.zmh{position:sticky;top:0;z-index:70;padding:env(safe-area-inset-top,0px)
 
 .fsec[hidden]{display:none}
 
-/* date as a header strip inside each post */
-.card>.tld{display:flex;align-items:center;gap:7px;margin:0;padding:11px 16px;border-radius:0;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff!important;font-size:12px;font-weight:800;letter-spacing:.05em;box-shadow:none}
-.card>.tld::before{content:"";width:14px;height:14px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E") center/contain no-repeat}
-.tl{gap:30px!important}
-.card{box-shadow:0 8px 22px rgba(11,61,92,.12);border-color:#cfe3ef}
-.tli::before{top:12px!important}
+/* 5A: framed post with light footer */
+.tl{gap:22px!important;padding-left:0!important}
+.tl::before,.tli::before{display:none!important}
+.card{border:1px solid #d7e8f2!important;border-radius:22px!important;box-shadow:0 8px 20px rgba(11,61,92,.1)!important;overflow:hidden}
+.card .img{position:relative}
+.card .img img{object-position:top center}
+.pch{position:absolute;z-index:3;top:12px;left:12px;display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:#fff;color:#1380b8;font:800 10px/1 Inter,sans-serif;letter-spacing:.06em;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.pch svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pno{position:absolute;z-index:3;top:12px;right:12px;padding:6px 9px;border-radius:999px;background:rgba(11,61,92,.75);color:#fff;font:800 10px/1 Inter,sans-serif;letter-spacing:.05em}
+.card .img .newtag{top:auto!important;bottom:12px!important;left:12px!important}
+.card .img .zoom{bottom:12px}
+.nohd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.nohd .pch,.nohd .pno{position:static;box-shadow:none}.nohd .pch{background:#eaf4fa}
+.card .cb{padding-bottom:14px!important}
+.fb{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;background:#eaf4fa;border-top:2px dashed #bcd6e6}
+.fl{display:flex;align-items:center;gap:9px;min-width:0}
+.pcal{width:38px;flex:none;border-radius:9px;overflow:hidden;text-align:center;box-shadow:0 2px 6px rgba(11,61,92,.18)}
+.pcal i{display:block;font-style:normal;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;font:800 7.5px/1 Inter,sans-serif;letter-spacing:.06em;padding:3px 0}
+.pcal b{display:block;background:#fff;color:#0b3d5c;font:800 15px/1 Inter,sans-serif;padding:4px 0}
+.pdt small{display:block;font:800 8.5px/1.2 Inter,sans-serif;letter-spacing:.06em;color:#6a8796}
+.pdt b{display:inline-flex;align-items:center;gap:4px;font:800 12.5px/1.3 Inter,sans-serif;color:#0b5d8f;white-space:nowrap}
+.pdt b svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round}
+.fb .acts{margin:0!important;padding:0!important;border:0!important;flex:none}
+.fb .acts .ic{width:40px;height:40px}
+.card .badges:empty,.card .badges:not(:has(*)){display:none}
 </style>
 </head>
 <body>
@@ -381,7 +400,21 @@ const isoD=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+Str
 function fillD(p){if(p._f)return;p._f=1;const prog=p.kind==='program';if(prog?p.event_date:p.last_date)return;const txt=String(p.body||''),f=dFind(txt,new Date(p.created_at));if(!f.length)return;
 if(prog){p.event_date=isoD(f[0].d);return}const hit=f.filter(x=>/വരെ|last\s*date|അവസാന|deadline|before|till|until/i.test(txt.slice(Math.max(0,x.i-60),x.i+60)));p.last_date=isoD((hit[0]||f[f.length-1]).d)}
 const lastLbl = p => p.last_date ? `LAST DATE · ${fmt(p.last_date)}` : `POSTED · ${fmt(p.created_at)}`;
-const tl = (rows, isInfo, dateOf) => (rows.forEach(fillD), rows).map(p => `<div class="tli${isNew(p) ? ' new' : ''}">${card(p, isInfo).replace('>', '><div class="tld">' + dateOf(p) + '</div>')}</div>`).join('');
+const tl = (rows, isInfo, dateOf) => (rows.forEach(fillD), rows).map((p, i) => (p._i = i + 1, p._n = rows.length, `<div class="tli${isNew(p) ? ' new' : ''}">${card(p, isInfo)}</div>`)).join('');
+const CHIPI={program:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',info:'<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6"/>',job:'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>'};
+const CHIPL={program:'ZEST PROGRAMS',info:'INFO CENTRE',job:'JOB UPDATE'};
+const kindOf = p => p.kind === 'program' || p.kind === 'job' ? p.kind : 'info';
+const chip = p => `<span class="pch"><svg viewBox="0 0 24 24">${CHIPI[kindOf(p)]}</svg>${CHIPL[kindOf(p)]}</span>`;
+const MSH=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+function foot(p){
+  const prog = p.kind === 'program', v = prog ? (p.event_date || p.last_date) : (p.last_date || p.event_date);
+  let d, lab, cd;
+  const t0 = new Date(); t0.setHours(0,0,0,0);
+  if(v){ const a = String(v).slice(0,10).split('-'); d = new Date(+a[0], a[1]-1, +a[2]); lab = prog ? 'PROGRAM DATE' : 'LAST DATE';
+    const n = Math.round((d - t0) / 864e5); cd = n < 0 ? (prog ? 'Completed' : 'Closed') : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : (prog ? 'in ' + n + ' days' : n + ' days left'); }
+  else { d = new Date(p.created_at); lab = 'POSTED'; const n = Math.floor((Date.now() - d) / 864e5); cd = n < 1 ? 'Today' : n < 2 ? 'Yesterday' : n + ' days ago'; }
+  return `<span class="pcal"><i>${MSH[d.getMonth()]}</i><b>${d.getDate()}</b></span><span class="pdt"><small>${lab}</small><b><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${cd}</b></span>`;
+}
 function card(p, isInfo){
   const lines = String(p.body || '').trim().split(/\r?\n/);
   const title = (lines.shift() || '').replace(/^[*_~\s]+|[*_~\s]+$/g, '');
@@ -392,9 +425,9 @@ function card(p, isInfo){
   const wide = p.kind === 'info' && p.image_url;
   const nw = isNew(p) ? '<span class="newtag">NEW</span>' : '';
   return `<article class="card${wide ? ' wide' : ''}" id="p-${esc(p.id)}">
-    ${p.image_url ? `<div class="img"${wide ? ` data-zoom="${esc(p.image_url)}"` : ''}>${nw}<img src="${esc(p.image_url)}" alt="${esc(title)}" loading="lazy" decoding="async">${wide ? '<span class="zoom">⤢ Full poster</span>' : ''}</div>` : ''}
+    ${p.image_url ? `<div class="img"${wide ? ` data-zoom="${esc(p.image_url)}"` : ''}>${chip(p)}${p._n ? `<span class="pno">${String(p._i).padStart(2,'0')} / ${String(p._n).padStart(2,'0')}</span>` : ''}${nw}<img src="${esc(p.image_url)}" alt="${esc(title)}" loading="lazy" decoding="async">${wide ? '<span class="zoom">⤢ Full poster</span>' : ''}</div>` : ''}
     <div class="cb">
-      ${p.image_url ? '' : nw}
+      ${p.image_url ? '' : '<div class="nohd">' + chip(p) + (p._n ? `<span class="pno">${String(p._i).padStart(2,'0')} / ${String(p._n).padStart(2,'0')}</span>` : '') + '</div>' + nw}
       <h3 class="title">${esc(title)}</h3>
       ${desc ? `<div class="desc clamp${isInfo ? '' : ' short'}">${paras(desc)}</div>` : ''}
       ${!isInfo && imp ? `<div class="xtra" hidden><div class="imp"><h4>IMPORTANT DETAILS</h4>${paras(imp)}</div></div>` : ''}
@@ -406,6 +439,8 @@ function card(p, isInfo){
 
         ${p.ref_no ? `<span class="b ref"># ${esc(p.ref_no)}</span>` : ''}
       </div>
+    </div>
+    <div class="fb"><div class="fl">${foot(p)}</div>
       <div class="acts ${isInfo && p.form_url ? '' : 'only'}">
         ${isInfo && p.form_url ? `<a class="applylink ${closed ? 'off' : ''}" href="${esc(p.form_url)}" target="_blank" rel="noopener">APPLY NOW <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>` : ''}
         <button type="button" class="ic sh" data-share="${esc(p.id)}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
@@ -521,7 +556,7 @@ function render(rows, demo){
   const dOf = p => { const v = p.kind === 'program' ? (p.event_date || p.last_date) : (p.last_date || p.event_date); if(!v) return null; const a = String(v).slice(0,10).split('-'); return Math.round((new Date(+a[0], a[1]-1, +a[2]) - t0) / 864e5); };
   const week = rows.filter(p => { const n = dOf(p); return n !== null && n >= 0 && n <= 7; }).sort((a, b) => dOf(a) - dOf(b));
   $('week').classList.toggle('tl', !!week.length);
-  $('week').innerHTML = week.length ? week.map(p => `<div class="tli${isNew(p) ? ' new' : ''}">${card(p, p.kind !== 'program').replace('id="p-', 'id="w-').replace('>', '><div class="tld">' + (p.kind === 'program' ? 'PROGRAM DATE · ' + fmt(p.event_date || p.last_date) : 'LAST DATE · ' + fmt(p.last_date || p.event_date)) + '</div>')}</div>`).join('') : '<div class="state">അടുത്ത 7 ദിവസത്തിൽ പരിപാടികളോ അറിയിപ്പുകളോ ഇല്ല</div>';
+  $('week').innerHTML = week.length ? week.map((p, i) => (p._i = i + 1, p._n = week.length, `<div class="tli${isNew(p) ? ' new' : ''}">${card(Object.assign({}, p, {_i: i + 1, _n: week.length}), p.kind !== 'program').replace('id="p-', 'id="w-')}</div>`)).join('') : '<div class="state">അടുത്ത 7 ദിവസത്തിൽ പരിപാടികളോ അറിയിപ്പുകളോ ഇല്ല</div>';
   const setN = (k, n) => { const e = document.querySelector('.z3c[data-k="' + k + '"] .z3n'); if(e) e.textContent = n > 99 ? '99+' : n; };
   setN('week', week.length); setN('program', prog.length); setN('info', info.length); setN('job', jobs.length);
   $('jobs').classList.toggle('tl', !!jobs.length);
