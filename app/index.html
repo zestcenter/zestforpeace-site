@@ -68,6 +68,7 @@ h1{margin:0;color:#fff;font-size:2rem;font-weight:800;letter-spacing:.02em;text-
 .nt-on{background:#1380b8;color:#fff;position:relative;animation:tap 2s ease-in-out infinite}
 @keyframes tap{0%,100%{box-shadow:0 0 0 0 rgba(19,128,184,.55)}50%{box-shadow:0 0 0 8px rgba(19,128,184,0)}}
 .nt-note{margin:.3rem 0 0;font-size:.78rem;line-height:1.5;color:#52636d}
+.hint{margin:.8rem 0 0;padding:.7rem .9rem;border-radius:.9rem;background:#eef6fb;color:#1c2a32;font-size:.88rem;line-height:1.5;text-align:center}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
 <script src="/gate.js?v=15"></script>
@@ -80,26 +81,10 @@ h1{margin:0;color:#fff;font-size:2rem;font-weight:800;letter-spacing:.02em;text-
 <p class="tl ml">നാട് വളരാൻ നാടിനൊപ്പം</p>
 
 <div class="card">
-<button type="button" class="btn" id="ins" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>DOWNLOAD ZEST APP</button>
+<button type="button" class="btn" id="ins"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>INSTALL APP</button>
 <p class="done" id="done" hidden>ZEST APP is installed. Open it from your home screen.</p>
 
-<div id="andr" hidden>
-<p class="st">Android – Chrome</p>
-<ol class="steps">
-<li><span>Tap the <b>⋮</b> menu at the top right of Chrome.</span></li>
-<li><span>Tap <b>Install app</b> or <b>Add to Home screen</b>.</span></li>
-<li><span>Tap <b>Install</b>. ZEST APP appears on your home screen.</span></li>
-</ol>
-</div>
-
-<div id="iosb" hidden>
-<p class="st">iPhone – Safari</p>
-<ol class="steps">
-<li><span>Open this page in <b>Safari</b>.</span></li>
-<li><span>Tap the <b>Share</b> button (square with an arrow).</span></li>
-<li><span>Tap <b>Add to Home Screen</b>, then <b>Add</b>.</span></li>
-</ol>
-</div>
+<p class="hint" id="hint" hidden></p>
 </div>
 
 <div class="ntf">
@@ -133,11 +118,12 @@ if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catc
 var sa=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
 if(sa){location.replace("/");return}
 var ua=navigator.userAgent,ios=/iphone|ipad|ipod/i.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-var ins=document.getElementById("ins"),andr=document.getElementById("andr"),iosb=document.getElementById("iosb"),done=document.getElementById("done"),ev=null;
-if(ios){iosb.hidden=false}else{andr.hidden=false}
-addEventListener("beforeinstallprompt",function(e){e.preventDefault();ev=e;ins.hidden=false;andr.hidden=true});
-ins.addEventListener("click",function(){if(!ev)return;ev.prompt();ev.userChoice.then(function(r){if(r&&r.outcome==="accepted"){ins.hidden=true;done.hidden=false}ev=null})});
-addEventListener("appinstalled",function(){ins.hidden=true;andr.hidden=true;done.hidden=false});
+var ins=document.getElementById("ins"),hint=document.getElementById("hint"),done=document.getElementById("done"),ev=null;
+addEventListener("beforeinstallprompt",function(e){e.preventDefault();ev=e;hint.hidden=true});
+ins.addEventListener("click",function(){
+if(ev){ev.prompt();ev.userChoice.then(function(r){if(r&&r.outcome==="accepted"){ins.hidden=true;done.hidden=false}ev=null});return}
+hint.innerHTML=ios?"In <b>Safari</b>, tap <b>Share</b> → <b>Add to Home Screen</b>.":"Tap Chrome's <b>⋮</b> menu → <b>Install app</b>.";hint.hidden=false});
+addEventListener("appinstalled",function(){ins.hidden=true;hint.hidden=true;done.hidden=false});
 })();
 </script>
 </body>
