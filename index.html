@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
 <link rel="manifest" href="/manifest.webmanifest">
-<script src="/gate.js?v=20"></script>
+<script src="/gate.js?v=21"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -1348,6 +1348,11 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 #mn a,.zmh-nav a{font-size:.8rem!important;padding:.42rem 1.1rem!important;line-height:1.4!important}
 #mn a.nn,.zmh-nav a.nn{display:inline-flex!important;align-self:flex-start;margin:8px 1.1rem 6px!important;padding:6px 12px!important;font-size:.7rem!important}
 }
+
+.z3row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}
+.z3row .z3md{margin-top:0}
+.z3rm{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;border-radius:999px;border:1.2px solid #f2a516;color:#a86a00;background:#fff8e8;font:700 9.5px/1 "Inter",sans-serif;cursor:pointer}
+.z3rm.on{background:#1380b8;border-color:#1380b8;color:#fff}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.com/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.com"], "url": "https://zestforpeace.com/", "publisher": {"@id": "https://zestforpeace.com/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
@@ -1668,7 +1673,7 @@ function left(p){var n=p.n,k=p.k;if(n==null){var a=Math.floor((Date.now()-new Da
 function card(p,i){var d=p.d||new Date(p.c),fresh=(Date.now()-new Date(p.c))<3*864e5;
 var lab=p.d?(p.k==="program"?"PROGRAM<br>DATE":"LAST<br>DATE"):"POSTED<br>ON";
 var im=p.im?'<img src="'+esc(p.im)+'" alt="" loading="lazy">':'<span class="ph">'+esc(p.t)+'</span>';
-return '<a class="z3k" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
+return '<a class="z3k" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3row"><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'+(p.d&&p.n!=null&&p.n>=0?'<span class="z3rm rmc" role="button" tabindex="0" data-rem="'+esc(p.id)+'" data-k="'+(p.k==="program"?"program":"info")+'" data-d="'+p.d.getFullYear()+'-'+('0'+(p.d.getMonth()+1)).slice(-2)+'-'+('0'+p.d.getDate()).slice(-2)+'" data-t="'+esc(p.t)+'">🔔 Remind me</span>':'')+'</span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
 var P=[],s=document.getElementById("z3s"),dots=document.getElementById("z3d"),chips=box.querySelectorAll(".z3c");
 function sortL(L){return L.sort(function(a,b){var ua=a.n!=null&&a.n>=0,ub=b.n!=null&&b.n>=0;if(ua&&ub)return a.n-b.n;if(ua)return -1;if(ub)return 1;return new Date(b.c)-new Date(a.c)})}
 function list(k){return sortL(P.filter(function(p){return k==="week"?(p.n!=null&&p.n>=0&&p.n<=7):p.k===k}))}
@@ -1680,11 +1685,11 @@ var st;s.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(dra
 chips.forEach(function(c){c.addEventListener("click",function(){chips.forEach(function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false")});c.classList.add("on");c.setAttribute("aria-pressed","true");show(c.dataset.k)})});
 var hi=0;if(!matchMedia("(prefers-reduced-motion:reduce)").matches)setInterval(function(){var off=[].filter.call(chips,function(x){return!x.classList.contains("on")});if(!off.length)return;var c=off[hi++%off.length];c.classList.add("hv");setTimeout(function(){c.classList.remove("hv")},900)},1300);
 fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(all){
-P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{k:k,t:title(x.body),im:x.image_url,d:d,n:n,c:x.created_at}});
+P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{id:x.id,k:k,t:title(x.body),im:x.image_url,d:d,n:n,c:x.created_at}});
 chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n").textContent=n>99?"99+":n});
 show("week")});
 })();
 </script>
-<script src="/notify.js?v=3" defer></script>
+<script src="/notify.js?v=4" defer></script>
 </body>
 </html>
