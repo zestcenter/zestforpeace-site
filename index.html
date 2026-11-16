@@ -1300,19 +1300,22 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 .z3d span{height:6px;width:6px;border-radius:3px;background:rgba(255,255,255,.4);transition:all .3s}
 .z3d span.on{width:18px;background:#fff}
 @media (min-width:64rem){
-#centre-info .z3{display:contents}
-#centre-info .z3top{grid-area:cats;align-self:center;min-width:0}
-#centre-info .z3bot{grid-area:car;min-width:0;margin-top:1.4rem}
-.z3cs{padding:0 0 6px;gap:10px;grid-template-columns:repeat(2,1fr)}
-.z3c{flex-direction:row!important;justify-content:flex-start;text-align:left;gap:12px!important;padding:14px 16px!important}
-.z3i{width:40px;height:40px;border-radius:12px}.z3i svg{width:22px;height:22px}
-.z3l{font-size:15px!important}.z3l small{font-size:12px!important}
-.z3a{width:13px;height:13px;top:9px;right:9px}
-.z3h{margin-top:10px;font-size:12px}
-.z3c{padding:10px 6px 9px}
-.z3l{font-size:12px}.z3l small{font-size:10px}
-.z3s{padding:14px 2px 20px;scroll-padding:0}
-.z3k{width:260px}
+#centre-info .zu-panel{grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr)!important;grid-template-areas:"h h" "sub sub" "photo cats" "more more"!important;grid-template-rows:auto auto auto auto!important}
+#centre-info .z3{grid-area:cats;align-self:start;min-width:0;margin-top:.9rem}
+.z3cs{padding:0 0 4px;gap:10px;grid-template-columns:repeat(4,1fr)}
+.z3c{flex-direction:row!important;justify-content:flex-start;text-align:left;gap:9px!important;padding:11px 12px!important}
+.z3i{width:34px;height:34px;border-radius:10px}.z3i svg{width:19px;height:19px}
+.z3l{font-size:13px!important}.z3l small{font-size:11px!important}
+.z3a{width:11px;height:11px;top:7px;right:7px}
+.z3h{display:none}
+.z3s{gap:12px;padding:16px 2px 18px;scroll-padding:0 2px}
+.z3k{width:calc((100% - 28px)/3)}
+.z3im{height:130px}
+.z3ti{font-size:12.5px;min-height:34px}
+.z3st{padding:9px 10px 11px}
+.z3cal{width:30px}.z3cal b{font-size:13px}
+.z3dl{font-size:7.5px}
+.z3cd{padding:5px 7px;font-size:9px}
 }
 @media (prefers-reduced-motion:reduce){.z3a,.z3h svg,.z3md::before,.z3md svg,.z3k{animation:none}}
 </style>
@@ -1639,7 +1642,7 @@ var P=[],s=document.getElementById("z3s"),dots=document.getElementById("z3d"),ch
 function sortL(L){return L.sort(function(a,b){var ua=a.n!=null&&a.n>=0,ub=b.n!=null&&b.n>=0;if(ua&&ub)return a.n-b.n;if(ua)return -1;if(ub)return 1;return new Date(b.c)-new Date(a.c)})}
 function list(k){return sortL(P.filter(function(p){return k==="week"?(p.n!=null&&p.n>=0&&p.n<=7):p.k===k}))}
 function step(){var c=s.querySelector(".z3k");return c?c.offsetWidth+14:264}
-function draw(){var n=s.querySelectorAll(".z3k").length,i=Math.round(s.scrollLeft/step());dots.innerHTML="";if(n<2)return;for(var k=0;k<n;k++){var e=document.createElement("span");if(k===i)e.className="on";dots.appendChild(e)}}
+function draw(){var n=s.querySelectorAll(".z3k").length,i=Math.round(s.scrollLeft/step());dots.innerHTML="";if(n<2||(innerWidth>=1024&&n<=3))return;for(var k=0;k<n;k++){var e=document.createElement("span");if(k===i)e.className="on";dots.appendChild(e)}}
 var EMP={week:"No programs or updates in the next 7 days.<br>Tap the other buttons to see all.",program:"No programs right now.",info:"No info updates right now.",job:"No job updates right now."};
 function show(k){var L=list(k);s.scrollLeft=0;s.innerHTML=L.length?L.map(card).join(""):'<div class="z3e">'+EMP[k]+'</div>';draw()}
 var st;s.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(draw,60)},{passive:true});
