@@ -262,6 +262,12 @@ header.zmh{position:sticky;top:0;z-index:70;padding:env(safe-area-inset-top,0px)
 @keyframes z3tp{50%{transform:translateY(2px) scale(.9)}}
 
 .fsec[hidden]{display:none}
+
+/* highlighted date above each post */
+.tld{display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;padding:6px 12px 6px 9px;border-radius:999px;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff!important;font-size:11.5px;font-weight:800;letter-spacing:.05em;box-shadow:0 4px 10px rgba(10,112,168,.28)}
+.tld::before{content:"";width:13px;height:13px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='3'/%3E%3Cpath d='M3 10h18M8 3v4M16 3v4'/%3E%3C/svg%3E") center/contain no-repeat}
+.tli.new .tld{background:linear-gradient(135deg,#f2a516,#ffc44d);color:#12303f!important;box-shadow:0 4px 10px rgba(242,165,22,.35)}
+.tli.new .tld::before{filter:brightness(0) saturate(100%) invert(14%) sepia(30%) saturate(1200%) hue-rotate(170deg)}
 </style>
 </head>
 <body>
@@ -389,15 +395,14 @@ function card(p, isInfo){
     <div class="cb">
       ${p.image_url ? '' : nw}
       <h3 class="title">${esc(title)}</h3>
-      ${p.kind === 'info' ? `<div class="meta">🗓 Posted ${fmt(p.created_at)}</div>` : ''}
       ${desc ? `<div class="desc clamp${isInfo ? '' : ' short'}">${paras(desc)}</div>` : ''}
       ${!isInfo && imp ? `<div class="xtra" hidden><div class="imp"><h4>IMPORTANT DETAILS</h4>${paras(imp)}</div></div>` : ''}
       ${desc || (!isInfo && imp) ? `<button type="button" class="more" data-l="${isInfo ? 'READ MORE' : 'VIEW MORE'}" hidden>${isInfo ? 'READ MORE' : 'VIEW MORE'} <span aria-hidden="true">▾</span></button>` : ''}
       ${isInfo && imp ? `<div class="imp"><h4>IMPORTANT DETAILS</h4>${paras(imp)}</div>` : ''}
       <div class="badges">
-        ${isInfo && p.kind !== 'info' ? `<span class="b">🗓 POST DATE: ${fmt(p.created_at)}</span>` : ''}
+
         
-        ${isInfo && p.last_date ? `<span class="b ${closed ? 'closed' : 'last'}">അവസാന തീയ്യതി: ${fmt(p.last_date)}${closed ? ' (അവസാനിച്ചു)' : ''}</span>` : ''}
+
         ${p.ref_no ? `<span class="b ref"># ${esc(p.ref_no)}</span>` : ''}
       </div>
       <div class="acts ${isInfo && p.form_url ? '' : 'only'}">
