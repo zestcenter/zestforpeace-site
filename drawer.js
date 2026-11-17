@@ -55,13 +55,42 @@
   var DROP = '<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11Z"/>';
   var REV = '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M8 7h7M8 11h5"/>';
   var MON = '<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M16 12.5h2M3 10h18"/>';
+  var BK = '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 21h15"/>';
+  var DROP = '<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11Z"/>';
+  function tl(h, em, t, go) { return '<a class="zdw-tl" href="' + h + '"' + (go ? ' data-go="' + go + '"' : '') + '><i>' + em + '</i><span>' + t + '</span></a>'; }
+  function gp(c, ic, t, inner) { return '<div class="zdw-gp" style="--c:' + c + '"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch">' + CHEV + '</b></button><div class="zdw-sub"><div class="zdw-sub-in zdw-tg">' + inner + '</div></div></div>'; }
+  function ln(c, h, ic, t) { return '<a class="zdw-mn" style="--c:' + c + '" href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></b></a>'; }
   var items =
-    grp(I.home, "MAIN PAGE", it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") + it(H("news"), I.ev, "EVENTS")) +
-    grp(I.info, "ZEST SERVICE CENTRE", it(H("ci-program"), I.cal, "ZEST PROGRAMS") + it(H("ci-info"), I.info, "INFO CENTRE") + it(H("ci-job"), I.job, "JOB UPDATES")) +
-    grp(I.stu, "STUDENTS CORNER", it("#students", REV, "REVISION PLANNER").replace('<a ', '<a data-go="rev" ') + it("#students", MON, "POCKET MONEY").replace('<a ', '<a data-go="mon" ')) +
-    grp(SV, "SERVICES", it("#soon", BK, "LIBRARY") + it("#soon", DROP, "BLOOD DONATION")) +
-    it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
-  dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd"><button class="zdw-x" aria-label="Close menu">✕</button><img src="' + LOGO + '" alt="ZEST for Peace"></div><div class="zdw-ls" role="navigation">' + items + '</div></div><div class="zdw-ft">ZEST FOR PEACE<b>zestforpeace.com</b></div>';
+    gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", "ABOUT US") + tl(H("programs"), "🧩", "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "📅", "EVENTS")) +
+    gp("#f08a00", I.info, "ZEST SERVICE CENTRE", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
+    gp("#6a4bd1", I.stu, "STUDENTS CORNER", tl("#students", "📖", "REVISION PLANNER", "rev") + tl("#students", "💰", "POCKET MONEY", "mon")) +
+    ln("#16996a", "#soon", BK, "LIBRARY") + ln("#e0345c", "#soon", DROP, "BLOOD BANK");
+  var BOT = '<div class="zdw-bt"><a class="zdw-sg" href="#settings"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></i><span data-noi18n class="zsgl">Settings</span></a>' +
+    '<a class="zdw-jn" href="' + H("join") + '"><b>💛 JOIN WITH ZEST</b><small data-noi18n>' + '</small><em><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></em></a></div>';
+  dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd2"><img src="/icons/icon-192.png" alt=""><div><b data-noi18n>ZEST for Peace</b><small data-noi18n>നാട് വളരാൻ നാടിനൊപ്പം</small></div><button class="zdw-x" aria-label="Close menu">✕</button></div><div class="zdw-ls" role="navigation">' + items + '</div></div>' + BOT + '<div class="zdw-ft"><b>zestforpeace.com</b></div>';
+  (function () { var ml = window.ZestLang && ZestLang.get() === "ml", sm = dw.querySelector(".zdw-jn small"); if (sm) sm.textContent = ml ? "നാടിന്റെ നന്മയ്ക്ക് ഒപ്പം" : "Stand with our village"; var sg = dw.querySelector(".zsgl"); if (sg) sg.textContent = ml ? "ക്രമീകരണം" : "Settings"; })();
+
+  var css2 = document.createElement("style");
+  css2.textContent =
+    '.zdw{background:#f5f8fa!important}' +
+    '.zdw-hd2{display:flex;align-items:center;gap:10px;padding:6px 2px 4px}.zdw-hd2 img{width:34px;height:34px;border-radius:11px;flex:none;box-shadow:0 3px 8px rgba(11,61,92,.2)}.zdw-hd2 b{display:block;font:800 14px/1.2 Inter,sans-serif;color:#0b3d5c}.zdw-hd2 small{display:block;font:500 10.5px/1.3 "Noto Sans Malayalam",sans-serif;color:#8aa0ad}' +
+    '.zdw-hd2 .zdw-x{position:static!important;margin-left:auto;width:30px;height:30px;background:#e9eff3!important;color:#5d707c!important;flex:none}' +
+    '.zdw .zdw-gp,.zdw a.zdw-mn{position:relative;border:0!important;border-radius:14px!important;background:#fff!important;box-shadow:0 2px 0 #e3eaef,0 4px 10px rgba(11,61,92,.05)!important;overflow:hidden}' +
+    '.zdw .zdw-gp::before,.zdw a.zdw-mn::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;border-radius:0 4px 4px 0;background:var(--c)}' +
+    '.zdw .zdw-gh svg,.zdw a.zdw-mn>svg{stroke:var(--c)!important}' +
+    '.zdw .zdw-gh,.zdw a.zdw-mn{min-height:44px!important;padding:8px 10px 8px 16px!important;font-size:13px!important}' +
+    '.zdw-ch{margin-left:auto;width:24px;height:24px;border-radius:50%;background:#f0f4f7;display:grid;place-items:center;flex:none}.zdw .zdw-ch svg{width:13px!important;height:13px!important;stroke:#7d93a0!important;stroke-width:2.4!important;fill:none;margin:0!important}' +
+    '.zdw .zdw-gp.op{background:transparent!important;box-shadow:none!important;overflow:visible}.zdw .zdw-gp.op>.zdw-gh{background:#fff;border-radius:14px;box-shadow:0 2px 0 #e3eaef,0 4px 10px rgba(11,61,92,.05)}.zdw .zdw-gp.op::before{top:12px;bottom:auto;height:20px}' +
+    '.zdw .zdw-tg{display:grid!important;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 0 0 8px!important;min-height:0;overflow:hidden}.zdw .zdw-gp.op .zdw-tg{padding:9px 0 2px 8px!important}.zdw .zdw-gp:not(.op) .zdw-tg{visibility:hidden}' +
+    '.zdw .zdw-tg a.zdw-tl{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:0!important;padding:10px 4px!important;border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:0 2px 0 #e3eaef!important;text-align:center;font:600 10.5px/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;color:#33434d!important}' +
+    '.zdw .zdw-tl i{font-style:normal;font-size:18px;line-height:1}' +
+    '.zdw-bt{display:flex;align-items:center;gap:9px;padding:10px 12px 4px}' +
+    '.zdw-sg{display:flex;flex-direction:column;align-items:center;gap:4px;flex:none;text-decoration:none;font:700 9.5px/1.2 Inter,"Noto Sans Malayalam",sans-serif;color:#0b5d8f;-webkit-tap-highlight-color:transparent}' +
+    '.zdw-sg i{position:relative;width:38px;height:38px;border-radius:12px;background:conic-gradient(from 210deg,#3fa7d6,#0b5d8f,#6fc3ea,#3fa7d6);display:grid;place-items:center;box-shadow:0 4px 10px rgba(19,128,184,.35),inset 0 1px 0 rgba(255,255,255,.35)}.zdw-sg i:after{content:"";position:absolute;inset:2px;border-radius:10px;background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,0) 55%)}.zdw-sg svg{position:relative;z-index:1;width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}' +
+    '.zdw-jn{flex:1;position:relative;display:block;border-radius:12px;padding:7px 36px 7px 11px;background:linear-gradient(135deg,#e3f3fc,#bfe3f6);border:1px solid #cfe6f3;box-shadow:0 2px 0 #cfe6f3;text-decoration:none;color:#0b5d8f;-webkit-tap-highlight-color:transparent}.zdw-jn b{display:block;font:800 11.5px/1.3 Inter,"Noto Sans Malayalam",sans-serif}.zdw-jn small{display:block;font:500 9px/1.3 "Noto Sans Malayalam",Inter,sans-serif;color:#3f7fa6}' +
+    '.zdw-jn em{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:#fff;display:grid;place-items:center}.zdw-jn em svg{width:11px;height:11px;fill:none;stroke:#1380b8;stroke-width:2.6}' +
+    '.zdw-ft{padding:6px 14px 12px!important}.zdw-ft b{color:#a7b6bf!important;font-size:10.5px!important}';
+  document.head.appendChild(css2);
   document.body.appendChild(bg); document.body.appendChild(dw);
 
   var open = false, lastFocus = null;
@@ -86,7 +115,7 @@
   }, true);
   bg.addEventListener("click", hide);
   dw.querySelector(".zdw-x").addEventListener("click", hide);
-  dw.querySelectorAll(".zdw-ls a").forEach(function (a) { a.addEventListener("click", function (e) {
+  dw.querySelectorAll(".zdw-ls a,.zdw-bt a").forEach(function (a) { a.addEventListener("click", function (e) {
     if (a.getAttribute("href") === "#soon") { e.preventDefault(); e.stopImmediatePropagation(); var ml = window.ZestLang && ZestLang.get() === "ml", t = document.createElement("div");
       t.textContent = ml ? "ഉടൻ വരുന്നു 🙂" : "Coming soon 🙂"; t.style.cssText = "position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,'Noto Sans Malayalam',sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25)";
       document.body.appendChild(t); setTimeout(function () { t.remove(); }, 1800); return; }
