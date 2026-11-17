@@ -1,6 +1,6 @@
 /* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v37';
-const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=9', '/gate.js?v=29', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE = 'zest-app-v38';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=10', '/gate.js?v=29', '/icons/icon-192.png', '/icons/icon-512.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
