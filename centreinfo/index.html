@@ -471,7 +471,7 @@ function card(p, isInfo){
     <div class="fb"><div class="fl">${foot(p)}</div>
       <div class="acts ${isInfo && p.form_url ? '' : 'only'}">
         ${isInfo && p.form_url ? `<a class="applylink ${closed ? 'off' : ''}" href="${esc(p.form_url)}" target="_blank" rel="noopener">APPLY NOW <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>` : ''}
-        <button type="button" class="ic sh" data-share="${esc(p.id)}" data-no="${esc(p.no || '')}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
+        <button type="button" class="ic sh" data-share="${esc(p.id)}" data-no="${esc(p.no || '')}" data-kind="${esc(p.kind)}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
       </div>
     </div>
   </article>`;
@@ -535,7 +535,8 @@ function toast(t){
 }
 document.addEventListener('click', async ev => {
   const b = ev.target.closest('[data-share]'); if(!b) return;
-  const url = b.dataset.no ? 'https://zestforpeace.com/app/' + b.dataset.no : location.origin + location.pathname + '#p-' + b.dataset.share;
+  const PRE = {info:'info', program:'prgm', job:'job'};
+  const url = b.dataset.no ? 'https://zestforpeace.com/app/' + (PRE[b.dataset.kind] || 'info') + b.dataset.no : location.origin + location.pathname + '#p-' + b.dataset.share;
   const title = b.dataset.t || 'ZEST';
   const text = title + '\n\nFor more updates 👇\n' + url;
   if(navigator.share){ try{ await navigator.share({text}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
