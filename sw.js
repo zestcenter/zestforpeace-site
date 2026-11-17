@@ -1,8 +1,8 @@
 /* ZEST APP service worker – fast start:
    pages & posts: network, but fall back to the saved copy if the network is slow (2.5 s)
    scripts, images, video, fonts: saved copy first (they change name/version when updated) */
-const CACHE = 'zest-app-v70';
-const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=25', '/gate.js?v=29', '/notify.js?v=22', '/drawer.js?v=11', '/icons/icon-192.png', '/icons/icon-512.png'];
+const CACHE = 'zest-app-v71';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=25', '/gate.js?v=29', '/notify.js?v=22', '/drawer.js?v=12', '/icons/icon-192.png', '/icons/icon-512.png'];
 const WAIT = 2500;
 
 self.addEventListener('install', e => {
