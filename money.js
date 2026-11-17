@@ -47,7 +47,7 @@
     var out = kind === "out", sel = out ? "snacks" : null;
     var s = sheet('<h4>' + (out ? '＋ Money spent' : '＋ Got money') + '</h4><div class="amt"><span>₹</span><input id="zm-a" type="number" inputmode="decimal" min="1" placeholder="0"></div>' +
       (out ? '<div class="cats">' + CAT.filter(function (c) { return c[0] !== "savings"; }).map(function (c) { return '<button data-c="' + c[0] + '"' + (c[0] === sel ? ' class="on"' : '') + '><i>' + c[1] + '</i>' + c[2] + '</button>'; }).join("") + '</div>' : '') +
-      '<input class="nt" id="zm-n" maxlength="40" placeholder="' + (out ? 'Note (optional) – e.g. juice' : 'From (optional) – e.g. Uppa') + '"><div class="err" id="zm-e"></div><button class="sv' + (out ? '' : ' g') + '">Save</button>');
+      '<input class="nt" id="zm-n" maxlength="40" placeholder="' + (out ? 'Note (optional) – e.g. juice' : 'From (optional)') + '"><div class="err" id="zm-e"></div><button class="sv' + (out ? '' : ' g') + '">Save</button>');
     s.querySelectorAll(".cats button").forEach(function (b) { b.onclick = function () { s.querySelectorAll(".cats button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); sel = b.dataset.c; }; });
     setTimeout(function () { s.querySelector("#zm-a").focus(); }, 50);
     s.querySelector(".sv").onclick = function () {

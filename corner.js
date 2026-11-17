@@ -99,7 +99,7 @@
     s.querySelector(".x1").onclick = close;
     s.querySelector(".chip").onclick = switcher;
     s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=4", "ZestRev"); };
-    s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=2", "ZestMoney"); };
+    s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=3", "ZestMoney"); };
   }
   function tool(src, g) {
     if (window[g]) return window[g].open();
