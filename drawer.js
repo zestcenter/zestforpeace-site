@@ -24,19 +24,19 @@
   }
   var css = document.createElement("style");
   css.textContent = '.zdw-bg{position:fixed;inset:0;z-index:2147483600;background:rgba(10,25,40,.45);opacity:0;visibility:hidden;transition:opacity .28s,visibility .28s}.zdw-bg.on{opacity:1;visibility:visible}' +
-    '.zdw{position:fixed;z-index:2147483601;top:0;left:0;bottom:0;width:min(84vw,22rem);background:#fff;border-radius:0 30px 30px 0;box-shadow:12px 0 40px rgba(10,40,70,.25);transform:translateX(-105%);transition:transform .32s cubic-bezier(.2,.8,.25,1);display:flex;flex-direction:column;overflow:hidden;font-family:Inter,"Plus Jakarta Sans",sans-serif}.zdw.on{transform:none}.zdw *{box-sizing:border-box}' +
-    '.zdw-sc{flex:1;overflow:auto;padding:16px 14px 18px;-webkit-overflow-scrolling:touch}' +
-    '.zdw-hd{position:relative;padding:22px 18px 20px;border-radius:24px;background:linear-gradient(140deg,#1a8ac4 0%,#0b5d8f 55%,#0b3d5c 100%);box-shadow:0 12px 26px rgba(11,61,92,.3);text-align:center;overflow:hidden}.zdw-hd::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08)}' +
-    '.zdw-hd img{position:relative;z-index:1;display:block;height:66px;width:auto;margin:0 auto}.zdw-hd .tg{position:relative;z-index:1;display:block;margin-top:10px;font:700 13px/1.3 "Noto Sans Malayalam",Inter,sans-serif;color:#d8eefa}' +
-    '.zdw-x{position:absolute;z-index:2;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font:700 16px/1 Inter,sans-serif;cursor:pointer}' +
-    '.zdw .zdw-ls{position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;max-height:none!important;height:auto!important;width:auto!important;background:none!important;box-shadow:none!important;padding:0!important;display:flex!important;flex-direction:column;gap:10px;margin-top:16px}' +
-    '.zdw-ls a{margin:0!important;width:auto!important;display:flex!important;align-items:center;gap:14px;min-height:56px;padding:12px 16px;border-radius:18px;border:1.5px solid #e2ecf3;background:#fff;color:#14232c!important;text-decoration:none;font:700 15px/1.2 Inter,sans-serif;letter-spacing:.02em;box-shadow:0 2px 6px rgba(11,61,92,.04);transition:background .2s,border-color .2s,transform .15s;-webkit-tap-highlight-color:transparent}' +
+    '.zdw{position:fixed;z-index:2147483601;top:0;right:0;bottom:0;width:min(78vw,19rem);background:#fff;border-radius:26px 0 0 26px;box-shadow:-12px 0 40px rgba(10,40,70,.25);transform:translateX(105%);transition:transform .32s cubic-bezier(.2,.8,.25,1);display:flex;flex-direction:column;overflow:hidden;font-family:Inter,"Plus Jakarta Sans",sans-serif}.zdw.on{transform:none}.zdw *{box-sizing:border-box}' +
+    '.zdw-sc{flex:1;overflow:auto;padding:14px 12px 14px;-webkit-overflow-scrolling:touch}' +
+    '.zdw-hd{position:relative;padding:16px 14px;border-radius:20px;background:linear-gradient(140deg,#1a8ac4 0%,#0b5d8f 55%,#0b3d5c 100%);box-shadow:0 12px 26px rgba(11,61,92,.3);text-align:center;overflow:hidden}.zdw-hd::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08)}' +
+    '.zdw-hd img{position:relative;z-index:1;display:block;height:50px;width:auto;margin:0 auto}.zdw-hd .tg{position:relative;z-index:1;display:block;margin-top:10px;font:700 13px/1.3 "Noto Sans Malayalam",Inter,sans-serif;color:#d8eefa}' +
+    '.zdw-x{position:absolute;z-index:2;top:8px;right:8px;width:28px;height:28px;font-size:13px!important;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font:700 16px/1 Inter,sans-serif;cursor:pointer}' +
+    '.zdw .zdw-ls{position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;max-height:none!important;height:auto!important;width:auto!important;background:none!important;box-shadow:none!important;padding:0!important;display:flex!important;flex-direction:column;gap:8px;margin-top:12px}' +
+    '.zdw-ls a{margin:0!important;width:auto!important;display:flex!important;align-items:center;gap:12px;min-height:46px;padding:9px 14px;border-radius:15px;border:1.5px solid #e2ecf3;background:#fff;color:#14232c!important;text-decoration:none;font:600 13px/1.2 Inter,sans-serif;letter-spacing:.03em;box-shadow:0 2px 6px rgba(11,61,92,.04);transition:background .2s,border-color .2s,transform .15s;-webkit-tap-highlight-color:transparent}' +
     '.zdw-ls a:active{transform:scale(.98);background:#f2f8fc}' +
-    '.zdw-ls a svg{width:24px;height:24px;flex:none;fill:none;stroke:#1380b8;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}' +
+    '.zdw-ls a svg{width:20px;height:20px;flex:none;fill:none;stroke:#1380b8;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}' +
     '.zdw-ls a.cur{background:#eef6fb;border-color:#9ec9e2}' +
     '.zdw-ls a.zdw-hl{background:linear-gradient(135deg,#0a70a8,#3fa7d6);border-color:transparent;color:#fff!important;box-shadow:0 8px 18px rgba(10,112,168,.3)}.zdw-ls a.zdw-hl svg{stroke:#ffc44d}' +
-    '.zdw-ls a.zdw-bl{color:#1380b8!important;font-weight:800}' +
-    '.zdw-ft{padding:12px 16px 18px;text-align:center;font:700 11.5px Inter,sans-serif;color:#8aa0ad;letter-spacing:.04em}.zdw-ft b{display:block;margin-top:4px;font:800 13px Inter,sans-serif;color:#0b5d8f;letter-spacing:.02em}' +
+    '.zdw-ls a.zdw-bl{color:#1380b8!important;font-weight:700}' +
+    '.zdw-ft{padding:10px 14px 14px;text-align:center;font:700 10px Inter,sans-serif;color:#8aa0ad;letter-spacing:.04em}.zdw-ft b{display:block;margin-top:3px;font:800 11.5px Inter,sans-serif;color:#0b5d8f;letter-spacing:.02em}' +
     '@media (min-width:64rem){.zdw,.zdw-bg{display:none}}';
   document.head.appendChild(css);
 
@@ -79,6 +79,6 @@
   /* swipe left to close */
   var sx = null;
   dw.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
-  dw.addEventListener("touchend", function (e) { if (sx !== null && sx - e.changedTouches[0].clientX > 60) hide(); sx = null; }, { passive: true });
+  dw.addEventListener("touchend", function (e) { if (sx !== null && e.changedTouches[0].clientX - sx > 60) hide(); sx = null; }, { passive: true });
   window.ZestDrawer = { open: show, close: hide };
 })();
