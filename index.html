@@ -1364,6 +1364,40 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 h2.zh2{font-size:clamp(1.5rem,6.6vw,2.5rem)!important;line-height:1.3!important}
 </style>
 <script>document.documentElement.classList.add("js")</script>
+<script>/* ZEST: icon picture for posts without a poster */
+var AIC = {
+  edu:['#1a8ac4','#0b5d8f','<path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/>'],
+  house:['#2e9e6a','#16704a','<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>'],
+  job:['#7b5cc4','#4e3496','<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>'],
+  health:['#e0645a','#b23b33','<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/><path d="M9 11h6M12 8v6"/>'],
+  agri:['#7fae3a','#527a1e','<path d="M12 21V9"/><path d="M12 13c-3 0-5-2-5-5 3 0 5 2 5 5ZM12 13c3 0 5-2 5-5-3 0-5 2-5 5ZM12 9c-2 0-3.5-1.5-3.5-4C10.5 5 12 6.5 12 9ZM12 9c2 0 3.5-1.5 3.5-4C13.5 5 12 6.5 12 9Z"/>'],
+  money:['#d39b1c','#a1720a','<circle cx="12" cy="12" r="9"/><path d="M9 8h6M9 11h6M9 8c3 0 4 1.5 4 3s-1.5 3-4 3l4 3"/>'],
+  power:['#f0a830','#c27a0a','<path d="M13 2 4 14h7l-1 8 9-12h-7Z"/>'],
+  water:['#2bb3d6','#127a99','<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11Z"/>'],
+  cal:['#1380b8','#0b3d5c','<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>'],
+  info:['#3fa7d6','#1380b8','<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>']
+};
+function aicKey(p){
+  var t = String(p.body || '');
+  if(p.kind === 'job' || /ജോലി|ഒഴിവ്|vacanc|recruit|job|internship|ഇന്റേൺ/i.test(t)) return 'job';
+  if(/സ്കോളർ|scholar|വിദ്യാ|പഠന|പരീക്ഷ|exam|admission|പ്രവേശന/i.test(t)) return 'edu';
+  if(/വീട്|ഭവന|housing|house/i.test(t)) return 'house';
+  if(/ആരോഗ്യ|ചികിത്സ|മെഡിക്കൽ|ക്യാമ്പ്|ആശുപത്രി|രക്ത|hospital|medical|health|vaccin/i.test(t)) return 'health';
+  if(/കൃഷി|കർഷ|farm|agri/i.test(t)) return 'agri';
+  if(/പെൻഷൻ|ധനസഹായ|സഹായധന|pension|loan|subsid/i.test(t)) return 'money';
+  if(/വൈദ്യുതി|കറന്റ്|KSEB|power|electric/i.test(t)) return 'power';
+  if(/കുടിവെള്ള|വെള്ളം|water/i.test(t)) return 'water';
+  if(p.kind === 'program') return 'cal';
+  return 'info';
+}
+function aicHTML(p){
+  var c = AIC[aicKey(p)];
+  return '<div class="aic" style="background:linear-gradient(140deg,'+c[0]+','+c[1]+')"><i></i><i></i><svg viewBox="0 0 24 24" aria-hidden="true">'+c[2]+'</svg></div>';
+}
+window.ZAIC=function(kind,body){return aicHTML({kind:kind,body:body})};
+</script>
+<style>.aic{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}.aic i{position:absolute;border-radius:50%;background:rgba(255,255,255,.09)}.aic i:first-child{width:180px;height:180px;right:-50px;top:-70px}.aic i+i{width:120px;height:120px;left:-40px;bottom:-60px}.aic svg{position:relative;width:52px;height:52px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}</style>
+
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://zestforpeace.com/#org", "name": "ZEST for Peace Charitable Trust", "alternateName": ["ZEST for Peace", "ZEST Kodencheri", "ZEST Centre Velloor"], "url": "https://zestforpeace.com/", "logo": "https://zestforpeace.com/icons/icon-512.png", "sameAs": ["https://www.instagram.com/zest_for_peace/"], "address": {"@type": "PostalAddress", "streetAddress": "Velloor, Kottembram Road", "addressLocality": "Kodencheri", "addressRegion": "Kerala", "addressCountry": "IN"}}, {"@type": "WebSite", "@id": "https://zestforpeace.com/#site", "name": "ZEST for Peace", "alternateName": ["ZEST APP", "zestforpeace.com"], "url": "https://zestforpeace.com/", "publisher": {"@id": "https://zestforpeace.com/#org"}}, {"@type": "WebApplication", "@id": "https://zestforpeace.com/app/#app", "name": "ZEST APP", "alternateName": ["ZEST for Peace App", "Zest App Kodencheri"], "url": "https://zestforpeace.com/app/", "applicationCategory": "LifestyleApplication", "operatingSystem": "Android, iOS, Web", "browserRequirements": "Requires a modern web browser", "image": "https://zestforpeace.com/icons/icon-512.png", "description": "The official ZEST APP of ZEST for Peace, Kodencheri – programs, Service Centre bulletins, job updates and notifications.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "INR"}, "publisher": {"@id": "https://zestforpeace.com/#org"}}]}</script>
 </head>
 <body>
@@ -1595,7 +1629,7 @@ function dlab(p){var k=p.kind,base=new Date(p.created_at),d=iso(k==="program"?(p
 if(!d){var f=dFind(txt,base);if(f.length){if(k!=="program"){var hit=f.filter(function(x){var seg=txt.slice(Math.max(0,x.i-60),x.i+60);return/വരെ|last\s*date|അവസാന|deadline|before|till|until/i.test(seg)});d=(hit[0]||f[f.length-1]).d}else d=f[0].d}}
 if(!d)return when(p.created_at);return (k==="program"?"Program date: ":"Last date: ")+'<b>'+fmt(d)+'</b>'}
 function card(p){var k=LBL[p.kind]?p.kind:"info",fresh=(Date.now()-new Date(p.created_at))<3*864e5,ti=esc(title(p.body));
-var im=p.image_url?'<img src="'+esc(p.image_url)+'" alt="" loading="lazy">':'<span class="zu-ph">'+ti+'</span>';
+var im=p.image_url?'<img src="'+esc(p.image_url)+'" alt="" loading="lazy">':ZAIC(p.kind,p.body);
 return '<a class="zu-card" href="'+SITE+'#p-'+encodeURIComponent(p.id)+'"><div class="zu-hd"><span class="zu-bg '+k+'">'+LBL[k]+'</span></div><div class="zu-im">'+im+(fresh?'<span class="zu-new">NEW</span>':'')+'</div><div class="zu-bd"><span class="zu-t">'+ti+'</span><div class="zu-ft"><span class="zu-d">'+dlab(p)+'</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>'}
 function auto(t,ri){return;var n=t.children.length;if(n<2)return;var cur=0,tm=null;function go(i){var c=t.children[i];if(!c)return;cur=i;t.scrollTo({left:c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft),behavior:"smooth"})}function start(){clearInterval(tm);tm=setInterval(function(){var max=t.scrollWidth-t.clientWidth-4;go(t.scrollLeft>=max?0:(cur+1)%n)},4500)}["touchstart","mouseenter","focusin"].forEach(function(e){t.addEventListener(e,function(){clearInterval(tm)},{passive:true})});["touchend","mouseleave","focusout"].forEach(function(e){t.addEventListener(e,start,{passive:true})});t.addEventListener("scroll",function(){var x=t.scrollLeft,b=0,bd=1e9;[].forEach.call(t.children,function(c,i){var d=Math.abs(c.offsetLeft-t.offsetLeft-parseFloat(getComputedStyle(t).paddingLeft)-x);if(d<bd){bd=d;b=i}});cur=b},{passive:true});setTimeout(start,ri*1500)}
 function empty(){trk.innerHTML='<a class="zu-card" href="'+SITE+'" target="_blank" rel="noopener"><div class="zu-im"><span class="zu-ph">ZEST Centre Info</span></div><div class="zu-bd"><span class="zu-t">See all programs, notices &amp; job updates</span><div class="zu-ft"><span class="zu-d">zestforpeace.com/centreinfo</span><span class="zu-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></a>';if(dots)dots.innerHTML=""}
@@ -1680,7 +1714,7 @@ var CLK='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v
 function left(p){var n=p.n,k=p.k;if(n==null){var a=Math.floor((Date.now()-new Date(p.c))/864e5);return a<1?"Today":a<2?"Yesterday":a+" days ago"}if(n<0)return k==="program"?"Completed":"Closed";return n===0?"Today":n===1?"Tomorrow":n+" days left"}
 function card(p,i){var d=p.d||new Date(p.c),fresh=(Date.now()-new Date(p.c))<3*864e5;
 var lab=p.d?(p.k==="program"?"PROGRAM<br>DATE":"LAST<br>DATE"):"POSTED<br>ON";
-var im=p.im?'<img src="'+esc(p.im)+'" alt="" loading="lazy">':'<span class="ph">'+esc(p.t)+'</span>';
+var im=p.im?'<img src="'+esc(p.im)+'" alt="" loading="lazy">':ZAIC(p.k,p.b);
 return '<a class="z3k'+(p.id===FOC?' z3hl':'')+'" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3row"><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'+(p.d&&p.n!=null&&p.n>=0?'<span class="z3rm rmc" role="button" tabindex="0" data-rem="'+esc(p.id)+'" data-k="'+(p.k==="program"?"program":"info")+'" data-d="'+p.d.getFullYear()+'-'+('0'+(p.d.getMonth()+1)).slice(-2)+'-'+('0'+p.d.getDate()).slice(-2)+'" data-t="'+esc(p.t)+'">🔔 Remind me</span>':'')+'</span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
 var P=[],s=document.getElementById("z3s"),dots=document.getElementById("z3d"),chips=box.querySelectorAll(".z3c");
 function sortL(L){return L.sort(function(a,b){var ua=a.n!=null&&a.n>=0,ub=b.n!=null&&b.n>=0;if(ua&&ub)return a.n-b.n;if(ua)return -1;if(ub)return 1;return new Date(b.c)-new Date(a.c)})}
@@ -1694,7 +1728,7 @@ var st;s.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(dra
 chips.forEach(function(c){c.addEventListener("click",function(){chips.forEach(function(x){x.classList.remove("on");x.setAttribute("aria-pressed","false")});c.classList.add("on");c.setAttribute("aria-pressed","true");show(c.dataset.k)})});
 var hi=0;if(!matchMedia("(prefers-reduced-motion:reduce)").matches)setInterval(function(){var off=[].filter.call(chips,function(x){return!x.classList.contains("on")});if(!off.length)return;var c=off[hi++%off.length];c.classList.add("hv");setTimeout(function(){c.classList.remove("hv")},900)},1300);
 fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(all){
-P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{id:x.id,k:k,t:title(x.body),im:x.image_url,d:d,n:n,c:x.created_at}});
+P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{id:x.id,k:k,t:title(x.body),b:x.body,im:x.image_url,d:d,n:n,c:x.created_at}});
 chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n").textContent=n>99?"99+":n});
 var hm=/^#ci-(program|info|job)$/.exec(location.hash),fp=FOC&&P.filter(function(p){return p.id===FOC})[0],fk=hm?hm[1]:(fp?fp.k:null);
 if(fk){var ch=box.querySelector('.z3c[data-k="'+fk+'"]');if(ch){ch.click();setTimeout(function(){var sec=document.getElementById("centre-info");if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"})},300)}else show("week")}else show("week")});
