@@ -11,7 +11,7 @@
   function seen() { try { return JSON.parse(localStorage.getItem(SK) || "[]"); } catch (e) { return []; } }
   function mark(id) { try { var s = seen(); if (s.indexOf(id) < 0) { s.push(id); localStorage.setItem(SK, JSON.stringify(s.slice(-60))); } } catch (e) {} }
   var T = {
-    death: { ml: "🕊️ മരണവാർത്ത", en: "🕊️ Obituary", bg: "#2c3a44", btn: "#2c3a44" },
+    death: { ml: "🕊️ മരണവാർത്ത", en: "🕊️ മരണവാർത്ത", bg: "#2c3a44", btn: "#2c3a44" },
     wedding: { ml: "💍 വിവാഹ മംഗളാശംസകൾ", en: "💍 Wedding Wishes", bg: "linear-gradient(90deg,#b3265e,#e0567f)", btn: "#c23a6a" }
   };
   function lines(b) { return String(b || "").split(/\n/).map(function (x) { return x.replace(/[*_~]/g, "").trim(); }).filter(Boolean); }
