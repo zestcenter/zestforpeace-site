@@ -37,18 +37,20 @@
     '.zdw-ls a.zdw-hl{background:linear-gradient(135deg,#0a70a8,#3fa7d6);border-color:transparent;color:#fff!important;box-shadow:0 8px 18px rgba(10,112,168,.3)}.zdw-ls a.zdw-hl svg{stroke:#ffc44d}' +
     '.zdw-ls a.zdw-bl{color:#1380b8!important;font-weight:700}' +
     '.zdw-ft{padding:10px 14px 14px;text-align:center;font:700 10px Inter,sans-serif;color:#8aa0ad;letter-spacing:.04em}.zdw-ft b{display:block;margin-top:3px;font:800 11.5px Inter,sans-serif;color:#0b5d8f;letter-spacing:.02em}' +
-    '@media (min-width:64rem){.zdw,.zdw-bg{display:none}}';
+    '.zdw-gp{border-radius:15px;border:1.5px solid #e2ecf3;background:#fff;box-shadow:0 2px 6px rgba(11,61,92,.04);overflow:hidden}.zdw-gh{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:9px 14px;border:0;background:none;color:#14232c;font:600 13px/1.2 Inter,sans-serif;letter-spacing:.03em;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}.zdw-gh svg{width:20px;height:20px;flex:none;fill:none;stroke:#1380b8;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.zdw-gh .zdw-cv{margin-left:auto;width:18px;height:18px;transition:transform .25s}.zdw-gp.op .zdw-cv{transform:rotate(180deg)}.zdw-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}.zdw-gp.op .zdw-sub{grid-template-rows:1fr}.zdw-sub>*{min-height:0}.zdw-sub{padding:0 8px}.zdw-gp.op .zdw-sub{padding:0 8px 8px}.zdw .zdw-sub a{min-height:40px!important;border:0!important;box-shadow:none!important;background:#f4f9fc!important;border-radius:12px!important;padding:8px 12px!important;font-size:12px!important;margin-top:6px!important}.zdw .zdw-sub a svg{width:17px;height:17px}.zdw-sub-in{overflow:hidden}@media (min-width:64rem){.zdw,.zdw-bg{display:none}}';
   document.head.appendChild(css);
 
   var bg = document.createElement("div"); bg.className = "zdw-bg";
   var dw = document.createElement("aside"); dw.className = "zdw"; dw.setAttribute("aria-label", "Main menu"); dw.setAttribute("aria-hidden", "true");
-  var here = location.pathname.replace(/index\.html$/, "");
-  var items = [].map.call(nav.querySelectorAll("a"), function (a) {
-    var h = a.getAttribute("href") || "#", t = a.textContent.trim(), cls = "";
-    if (a.classList.contains("nsc")) cls = "zdw-hl"; else if (a.classList.contains("nset")) cls = "zdw-bl";
-    else if (here.indexOf("/centreinfo") === 0 && /centreinfo/.test(h)) cls = "cur";
-    return '<a href="' + h + '" class="' + cls + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + icon(h) + '</svg><span>' + t + '</span></a>';
-  }).join("");
+  var onHome = location.pathname === "/" || /\/index\.html$/.test(location.pathname) && location.pathname.indexOf("/centreinfo") !== 0;
+  var H = function (id) { return onHome ? "#" + id : "/#" + id; };
+  function it(h, ic, t) { return '<a href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span></a>'; }
+  var CHEV = '<svg class="zdw-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  var items = it(H("top"), I.home, "HOME") +
+    '<div class="zdw-gp"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + I.about + '</svg><span>ABOUT ZEST</span>' + CHEV + '</button><div class="zdw-sub"><div class="zdw-sub-in">' +
+      it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") +
+    '</div></div></div>' +
+    it("/centreinfo/", I.info, "ZEST SERVICE CENTRE") + it("#students", I.stu, "STUDENTS CORNER") + it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
   dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd"><button class="zdw-x" aria-label="Close menu">✕</button><img src="' + LOGO + '" alt="ZEST for Peace"></div><div class="zdw-ls" role="navigation">' + items + '</div></div><div class="zdw-ft">ZEST FOR PEACE<b>zestforpeace.com</b></div>';
   document.body.appendChild(bg); document.body.appendChild(dw);
 
@@ -75,6 +77,7 @@
   bg.addEventListener("click", hide);
   dw.querySelector(".zdw-x").addEventListener("click", hide);
   dw.querySelectorAll(".zdw-ls a").forEach(function (a) { a.addEventListener("click", function () { hide(); }); });
+  var gh = dw.querySelector(".zdw-gh"); gh.addEventListener("click", function () { var g = gh.parentNode, o = !g.classList.contains("op"); g.classList.toggle("op", o); gh.setAttribute("aria-expanded", o ? "true" : "false"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
   /* swipe left to close */
   var sx = null;
