@@ -12,7 +12,7 @@
   function mark(id) { try { var s = seen(); if (s.indexOf(id) < 0) { s.push(id); localStorage.setItem(SK, JSON.stringify(s.slice(-60))); } } catch (e) {} }
   var T = {
     death: { ml: "🕊️ മരണവാർത്ത", en: "🕊️ മരണവാർത്ത", bg: "#2c3a44", btn: "#2c3a44" },
-    wedding: { ml: "💍 വിവാഹ മംഗളാശംസകൾ", en: "💍 Wedding Wishes", bg: "linear-gradient(90deg,#b3265e,#e0567f)", btn: "#c23a6a" }
+    wedding: { ml: "💍 വിവാഹ മംഗളാശംസകൾ", en: "💍 വിവാഹ മംഗളാശംസകൾ", bg: "linear-gradient(90deg,#b3265e,#e0567f)", btn: "#c23a6a" }
   };
   function lines(b) { return String(b || "").split(/\n/).map(function (x) { return x.replace(/[*_~]/g, "").trim(); }).filter(Boolean); }
   function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -29,8 +29,7 @@
   document.head.appendChild(css);
 
   function shareText(p) {
-    var L = lines(p.body), t = T[p.kind];
-    return t.ml + "\n" + L.slice(0, 2).join(" ") + "\n\n📲 ZEST APP: https://zestforpeace.com/app";
+    return "📲 Download ZEST APP for more details 👇\nhttps://zestforpeace.com/app";
   }
   function share(p, b) {
     var text = shareText(p);
