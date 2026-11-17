@@ -29,7 +29,8 @@
   document.head.appendChild(css);
 
   function shareText(p) {
-    return "Download the ZEST APP 👇\nhttps://zestforpeace.com/app";
+    var top = p.kind === "death" ? "പ്രിയപ്പെട്ടവർക്ക് പ്രാർത്ഥനകൾ🍂" : "വിവാഹ മംഗളാശംസകൾ💐";
+    return top + "\n\nDownload the ZEST APP 👇\nhttps://zestforpeace.com/app";
   }
   function share(p, b) {
     var text = shareText(p);
