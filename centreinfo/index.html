@@ -192,6 +192,8 @@ section.blk{margin:26px 16px 0}
 .applylink:active svg{transform:translateX(5px)}
 .applylink.off{color:#7d929e;pointer-events:none}
 .acts.only{justify-content:flex-end}
+.applylink.apb{display:flex;justify-content:center;gap:7px;width:calc(100% - 28px);margin:0 14px 10px;padding:12px;border-radius:12px;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;font-size:13px;box-shadow:0 6px 14px rgba(19,128,184,.25)}
+.applylink.apb.off{background:#c9d6de;color:#fff;box-shadow:none}
 .state{text-align:center;color:var(--mute);padding:26px 16px;background:#fff;border:1px dashed var(--line);border-radius:20px;font-size:16px;font-weight:600}
 .skel{height:200px;border-radius:20px;background:linear-gradient(90deg,#e4eef4 25%,#f1f7fa 50%,#e4eef4 75%);background-size:200% 100%;animation:sh 1.3s infinite}
 @keyframes sh{to{background-position:-200% 0}}
@@ -467,10 +469,10 @@ function card(p, isInfo){
         ${p.ref_no ? `<span class="b ref"># ${esc(p.ref_no)}</span>` : ''}
       </div>
     </div>
+    ${isInfo && p.form_url ? `<a class="applylink apb ${closed ? 'off' : ''}" href="${esc(p.form_url)}" target="_blank" rel="noopener">APPLY NOW <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>` : ''}
     ${remBtn(p, title)}
     <div class="fb"><div class="fl">${foot(p)}</div>
-      <div class="acts ${isInfo && p.form_url ? '' : 'only'}">
-        ${isInfo && p.form_url ? `<a class="applylink ${closed ? 'off' : ''}" href="${esc(p.form_url)}" target="_blank" rel="noopener">APPLY NOW <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>` : ''}
+      <div class="acts only">
         <button type="button" class="ic sh" data-share="${esc(p.id)}" data-no="${esc(p.no || '')}" data-kind="${esc(p.kind)}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
       </div>
     </div>
