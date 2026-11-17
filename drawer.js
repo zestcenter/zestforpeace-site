@@ -50,11 +50,17 @@
   function it(h, ic, t) { return '<a href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span></a>'; }
   var CHEV = '<svg class="zdw-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   function grp(ic, t, inner) { return '<div class="zdw-gp"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span>' + CHEV + '</button><div class="zdw-sub"><div class="zdw-sub-in">' + inner + '</div></div></div>'; }
-  var items = it(H("top"), I.home, "HOME") +
-    '<div class="zdw-gp"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + I.about + '</svg><span>ABOUT ZEST</span>' + CHEV + '</button><div class="zdw-sub"><div class="zdw-sub-in">' +
-      it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") + it(H("news"), I.ev, "EVENTS") +
-    '</div></div></div>' +
-    grp(I.info, "ZEST SERVICE CENTRE", it(H("ci-program"), I.cal, "ZEST PROGRAMS") + it(H("ci-info"), I.info, "INFO CENTRE") + it(H("ci-job"), I.job, "JOB UPDATES")) + it("#students", I.stu, "STUDENTS CORNER") + it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
+  var SV = '<rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>';
+  var BK = '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M4 21h15"/>';
+  var DROP = '<path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11Z"/>';
+  var REV = '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2Z"/><path d="M8 7h7M8 11h5"/>';
+  var MON = '<rect x="3" y="6" width="18" height="13" rx="3"/><path d="M16 12.5h2M3 10h18"/>';
+  var items =
+    grp(I.home, "MAIN PAGE", it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") + it(H("news"), I.ev, "EVENTS")) +
+    grp(I.info, "ZEST SERVICE CENTRE", it(H("ci-program"), I.cal, "ZEST PROGRAMS") + it(H("ci-info"), I.info, "INFO CENTRE") + it(H("ci-job"), I.job, "JOB UPDATES")) +
+    grp(I.stu, "STUDENTS CORNER", it("#students", REV, "REVISION PLANNER").replace('<a ', '<a data-go="rev" ') + it("#students", MON, "POCKET MONEY").replace('<a ', '<a data-go="mon" ')) +
+    grp(SV, "SERVICES", it("#soon", BK, "LIBRARY") + it("#soon", DROP, "BLOOD DONATION")) +
+    it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
   dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd"><button class="zdw-x" aria-label="Close menu">✕</button><img src="' + LOGO + '" alt="ZEST for Peace"></div><div class="zdw-ls" role="navigation">' + items + '</div></div><div class="zdw-ft">ZEST FOR PEACE<b>zestforpeace.com</b></div>';
   document.body.appendChild(bg); document.body.appendChild(dw);
 
@@ -80,7 +86,12 @@
   }, true);
   bg.addEventListener("click", hide);
   dw.querySelector(".zdw-x").addEventListener("click", hide);
-  dw.querySelectorAll(".zdw-ls a").forEach(function (a) { a.addEventListener("click", function () { hide(); }); });
+  dw.querySelectorAll(".zdw-ls a").forEach(function (a) { a.addEventListener("click", function (e) {
+    if (a.getAttribute("href") === "#soon") { e.preventDefault(); e.stopImmediatePropagation(); var ml = window.ZestLang && ZestLang.get() === "ml", t = document.createElement("div");
+      t.textContent = ml ? "ഉടൻ വരുന്നു 🙂" : "Coming soon 🙂"; t.style.cssText = "position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,'Noto Sans Malayalam',sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25)";
+      document.body.appendChild(t); setTimeout(function () { t.remove(); }, 1800); return; }
+    if (a.dataset.go) window.__zgo = a.dataset.go;
+    hide(); }); });
   dw.querySelectorAll(".zdw-gh").forEach(function (gh) { gh.addEventListener("click", function () { var g = gh.parentNode, o = !g.classList.contains("op"); dw.querySelectorAll(".zdw-gp.op").forEach(function (x) { if (x !== g) { x.classList.remove("op"); x.querySelector(".zdw-gh").setAttribute("aria-expanded", "false"); } }); g.classList.toggle("op", o); gh.setAttribute("aria-expanded", o ? "true" : "false"); }); });
   /* Service Centre sub-items: go to the Centre Info section on the home page and pick that filter */
   function ci() {

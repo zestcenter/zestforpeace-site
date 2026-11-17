@@ -109,6 +109,7 @@
     s.querySelector(".chip").onclick = switcher;
     s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=4", "ZestRev"); };
     s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=3", "ZestMoney"); };
+    if (window.__zgo) { var g = s.querySelector('[data-go=' + window.__zgo + ']'); window.__zgo = null; if (g) setTimeout(function () { g.click(); }, 60); }
   }
   function tool(src, g) {
     if (window[g]) return window[g].open();
