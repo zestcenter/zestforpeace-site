@@ -29,7 +29,7 @@
   document.head.appendChild(css);
 
   function shareText(p) {
-    return "📲 Download the ZEST APP for more info 👇\nhttps://zestforpeace.com/app";
+    return "Download the ZEST APP 👇\nhttps://zestforpeace.com/app";
   }
   function share(p, b) {
     var text = shareText(p);
