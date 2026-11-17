@@ -15,6 +15,9 @@
     join: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/>',
     stu: '<path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/>',
     set: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
+    ev: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 13.5l1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5 2.2-.3Z"/>',
+    cal: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/>',
+    job: '<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
     dot: '<circle cx="12" cy="12" r="3"/>'
   };
   function icon(h) {
@@ -46,11 +49,12 @@
   var H = function (id) { return onHome ? "#" + id : "/#" + id; };
   function it(h, ic, t) { return '<a href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span></a>'; }
   var CHEV = '<svg class="zdw-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  function grp(ic, t, inner) { return '<div class="zdw-gp"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span>' + CHEV + '</button><div class="zdw-sub"><div class="zdw-sub-in">' + inner + '</div></div></div>'; }
   var items = it(H("top"), I.home, "HOME") +
     '<div class="zdw-gp"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + I.about + '</svg><span>ABOUT ZEST</span>' + CHEV + '</button><div class="zdw-sub"><div class="zdw-sub-in">' +
-      it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") +
+      it(H("about"), I.about, "ABOUT US") + it(H("programs"), I.proj, "OUR PROJECTS") + it(H("clubs"), I.clubs, "ZEST CLUBS") + it(H("documentary"), I.doc, "DOCUMENTARY") + it(H("news"), I.ev, "EVENTS") +
     '</div></div></div>' +
-    it("/centreinfo/", I.info, "ZEST SERVICE CENTRE") + it("#students", I.stu, "STUDENTS CORNER") + it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
+    grp(I.info, "ZEST SERVICE CENTRE", it(H("ci-program"), I.cal, "ZEST PROGRAMS") + it(H("ci-info"), I.info, "INFO CENTRE") + it(H("ci-job"), I.job, "JOB UPDATES")) + it("#students", I.stu, "STUDENTS CORNER") + it(H("join"), I.join, "JOIN WITH ZEST") + it("#settings", I.set, "SETTINGS");
   dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd"><button class="zdw-x" aria-label="Close menu">✕</button><img src="' + LOGO + '" alt="ZEST for Peace"></div><div class="zdw-ls" role="navigation">' + items + '</div></div><div class="zdw-ft">ZEST FOR PEACE<b>zestforpeace.com</b></div>';
   document.body.appendChild(bg); document.body.appendChild(dw);
 
@@ -77,7 +81,17 @@
   bg.addEventListener("click", hide);
   dw.querySelector(".zdw-x").addEventListener("click", hide);
   dw.querySelectorAll(".zdw-ls a").forEach(function (a) { a.addEventListener("click", function () { hide(); }); });
-  var gh = dw.querySelector(".zdw-gh"); gh.addEventListener("click", function () { var g = gh.parentNode, o = !g.classList.contains("op"); g.classList.toggle("op", o); gh.setAttribute("aria-expanded", o ? "true" : "false"); });
+  dw.querySelectorAll(".zdw-gh").forEach(function (gh) { gh.addEventListener("click", function () { var g = gh.parentNode, o = !g.classList.contains("op"); dw.querySelectorAll(".zdw-gp.op").forEach(function (x) { if (x !== g) { x.classList.remove("op"); x.querySelector(".zdw-gh").setAttribute("aria-expanded", "false"); } }); g.classList.toggle("op", o); gh.setAttribute("aria-expanded", o ? "true" : "false"); }); });
+  /* Service Centre sub-items: go to the Centre Info section on the home page and pick that filter */
+  function ci() {
+    var m = /^#ci-(program|info|job)$/.exec(location.hash); if (!m) return;
+    var sec = document.getElementById("centre-info"); if (!sec) return;
+    var t = 0, iv = setInterval(function () {
+      var c = document.querySelector('.z3c[data-k="' + m[1] + '"]');
+      if (c || ++t > 40) { clearInterval(iv); if (c) c.click(); sec.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    }, 100);
+  }
+  window.addEventListener("hashchange", ci); ci();
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
   /* swipe left to close */
   var sx = null;
