@@ -67,7 +67,7 @@
     if (document.getElementById("zlp") || document.getElementById("zgate")) { setTimeout(run, 1500); return; }
     var since = new Date(Date.now() - 3 * 864e5).toISOString();
     var u = URL_ + "?select=id,kind,body,image_url,created_at&published=eq.true&kind=in.(death,wedding)&order=created_at.asc&" +
-      (want ? "id=eq." + encodeURIComponent(want) : "created_at=gte." + since);
+      "created_at=gte." + since + (want ? "&id=eq." + encodeURIComponent(want) : "");
     fetch(u, { headers: { apikey: KEY, Authorization: "Bearer " + KEY } }).then(function (r) { return r.ok ? r.json() : []; }).then(function (all) {
       var s = seen();
       show((all || []).filter(function (p) { return want ? true : s.indexOf(p.id) < 0; }));
