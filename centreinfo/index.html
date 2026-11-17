@@ -471,7 +471,7 @@ function card(p, isInfo){
     <div class="fb"><div class="fl">${foot(p)}</div>
       <div class="acts ${isInfo && p.form_url ? '' : 'only'}">
         ${isInfo && p.form_url ? `<a class="applylink ${closed ? 'off' : ''}" href="${esc(p.form_url)}" target="_blank" rel="noopener">APPLY NOW <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>` : ''}
-        <button type="button" class="ic sh" data-share="${esc(p.id)}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
+        <button type="button" class="ic sh" data-share="${esc(p.id)}" data-no="${esc(p.no || '')}" data-t="${esc(title)}" data-img="${esc(p.image_url || '')}" data-k="${isInfo ? 'info' : 'program'}" aria-label="Share"><svg viewBox="0 0 24 24"><use href="#i-share"/></svg></button>${icons}
       </div>
     </div>
   </article>`;
@@ -535,24 +535,11 @@ function toast(t){
 }
 document.addEventListener('click', async ev => {
   const b = ev.target.closest('[data-share]'); if(!b) return;
-  const url = location.origin + location.pathname + '#p-' + b.dataset.share;
-  const title = b.dataset.t || 'ZEST CENTER INFO';
-  const text = title + '\n\nകൂടുതൽ വിവരങ്ങൾക്ക്: ' + url;
-  /* share an image (poster + ZEST logo, or a ZEST title card) so WhatsApp shows a picture */
-  if(navigator.canShare){
-    try{
-      b.disabled = true;
-      const prog = b.dataset.k === 'program';
-      if(prog && !b.dataset.img) throw 0;   // programs without a poster: share the link only
-      /* programs: the original poster; info posts: poster/card with the blue ZEST strip */
-      const blob = prog ? await (await fetch(b.dataset.img)).blob() : await shareImage(b.dataset.img, title);
-      const file = new File([blob], 'zest-post.jpg', {type: 'image/jpeg'});
-      if(navigator.canShare({files:[file]})){ await navigator.share({files:[file], text, title}); b.disabled = false; return; }
-    }catch(e){ b.disabled = false; if(e && e.name === 'AbortError') return; }
-    b.disabled = false;
-  }
-  if(navigator.share){ try{ await navigator.share({title, text}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
-  try{ await navigator.clipboard.writeText(url); toast('ലിങ്ക് കോപ്പി ചെയ്തു ✓'); }
+  const url = b.dataset.no ? 'https://zestforpeace.com/app/' + b.dataset.no : location.origin + location.pathname + '#p-' + b.dataset.share;
+  const title = b.dataset.t || 'ZEST';
+  const text = title + '\n\nFor more details 👇\n' + url;
+  if(navigator.share){ try{ await navigator.share({text}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
+  try{ await navigator.clipboard.writeText(text); toast('ലിങ്ക് കോപ്പി ചെയ്തു ✓'); }
   catch(_){ prompt('Copy this link:', url); }
 });
 function limit(el){
@@ -605,7 +592,7 @@ async function start(){
     const db = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
     let last = '';
     const load = async () => {
-      const {data, error} = await db.from('posts').select('*').eq('published', true).order('created_at', {ascending:false});
+      const {data, error} = await db.from('posts').select('*').eq('published', true).in('kind', ['program','info','job']).order('created_at', {ascending:false});
       if(error) throw error;
       const sig = JSON.stringify(data || []);
       if(sig === last) return;   // nothing changed – keep what the visitor has open
@@ -700,6 +687,7 @@ var hi=0;if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(f
 })();
 </script>
 <script src="/notify.js?v=20" defer></script>
+<script src="/popup.js?v=1" defer></script>
 <script src="/drawer.js?v=5" defer></script>
 </body>
 </html>

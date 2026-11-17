@@ -1359,6 +1359,7 @@ html.zdv-on .zbento .zb-t.zdv.in{opacity:1;transform:none}
 #mn a.nset,.zmh-nav a.nset{color:#1380b8!important;font-weight:800!important}
 
 .mq{padding:.28rem 0!important;font-size:.72rem!important;letter-spacing:.02em}.mq span{padding:0 1.4rem!important}
+.z3k.z3hl .z3t{box-shadow:0 0 0 3px #ffc44d,0 10px 24px rgba(0,0,0,.25)!important}
 /* one size for all section titles */
 h2.zh2{font-size:clamp(1.5rem,6.6vw,2.5rem)!important;line-height:1.3!important}
 </style>
@@ -1575,7 +1576,7 @@ if(ios){msg.textContent="Tap Share, then “Add to Home Screen”";btn.textConte
 </script>
 <script>
 (function(){
-var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&order=created_at.desc&limit=30";
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&kind=in.(program,info,job)&order=created_at.desc&limit=30";
 var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
 var SITE="/centreinfo/";
 var trk=document.getElementById("zuTrk"),dots=document.getElementById("zuDots");if(!trk)return;
@@ -1607,7 +1608,7 @@ function restart(){clearInterval(timer);timer=setInterval(function(){var max=trk
 ["touchstart","mouseenter","focusin"].forEach(function(e){trk.addEventListener(e,function(){clearInterval(timer)},{passive:true})});
 ["touchend","mouseleave","focusout"].forEach(function(e){trk.addEventListener(e,restart,{passive:true})});
 mark(0);restart()}
-fetch("https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=kind&published=eq.true",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).then(function(all){var c={program:0,info:0,job:0};(all||[]).forEach(function(x){var k=x.kind==="program"||x.kind==="job"?x.kind:"info";c[k]++});[].forEach.call(document.querySelectorAll(".zu-cnt"),function(el){var n=c[el.getAttribute("data-k")]||0;el.textContent=n>99?"99+":n;el.hidden=false;el.parentNode.parentNode.setAttribute("aria-label",el.parentNode.nextSibling.textContent+": "+n+" posts")})}).catch(function(){});
+fetch("https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=kind&published=eq.true&kind=in.(program,info,job)",{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).then(function(all){var c={program:0,info:0,job:0};(all||[]).forEach(function(x){var k=x.kind==="program"||x.kind==="job"?x.kind:"info";c[k]++});[].forEach.call(document.querySelectorAll(".zu-cnt"),function(el){var n=c[el.getAttribute("data-k")]||0;el.textContent=n>99?"99+":n;el.hidden=false;el.parentNode.parentNode.setAttribute("aria-label",el.parentNode.nextSibling.textContent+": "+n+" posts")})}).catch(function(){});
 fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(rows){if(!rows||!rows.length){empty();return}var by={program:[],info:[],job:[]};rows.forEach(function(x){var k=by[x.kind]?x.kind:"info";if(by[k].length<5)by[k].push(x)});var box=document.getElementById("zuRows");box.innerHTML="";["program","info","job"].forEach(function(k,ri){if(!by[k].length)return;var r=document.createElement("div");r.className="zu-row";var t=document.createElement("div");t.className="zu-trk";t.innerHTML=by[k].map(card).join("");r.appendChild(t);box.appendChild(r);auto(t,ri)})}).catch(empty);
 })();
 </script>
@@ -1659,7 +1660,7 @@ p.insertBefore(b,p.firstChild);})();
 <script>
 (function(){
 var box=document.getElementById("z3");if(!box)return;
-var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&order=created_at.desc&limit=60";
+var URL_="https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/posts?select=id,kind,created_at,body,image_url,event_date,last_date&published=eq.true&kind=in.(program,info,job)&order=created_at.desc&limit=60";
 var KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdWZ0ZHlybG5oYmltcW9rZ3llIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM5ODQ4MTEsImV4cCI6MjEwOTU2MDgxMX0.ysNN5nbJrBevp6SNiyVMB0RUhsdJrUli0dn5FRKD8qk";
 var LBL={program:"ZEST PROGRAMS",info:"INFO CENTRE",job:"JOB UPDATE"},SEC={program:"sec-programs",info:"sec-info",job:"sec-jobs"};
 var IC={program:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',info:'<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6"/>',job:'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>'};
@@ -1680,10 +1681,11 @@ function left(p){var n=p.n,k=p.k;if(n==null){var a=Math.floor((Date.now()-new Da
 function card(p,i){var d=p.d||new Date(p.c),fresh=(Date.now()-new Date(p.c))<3*864e5;
 var lab=p.d?(p.k==="program"?"PROGRAM<br>DATE":"LAST<br>DATE"):"POSTED<br>ON";
 var im=p.im?'<img src="'+esc(p.im)+'" alt="" loading="lazy">':'<span class="ph">'+esc(p.t)+'</span>';
-return '<a class="z3k" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3row"><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'+(p.d&&p.n!=null&&p.n>=0?'<span class="z3rm rmc" role="button" tabindex="0" data-rem="'+esc(p.id)+'" data-k="'+(p.k==="program"?"program":"info")+'" data-d="'+p.d.getFullYear()+'-'+('0'+(p.d.getMonth()+1)).slice(-2)+'-'+('0'+p.d.getDate()).slice(-2)+'" data-t="'+esc(p.t)+'">🔔 Remind me</span>':'')+'</span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
+return '<a class="z3k'+(p.id===FOC?' z3hl':'')+'" style="animation-delay:'+(i*70)+'ms" href="/centreinfo/#'+SEC[p.k]+'"><div class="z3t"><div class="z3im">'+im+(fresh?'<span class="z3new">NEW</span>':'')+'</div><div class="z3in"><span class="z3tg"><svg viewBox="0 0 24 24">'+IC[p.k]+'</svg>'+LBL[p.k]+'</span><span class="z3ti">'+esc(p.t)+'</span><span class="z3row"><span class="z3md">More details<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'+(p.d&&p.n!=null&&p.n>=0?'<span class="z3rm rmc" role="button" tabindex="0" data-rem="'+esc(p.id)+'" data-k="'+(p.k==="program"?"program":"info")+'" data-d="'+p.d.getFullYear()+'-'+('0'+(p.d.getMonth()+1)).slice(-2)+'-'+('0'+p.d.getDate()).slice(-2)+'" data-t="'+esc(p.t)+'">🔔 Remind me</span>':'')+'</span></div></div><div class="z3b"><div class="z3ln"></div><div class="z3st"><div class="z3dt"><span class="z3cal"><span>'+MS[d.getMonth()]+'</span><b>'+d.getDate()+'</b></span><span class="z3dl">'+lab+'</span></div><span class="z3cd">'+CLK+left(p)+'</span></div></div></a>'}
 var P=[],s=document.getElementById("z3s"),dots=document.getElementById("z3d"),chips=box.querySelectorAll(".z3c");
 function sortL(L){return L.sort(function(a,b){var ua=a.n!=null&&a.n>=0,ub=b.n!=null&&b.n>=0;if(ua&&ub)return a.n-b.n;if(ua)return -1;if(ub)return 1;return new Date(b.c)-new Date(a.c)})}
-function list(k){return sortL(P.filter(function(p){return k==="week"?(p.n!=null&&p.n>=0&&p.n<=7):p.k===k}))}
+var FOC=new URLSearchParams(location.search).get("p");
+function list(k){var L=sortL(P.filter(function(p){return k==="week"?(p.n!=null&&p.n>=0&&p.n<=7):p.k===k}));if(FOC){var f=L.filter(function(p){return p.id===FOC});if(f.length)L=f.concat(L.filter(function(p){return p.id!==FOC}))}return L}
 function step(){var c=s.querySelector(".z3k");return c?c.offsetWidth+14:264}
 function draw(){var n=s.querySelectorAll(".z3k").length,i=Math.round(s.scrollLeft/step());dots.innerHTML="";if(n<2||(innerWidth>=1024&&n<=3))return;for(var k=0;k<n;k++){var e=document.createElement("span");if(k===i)e.className="on";dots.appendChild(e)}}
 var EMP={week:"No programs or updates in the next 7 days.<br>Tap the other buttons to see all.",program:"No programs right now.",info:"No info updates right now.",job:"No job updates right now."};
@@ -1694,11 +1696,13 @@ var hi=0;if(!matchMedia("(prefers-reduced-motion:reduce)").matches)setInterval(f
 fetch(URL_,{headers:{apikey:KEY,Authorization:"Bearer "+KEY}}).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]}).then(function(all){
 P=(all||[]).map(function(x){var k=LBL[x.kind]?x.kind:"info",d=dateOf(x),n=null;if(d){d.setHours(0,0,0,0);n=Math.round((d-t0)/864e5)}return{id:x.id,k:k,t:title(x.body),im:x.image_url,d:d,n:n,c:x.created_at}});
 chips.forEach(function(c){var n=list(c.dataset.k).length;c.querySelector(".z3n").textContent=n>99?"99+":n});
-show("week")});
+var hm=/^#ci-(program|info|job)$/.exec(location.hash),fp=FOC&&P.filter(function(p){return p.id===FOC})[0],fk=hm?hm[1]:(fp?fp.k:null);
+if(fk){var ch=box.querySelector('.z3c[data-k="'+fk+'"]');if(ch){ch.click();setTimeout(function(){var sec=document.getElementById("centre-info");if(sec)sec.scrollIntoView({behavior:"smooth",block:"start"})},300)}else show("week")}else show("week")});
 })();
 </script>
 <script src="/notify.js?v=20" defer></script>
 <script src="/drawer.js?v=5" defer></script>
+<script src="/popup.js?v=1" defer></script>
 <script>(function(){var f=document.querySelector('iframe[src*="lightwidget.com"]');if(!f)return;var go=function(){if(go.d)return;go.d=1;var s=document.createElement('script');s.src='https://cdn.lightwidget.com/widgets/lightwidget.js';s.async=true;document.body.appendChild(s)};if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'600px'}).observe(f)}else go()})();</script>
 </body>
 </html>
