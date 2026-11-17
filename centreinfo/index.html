@@ -537,7 +537,7 @@ document.addEventListener('click', async ev => {
   const b = ev.target.closest('[data-share]'); if(!b) return;
   const url = b.dataset.no ? 'https://zestforpeace.com/app/' + b.dataset.no : location.origin + location.pathname + '#p-' + b.dataset.share;
   const title = b.dataset.t || 'ZEST';
-  const text = title + '\n\nFor more details 👇\n' + url;
+  const text = title + '\n\nFor more updates 👇\n' + url;
   if(navigator.share){ try{ await navigator.share({text}); return; }catch(e){ if(e && e.name === 'AbortError') return; } }
   try{ await navigator.clipboard.writeText(text); toast('ലിങ്ക് കോപ്പി ചെയ്തു ✓'); }
   catch(_){ prompt('Copy this link:', url); }
