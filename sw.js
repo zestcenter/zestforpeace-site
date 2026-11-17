@@ -1,9 +1,12 @@
-/* ZEST APP service worker: network first, cached copy when offline */
-const CACHE = 'zest-app-v44';
-const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=16', '/gate.js?v=29', '/icons/icon-192.png', '/icons/icon-512.png'];
+/* ZEST APP service worker – fast start:
+   pages & posts: network, but fall back to the saved copy if the network is slow (2.5 s)
+   scripts, images, video, fonts: saved copy first (they change name/version when updated) */
+const CACHE = 'zest-app-v45';
+const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=16', '/gate.js?v=29', '/notify.js?v=19', '/drawer.js?v=5', '/icons/icon-192.png', '/icons/icon-512.png'];
+const WAIT = 2500;
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).catch(() => {}).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', e => {
@@ -14,22 +17,55 @@ self.addEventListener('activate', e => {
   );
 });
 
+const put = (req, res) => { if (res && (res.ok || res.type === 'opaque')) { const c = res.clone(); caches.open(CACHE).then(x => x.put(req, c)).catch(() => {}); } return res; };
+const saved = req => caches.match(req, { ignoreVary: true });
+
+/* network, but answer from the saved copy if the network is slower than WAIT */
+function netOrSaved(req, fallback) {
+  return new Promise(resolve => {
+    let done = false;
+    const finish = r => { if (!done && r) { done = true; resolve(r); } };
+    const t = setTimeout(() => saved(req).then(finish), WAIT);
+    fetch(req, { cache: 'no-cache' })
+      .then(res => { clearTimeout(t); put(req, res); finish(res); if (!done) resolve(res); })
+      .catch(() => { clearTimeout(t); saved(req).then(r => r || (fallback ? fallback() : undefined)).then(r => { if (!done) { done = true; resolve(r || Response.error()); } }); });
+  });
+}
+
+/* saved copy first, update in the background */
+function savedFirst(req) {
+  return saved(req).then(r => {
+    const net = fetch(req).then(res => put(req, res)).catch(() => r);
+    return r || net;
+  });
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
-  if (req.method !== 'GET') return;
+  if (req.method !== 'GET' || req.headers.has('range')) return;
   const url = new URL(req.url);
-  if (url.origin !== location.origin) return;
-  e.respondWith(
-    fetch(req, {cache: 'no-cache'})
-      .then(res => {
-        if (res.ok) {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put(req, copy));
-        }
-        return res;
-      })
-      .catch(() => caches.match(req, {ignoreSearch: true}).then(r => r || (req.mode === 'navigate' ? caches.match(url.pathname.startsWith('/centreinfo') ? '/centreinfo/' : '/') : undefined)))
-  );
+  const same = url.origin === location.origin;
+
+  // ZEST posts from Supabase
+  if (url.hostname.endsWith('supabase.co')) {
+    if (url.pathname.includes('/storage/v1/object/public/')) { e.respondWith(savedFirst(req)); return; }
+    if (url.pathname.startsWith('/rest/v1/posts')) { e.respondWith(netOrSaved(req)); return; }
+    return;
+  }
+  // Google fonts
+  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') { e.respondWith(savedFirst(req)); return; }
+  if (!same) return;
+
+  if (req.mode === 'navigate') {
+    e.respondWith(netOrSaved(req, () => caches.match(url.pathname.startsWith('/centreinfo') ? '/centreinfo/' : '/')));
+    return;
+  }
+  if (/\.(mp4|webm)$/i.test(url.pathname)) return; // video: browser handles
+  if (url.search.includes('v=') || /^\/(media|icons)\//.test(url.pathname) || /\.(png|jpe?g|webp|svg|woff2?)$/i.test(url.pathname)) {
+    e.respondWith(savedFirst(req));
+    return;
+  }
+  e.respondWith(netOrSaved(req));
 });
 
 self.addEventListener('push', e => {
