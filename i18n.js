@@ -135,23 +135,21 @@
   function abRender(en) {
     var s = document.getElementById("about"); if (!s) return;
     AB.en = !!en; s.classList.toggle("zab-en", AB.en); abWalk(s, AB.en);
-    var b = document.getElementById("zabx"); if (b) { b.classList.toggle("en", AB.en); b.setAttribute("aria-label", AB.en ? "മലയാളത്തിൽ വായിക്കൂ" : "Read in English"); }
+    var b = document.getElementById("zabx"); if (b) { b.classList.toggle("en", AB.en); b.setAttribute("aria-checked", AB.en ? "true" : "false"); }
     if (AB.obs) AB.obs.takeRecords();
   }
   function abInit() {
     var s = document.getElementById("about"); if (!s || s.__zab) return; s.__zab = 1;
     var css = document.createElement("style");
     css.textContent = '#about .zabh{display:flex;align-items:center;justify-content:space-between;gap:8px}#about .zabh .tag{margin:0!important}' +
-      '#zabx{position:relative;width:46px;height:38px;flex:none;padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}' +
-      '#zabx b{position:absolute;display:grid;place-items:center;width:28px;height:28px;border-radius:8px;font:800 11px/1 "Noto Sans Malayalam",Inter,sans-serif;transition:all .25s}' +
-      '#zabx .a{left:0;top:0;z-index:1;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;box-shadow:0 3px 8px rgba(19,128,184,.35)}' +
-      '#zabx .e{right:0;bottom:0;background:#fff;color:#0b5d8f;border:1.5px solid #9ec9e2}' +
-      '#zabx.en .a{z-index:0;background:#fff;color:#0b5d8f;border:1.5px solid #9ec9e2;box-shadow:none}#zabx.en .e{z-index:1;background:linear-gradient(135deg,#0a70a8,#3fa7d6);color:#fff;border:0;box-shadow:0 3px 8px rgba(19,128,184,.35)}' +
+      '#zabx{display:inline-flex;align-items:center;gap:7px;flex:none;padding:4px 0;border:0;background:none;cursor:pointer;font:700 11.5px/1 Inter,sans-serif;color:#6a8796;-webkit-tap-highlight-color:transparent}' +
+      '#zabx .sw{position:relative;width:36px;height:21px;border-radius:999px;background:#c9d6de;transition:background .2s}#zabx .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}' +
+      '#zabx.en{color:#1380b8}#zabx.en .sw{background:#1380b8}#zabx.en .sw i{left:17.5px}' +
       '#about.zab-en h2.ml{white-space:normal!important}#about.zab-en .q1{display:none!important}';
     document.head.appendChild(css);
     var tag = s.querySelector(".tag");
     if (tag) { var w = document.createElement("div"); w.className = "zabh"; tag.parentNode.insertBefore(w, tag); w.appendChild(tag);
-      w.insertAdjacentHTML("beforeend", '<button type="button" id="zabx" data-noi18n aria-label="Read in English"><b class="a">അ</b><b class="e">A</b></button>');
+      w.insertAdjacentHTML("beforeend", '<button type="button" id="zabx" data-noi18n role="switch" aria-checked="false" aria-label="Read in English">English <span class="sw"><i></i></span></button>');
       document.getElementById("zabx").onclick = function () { abRender(!AB.en); }; }
     abRender(false);
     AB.obs = new MutationObserver(function (ms) { ms.forEach(function (m) { if (m.type === "characterData") { m.target.__zo = m.target.nodeValue; abWalk(m.target, AB.en); } else m.addedNodes.forEach(function (n) { abWalk(n, AB.en); }); }); AB.obs.takeRecords(); });
