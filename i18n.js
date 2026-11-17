@@ -34,7 +34,8 @@
   document.head.appendChild(css);
 
   /* first open of the app: choose language (English selected) */
-  if (app && !get()) {
+  /* first-open language picker turned off: app always opens in English; change via EN | മ or Settings */
+  if (false) {
     var T = {
       en: ["Welcome to ZEST APP", "Programs · Info · Jobs · Students", "🌐 Choose your language", "ഭാഷ തിരഞ്ഞെടുക്കുക", "Continue →", "⚙️ You can change this anytime in Settings"],
       ml: ["സ്വാഗതം 👋", "പരിപാടികൾ · അറിയിപ്പുകൾ · ജോലി · പഠനം", "🌐 ഭാഷ തിരഞ്ഞെടുക്കുക", "Choose your language", "തുടരുക →", "⚙️ പിന്നീട് Settings-ൽ മാറ്റാം"]
