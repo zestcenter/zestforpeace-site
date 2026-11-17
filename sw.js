@@ -1,7 +1,7 @@
 /* ZEST APP service worker – fast start:
    pages & posts: network, but fall back to the saved copy if the network is slow (2.5 s)
    scripts, images, video, fonts: saved copy first (they change name/version when updated) */
-const CACHE = 'zest-app-v61';
+const CACHE = 'zest-app-v62';
 const CORE = ['/', '/centreinfo/', '/manifest.webmanifest', '/i18n.js?v=20', '/gate.js?v=29', '/notify.js?v=21', '/drawer.js?v=5', '/icons/icon-192.png', '/icons/icon-512.png'];
 const WAIT = 2500;
 
