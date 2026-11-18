@@ -176,6 +176,7 @@
     }
     h += '<div class="lnk"><button id="rv-ed">✏️ Edit plan</button><button class="rd" id="rv-del">🗑 Delete plan</button></div>';
     w.innerHTML = h;
+    w.insertAdjacentHTML('beforeend', '<p class="zpvn" style="margin:18px 12px 8px;padding:10px 12px;border-radius:12px;background:#eef6fb;color:#3c5566;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p>');
     w.querySelectorAll(".task[data-id]").forEach(function (t) {
       t.onclick = function () { var id = t.dataset.id; if (p.done[id]) delete p.done[id]; else p.done[id] = tk; save(p); var y = el.scrollTop; view(false); el.scrollTop = y; };
     });

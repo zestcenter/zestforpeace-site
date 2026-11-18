@@ -55,7 +55,7 @@
       '<div class="w2-sec" id="w2-who">' + (has ? "Who's studying?" : "Start here") + '</div>' +
       (has ? '' : '<div class="w2-tip">Add your name to get your own study space. Brothers and sisters can each add their own name too.</div>') +
       '<div class="w2-pf">' + d.list.map(function (p) { return '<button class="w2-p" data-id="' + p.id + '"><span class="av" style="background:' + p.bg + '">' + p.e + (p.pin ? '<i>🔒</i>' : '') + '</span><b>' + esc(p.n) + '</b><small>' + esc(p.c || '') + '</small></button>'; }).join("") +
-      '<button class="w2-p add"><span class="av">＋</span><b>Add student</b><small>' + (has ? 'Brother / sister' : 'Tap to begin') + '</small></button></div>' +
+      '<button class="w2-p add"><span class="av">＋</span><b>Add student</b><small>' + (has ? 'Brother / sister' : 'Tap to begin') + '</small></button></div><p class="zpvn" style="margin:14px 2px 6px;padding:10px 12px;border-radius:12px;background:#eef6fb;color:#3c5566;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p>' +
       '<div class="w2-sg"><div class="sh"><i>💡</i><span><b>What else should we add?</b><small>Tell us what you would like in Students Corner</small></span></div>' +
       '<textarea class="sgt" rows="3" placeholder="Type your idea…"></textarea><button class="sgb">💬 Send on WhatsApp</button></div></div>';
     s.querySelector(".x0").onclick = close;
@@ -104,11 +104,11 @@
       '<div class="hi">Hi ' + esc(p.n) + ' 👋<small>' + (p.c ? esc(p.c) + ' · ' : '') + 'your own study space</small></div><div class="zctl">' +
       '<button class="t" data-go="rev"><span>📖</span><b>Revision Planner</b><small>' + sm.rev[0] + '</small><span class="s">' + sm.rev[1] + '</span></button>' +
       '<button class="t" data-go="mon"><span>💰</span><b>Pocket Money</b><small>' + sm.mon[0] + '</small><span class="s">' + sm.mon[1] + '</span></button>' +
-      [["📚", "My Timetable"], ["📝", "Homework"], ["⏱️", "Focus Timer"]].map(function (t) { return '<div class="t cs"><span>' + t[0] + '</span><b>' + t[1] + '</b><small></small><span class="s">Coming soon</span></div>'; }).join("") + '</div></div>';
+      [["📚", "My Timetable"], ["📝", "Homework"], ["⏱️", "Focus Timer"]].map(function (t) { return '<div class="t cs"><span>' + t[0] + '</span><b>' + t[1] + '</b><small></small><span class="s">Coming soon</span></div>'; }).join("") + '</div><p class="zpvn" style="margin:18px 12px 8px;padding:10px 12px;border-radius:12px;background:#eef6fb;color:#3c5566;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p></div>';
     s.querySelector(".x1").onclick = close;
     s.querySelector(".chip").onclick = switcher;
-    s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=4", "ZestRev"); };
-    s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=3", "ZestMoney"); };
+    s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=5", "ZestRev"); };
+    s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=4", "ZestMoney"); };
     if (window.__zgo) { var g = s.querySelector('[data-go=' + window.__zgo + ']'); window.__zgo = null; if (g) setTimeout(function () { g.click(); }, 60); }
   }
   function tool(src, g) {

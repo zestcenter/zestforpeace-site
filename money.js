@@ -128,6 +128,7 @@
     var months = [cur - 3, cur - 2, cur - 1, cur], vals = months.map(function (x) { return d.tx.filter(function (t) { return t.k === "out" && mk(t.ts) === x; }).reduce(function (a, t) { return a + t.a; }, 0); }), mx = Math.max.apply(null, vals) || 1;
     if (vals.some(function (v) { return v > 0; })) h += '<div class="sec">Last 4 months <small>Spent</small></div><div class="mo">' + months.map(function (x, i) { return '<div' + (x === cur ? ' class="c"' : '') + '><span>' + (vals[i] ? rs(vals[i]) : '') + '</span><i style="height:' + Math.round(vals[i] * 80 / mx) + 'px"></i>' + MS[x % 12] + '</div>'; }).join("") + '</div>';
     w.innerHTML = h;
+    w.insertAdjacentHTML('beforeend', '<p class="zpvn" style="margin:18px 12px 8px;padding:10px 12px;border-radius:12px;background:#eef6fb;color:#3c5566;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p>');
     var q = function (s) { return w.querySelector(s); };
     if (q("#zm-out")) q("#zm-out").onclick = function () { addTx("out"); };
     if (q("#zm-in")) q("#zm-in").onclick = function () { addTx("in"); };
