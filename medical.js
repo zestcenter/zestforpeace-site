@@ -9,8 +9,9 @@
     '#zmed .hd{position:sticky;top:0;z-index:2;background:#fff;padding:12px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e2ecf3}' +
     '#zmed .bk{width:36px;height:36px;border-radius:11px;border:0;background:#eef6fb;color:#0b5d8f;font:700 18px Inter,sans-serif;cursor:pointer}#zmed .hd b{font-size:16px}' +
     '#zmed .hd b{flex:1;min-width:0;line-height:1.35}#zmed .lsw{display:inline-flex;align-items:center;gap:7px;flex:none;padding:4px 0;border:0;background:none;cursor:pointer;font:700 11.5px/1 Inter,sans-serif;color:#6a8796}#zmed .lsw .sw{position:relative;width:36px;height:21px;border-radius:999px;background:#c9d6de;transition:background .2s}#zmed .lsw .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}#zmed .lsw.en{color:#1380b8}#zmed .lsw.en .sw{background:#1380b8}#zmed .lsw.en .sw i{left:17.5px}' +
+'#zmed .mh{position:relative;padding:34px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden}#zmed .mh::after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}#zmed .mh .cap{display:grid;place-items:center;width:58px;height:58px;margin:0 auto;border-radius:18px;background:rgba(255,255,255,.16);font-size:30px}#zmed .mh h2{margin:12px 0 4px;font:800 22px Inter,"Noto Sans Malayalam",sans-serif;color:#fff}#zmed .mh p{margin:0;font:600 12.5px Inter,"Noto Sans Malayalam",sans-serif;color:#cfe6f5}#zmed .mh .bk{position:absolute;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font:700 17px Inter,sans-serif;cursor:pointer}#zmed .mh .lsw{position:absolute;left:16px;top:18px;z-index:2;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff}#zmed .mh .lsw .sw{background:rgba(255,255,255,.35)}#zmed .mh .lsw.en{color:#fff}#zmed .mh .lsw.en .sw{background:#3fa7d6}' +
     '#zmed .soon{margin:12px 14px 0;background:#fff4d6;color:#7a5a00;border-radius:12px;padding:9px 12px;font-size:12px;text-align:center;font-weight:600}' +
-    '#zmed .mhr{margin:12px 14px 10px;padding:14px;border-radius:18px;color:#fff}#zmed .mhr h3{font-size:16px;margin:0}#zmed .mhr p{font-size:12px;opacity:.92;margin:3px 0 0;line-height:1.5}' +
+    '#zmed .mhr{margin:16px 18px 12px;padding:0 0 0 12px;border-left:4px solid #3fa7d6}#zmed .mhr h3{font-size:16px;margin:0;color:#0b3d5c}#zmed .mhr p{font-size:12.5px;color:#5d707c;margin:3px 0 0;line-height:1.55}' +
     '#zmed .tb{display:flex;gap:6px;margin:0 14px 10px;background:#e6eef3;border-radius:14px;padding:4px}#zmed .tb button{flex:1;border:0;background:none;padding:9px 4px;border-radius:11px;font:600 13px Inter,"Noto Sans Malayalam",sans-serif;color:#5d707c;cursor:pointer}#zmed .tb .on{background:#fff;color:#0f7d58;font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.08)}' +
     '#zmed .lb{font-size:12.5px;color:#0b5d8f;font-weight:700;margin:12px 14px 7px}' +
     '#zmed .g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 14px}' +
@@ -37,7 +38,7 @@
 
   function eqPage(tab) {
     var need = tab !== "give";
-    return '<div class="mhr" style="background:linear-gradient(135deg,#34c38f,#0f7d58)"><h3>' + T("നാട്ടുകാർ നാട്ടുകാർക്ക്", "Neighbours helping neighbours") + '</h3><p>' + T("വീട്ടിൽ ഉപയോഗിക്കാത്ത ചികിത്സാ ഉപകരണങ്ങൾ ആവശ്യക്കാർക്ക് എത്തിക്കാം", "Pass unused medical equipment to those who need it") + '</p></div>' +
+    return '<div class="mhr"><h3>' + T("നാട്ടുകാർ നാട്ടുകാർക്ക്", "Neighbours helping neighbours") + '</h3><p>' + T("വീട്ടിൽ ഉപയോഗിക്കാത്ത ചികിത്സാ ഉപകരണങ്ങൾ ആവശ്യക്കാർക്ക് എത്തിക്കാം", "Pass unused medical equipment to those who need it") + '</p></div>' +
       '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("എനിക്ക് വേണം", "I need") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🤝 ' + T("എനിക്ക് കൊടുക്കാം", "I can give") + '</button></div>' +
       '<div class="lb">' + (need ? T("ഏത് ഉപകരണമാണ് വേണ്ടത്?", "Which equipment do you need?") : T("നിങ്ങളുടെ കയ്യിൽ ഉള്ളത് (ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം)", "What do you have? (pick one or more)")) + '</div>' +
       '<div class="g' + (need ? '' : ' multi') + '">' + items().map(function (x) { return '<button type="button" class="t"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
@@ -51,7 +52,7 @@
 
   function bloodPage() {
     var G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
-    return '<div class="mhr" style="background:linear-gradient(135deg,#ff7a8a,#d63a52)"><h3>🩸 ' + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") + '</h3><p>' + T("നാട്ടിൽ അടിയന്തരമായി രക്തം വേണ്ടി വരുമ്പോൾ സഹായിക്കാൻ തയ്യാറുള്ളവരുടെ കൂട്ടായ്മ", "Neighbours ready to donate blood in local emergencies") + '</p></div>' +
+    return '<div class="mhr"><h3>' + T("നാട്ടുകാരുടെ രക്തദാന കൂട്ടായ്മ", "Our village blood donors") + '</h3><p>' + T("നാട്ടിൽ അടിയന്തരമായി രക്തം വേണ്ടി വരുമ്പോൾ സഹായിക്കാൻ തയ്യാറുള്ളവരുടെ കൂട്ടായ്മ", "Neighbours ready to donate blood in local emergencies") + '</p></div>' +
       '<div class="q"><div class="dr">🩸</div><h4>' + T("നമ്മുടെ നാട്ടിലെ ഒരാൾക്ക് പെട്ടെന്ന് രക്തം ആവശ്യമായി വന്നാൽ, കൊടുക്കാൻ നിങ്ങൾ തയ്യാറാണോ?", "If someone in our village urgently needs blood, are you ready to donate?") + '</h4><p>' + T("നിങ്ങളുടെ ഒരു തീരുമാനം ഒരു ജീവൻ രക്ഷിച്ചേക്കാം", "Your decision could save a life") + '</p>' +
       '<div class="yn"><button type="button" class="y">✅ ' + T("അതെ, തയ്യാറാണ്", "Yes, I'm ready") + '</button><button type="button">' + T("ഇല്ല", "No") + '</button></div></div>' +
       '<div class="lb">' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</div><div class="f">' +
@@ -71,7 +72,8 @@
     function render(tab) {
       cur = tab;
       var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ ഉപകരണങ്ങൾ", "Medical Equipment");
-      w.innerHTML = '<div class="hd"><button type="button" class="bk" aria-label="Back">←</button><b>' + title + '</b><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage() : eqPage(tab));
+      var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ആവശ്യക്കാർക്ക് ചികിത്സാ ഉപകരണങ്ങൾ", "Medical equipment for those in need");
+      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button><span class="cap">' + cap + '</span><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage() : eqPage(tab));
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
