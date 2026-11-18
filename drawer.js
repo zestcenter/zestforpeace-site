@@ -161,5 +161,5 @@
   var sx = null;
   dw.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; }, { passive: true });
   dw.addEventListener("touchend", function (e) { if (sx !== null && e.changedTouches[0].clientX - sx > 60) hide(); sx = null; }, { passive: true });
-  window.ZestDrawer = { open: show, close: hide };
+  window.ZestDrawer = { open: show, close: hide, appOnly: appOnly };
 })();
