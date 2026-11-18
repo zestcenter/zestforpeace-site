@@ -157,8 +157,62 @@
   }
   if (document.readyState !== "loading") abInit(); else document.addEventListener("DOMContentLoaded", abInit);
 
+  /* Inner app pages (Students Corner, tools): always Malayalam first; "English" switch in the page header */
+  var SECSEL = ".zsc2,.zsc2-sh,.zrv,.zmy,.zmy-sh";
+  var SEC = { en: false };
+  function secSw(root) {
+    root.querySelectorAll(".w2-hd,.hd").forEach(function (h) {
+      if (h.querySelector(".zsecx") || !h.closest(SECSEL)) return;
+      var b = document.createElement("button"); b.type = "button"; b.className = "zsecx" + (SEC.en ? " en" : "") + (h.classList.contains("w2-hd") ? " dk" : "");
+      b.setAttribute("data-noi18n", ""); b.setAttribute("role", "switch"); b.setAttribute("aria-checked", SEC.en ? "true" : "false");
+      b.innerHTML = 'English <span class="sw"><i></i></span>';
+      b.onclick = function (e) { e.stopPropagation(); secSet(!SEC.en); };
+      h.appendChild(b);
+    });
+  }
+  function secPh(r, en) {
+    if (!r.querySelectorAll) return;
+    r.querySelectorAll("input[placeholder],textarea[placeholder]").forEach(function (e) {
+      if (e.__zph == null) e.__zph = e.placeholder;
+      var b = e.__zph, v = en ? (/[ഀ-ൿ]/.test(b) ? enT(b) : null) : tr(b);
+      e.placeholder = v == null ? b : v;
+    });
+  }
+  function secApply(r) { abWalk(r, SEC.en); secPh(r, SEC.en); if (r.nodeType === 1) secSw(r.matches && r.matches(SECSEL) ? r : (r.closest && r.closest(SECSEL)) || r); }
+  function secSet(en) {
+    SEC.en = !!en;
+    document.querySelectorAll(SECSEL).forEach(function (c) { abWalk(c, SEC.en); secPh(c, SEC.en); });
+    document.querySelectorAll(".zsecx").forEach(function (b) { b.classList.toggle("en", SEC.en); b.setAttribute("aria-checked", SEC.en ? "true" : "false"); });
+    if (SEC.obs) SEC.obs.takeRecords();
+  }
+  function secInit() {
+    if (!app || SEC.obs) return;
+    var css = document.createElement("style");
+    css.textContent = '.zsecx{display:inline-flex;align-items:center;gap:7px;flex:none;margin-left:auto;padding:4px 0;border:0;background:none;cursor:pointer;font:700 11.5px/1 Inter,sans-serif;color:#6a8796;-webkit-tap-highlight-color:transparent}' +
+      '.zsecx .sw{position:relative;width:36px;height:21px;border-radius:999px;background:#c9d6de;transition:background .2s}.zsecx .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}' +
+      '.zsecx.en{color:#1380b8}.zsecx.en .sw{background:#1380b8}.zsecx.en .sw i{left:17.5px}' +
+      '.zsecx.dk{position:absolute;left:16px;top:18px;z-index:3;margin:0;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.16);color:#fff}.zsecx.dk .sw{background:rgba(255,255,255,.35)}.zsecx.dk.en .sw{background:#3fa7d6}';
+    document.head.appendChild(css);
+    SEC.obs = new MutationObserver(function (ms) {
+      ms.forEach(function (m) {
+        var t = m.target, el = t.nodeType === 3 ? t.parentNode : t;
+        if (!el || !el.closest || !el.closest(SECSEL)) {
+          if (m.type === "childList") m.addedNodes.forEach(function (n) { if (n.nodeType === 1 && (n.matches(SECSEL) || n.querySelector(SECSEL))) { (n.matches(SECSEL) ? [n] : n.querySelectorAll(SECSEL)).forEach(secApply); } });
+          return;
+        }
+        if (m.type === "characterData") { t.__zo = t.nodeValue; abWalk(t, SEC.en); }
+        else if (m.type === "attributes") { if (/^(INPUT|TEXTAREA)$/.test(t.nodeName)) { t.__zph = null; secPh(t.parentNode || t, SEC.en); } else secApply(t); }
+        else m.addedNodes.forEach(function (n) { secApply(n); });
+      });
+      SEC.obs.takeRecords();
+    });
+    SEC.obs.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["placeholder"] });
+    document.querySelectorAll(SECSEL).forEach(secApply);
+  }
+  if (document.readyState !== "loading") secInit(); else document.addEventListener("DOMContentLoaded", secInit);
+
   if (lang !== "ml") {
-    var enSkip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|CODE|svg)$/i, enNot = "#about,[data-noi18n],#zlp,.zlg,.zlb,.zbody,.pbody,.ptext,.ptx";
+    var enSkip = /^(SCRIPT|STYLE|TEXTAREA|INPUT|CODE|svg)$/i, enNot = "#about,.zsc2,.zsc2-sh,.zrv,.zmy,.zmy-sh,[data-noi18n],#zlp,.zlg,.zlb,.zbody,.pbody,.ptext,.ptx";
     var enNode = function (t) { var p = t.parentNode; if (!p || enSkip.test(p.nodeName) || p.closest && p.closest(enNot)) return; var v = enT(t.nodeValue); if (v != null) { var m = t.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/); t.nodeValue = m[1] + v + m[2]; } };
     var enWalk = function (r) { if (!r) return; if (r.nodeType === 3) return enNode(r); if (r.nodeType !== 1 || enSkip.test(r.nodeName) || r.closest && r.closest(enNot)) return; ["placeholder", "aria-label", "alt", "title"].forEach(function (a) { var v = r.getAttribute && r.getAttribute(a); if (v) { var x = enT(v); if (x != null) r.setAttribute(a, x); } }); var c = r.childNodes; for (var i = 0; i < c.length; i++) enWalk(c[i]); };
     var enStart = function () {
@@ -169,7 +223,7 @@
     return;
   }
 
-  var NOT = "#about,.zbody,.pbody,.ptext,.ptx,.z3k .tx,[data-noi18n]";
+  var NOT = "#about,.zsc2,.zsc2-sh,.zrv,.zmy,.zmy-sh,.zbody,.pbody,.ptext,.ptx,.z3k .tx,[data-noi18n]";
   function walk(root) {
     if (!root || root.nodeType !== 1 && root.nodeType !== 3) return;
     if (root.nodeType === 3) return node(root);
@@ -182,7 +236,7 @@
     var par = t.parentNode; if (!par || SKIP.test(par.nodeName) || par.closest && par.closest(NOT)) return;
     var v = tr(t.nodeValue); if (v != null) { var m = t.nodeValue.match(/^(\s*)[\s\S]*?(\s*)$/); t.nodeValue = m[1] + v + m[2]; }
   }
-  function ph(root) { if (root.querySelectorAll) root.querySelectorAll("input[placeholder],textarea[placeholder]").forEach(function (e) { var p = tr(e.placeholder); if (p) e.placeholder = p; }); }
+  function ph(root) { if (root.querySelectorAll) root.querySelectorAll("input[placeholder],textarea[placeholder]").forEach(function (e) { if (e.closest(NOT)) return; var p = tr(e.placeholder); if (p) e.placeholder = p; }); }
   function run(r) { walk(r); ph(r); }
   function start() {
     document.documentElement.lang = "ml";

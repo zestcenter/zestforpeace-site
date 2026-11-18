@@ -1,13 +1,14 @@
 /* ZEST APP – Medical Help pages (Blood Bank, Medical Equipment). Preview only: submit is disabled. */
 (function () {
-  var ML = window.ZestLang && ZestLang.get() === "ml";
+  var ML = true; /* inner pages: Malayalam first, "English" switch in header */
   function T(m, e) { return ML ? m : e; }
   var WA = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>';
-  var PLACES = [T("കോട്ടെമ്പ്രം", "Kottembram"), T("കോടഞ്ചേരി", "Kodencheri"), T("വെള്ളൂർ", "Velloor"), T("മറ്റുള്ളവ", "Other")];
+  function places() { return [T("കോട്ടെമ്പ്രം", "Kottembram"), T("കോടഞ്ചേരി", "Kodencheri"), T("വെള്ളൂർ", "Velloor"), T("മറ്റുള്ളവ", "Other")]; }
   var CSS = '#zmed{position:fixed;inset:0;z-index:2147483600;background:#f3f8fb;overflow:auto;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;-webkit-overflow-scrolling:touch;animation:zmIn .25s ease}' +
     '@keyframes zmIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}' +
     '#zmed .hd{position:sticky;top:0;z-index:2;background:#fff;padding:12px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e2ecf3}' +
     '#zmed .bk{width:36px;height:36px;border-radius:11px;border:0;background:#eef6fb;color:#0b5d8f;font:700 18px Inter,sans-serif;cursor:pointer}#zmed .hd b{font-size:16px}' +
+    '#zmed .hd b{flex:1;min-width:0;line-height:1.35}#zmed .lsw{display:inline-flex;align-items:center;gap:7px;flex:none;padding:4px 0;border:0;background:none;cursor:pointer;font:700 11.5px/1 Inter,sans-serif;color:#6a8796}#zmed .lsw .sw{position:relative;width:36px;height:21px;border-radius:999px;background:#c9d6de;transition:background .2s}#zmed .lsw .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}#zmed .lsw.en{color:#1380b8}#zmed .lsw.en .sw{background:#1380b8}#zmed .lsw.en .sw i{left:17.5px}' +
     '#zmed .soon{margin:12px 14px 0;background:#fff4d6;color:#7a5a00;border-radius:12px;padding:9px 12px;font-size:12px;text-align:center;font-weight:600}' +
     '#zmed .mhr{margin:12px 14px 10px;padding:14px;border-radius:18px;color:#fff}#zmed .mhr h3{font-size:16px;margin:0}#zmed .mhr p{font-size:12px;opacity:.92;margin:3px 0 0;line-height:1.5}' +
     '#zmed .tb{display:flex;gap:6px;margin:0 14px 10px;background:#e6eef3;border-radius:14px;padding:4px}#zmed .tb button{flex:1;border:0;background:none;padding:9px 4px;border-radius:11px;font:600 13px Inter,"Noto Sans Malayalam",sans-serif;color:#5d707c;cursor:pointer}#zmed .tb .on{background:#fff;color:#0f7d58;font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.08)}' +
@@ -30,22 +31,22 @@
   function toast(m) { var t = document.createElement("div"); t.className = "zmt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
   function chips(list, cls) { return '<div class="ch ' + (cls || "") + '">' + list.map(function (p, i) { return '<button type="button"' + (i === 0 ? ' class="on"' : '') + '>' + p + '</button>'; }).join("") + '</div>'; }
   function single(root) { root.querySelectorAll(".ch,.bg").forEach(function (g) { if (g.classList.contains("multi")) return; g.addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; g.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); }); }
-  var SOON = T("ഈ സേവനം ഉടൻ തുടങ്ങും 🙂 ഇപ്പോൾ കാണാൻ മാത്രം", "This service starts soon 🙂 Preview only");
+  function soon() { return T("ഈ സേവനം ഉടൻ തുടങ്ങും 🙂 ഇപ്പോൾ കാണാൻ മാത്രം", "This service starts soon 🙂 Preview only"); }
 
-  var ITEMS = [["🦽", T("വീൽചെയർ", "Wheelchair"), "#e3f1fa"], ["🛏️", T("ആശുപത്രി കട്ടിൽ", "Hospital bed"), "#efe9fd"], ["🚶", T("വാക്കർ", "Walker"), "#fff1e2"], ["🩼", T("ക്രച്ചസ്", "Crutches"), "#ffe9ef"], ["🫁", T("ഓക്സിജൻ മെഷീൻ", "Oxygen machine"), "#e6f3fb"], ["🪑", T("കമ്മോഡ് ചെയർ", "Commode chair"), "#e8f7ef"], ["🌡️", T("BP / ഷുഗർ മെഷീൻ", "BP / Sugar meter"), "#fff1e2"], ["💨", T("നെബുലൈസർ", "Nebuliser"), "#efe9fd"], ["➕", T("മറ്റുള്ളവ", "Other"), "#eef2f5"]];
+  function items() { return [["🦽", T("വീൽചെയർ", "Wheelchair"), "#e3f1fa"], ["🛏️", T("ആശുപത്രി കട്ടിൽ", "Hospital bed"), "#efe9fd"], ["🚶", T("വാക്കർ", "Walker"), "#fff1e2"], ["🩼", T("ക്രച്ചസ്", "Crutches"), "#ffe9ef"], ["🫁", T("ഓക്സിജൻ മെഷീൻ", "Oxygen machine"), "#e6f3fb"], ["🪑", T("കമ്മോഡ് ചെയർ", "Commode chair"), "#e8f7ef"], ["🌡️", T("BP / ഷുഗർ മെഷീൻ", "BP / Sugar meter"), "#fff1e2"], ["💨", T("നെബുലൈസർ", "Nebuliser"), "#efe9fd"], ["➕", T("മറ്റുള്ളവ", "Other"), "#eef2f5"]]; }
 
   function eqPage(tab) {
     var need = tab !== "give";
     return '<div class="mhr" style="background:linear-gradient(135deg,#34c38f,#0f7d58)"><h3>' + T("നാട്ടുകാർ നാട്ടുകാർക്ക്", "Neighbours helping neighbours") + '</h3><p>' + T("വീട്ടിൽ ഉപയോഗിക്കാത്ത ചികിത്സാ ഉപകരണങ്ങൾ ആവശ്യക്കാർക്ക് എത്തിക്കാം", "Pass unused medical equipment to those who need it") + '</p></div>' +
       '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("എനിക്ക് വേണം", "I need") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🤝 ' + T("എനിക്ക് കൊടുക്കാം", "I can give") + '</button></div>' +
       '<div class="lb">' + (need ? T("ഏത് ഉപകരണമാണ് വേണ്ടത്?", "Which equipment do you need?") : T("നിങ്ങളുടെ കയ്യിൽ ഉള്ളത് (ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം)", "What do you have? (pick one or more)")) + '</div>' +
-      '<div class="g' + (need ? '' : ' multi') + '">' + ITEMS.map(function (x) { return '<button type="button" class="t"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
+      '<div class="g' + (need ? '' : ' multi') + '">' + items().map(function (x) { return '<button type="button" class="t"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
       '<div class="lb">' + T("വിവരങ്ങൾ", "Details") + '</div><div class="f">' +
       (need ? '<div class="row"><input placeholder="📅 ' + T("ഏത് തീയതി മുതൽ", "From date") + '"><input placeholder="⏳ ' + T("എത്ര ദിവസം", "How long") + '"></div>'
             : chips([T("സൗജന്യമായി കൊടുക്കാം", "Give for free"), T("കുറച്ച് ദിവസത്തേക്ക് മാത്രം", "Lend for a few days")])) +
-      chips(PLACES) + '<input type="tel" inputmode="tel" placeholder="📱 ' + T("മൊബൈൽ നമ്പർ", "Mobile number") + '"></div>' +
+      chips(places()) + '<input type="tel" inputmode="tel" placeholder="📱 ' + T("മൊബൈൽ നമ്പർ", "Mobile number") + '"></div>' +
       '<button type="button" class="go">' + WA + (need ? T("WhatsApp വഴി ആവശ്യപ്പെടൂ", "Request on WhatsApp") : T("WhatsApp വഴി അറിയിക്കൂ", "Tell us on WhatsApp")) + '</button>' +
-      '<p class="nt">' + SOON + '</p>';
+      '<p class="nt">' + soon() + '</p>';
   }
 
   function bloodPage() {
@@ -55,25 +56,28 @@
       '<div class="yn"><button type="button" class="y">✅ ' + T("അതെ, തയ്യാറാണ്", "Yes, I'm ready") + '</button><button type="button">' + T("ഇല്ല", "No") + '</button></div></div>' +
       '<div class="lb">' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</div><div class="f">' +
       '<input placeholder="' + T("പേര്", "Name") + '"><input placeholder="' + T("വീട്ടുപേര്", "House name") + '"><input type="tel" inputmode="tel" placeholder="📱 ' + T("ഫോൺ നമ്പർ", "Phone number") + '">' +
-      '</div><div class="lb">' + T("സ്ഥലം", "Place") + '</div><div class="f">' + chips(PLACES) + '</div>' +
+      '</div><div class="lb">' + T("സ്ഥലം", "Place") + '</div><div class="f">' + chips(places()) + '</div>' +
       '<div class="lb">' + T("അവസാനമായി രക്തം കൊടുത്തത്", "Last donated") + '</div><div class="f">' + chips([T("3 മാസത്തിനുള്ളിൽ", "Within 3 months"), T("3 മാസത്തിന് മുൻപ്", "Over 3 months ago"), T("ഇതുവരെ കൊടുത്തിട്ടില്ല", "Never")]) + '</div>' +
       '<div class="lb">' + T("ബ്ലഡ് ഗ്രൂപ്പ്", "Blood group") + '</div><div class="f"><div class="bg">' + G.map(function (g) { return '<button type="button">' + g + '</button>'; }).join("") + '<button type="button" class="u">' + T("അറിയില്ല", "Don't know") + '</button></div></div>' +
       '<button type="button" class="go gr">✅ ' + T("സമർപ്പിക്കൂ", "Submit") + '</button>' +
-      '<p class="pv">🔒 ' + T("(ഈ വിവരങ്ങൾ അഡ്മിന് മാത്രമേ കാണാൻ സാധിക്കൂ)", "(Only ZEST admins can see these details)") + '</p><p class="nt">' + SOON + '</p>';
+      '<p class="pv">🔒 ' + T("(ഈ വിവരങ്ങൾ അഡ്മിന് മാത്രമേ കാണാൻ സാധിക്കൂ)", "(Only ZEST admins can see these details)") + '</p><p class="nt">' + soon() + '</p>';
   }
 
   function open(which) {
     if (!document.getElementById("zmed-css")) { var s = document.createElement("style"); s.id = "zmed-css"; s.textContent = CSS; document.head.appendChild(s); }
     var old = document.getElementById("zmed"); if (old) old.remove();
     var w = document.createElement("div"); w.id = "zmed"; w.setAttribute("data-noi18n", "");
-    var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ ഉപകരണങ്ങൾ", "Medical Equipment");
+    ML = true; var cur = "need";
     function render(tab) {
-      w.innerHTML = '<div class="hd"><button type="button" class="bk" aria-label="Back">←</button><b>' + title + '</b></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage() : eqPage(tab));
+      cur = tab;
+      var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ ഉപകരണങ്ങൾ", "Medical Equipment");
+      w.innerHTML = '<div class="hd"><button type="button" class="bk" aria-label="Back">←</button><b>' + title + '</b><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage() : eqPage(tab));
       w.querySelector(".bk").onclick = close;
+      w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
       var g = w.querySelector(".g"); if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
       w.querySelectorAll(".tb button").forEach(function (b) { b.onclick = function () { render(b.dataset.tab); w.scrollTop = 0; }; });
-      w.querySelectorAll(".go,.yn button").forEach(function (b) { b.onclick = function () { toast(SOON); }; });
+      w.querySelectorAll(".go,.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
     }
     render("need");
     document.body.appendChild(w);
