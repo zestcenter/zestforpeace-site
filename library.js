@@ -1,76 +1,137 @@
-/* ZEST APP – ZEST Library (sample preview: 5 books, search + category filter work; borrowing not yet) */
+/* ZEST APP – ZEST Library (sample preview: 5 books; All / Category / Availability filters work; borrowing not yet) */
 (function () {
   var ML = true; /* inner pages: Malayalam first, "English" switch in header */
+  var V = "v1";  /* page design */
   function T(m, e) { return ML ? m : e; }
-  /* k: category key · c1/c2: cover colours · m: cover motif · st: 1 = available, 0 = being read */
+  /* st: 1 = available, 2 = being read, 3 = not available */
   var BOOKS = [
     { k: "nov", t: ["ബാല്യകാലസഖി", "Balyakalasakhi"], a: ["വൈക്കം മുഹമ്മദ് ബഷീർ", "Vaikom Muhammad Basheer"], c1: "#c0392b", c2: "#f39c6b", m: "🌳", st: 1 },
-    { k: "nov", t: ["ഖസാക്കിന്റെ ഇതിഹാസം", "Khasakkinte Ithihasam"], a: ["ഒ.വി. വിജയൻ", "O.V. Vijayan"], c1: "#1e5f74", c2: "#7fc8a9", m: "🌄", st: 0 },
+    { k: "nov", t: ["ഖസാക്കിന്റെ ഇതിഹാസം", "Khasakkinte Ithihasam"], a: ["ഒ.വി. വിജയൻ", "O.V. Vijayan"], c1: "#1e5f74", c2: "#7fc8a9", m: "🌄", st: 2 },
     { k: "sto", t: ["പ്രകാശം പരത്തുന്ന ഒരു പെൺകുട്ടി", "Prakasham Parathunna Oru Penkutty"], a: ["ടി. പത്മനാഭൻ", "T. Padmanabhan"], c1: "#6a4bd1", c2: "#c9b8ff", m: "🕯️", st: 1 },
     { k: "poe", t: ["രമണൻ", "Ramanan"], a: ["ചങ്ങമ്പുഴ കൃഷ്ണപിള്ള", "Changampuzha Krishna Pillai"], c1: "#0f7d58", c2: "#a8e6c9", m: "🪈", st: 1 },
-    { k: "bio", t: ["എന്റെ കഥ", "Ente Katha"], a: ["മാധവിക്കുട്ടി", "Madhavikutty"], c1: "#b5651d", c2: "#ffd59a", m: "✍️", st: 0 }
+    { k: "bio", t: ["എന്റെ കഥ", "Ente Katha"], a: ["മാധവിക്കുട്ടി", "Madhavikutty"], c1: "#b5651d", c2: "#ffd59a", m: "✍️", st: 2 }
   ];
-  function cats() { return [["all", T("എല്ലാം", "All")], ["nov", T("നോവൽ", "Novel")], ["sto", T("കഥകൾ", "Stories")], ["poe", T("കവിത", "Poetry")], ["bio", T("ആത്മകഥ", "Autobiography")]]; }
-  function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : ""; }
+  function cats() { return [["nov", "📖", T("നോവൽ", "Novel")], ["sto", "📝", T("കഥകൾ", "Stories")], ["poe", "🪶", T("കവിത", "Poetry")], ["bio", "🙋", T("ആത്മകഥ", "Autobiography")], ["lif", "👤", T("ജീവചരിത്രം", "Biography")], ["kid", "🧒", T("ബാലസാഹിത്യം", "Children")], ["his", "🏛️", T("ചരിത്രം", "History")], ["sci", "🔬", T("ശാസ്ത്രം", "Science")], ["trv", "✈️", T("യാത്രാവിവരണം", "Travel")], ["dra", "🎭", T("നാടകം", "Drama")], ["ess", "📰", T("ലേഖനങ്ങൾ", "Essays")], ["psc", "🎯", T("PSC / മത്സരപ്പരീക്ഷ", "PSC / Exams")]]; }
+  function sts() { return [[1, "🟢", T("ലഭ്യം", "Available")], [2, "📖", T("വായനയിൽ", "Being read")]]; }
+  function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var F = "Inter,\"Noto Sans Malayalam\",sans-serif";
 
-  var CSS = '#zlib{position:fixed;inset:0;z-index:2147483600;background:#f3f8fb;overflow:auto;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;-webkit-overflow-scrolling:touch;animation:zlIn .25s ease}' +
+  var CSS = '#zlib{position:fixed;inset:0;z-index:2147483600;background:#f3f8fb;overflow:auto;font-family:' + F + ';color:#14232c;-webkit-overflow-scrolling:touch;animation:zlIn .25s ease}' +
     '@keyframes zlIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}' +
     '#zlib .mh{position:relative;padding:34px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden}#zlib .mh::after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
-    '#zlib .mh .cap{display:grid;place-items:center;width:58px;height:58px;margin:0 auto;border-radius:18px;background:rgba(255,255,255,.16);font-size:30px}#zlib .mh h2{margin:12px 0 4px;font:800 22px Inter,"Noto Sans Malayalam",sans-serif;color:#fff}#zlib .mh p{margin:0;font:600 12.5px Inter,"Noto Sans Malayalam",sans-serif;color:#cfe6f5}' +
+    '#zlib .mh .cap{display:grid;place-items:center;width:58px;height:58px;margin:0 auto;border-radius:18px;background:rgba(255,255,255,.16);font-size:30px}#zlib .mh h2{margin:12px 0 4px;font:800 22px ' + F + ';color:#fff}#zlib .mh p{margin:0;font:600 12.5px ' + F + ';color:#cfe6f5}' +
     '#zlib .mh .bk{position:absolute;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font:700 17px Inter,sans-serif;cursor:pointer}' +
-    '#zlib .lsw{position:absolute;left:16px;top:18px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;border:0;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;font:700 11.5px/1 Inter,sans-serif}#zlib .lsw .sw{position:relative;width:36px;height:21px;border-radius:999px;background:rgba(255,255,255,.35);transition:background .2s}#zlib .lsw .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}#zlib .lsw.en .sw{background:#3fa7d6}#zlib .lsw.en .sw i{left:17.5px}' +
+    '#zlib .lsw{position:absolute;left:16px;top:18px;z-index:2;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;border:0;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;font:700 11.5px/1 Inter,sans-serif}#zlib .lsw .sw{position:relative;width:36px;height:21px;border-radius:999px;background:rgba(255,255,255,.35)}#zlib .lsw .sw i{position:absolute;top:2.5px;left:2.5px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}#zlib .lsw.en .sw{background:#3fa7d6}#zlib .lsw.en .sw i{left:17.5px}' +
     '#zlib .soon{margin:12px 14px 0;background:#fff4d6;color:#7a5a00;border-radius:12px;padding:9px 12px;font-size:12px;text-align:center;font-weight:600;line-height:1.5}' +
-    '#zlib .mhr{margin:16px 18px 10px;padding:0 0 0 12px;border-left:4px solid #3fa7d6}#zlib .mhr h3{font-size:16px;margin:0;color:#0b3d5c}#zlib .mhr p{font-size:12.5px;color:#5d707c;margin:3px 0 0;line-height:1.55}' +
-    '#zlib .sr{position:relative;margin:0 14px 10px}#zlib .sr input{width:100%;box-sizing:border-box;background:#fff;border:1.5px solid #dde6ee;border-radius:12px;padding:11px 12px 11px 38px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;outline:none}#zlib .sr input:focus{border-color:#1380b8}#zlib .sr span{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px}' +
-    '#zlib .ch{display:flex;gap:6px;overflow-x:auto;padding:0 14px 4px;scrollbar-width:none}#zlib .ch::-webkit-scrollbar{display:none}#zlib .ch button{flex:none;background:#fff;border:1.5px solid #dde6ee;border-radius:999px;padding:7px 13px;font:600 12px Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;cursor:pointer}#zlib .ch .on{background:#0b5d8f;color:#fff;border-color:#0b5d8f}' +
-    '#zlib .cnt{margin:10px 16px 8px;font-size:12px;color:#7a8b96;font-weight:600}' +
-    '#zlib .bl{display:grid;gap:10px;padding:0 14px}#zlib .b{display:flex;gap:12px;background:#fff;border-radius:16px;padding:10px;box-shadow:0 2px 0 #e3eaef}' +
+    '#zlib .sr{position:relative;margin:14px 14px 10px}#zlib .sr input{width:100%;box-sizing:border-box;background:#fff;border:1.5px solid #dde6ee;border-radius:14px;padding:12px 12px 12px 40px;font:500 14px ' + F + ';color:#14232c;outline:none;transition:border-color .2s,box-shadow .2s}#zlib .sr input:focus{border-color:#1380b8;box-shadow:0 0 0 4px rgba(19,128,184,.12)}#zlib .sr span{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:15px}' +
+    /* filter bar – shared */
+    '#zlib .fb{display:flex;gap:8px;padding:0 14px}#zlib .fb button{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s,background .25s,color .25s,box-shadow .25s,border-color .25s}#zlib .fb button:active{transform:scale(.94)}' +
+    '#zlib .fb .n{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:999px;background:#ffc44d;color:#3a2a00;font:800 10.5px Inter,sans-serif;animation:zlPop .35s cubic-bezier(.3,1.6,.5,1)}@keyframes zlPop{from{transform:scale(0)}to{transform:scale(1)}}' +
+    '#zlib .fb .si{font-style:normal;font-size:13px;line-height:1}#zlib .fb .cv2{display:inline-block;font-size:10px;transition:transform .25s}' +
+    '#zlib .af{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0}#zlib .af:empty{display:none}#zlib .af span{display:inline-flex;align-items:center;gap:5px;background:#e6f3fb;color:#0b5d8f;border-radius:999px;padding:5px 6px 5px 10px;font:700 11.5px ' + F + ';animation:zlPop .3s ease}#zlib .af b{display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#fff;color:#0b5d8f;font:800 10px Inter,sans-serif;cursor:pointer}' +
+    '#zlib .cnt{margin:12px 16px 8px;font-size:12px;color:#7a8b96;font-weight:700}' +
+    /* V1 – segmented pill bar */
+    '#zlib.v1 .fb{margin:0 14px;padding:5px;background:#fff;border-radius:18px;box-shadow:0 4px 14px rgba(11,61,92,.08)}#zlib.v1 .fb button{flex:1;border:0;background:none;border-radius:14px;padding:10px 4px;font:700 13px ' + F + ';color:#4a5d69}' +
+    '#zlib.v1 .fb button.on{background:linear-gradient(135deg,#1380b8,#0b5d8f);color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.35)}' +
+    /* V2 – icon chips with gradient ring */
+    '#zlib.v2 .fb button{flex:1;flex-direction:column;gap:3px;border:0;border-radius:18px;padding:10px 4px 9px;background:#fff;font:700 12px ' + F + ';color:#3c4d57;box-shadow:0 3px 0 #e3eaef}#zlib.v2 .fb button i{font-style:normal;font-size:20px;transition:transform .3s}#zlib.v2 .fb button span{display:flex;align-items:center;gap:4px}' +
+    '#zlib.v2 .fb button.on{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#1380b8,#ffc44d) border-box;border:2px solid transparent;padding:8px 2px 7px;color:#0b5d8f;box-shadow:0 8px 18px rgba(19,128,184,.18)}#zlib.v2 .fb button.on i{transform:scale(1.15) rotate(-6deg)}#zlib.v2 .fb .n{position:absolute;top:-6px;right:-4px}' +
+    /* V3 – sticky glass bar */
+    '#zlib.v3 .stk{position:sticky;top:0;z-index:5;padding:10px 0 8px;background:rgba(243,248,251,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}#zlib.v3 .sr{margin:4px 14px 10px}' +
+    '#zlib.v3 .fb button{border:1.5px solid #d6e3ec;background:#fff;border-radius:999px;padding:8px 14px;font:700 12.5px ' + F + ';color:#3c4d57}#zlib.v3 .fb button.dd{flex:1}#zlib.v3 .fb button.on{background:#0b3d5c;border-color:#0b3d5c;color:#fff}#zlib.v3 .fb button.on.dd{background:#e6f3fb;border-color:#1380b8;color:#0b5d8f}' +
+    /* book cards */
+    '#zlib .bl{display:grid;gap:10px;padding:0 14px}#zlib .b{display:flex;gap:12px;background:#fff;border-radius:18px;padding:10px;box-shadow:0 2px 0 #e3eaef;animation:zlUp .35s ease both}@keyframes zlUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}' +
     '#zlib .cv{position:relative;flex:none;width:80px;height:112px;border-radius:6px 10px 10px 6px;padding:8px 6px 6px 10px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;color:#fff;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.18)}' +
     '#zlib .cv:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:rgba(0,0,0,.18)}#zlib .cv:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%)}' +
     '#zlib .cv b{position:relative;z-index:1;overflow-wrap:break-word;font:800 9px/1.25 "Noto Sans Malayalam",Inter,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.3)}#zlib .cv i{position:relative;z-index:1;font-style:normal;font-size:20px;text-align:center}#zlib .cv small{position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:600 7.5px/1.2 "Noto Sans Malayalam",Inter,sans-serif;opacity:.95}' +
     '#zlib .in{flex:1;min-width:0;display:flex;flex-direction:column}#zlib .in h4{margin:2px 0 3px;font:800 14.5px/1.35 "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zlib .in .au{font-size:12px;color:#5d707c}' +
-    '#zlib .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}#zlib .tg span{font:700 10.5px Inter,"Noto Sans Malayalam",sans-serif;padding:3px 8px;border-radius:999px;background:#eef6fb;color:#0b5d8f}#zlib .tg .ok{background:#e8f7ef;color:#0f7d58}#zlib .tg .rd{background:#fff1e2;color:#b5651d}' +
-    '#zlib .rq{margin-top:auto;align-self:flex-start;border:0;background:#1380b8;color:#fff;border-radius:10px;padding:7px 12px;font:700 12px Inter,"Noto Sans Malayalam",sans-serif;cursor:pointer;opacity:.6}' +
-    '#zlib .no{text-align:center;color:#7a8b96;font-size:13px;padding:26px 14px}' +
+    '#zlib .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}#zlib .tg span{font:700 10.5px ' + F + ';padding:3px 8px;border-radius:999px;background:#eef6fb;color:#0b5d8f}#zlib .tg .s1{background:#e8f7ef;color:#0f7d58}#zlib .tg .s2{background:#fff1e2;color:#b5651d}#zlib .tg .s3{background:#fdecef;color:#c0392b}' +
+    '#zlib .rq{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:5px;border:0;background:#25d366;color:#fff;border-radius:999px;padding:5px 11px 5px 8px;font:700 11px ' + F + ';cursor:pointer;opacity:.75;box-shadow:0 3px 8px rgba(37,211,102,.25)}#zlib .rq svg{width:14px;height:14px}' +
+    /* V2 – cover-first 2-column cards */
+    '#zlib.v2 .bl{grid-template-columns:1fr 1fr}#zlib.v2 .b{flex-direction:column;gap:8px;padding:12px}#zlib.v2 .cv{width:100%;height:150px;padding:12px 10px 10px 14px}#zlib.v2 .cv b{font-size:12.5px}#zlib.v2 .cv i{font-size:30px}#zlib.v2 .cv small{font-size:9.5px}#zlib.v2 .in h4{font-size:13.5px}#zlib.v2 .in .au{font-size:11px}#zlib.v2 .rq{width:100%;margin-top:8px}' +
+    /* V3 – compact rows with status dot */
+    '#zlib.v3 .b{align-items:center}#zlib.v3 .cv{width:58px;height:82px;padding:6px 4px 4px 8px}#zlib.v3 .cv b{font-size:7.5px}#zlib.v3 .cv i{font-size:16px}#zlib.v3 .cv small{display:none}#zlib.v3 .rq{display:none}#zlib.v3 .b:after{content:"›";flex:none;width:28px;height:28px;border-radius:50%;background:#eef6fb;color:#1380b8;font:800 16px/27px Inter,sans-serif;text-align:center}' +
+    '#zlib .no{text-align:center;color:#7a8b96;font-size:13px;padding:30px 14px}#zlib .no i{display:block;font-style:normal;font-size:34px;margin-bottom:6px}#zlib .no button{margin-top:10px;border:0;background:#e6f3fb;color:#0b5d8f;border-radius:999px;padding:8px 14px;font:700 12px ' + F + '}' +
     '#zlib .nt{text-align:center;font-size:11.5px;color:#7a8b96;margin:16px 18px 30px;line-height:1.5}' +
-    '.zlt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,"Noto Sans Malayalam",sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
+    /* bottom sheet with ticks */
+    '.zls-bg{position:fixed;inset:0;z-index:2147483640;background:rgba(10,30,45,.45);opacity:0;transition:opacity .25s}.zls-bg.on{opacity:1}' +
+    '.zls{position:fixed;left:0;right:0;bottom:0;z-index:2147483641;max-height:78vh;display:flex;flex-direction:column;background:#fff;border-radius:24px 24px 0 0;font-family:' + F + ';transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.9,.3,1)}.zls.on{transform:none}' +
+    '.zls .gr{width:40px;height:4px;border-radius:2px;background:#d4e0e8;margin:10px auto 6px}.zls .sh2{display:flex;align-items:center;justify-content:space-between;padding:0 14px 0 18px}.zls h4{margin:4px 0;font-size:16px;color:#0b3d5c}.zls .x{width:32px;height:32px;border-radius:50%;border:0;background:#eef3f7;color:#3b4c57;font:700 14px Inter,sans-serif;cursor:pointer}.zls .hs{margin:0 18px 8px;font-size:12px;color:#7a8b96}' +
+    '.zls .ls{overflow:auto;padding:0 12px}.zls .r{display:flex;align-items:center;gap:12px;padding:11px 8px;border-radius:14px;cursor:pointer;font:600 14px ' + F + ';color:#14232c;transition:background .2s}.zls .r:active{background:#f1f6f9}.zls .r.on{background:#eef7fd;color:#0b5d8f}' +
+    '.zls .r i{font-style:normal;font-size:18px;width:26px;text-align:center}.zls .r span{flex:1}.zls .r small{font:700 11px Inter,sans-serif;color:#7a8b96}' +
+    '.zls .r span.ck{position:relative;flex:none;width:22px;height:22px;border-radius:7px;border:2px solid #c9d6de;transition:background .2s,border-color .2s}.zls .r.on .ck{background:#1380b8;border-color:#1380b8}.zls .ck:after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}.zls .r.on .ck:after{transform:rotate(45deg) scale(1)}' +
+    '.zls .ap{display:flex;justify-content:center;padding:12px 16px 18px;border-top:1px solid #eef3f6}.zls .ap button{border:0;border-radius:14px;padding:13px;font:800 14px ' + F + ';cursor:pointer}.zls .ap .c{flex:none;padding:13px 18px;background:#eef3f7;color:#3b4c57}.zls .ap .a{padding:10px 26px;font-size:13px;border-radius:999px;background:linear-gradient(135deg,#1380b8,#0b5d8f);color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.3)}' +
+    '.zlt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px ' + F + ';box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
 
   function toast(m) { var t = document.createElement("div"); t.className = "zlt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
   function i(a) { return ML ? a[0] : a[1]; }
-  function card(b) {
-    return '<div class="b"><div class="cv" style="background:linear-gradient(160deg,' + b.c1 + ',' + b.c2 + ')"><b>' + esc(b.t[0]) + '</b><i>' + b.m + '</i><small>' + esc(b.a[0]) + '</small></div>' +
-      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + catName(b.k) + '</span>' +
-      (b.st ? '<span class="ok">✓ ' + T("ലഭ്യം", "Available") + '</span>' : '<span class="rd">📖 ' + T("വായനയിൽ", "Being read") + '</span>') + '</div>' +
-      '<button type="button" class="rq">📚 ' + T("പുസ്തകം ചോദിക്കാം", "Request book") + '</button></div></div>';
+  function stTag(s) { var x = sts().filter(function (y) { return y[0] === s; })[0]; return '<span class="s' + s + '">' + (s === 1 ? "✓ " : "📖 ") + x[2] + '</span>'; }
+  function card(b, n) {
+    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(160deg,' + b.c1 + ',' + b.c2 + ')"><b>' + esc(b.t[0]) + '</b><i>' + b.m + '</i><small>' + esc(b.a[0]) + '</small></div>' +
+      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + catName(b.k) + '</span>' + stTag(b.st) + '</div>' +
+      '<button type="button" class="rq"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("പുസ്തകം ചോദിക്കാം", "Request book") + '</button></div></div>';
   }
 
-  function open() {
+  function open(opt) {
+    if (opt && opt.v) V = opt.v;
     if (!document.getElementById("zlib-css")) { var s = document.createElement("style"); s.id = "zlib-css"; s.textContent = CSS; document.head.appendChild(s); }
     var old = document.getElementById("zlib"); if (old) old.remove();
-    var w = document.createElement("div"); w.id = "zlib"; w.setAttribute("data-noi18n", "");
-    ML = true; var cat = "all", q = "";
+    var w = document.createElement("div"); w.id = "zlib"; w.className = V; w.setAttribute("data-noi18n", "");
+    ML = true; var q = "", selC = [], selS = [];
+    function match(b, C, S) { var qq = q.trim().toLowerCase(); return (!C.length || C.indexOf(b.k) > -1) && (!S.length || S.indexOf(b.st) > -1) && (!qq || (b.t.join(" ") + " " + b.a.join(" ")).toLowerCase().indexOf(qq) > -1); }
+    function bar() {
+      var all = !selC.length && !selS.length;
+      function n(a) { return a.length ? '<em class="n">' + a.length + '</em>' : ''; }
+      var ic = V === "v2", si = function (e) { return ic ? '' : '<i class="si">' + e + '</i>'; };
+      w.querySelector(".fb").innerHTML =
+        '<button type="button" data-f="all" class="' + (all ? 'on' : '') + '">' + si("📚") + (ic ? '<i>📚</i><span>' : '') + T("എല്ലാം", "All") + (ic ? '</span>' : '') + '</button>' +
+        '<button type="button" data-f="cat" class="dd' + (selC.length ? ' on' : '') + '">' + si("🗂️") + (ic ? '<i>🗂️</i><span>' : '') + T("വിഭാഗം", "Category") + ' <span class="cv2">▾</span>' + (ic ? '</span>' : '') + n(selC) + '</button>' +
+        '<button type="button" data-f="st" class="dd' + (selS.length ? ' on' : '') + '">' + si("✅") + (ic ? '<i>✅</i><span>' : '') + T("ലഭ്യത", "Availability") + ' <span class="cv2">▾</span>' + (ic ? '</span>' : '') + n(selS) + '</button>';
+      w.querySelector('[data-f=all]').onclick = function () { selC = []; selS = []; bar(); list(); };
+      w.querySelector('[data-f=cat]').onclick = function () { pick("cat"); };
+      w.querySelector('[data-f=st]').onclick = function () { pick("st"); };
+      var af = selC.map(function (k) { return '<span>' + catName(k) + ' <b data-c="' + k + '">✕</b></span>'; }).concat(selS.map(function (k) { return '<span>' + sts()[k - 1][2] + ' <b data-s="' + k + '">✕</b></span>'; }));
+      w.querySelector(".af").innerHTML = af.join("");
+      w.querySelectorAll(".af b").forEach(function (x) { x.onclick = function () { if (x.dataset.c) selC = selC.filter(function (k) { return k !== x.dataset.c; }); else selS = selS.filter(function (k) { return k !== +x.dataset.s; }); bar(); list(); }; });
+    }
     function list() {
-      var qq = q.trim().toLowerCase();
-      var r = BOOKS.filter(function (b) { return (cat === "all" || b.k === cat) && (!qq || (b.t.join(" ") + " " + b.a.join(" ")).toLowerCase().indexOf(qq) > -1); });
+      var r = BOOKS.filter(function (b) { return match(b, selC, selS); });
       w.querySelector(".cnt").textContent = ML ? r.length + " പുസ്തകങ്ങൾ" : r.length + (r.length === 1 ? " book" : " books");
-      w.querySelector(".bl").innerHTML = r.length ? r.map(card).join("") : '<div class="no">🔍 ' + T("ഈ പേരിൽ പുസ്തകം ഇല്ല", "No book found") + '</div>';
+      w.querySelector(".bl").innerHTML = r.length ? r.map(card).join("") : '<div class="no"><i>📭</i>' + T("ഈ ഫിൽട്ടറിൽ പുസ്തകം ഇല്ല", "No books match this filter") + '<br><button type="button">' + T("എല്ലാം കാണിക്കൂ", "Show all") + '</button></div>';
+      var nb = w.querySelector(".no button"); if (nb) nb.onclick = function () { selC = []; selS = []; q = ""; w.querySelector(".sr input").value = ""; bar(); list(); };
       w.querySelectorAll(".rq").forEach(function (b) { b.onclick = function () { toast(T("പുസ്തകം ചോദിക്കൽ ഉടൻ തുടങ്ങും 🙂", "Book requests start soon 🙂")); }; });
     }
+    function pick(type) {
+      var isC = type === "cat", tmp = (isC ? selC : selS).slice();
+      var rows = isC ? cats() : sts();
+      var bg = document.createElement("div"); bg.className = "zls-bg";
+      var sh = document.createElement("div"); sh.className = "zls"; sh.setAttribute("data-noi18n", "");
+      function cnt(key) { return BOOKS.filter(function (b) { return isC ? b.k === key && match(b, [], selS) : b.st === key && match(b, selC, []); }).length; }
+      sh.innerHTML = '<div class="gr"></div><div class="sh2"><h4>' + (isC ? "🗂️ " + T("വിഭാഗം", "Category") : "✅ " + T("ലഭ്യത", "Availability")) + '</h4><button type="button" class="x" aria-label="Close">✕</button></div><div class="hs">' + T("ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം", "You can pick more than one") + '</div><div class="ls">' +
+        rows.map(function (x) { return '<div class="r' + (tmp.indexOf(x[0]) > -1 ? ' on' : '') + '" data-k="' + x[0] + '"><span class="ck"></span><i>' + x[1] + '</i><span>' + x[2] + '</span><small>' + cnt(x[0]) + '</small></div>'; }).join("") +
+        '</div><div class="ap"><button type="button" class="a">' + T("പുസ്തകങ്ങൾ കാണിക്കൂ", "Show books") + '</button></div>';
+      function upd() {}
+      sh.querySelectorAll(".r").forEach(function (r) { r.onclick = function () { var k = isC ? r.dataset.k : +r.dataset.k, p = tmp.indexOf(k); if (p > -1) tmp.splice(p, 1); else tmp.push(k); r.classList.toggle("on", p < 0); upd(); }; });
+      function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
+      bg.onclick = shut;
+      sh.querySelector(".x").onclick = shut;
+      sh.querySelector(".a").onclick = function () { if (isC) selC = tmp; else selS = tmp; bar(); list(); shut(); };
+      upd(); document.body.appendChild(bg); document.body.appendChild(sh);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { bg.classList.add("on"); sh.classList.add("on"); }); });
+    }
     function render() {
+      var filt = '<div class="sr"><span>🔍</span><input type="search" placeholder="' + T("പുസ്തകം / എഴുത്തുകാരൻ തിരയൂ", "Search book / author") + '" value="' + esc(q) + '"></div><div class="fb"></div><div class="af"></div>';
       w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button>' +
         '<span class="cap">📚</span><h2>' + T("ZEST ലൈബ്രറി", "ZEST Library") + '</h2><p>' + T("വായിക്കാം, വളരാം", "Read and grow") + '</p></div>' +
         '<div class="soon">👀 ' + T("ഇത് ഒരു മാതൃക മാത്രം – ലൈബ്രറിയിലെ മുഴുവൻ പുസ്തകങ്ങളും ഉടൻ ചേർക്കും", "Sample preview – all library books will be added soon") + '</div>' +
-        '<div class="mhr"><h3>' + T("ZEST ലൈബ്രറിയിലെ പുസ്തകങ്ങൾ", "Books at ZEST Library") + '</h3><p>' + T("പുസ്തകം തിരയാം, ഇഷ്ടമുള്ള വിഭാഗം തിരഞ്ഞെടുക്കാം", "Search a book or pick a category") + '</p></div>' +
-        '<div class="sr"><span>🔍</span><input type="search" placeholder="' + T("പുസ്തകം / എഴുത്തുകാരൻ തിരയൂ", "Search book / author") + '" value="' + esc(q) + '"></div>' +
-        '<div class="ch">' + cats().map(function (c) { return '<button type="button" data-c="' + c[0] + '"' + (c[0] === cat ? ' class="on"' : '') + '>' + c[1] + '</button>'; }).join("") + '</div>' +
+        (V === "v3" ? '<div class="stk">' + filt + '</div>' : filt) +
         '<div class="cnt"></div><div class="bl"></div>' +
         '<div class="nt">' + T("പുതിയ പുസ്തകങ്ങൾ ലൈബ്രറിയിൽ എത്തുമ്പോൾ ഇവിടെ തനിയെ വരും", "New books appear here automatically when they reach the library") + '</div>';
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(); w.scrollTop = y; };
       w.querySelector(".sr input").oninput = function (e) { q = e.target.value; list(); };
-      w.querySelectorAll(".ch button").forEach(function (b) { b.onclick = function () { cat = b.dataset.c; w.querySelectorAll(".ch button").forEach(function (x) { x.classList.toggle("on", x === b); }); list(); }; });
-      list();
+      bar(); list();
     }
     render();
     document.body.appendChild(w);
