@@ -65,7 +65,7 @@
     gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "📅", "EVENTS")) +
     gp("#f08a00", I.info, ZML ? "അറിയിപ്പുകൾ" : "SERVICE CENTRE INFO", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", ZML ? "പ്രധാന അറിയിപ്പ്" : "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
     gp("#6a4bd1", I.stu, "STUDENTS CORNER", tl("#students", "📖", "REVISION PLANNER", "rev") + tl("#students", "💰", "POCKET MONEY", "mon")) +
-    ln("#16996a", "#soon", BK, "ZEST LIBRARY") + ln("#e0345c", "#soon", DROP, "BLOOD BANK");
+    ln("#16996a", "#soon", BK, "ZEST LIBRARY") + gp("#e0345c", DROP, "MEDICAL HELP", tl("#soon", "🩸", "BLOOD BANK") + tl("#soon", "🦽", ZML ? "മെഡിക്കൽ ഉപകരണങ്ങൾ" : "MEDICAL EQUIPMENT"));
   var BOT = '<div class="zdw-bt"><a class="zdw-sg" href="#settings"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></i><span data-noi18n class="zsgl">Settings</span></a>' +
     '<a class="zdw-jn" href="' + H("join") + '"><b>💛 JOIN WITH ZEST</b><small data-noi18n>' + '</small><em><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></em></a></div>';
   dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd2"><img src="/icons/icon-192.png" alt=""><div><b data-noi18n>ZEST for Peace</b><small data-noi18n>നാട് വളരാൻ നാടിനൊപ്പം</small></div><button class="zdw-x" aria-label="Close menu">✕</button></div><div class="zdw-ls" role="navigation">' + items + '</div></div>' + BOT + '<div class="zdw-ft"><b>zestforpeace.com</b></div>';
@@ -117,11 +117,26 @@
   }, true);
   bg.addEventListener("click", hide);
   dw.querySelector(".zdw-x").addEventListener("click", hide);
+  function appOnly(ml) {
+    var o = document.getElementById("zao"); if (o) o.remove();
+    o = document.createElement("div"); o.id = "zao"; o.setAttribute("data-noi18n", "");
+    o.innerHTML = '<div class="zao-bg"></div><div class="zao-c"><img src="/icons/icon-192.png" alt=""><b>' + (ml ? "ഇത് ZEST APP-ൽ മാത്രം" : "Available only in the ZEST APP") + '</b><p>' + (ml ? "ഈ സേവനം ഉപയോഗിക്കാൻ ZEST APP ഇൻസ്റ്റാൾ ചെയ്യൂ. സൗജന്യമാണ്." : "Install the free ZEST APP to use this service.") + '</p><a class="zao-i" href="/app/">' + (ml ? "📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ" : "📲 Install the App") + '</a><button type="button" class="zao-x">' + (ml ? "പിന്നീട്" : "Later") + '</button></div>';
+    var st = document.getElementById("zao-css"); if (!st) { st = document.createElement("style"); st.id = "zao-css";
+      st.textContent = '#zao{position:fixed;inset:0;z-index:2147483646;display:grid;place-items:center;padding:24px}#zao .zao-bg{position:absolute;inset:0;background:rgba(8,25,40,.55)}#zao .zao-c{position:relative;width:100%;max-width:340px;background:#fff;border-radius:22px;padding:22px 20px 16px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3);font-family:Inter,"Noto Sans Malayalam",sans-serif}#zao img{width:64px;height:64px;border-radius:18px;box-shadow:0 6px 14px rgba(11,61,92,.2)}#zao b{display:block;margin-top:12px;font-size:17px;color:#0b3d5c}#zao p{margin:6px 0 16px;font-size:13px;color:#5d707c;line-height:1.6}#zao .zao-i{display:block;padding:13px;border-radius:14px;background:linear-gradient(135deg,#3fa7d6,#0b5d8f);color:#fff;font-weight:800;text-decoration:none;font-size:14.5px}#zao .zao-x{margin-top:8px;border:0;background:none;color:#7a8b96;font:600 13px Inter,"Noto Sans Malayalam",sans-serif;padding:8px;cursor:pointer}';
+      document.head.appendChild(st); }
+    document.body.appendChild(o);
+    o.querySelector(".zao-bg").onclick = o.querySelector(".zao-x").onclick = function () { o.remove(); };
+  }
   dw.querySelectorAll(".zdw-ls a,.zdw-bt a").forEach(function (a) { a.addEventListener("click", function (e) {
-    if (a.getAttribute("href") === "#soon") { e.preventDefault(); e.stopImmediatePropagation(); var ml = window.ZestLang && ZestLang.get() === "ml", t = document.createElement("div");
+    if (a.getAttribute("href") === "#soon") { e.preventDefault(); e.stopImmediatePropagation(); var ml = window.ZestLang && ZestLang.get() === "ml";
+      var isApp = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+      if (!isApp) { hide(); appOnly(ml); return; }
+      var t = document.createElement("div");
       t.textContent = ml ? "ഉടൻ വരുന്നു 🙂" : "Coming soon 🙂"; t.style.cssText = "position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,'Noto Sans Malayalam',sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25)";
       document.body.appendChild(t); setTimeout(function () { t.remove(); }, 1800); return; }
-    if (a.dataset.go) window.__zgo = a.dataset.go;
+    if (a.dataset.go) { var inApp = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+      if (!inApp) { e.preventDefault(); e.stopImmediatePropagation(); hide(); appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
+      window.__zgo = a.dataset.go; }
     hide(); }); });
   dw.querySelectorAll(".zdw-gh").forEach(function (gh) { gh.addEventListener("click", function () { var g = gh.parentNode, o = !g.classList.contains("op"); dw.querySelectorAll(".zdw-gp.op").forEach(function (x) { if (x !== g) { x.classList.remove("op"); x.querySelector(".zdw-gh").setAttribute("aria-expanded", "false"); } }); g.classList.toggle("op", o); gh.setAttribute("aria-expanded", o ? "true" : "false"); }); });
   /* Service Centre sub-items: go to the Centre Info section on the home page and pick that filter */
