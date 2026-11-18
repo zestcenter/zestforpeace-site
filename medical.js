@@ -27,6 +27,13 @@
     '#zmed .q{margin:4px 14px 0;background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 2px 0 #e3eaef}#zmed .q h4{margin:6px 0 4px;font-size:16px;line-height:1.5;color:#0b3d5c}#zmed .q p{margin:0;font-size:12.5px;color:#5d707c}#zmed .q .dr{font-size:30px}' +
     '#zmed .yn{display:flex;gap:8px;margin-top:12px}#zmed .yn button{flex:1;border:0;border-radius:12px;padding:11px;font:800 14px Inter,"Noto Sans Malayalam",sans-serif;cursor:pointer;background:#eef3f7;color:#3b4c57}#zmed .yn .y{background:#1f9d55;color:#fff}' +
     '#zmed .pv{font-size:11.5px;color:#7a8b96;text-align:center;margin:10px 14px 0}' +
+    '#zmed .fl{display:block;margin-bottom:10px}#zmed .fl>span:first-child{display:block;font:700 12px ' + '"Noto Sans Malayalam",Inter,sans-serif;color:#3c5566;margin:0 0 5px 2px}#zmed .fl em,#zmed .rqm{font-style:normal;color:#e0345c}#zmed .fl input{margin-bottom:0}' +
+    '#zmed select{width:100%;box-sizing:border-box;-webkit-appearance:none;appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M6 9l6 6 6-6%27 fill=%27none%27 stroke=%27%231380b8%27 stroke-width=%272.5%27/%3E%3C/svg%3E") no-repeat right 12px center/16px;border:1.5px solid #dde6ee;border-radius:12px;padding:11px 36px 11px 12px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;outline:none}#zmed select:focus{border-color:#1380b8}' +
+    '#zmed .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}#zmed .r2 .fl{min-width:0}#zmed .zpo{position:relative;display:block}#zmed .zpo input{padding-right:38px}#zmed .zpb{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:8px;background:#eef6fb;color:#1380b8;font:800 12px Inter,sans-serif;cursor:pointer}#zmed input[type=date]{min-height:44px}' +
+    '#zmed .inv{border-color:#e0345c!important;background-color:#fff6f8!important}#zmed .g.inv{outline:2px dashed #e0345c;outline-offset:4px;border-radius:14px;background:none!important}#zmed [hidden]{display:none!important}' +
+    '#zmed .tb button{white-space:nowrap;font-size:12.5px}' +
+    '#zmed .ntb{margin:6px 14px 0;background:#eef7f1;border-radius:14px;padding:10px 12px}#zmed .ntb p{margin:3px 0;font:600 12px/1.55 "Noto Sans Malayalam",Inter,sans-serif;color:#2d5a43}' +
+    '#zmed .go.eqg{width:-webkit-fit-content;width:fit-content;margin:16px auto 0;padding:11px 22px;font-size:13.5px;border-radius:999px;opacity:1;background:#25d366;box-shadow:0 6px 14px rgba(37,211,102,.3)}#zmed .go.eqg svg{width:18px;height:18px}' +
     '.zmt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,"Noto Sans Malayalam",sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
 
   function toast(m) { var t = document.createElement("div"); t.className = "zmt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
@@ -36,20 +43,56 @@
 
   function items() { return [["🦽", T("വീൽചെയർ", "Wheelchair"), "#e3f1fa"], ["🛏️", T("ആശുപത്രി കട്ടിൽ", "Hospital bed"), "#efe9fd"], ["🚶", T("വാക്കർ", "Walker"), "#fff1e2"], ["🩼", T("ക്രച്ചസ്", "Crutches"), "#ffe9ef"], ["🫁", T("ഓക്സിജൻ മെഷീൻ", "Oxygen machine"), "#e6f3fb"], ["🪑", T("കമ്മോഡ് ചെയർ", "Commode chair"), "#e8f7ef"], ["🌡️", T("BP / ഷുഗർ മെഷീൻ", "BP / Sugar meter"), "#fff1e2"], ["💨", T("നെബുലൈസർ", "Nebuliser"), "#efe9fd"], ["➕", T("മറ്റുള്ളവ", "Other"), "#eef2f5"]]; }
 
+  var VAL = {}, SEL = { need: [], give: [] }, EXTRA = [];
+  try { EXTRA = JSON.parse(localStorage.getItem("zestEqExtra") || "[]"); } catch (e) {}
+  function fld(name, label, html) { return '<label class="fl"><span>' + label + ' <em>*</em></span>' + html + '</label>'; }
+  function inp(name, type, ph, extra) { return '<input name="' + name + '" type="' + type + '" placeholder="' + ph + '" value="' + (VAL[name] || "").replace(/"/g, "&quot;") + '"' + (extra || "") + '>'; }
+  function sel(name, opts) { return '<select name="' + name + '"><option value="">' + T("തിരഞ്ഞെടുക്കൂ", "Choose") + '</option>' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (VAL[name] === o[0] ? " selected" : "") + '>' + o[1] + '</option>'; }).join("") + '</select>'; }
+  function eqItems(need) { var it = items(), oth = it.pop(); if (!need) EXTRA.forEach(function (x) { it.push(["📦", x, "#f1f4f7"]); }); it.push(oth); return it; }
+  function placeCell(pl) { return VAL.p === "other" ? '<span class="zpo">' + inp("po", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("p", pl); }
   function eqPage(tab) {
-    var need = tab !== "give";
+    var need = tab !== "give", it = eqItems(need), sl = SEL[need ? "need" : "give"], othOn = sl.indexOf(it.length - 1) > -1;
+    var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
+    var today = new Date(), iso = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
     return '<div class="mhr"><h3>' + T("നാട്ടുകാർ നാട്ടുകാർക്ക്", "Neighbours helping neighbours") + '</h3><p>' + T("വീട്ടിൽ ഉപയോഗിക്കാത്ത ചികിത്സാ ഉപകരണങ്ങൾ ആവശ്യക്കാർക്ക് എത്തിക്കാം", "Pass unused medical equipment to those who need it") + '</p></div>' +
       '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("എനിക്ക് വേണം", "I need") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🤝 ' + T("ഞാൻ കൊടുക്കാം", "I can give") + '</button></div>' +
-      '<div class="lb">' + (need ? T("ഏത് ഉപകരണമാണ് വേണ്ടത്?", "Which equipment do you need?") : T("നിങ്ങളുടെ കയ്യിൽ ഉള്ളത് (ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം)", "What do you have? (pick one or more)")) + '</div>' +
-      '<div class="g' + (need ? '' : ' multi') + '">' + items().map(function (x) { return '<button type="button" class="t"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
-      '<div class="lb">' + T("വിവരങ്ങൾ", "Details") + '</div><div class="f">' +
-      (need ? '<div class="row"><input placeholder="📅 ' + T("ഏത് തീയതി മുതൽ", "From date") + '"><input placeholder="⏳ ' + T("എത്ര ദിവസം", "How long") + '"></div>'
-            : chips([T("സൗജന്യമായി കൊടുക്കാം", "Give for free"), T("കുറച്ച് ദിവസത്തേക്ക് മാത്രം", "Lend for a few days")])) +
-      chips(places()) + '<input type="tel" inputmode="tel" placeholder="📱 ' + T("മൊബൈൽ നമ്പർ", "Mobile number") + '"></div>' +
-      '<button type="button" class="go">' + WA + (need ? T("WhatsApp വഴി ആവശ്യപ്പെടൂ", "Request on WhatsApp") : T("WhatsApp വഴി അറിയിക്കൂ", "Tell us on WhatsApp")) + '</button>' +
+      '<div class="lb">' + (need ? T("ഏത് ഉപകരണമാണ് വേണ്ടത്?", "Which equipment do you need?") : T("നിങ്ങളുടെ കയ്യിൽ ഉള്ളത് (ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം)", "What do you have? (pick one or more)")) + ' <em class="rqm">*</em></div>' +
+      '<div class="g' + (need ? '' : ' multi') + '">' + it.map(function (x, i) { return '<button type="button" class="t' + (sl.indexOf(i) > -1 ? ' sel' : '') + '" data-i="' + i + '"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
+      '<div class="f oth"' + (othOn ? '' : ' hidden') + '>' + fld("oth", T("ഏത് ഉപകരണം?", "Which equipment?"), inp(need ? "othN" : "othG", "text", T("ഉപകരണത്തിന്റെ പേര് എഴുതൂ", "Type the equipment name"))) + '</div>' +
+      '<div class="lb">' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</div><div class="f">' +
+      fld("n", T("പേര്", "Name"), inp("n", "text", T("നിങ്ങളുടെ പേര്", "Your name"))) +
+      fld("h", T("വീട്ടുപേര്", "House name"), inp("h", "text", T("വീട്ടുപേര്", "House name"))) +
+      '<div class="r2">' + fld("p", T("സ്ഥലം", "Place"), '<span class="zpc">' + placeCell(pl) + '</span>') +
+      fld("m", T("മൊബൈൽ നമ്പർ", "Mobile number"), inp("m", "tel", T("10 അക്ക നമ്പർ", "10-digit number"), ' inputmode="tel" maxlength="13"')) + '</div>' +
+      (need ? '<div class="r2">' + fld("d", T("ആവശ്യമുള്ള തീയതി", "Date needed"), inp("d", "date", "", ' min="' + iso + '"')) + fld("dd", T("എത്ര ദിവസത്തേക്ക്", "For how many days"), inp("dd", "number", T("ഉദാ: 10", "e.g. 10"), ' inputmode="numeric" min="1"')) + '</div>'
+            : fld("how", T("എങ്ങനെ കൊടുക്കാം", "How will you give"), sel("how", [["full", T("പൂർണമായും കൊടുക്കാം", "Give it away")], ["lend", T("കുറച്ച് ദിവസത്തേക്ക് കൊടുക്കാം", "Lend for a few days")]]))) +
+      '</div><div class="ntb">' + (need ? '<p>🔍 ' + T("ലഭിക്കുന്ന ഉപകരണങ്ങൾ പൂർണമായും പരിശോധിച്ചതിന് ശേഷം മാത്രം കൈപ്പറ്റുക.", "Check the equipment fully before you accept it.") + '</p>' : '') +
+      '<p>💚 ' + T("ZEST App-ലൂടെയുള്ള ഈ കൈമാറ്റം തീർത്തും സൗജന്യമായിരിക്കും.", "This exchange through the ZEST App is completely free.") + '</p></div>' +
+      '<button type="button" class="go eqg">' + WA + (need ? T("ZEST CENTRE-ൽ അന്വേഷിക്കാം", "Ask ZEST Centre") : T("ZEST CENTRE-ൽ അറിയിക്കാം", "Tell ZEST Centre")) + '</button>' +
       '<p class="nt">' + soon() + '</p>';
   }
-
+  function eqWire(w, tab, rerender) {
+    var need = tab !== "give", key = need ? "need" : "give", g = w.querySelector(".g"), last = g.querySelectorAll(".t").length - 1;
+    var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
+    function bind(root) { root.querySelectorAll("input,select").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); el.addEventListener("change", function () { VAL[el.name] = el.value; el.classList.remove("inv"); if (el.name === "p" && el.value === "other") swapPlace(true); }); });
+      var pb = root.querySelector(".zpb"); if (pb) pb.onclick = function () { VAL.p = ""; VAL.po = ""; swapPlace(false); }; }
+    function swapPlace(focus) { var pc = w.querySelector(".zpc"); pc.innerHTML = placeCell(pl); bind(pc); if (focus) { var i = pc.querySelector("input"); if (i) i.focus(); } }
+    bind(w.querySelector(".f.oth")); w.querySelectorAll(".f").forEach(function (f) { if (!f.classList.contains("oth")) bind(f); });
+    g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; var i = +b.dataset.i, sl = SEL[key];
+      if (need) { SEL[key] = sl[0] === i ? [] : [i]; } else { var p = sl.indexOf(i); if (p > -1) sl.splice(p, 1); else sl.push(i); }
+      g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", SEL[key].indexOf(+x.dataset.i) > -1); });
+      g.classList.remove("inv"); w.querySelector(".oth").hidden = SEL[key].indexOf(last) < 0; });
+    w.querySelector(".eqg").onclick = function () {
+      var bad = null;
+      if (!SEL[key].length) { g.classList.add("inv"); bad = bad || g; }
+      w.querySelectorAll(".f input,.f select").forEach(function (el) { if (el.closest("[hidden]")) return; var v = (el.value || "").trim(), ok = !!v;
+        if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (ok && el.name === "dd") ok = +v > 0;
+        if (!ok) { el.classList.add("inv"); bad = bad || el; } });
+      if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
+      if (need && SEL[key].indexOf(last) > -1 && VAL.othN && EXTRA.indexOf(VAL.othN.trim()) < 0) { EXTRA.push(VAL.othN.trim()); try { localStorage.setItem("zestEqExtra", JSON.stringify(EXTRA)); } catch (e) {} }
+      toast(soon());
+    };
+  }
   function bloodPage() {
     var G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
     return '<div class="mhr"><h3>' + T("നാട്ടുകാരുടെ രക്തദാന കൂട്ടായ്മ", "Our village blood donors") + '</h3><p>' + T("നാട്ടിൽ അടിയന്തരമായി രക്തം വേണ്ടി വരുമ്പോൾ സഹായിക്കാൻ തയ്യാറുള്ളവരുടെ കൂട്ടായ്മ", "Neighbours ready to donate blood in local emergencies") + '</p></div>' +
@@ -77,9 +120,9 @@
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
-      var g = w.querySelector(".g"); if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
+      if (which !== "blood") eqWire(w, tab); var g = which === "blood" ? w.querySelector(".g") : null; if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
       w.querySelectorAll(".tb button").forEach(function (b) { b.onclick = function () { render(b.dataset.tab); w.scrollTop = 0; }; });
-      w.querySelectorAll(".go,.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
+      w.querySelectorAll(".go:not(.eqg),.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
     }
     render("need");
     document.body.appendChild(w);
