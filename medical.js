@@ -34,6 +34,19 @@
     '#zmed .tb button{white-space:nowrap;font-size:12.5px}' +
     '#zmed .ntb{margin:6px 14px 0;background:#eef7f1;border-radius:14px;padding:10px 12px}#zmed .ntb p{margin:3px 0;font:600 12px/1.55 "Noto Sans Malayalam",Inter,sans-serif;color:#2d5a43}' +
     '#zmed .go.eqg{width:-webkit-fit-content;width:fit-content;margin:16px auto 0;padding:11px 22px;font-size:13.5px;border-radius:999px;opacity:1;background:#25d366;box-shadow:0 6px 14px rgba(37,211,102,.3)}#zmed .go.eqg svg{width:18px;height:18px}' +
+    '#zmed .zbq{margin:14px 14px 0;display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 2px 0 #e3eaef}#zmed .zbq .ic{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:linear-gradient(160deg,#ff5a7a,#d81b47);font-size:26px;box-shadow:0 6px 14px rgba(216,27,71,.3)}#zmed .zbq b{display:block;font:800 14px/1.45 "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbq small{font:600 11.5px "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}' +
+    '#zmed .zbyn{display:flex;margin:12px 14px 0;background:#fff;border-radius:16px;padding:5px;box-shadow:0 2px 0 #e3eaef}#zmed .zbyn button{flex:1;border:0;background:none;padding:11px;border-radius:12px;font:800 13px "Noto Sans Malayalam",Inter,sans-serif;color:#4a5d69;cursor:pointer}#zmed .zbyn .on{background:linear-gradient(135deg,#22b573,#159a5c);color:#fff}' +
+    '#zmed .zbt{margin:18px 18px 8px;font:800 14px "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbt em{font-style:normal;color:#e0345c}' +
+    '#zmed .zbg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:2px 14px 4px}#zmed .zbg button{height:60px;border-radius:50% 50% 50% 50%/58% 58% 42% 42%;background:#fff;border:1.5px solid #f6c9d3;color:#c0254a;font:900 16px Inter,sans-serif;cursor:pointer;transition:transform .15s}#zmed .zbg button.on{background:linear-gradient(160deg,#ff5a7a,#d81b47);color:#fff;border-color:#d81b47;box-shadow:0 8px 16px rgba(216,27,71,.35);transform:scale(1.05)}#zmed .zbg.inv{outline:2px dashed #e0345c;outline-offset:2px;border-radius:14px}' +
+    '#zmed .zbu{display:block;width:calc(100% - 28px);margin:8px 14px 0;text-align:center;border:1.5px dashed #e1c3cb;border-radius:12px;padding:9px;font:700 12.5px "Noto Sans Malayalam",Inter,sans-serif;color:#8a5562;background:#fff;cursor:pointer}#zmed .zbu.on{border-style:solid;border-color:#d81b47;background:#fff5f7;color:#c0254a}' +
+    '#zmed .zbfs{padding:0 14px}#zmed .zbf{position:relative;display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:0 12px;margin-bottom:8px;box-shadow:0 2px 0 #e3eaef}#zmed .zbf>i{font-style:normal;font-size:17px;flex:none}#zmed .zbf>em{font-style:normal;color:#e0345c;font-weight:800;flex:none}#zmed .zbf input,#zmed .zbf select{flex:1;min-width:0;margin:0;border:0!important;box-shadow:none;background-color:transparent!important;padding:12px 4px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif}#zmed .zbf .zpc{flex:1;min-width:0}#zmed .zbf select{padding-right:26px!important;background-position:right 4px center!important;text-overflow:ellipsis}#zmed .zbf .zpo input{padding-right:34px}#zmed .zbf .zpb{right:0}#zmed .zbf:has(.inv){box-shadow:0 0 0 2px #e0345c;background:#fff6f8}#zmed .zbfs .r2{gap:8px}' +
+    '#zmed .zbok{margin:16px 14px 0;background:#fff;border-radius:20px;padding:20px 16px;text-align:center;box-shadow:0 2px 0 #e3eaef;animation:zbIn .35s ease}@keyframes zbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}#zmed .zbk{display:grid;place-items:center;width:56px;height:56px;margin:0 auto;border-radius:50%;background:#e8f7ef;font-size:28px}#zmed .zbok h4{margin:12px 0 4px;font:800 15px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbok p{margin:0 0 14px;font:600 11.5px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}#zmed .zbmore{border:0;border-radius:999px;padding:11px 18px;background:#e6f3fb;color:#0b5d8f;font:800 13px "Noto Sans Malayalam",Inter,sans-serif;cursor:pointer}' +
+    '#zmed .zbno{margin:14px;background:#eef6fb;border-radius:14px;padding:14px;text-align:center;font:700 13px/1.6 "Noto Sans Malayalam",Inter,sans-serif;color:#3c5566}' +
+    '#zmed .go.zbgo{width:-webkit-fit-content;width:fit-content;margin:16px auto 0;padding:12px 24px;border-radius:999px;font-size:14px;background:linear-gradient(135deg,#22b573,#159a5c);opacity:1;box-shadow:0 6px 14px rgba(21,154,92,.3)}' +
+    '#zmed .zbav{margin:14px 14px 0;background:#fff;border-radius:20px;padding:14px;box-shadow:0 2px 0 #e3eaef}#zmed .zbav h4{margin:0 0 4px;font:800 14.5px "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbav p{margin:0 0 12px;font:600 11.5px "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}' +
+    '#zmed .zbag{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}#zmed .zbag div{position:relative;text-align:center;padding:12px 4px 10px;border-radius:16px;background:#fff5f7;border:1.5px solid #f6c9d3}#zmed .zbag b{display:block;font:900 16px Inter,sans-serif;color:#c0254a}#zmed .zbag span{display:block;margin-top:4px;font:800 12px "Noto Sans Malayalam",Inter,sans-serif;color:#0f7d58}#zmed .zbag div.z{background:#f6f8fa;border-color:#e3eaef}#zmed .zbag div.z b,#zmed .zbag div.z span{color:#a3b1ba}#zmed .zbag div:not(.z):after{content:"";position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:#22b573;box-shadow:0 0 0 3px rgba(34,181,115,.2)}' +
+    '#zmed .zbtot{display:flex;align-items:center;gap:10px;margin:12px 14px 0;background:linear-gradient(135deg,#effaf4,#e2f5ea);border-radius:16px;padding:12px 14px;font:700 12.5px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#2d5a43}#zmed .zbtot b{font:900 22px Inter,sans-serif;color:#0f7d58}#zmed .zbtot small{font-weight:600;color:#5d7a69}' +
+    '#zmed .zbhw{margin:12px 14px 0;background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 2px 0 #e3eaef}#zmed .zbhw h5{margin:0 0 8px;font:800 13px "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbhw ol{margin:0;padding-left:18px;font:600 12.5px/1.7 "Noto Sans Malayalam",Inter,sans-serif;color:#3c5566}' +
     '.zmt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px Inter,"Noto Sans Malayalam",sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
 
   function toast(m) { var t = document.createElement("div"); t.className = "zmt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
@@ -93,18 +106,55 @@
       toast(soon());
     };
   }
-  function bloodPage() {
-    var G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
-    return '<div class="mhr"><h3>' + T("നാട്ടുകാരുടെ രക്തദാന കൂട്ടായ്മ", "Our village blood donors") + '</h3><p>' + T("നാട്ടിൽ അടിയന്തരമായി രക്തം വേണ്ടി വരുമ്പോൾ സഹായിക്കാൻ തയ്യാറുള്ളവരുടെ കൂട്ടായ്മ", "Neighbours ready to donate blood in local emergencies") + '</p></div>' +
-      '<div class="q"><div class="dr">🩸</div><h4>' + T("നമ്മുടെ നാട്ടിലെ ഒരാൾക്ക് പെട്ടെന്ന് രക്തം ആവശ്യമായി വന്നാൽ, കൊടുക്കാൻ നിങ്ങൾ തയ്യാറാണോ?", "If someone in our village urgently needs blood, are you ready to donate?") + '</h4><p>' + T("നിങ്ങളുടെ ഒരു തീരുമാനം ഒരു ജീവൻ രക്ഷിച്ചേക്കാം", "Your decision could save a life") + '</p>' +
-      '<div class="yn"><button type="button" class="y">✅ ' + T("അതെ, തയ്യാറാണ്", "Yes, I'm ready") + '</button><button type="button">' + T("ഇല്ല", "No") + '</button></div></div>' +
-      '<div class="lb">' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</div><div class="f">' +
-      '<input placeholder="' + T("പേര്", "Name") + '"><input placeholder="' + T("വീട്ടുപേര്", "House name") + '"><input type="tel" inputmode="tel" placeholder="📱 ' + T("ഫോൺ നമ്പർ", "Phone number") + '">' +
-      '</div><div class="lb">' + T("സ്ഥലം", "Place") + '</div><div class="f">' + chips(places()) + '</div>' +
-      '<div class="lb">' + T("അവസാനമായി രക്തം കൊടുത്തത്", "Last donated") + '</div><div class="f">' + chips([T("3 മാസത്തിനുള്ളിൽ", "Within 3 months"), T("3 മാസത്തിന് മുൻപ്", "Over 3 months ago"), T("ഇതുവരെ കൊടുത്തിട്ടില്ല", "Never")]) + '</div>' +
-      '<div class="lb">' + T("ബ്ലഡ് ഗ്രൂപ്പ്", "Blood group") + '</div><div class="f"><div class="bg">' + G.map(function (g) { return '<button type="button">' + g + '</button>'; }).join("") + '<button type="button" class="u">' + T("അറിയില്ല", "Don't know") + '</button></div></div>' +
-      '<button type="button" class="go gr">✅ ' + T("സമർപ്പിക്കൂ", "Submit") + '</button>' +
-      '<p class="pv">🔒 ' + T("(ഈ വിവരങ്ങൾ അഡ്മിന് മാത്രമേ കാണാൻ സാധിക്കൂ)", "(Only ZEST admins can see these details)") + '</p><p class="nt">' + soon() + '</p>';
+  var BST = { ready: 1, grp: "", done: 0 };
+  var BCOUNT = { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }; /* sample numbers – will come from the Google Sheet */
+  function ifl(icon, html, dd) { return '<label class="zbf' + (dd ? ' dd' : '') + '"><i>' + icon + '</i>' + html + '<em>*</em></label>'; }
+  function bPlace() { var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
+    return VAL.bp === "other" ? '<span class="zpo">' + inp("bpo", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("bp", pl).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("സ്ഥലം", "Place")); }
+  function bloodPage(tab) {
+    var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
+    var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
+    if (!give) {
+      var tot = 0; G.forEach(function (g) { tot += BCOUNT[g]; });
+      return h + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
+        G.map(function (g) { var n = BCOUNT[g]; return '<div' + (n ? '' : ' class="z"') + '><b>' + g + '</b><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
+        '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
+        '<div class="zbhw"><h5>' + T("രക്തം വേണമെങ്കിൽ എന്ത് ചെയ്യണം?", "Need blood? Here's how") + '</h5><ol><li>' + T("താഴെയുള്ള ബട്ടൺ അമർത്തി ZEST CENTRE-നെ അറിയിക്കുക", "Tap the button below to tell ZEST Centre") + '</li><li>' + T("ZEST ലഭ്യമായ ദാതാക്കളെ ബന്ധപ്പെടും", "ZEST contacts available donors") + '</li><li>' + T("ദാതാവ് നിങ്ങളെ നേരിട്ട് വിളിക്കും", "A donor calls you directly") + '</li></ol></div>' +
+        '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button><p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>';
+    }
+    return h + '<div class="zbq"><span class="ic">🩸</span><span><b>' + T("നാട്ടിലെ ഒരു ജീവന് നിങ്ങളുടെ രക്തം വേണ്ടി വന്നാൽ?", "If a life in our village needs your blood?") + '</b><small>' + T("ദാതാവായി ചേരാൻ 1 മിനിറ്റ് മതി", "Joining takes just 1 minute") + '</small></span></div>' +
+      '<div class="zbyn"><button type="button" data-r="1"' + (BST.ready ? ' class="on"' : '') + '>✅ ' + T("ഞാൻ തയ്യാറാണ്", "I'm ready") + '</button><button type="button" data-r="0"' + (BST.ready ? '' : ' class="on"') + '>' + T("ഇപ്പോൾ ഇല്ല", "Not now") + '</button></div>' +
+      (BST.ready && BST.done ? '<div class="zbok"><div class="zbk">✅</div><h4>' + T("നന്ദി! ഒരു ജീവൻ രക്ഷിക്കാൻ നിങ്ങളും തയ്യാർ 💚", "Thank you! You are ready to save a life 💚") + '</h4><p>' + T("(ഇത് മാതൃക മാത്രം – സേവനം തുടങ്ങുമ്പോഴാണ് വിവരങ്ങൾ ZEST-ലേക്ക് പോവുക)", "(Preview only – details are sent to ZEST once the service starts)") + '</p>' +
+        '<button type="button" class="zbmore">➕ ' + T("വീട്ടിലെ മറ്റൊരാളെ കൂടി ചേർക്കാം", "Add another family member") + '</button></div>' :
+      BST.ready ?
+      '<div class="zbt">🩸 ' + T("ബ്ലഡ് ഗ്രൂപ്പ്", "Blood group") + ' <em>*</em></div><div class="zbg">' + G.map(function (g) { return '<button type="button" data-g="' + g + '"' + (BST.grp === g ? ' class="on"' : '') + '>' + g + '</button>'; }).join("") + '</div>' +
+      '<button type="button" class="zbu' + (BST.grp === "?" ? ' on' : '') + '" data-g="?">🤔 ' + T("അറിയില്ല", "Don't know") + '</button>' +
+      '<div class="zbt">👤 ' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</div><div class="f zbfs">' +
+      ifl("🙂", inp("n", "text", T("പേര്", "Name"))) + ifl("🏠", inp("h", "text", T("വീട്ടുപേര്", "House name"))) +
+      '<div class="r2">' + ifl("📍", '<span class="zpc">' + bPlace() + '</span>') + ifl("📱", inp("m", "tel", T("മൊബൈൽ", "Mobile"), ' inputmode="tel" maxlength="13"')) + '</div>' +
+      ifl("🗓️", sel("bl", [["lt3", T("3 മാസത്തിനുള്ളിൽ", "Within 3 months")], ["gt3", T("3 മാസത്തിന് മുമ്പ്", "Over 3 months ago")], ["never", T("ഇതുവരെ കൊടുത്തിട്ടില്ല", "Never")]]).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("അവസാനമായി രക്തം കൊടുത്തത്", "Last donated"))) +
+      '</div><button type="button" class="go zbgo">🩸 ' + T("രക്തദാതാവായി ചേരാം", "Join as a donor") + '</button>' +
+      '<p class="pv">🔒 ' + T("ഈ വിവരങ്ങൾ ZEST അഡ്മിന് മാത്രമേ കാണാൻ കഴിയൂ", "Only ZEST admins can see these details") + '</p>'
+      : '<div class="zbno">🙏 ' + T("ശരി, ഒരു പ്രശ്നവുമില്ല. എപ്പോഴെങ്കിലും തയ്യാറാകുമ്പോൾ ഇവിടെ വന്ന് ചേരാം.", "No problem. You can join here whenever you are ready.") + '</div>') +
+      '<p class="nt">' + soon() + '</p>';
+  }
+  function bloodWire(w, tab, rerender) {
+    if (tab === "need") { w.querySelector(".zbneed").onclick = function () { toast(soon()); }; return; }
+    w.querySelectorAll(".zbyn button").forEach(function (b) { b.onclick = function () { BST.ready = +b.dataset.r; var y = w.scrollTop; rerender(); w.scrollTop = y; }; });
+    if (!BST.ready) return;
+    if (BST.done) { w.querySelector(".zbmore").onclick = function () { BST.done = 0; BST.grp = ""; VAL.n = ""; VAL.m = ""; VAL.bl = ""; rerender(); var t = w.querySelector(".zbt"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }; return; }
+    w.querySelectorAll("[data-g]").forEach(function (b) { b.onclick = function () { BST.grp = b.dataset.g; w.querySelectorAll("[data-g]").forEach(function (x) { x.classList.toggle("on", x === b); }); w.querySelector(".zbg").classList.remove("inv"); }; });
+    function bind(root) { root.querySelectorAll("input,select").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); el.addEventListener("change", function () { VAL[el.name] = el.value; el.classList.remove("inv"); if (el.name === "bp" && el.value === "other") swap(true); }); });
+      var pb = root.querySelector(".zpb"); if (pb) pb.onclick = function () { VAL.bp = ""; VAL.bpo = ""; swap(false); }; }
+    function swap(f) { var pc = w.querySelector(".zpc"); pc.innerHTML = bPlace(); bind(pc); if (f) { var i = pc.querySelector("input"); if (i) i.focus(); } }
+    bind(w.querySelector(".zbfs"));
+    w.querySelector(".zbgo").onclick = function () {
+      var bad = null, g = w.querySelector(".zbg");
+      if (!BST.grp) { g.classList.add("inv"); bad = g; }
+      w.querySelectorAll(".zbfs input,.zbfs select").forEach(function (el) { var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
+      if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
+      BST.done = 1; rerender(); var ok = w.querySelector(".zbok"); if (ok) ok.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
   }
 
   function open(which) {
@@ -116,15 +166,15 @@
       cur = tab;
       var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ ഉപകരണങ്ങൾ", "Medical Equipment");
       var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ആവശ്യക്കാർക്ക് ചികിത്സാ ഉപകരണങ്ങൾ", "Medical equipment for those in need");
-      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button><span class="cap">' + cap + '</span><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage() : eqPage(tab));
+      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">English <span class="sw"><i></i></span></button><span class="cap">' + cap + '</span><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage(tab) : eqPage(tab));
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
-      if (which !== "blood") eqWire(w, tab); var g = which === "blood" ? w.querySelector(".g") : null; if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
+      if (which !== "blood") eqWire(w, tab); else bloodWire(w, tab, function () { render(cur); }); var g = which === "blood" ? w.querySelector(".g") : null; if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
       w.querySelectorAll(".tb button").forEach(function (b) { b.onclick = function () { render(b.dataset.tab); w.scrollTop = 0; }; });
-      w.querySelectorAll(".go:not(.eqg),.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
+      w.querySelectorAll(".go:not(.eqg):not(.zbgo),.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
     }
-    render("need");
+    render(which === "blood" ? "give" : "need");
     document.body.appendChild(w);
     try { history.pushState({ zmed: 1 }, ""); } catch (e) {}
     window.addEventListener("popstate", onPop);
