@@ -41,6 +41,14 @@
     '#zmed .zbu{display:block;width:calc(100% - 28px);margin:8px 14px 0;text-align:center;border:1.5px dashed #e1c3cb;border-radius:12px;padding:9px;font:700 12.5px "Noto Sans Malayalam",Inter,sans-serif;color:#8a5562;background:#fff;cursor:pointer}#zmed .zbu.on{border-style:solid;border-color:#d81b47;background:#fff5f7;color:#c0254a}' +
     '#zmed .zbfs{padding:0 14px}#zmed .zbf{position:relative;display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:0 12px;margin-bottom:8px;box-shadow:0 2px 0 #e3eaef}#zmed .zbf>i{font-style:normal;font-size:17px;flex:none}#zmed .zbf>em{font-style:normal;color:#e0345c;font-weight:800;flex:none}#zmed .zbf input,#zmed .zbf select{flex:1;min-width:0;margin:0;border:0!important;box-shadow:none;background-color:transparent!important;padding:12px 4px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif}#zmed .zbf .zpc{flex:1;min-width:0}#zmed .zbf select{padding-right:26px!important;background-position:right 4px center!important;text-overflow:ellipsis}#zmed .zbf .zpo input{padding-right:34px}#zmed .zbf .zpb{right:0}#zmed .zbf:has(.inv){box-shadow:0 0 0 2px #e0345c;background:#fff6f8}#zmed .zbfs .r2{gap:8px}' +
     '#zmed .zbok{margin:16px 14px 0;background:#fff;border-radius:20px;padding:20px 16px;text-align:center;box-shadow:0 2px 0 #e3eaef;animation:zbIn .35s ease}@keyframes zbIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}#zmed .zbk{display:grid;place-items:center;width:56px;height:56px;margin:0 auto;border-radius:50%;background:#e8f7ef;font-size:28px}#zmed .zbok h4{margin:12px 0 4px;font:800 15px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbok p{margin:0 0 14px;font:600 11.5px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}#zmed .zbmore{border:0;border-radius:999px;padding:11px 18px;background:#e6f3fb;color:#0b5d8f;font:800 13px "Noto Sans Malayalam",Inter,sans-serif;cursor:pointer}' +
+    '#zmed .zbdl{margin:2px 4px 6px;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;color:#3c5566}#zmed .zbnx{margin:-2px 4px 8px;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;color:#0f7d58}#zmed .zbnx:empty{display:none}#zmed .zbd{animation:zbIn .3s ease}' +
+    '#zmed .zbmc{position:relative;margin:14px 14px 0;border-radius:22px;padding:16px 18px 14px;color:#fff;background:linear-gradient(135deg,#e0345c,#a3123a 70%);box-shadow:0 12px 26px rgba(176,24,64,.32);overflow:hidden;animation:zbIn .35s ease}#zmed .zbmc:before{content:"";position:absolute;right:-30px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.1)}#zmed .zbmc.ok{background:linear-gradient(135deg,#22b573,#0f7d58 75%);box-shadow:0 12px 26px rgba(15,125,88,.3)}' +
+    '#zmed .zbmc .t1{display:flex;justify-content:space-between;font:800 10.5px Inter,sans-serif;letter-spacing:.08em;opacity:.9}#zmed .zbmc .gg{position:absolute;right:18px;top:38px;font:900 44px/1 Inter,sans-serif;text-shadow:0 3px 10px rgba(0,0,0,.2)}#zmed .zbmc .nn{position:relative;margin-top:16px;font:800 18px "Noto Sans Malayalam",Inter,sans-serif;max-width:62%;overflow-wrap:anywhere}#zmed .zbmc .ll{margin-top:4px;font:600 12px "Noto Sans Malayalam",Inter,sans-serif;opacity:.92}#zmed .zbmc .pb{margin-top:14px;height:7px;border-radius:4px;background:rgba(255,255,255,.25);overflow:hidden}#zmed .zbmc .pb i{display:block;height:100%;border-radius:4px;background:#fff}#zmed .zbmc .nx{margin-top:7px;font:700 11.5px/1.5 "Noto Sans Malayalam",Inter,sans-serif;opacity:.95}' +
+    '#zmed .zbdn{display:flex;justify-content:center;margin:16px 0 0}#zmed .zbagain{border:0;padding:11px 20px;border-radius:999px;background:#fff;color:#c0183f;font:800 13px "Noto Sans Malayalam",Inter,sans-serif;box-shadow:0 0 0 1.5px #f6c9d3,0 6px 14px rgba(216,27,71,.12);cursor:pointer}#zmed .zblk{display:flex;justify-content:center;gap:14px;margin:12px 0 0}#zmed .zblk button,#zmed .zbcard{border:0;background:none;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;color:#1380b8;cursor:pointer}#zmed .zbcard{margin-top:10px}' +
+    '#zmed .zbold{display:flex;justify-content:center;margin:12px 0 0}#zmed .zbold button{border:0;background:#e6f3fb;color:#0b5d8f;border-radius:999px;padding:8px 14px;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;cursor:pointer}' +
+    '.zbs-bg{position:fixed;inset:0;z-index:2147483640;background:rgba(10,30,45,.45)}.zbs{position:fixed;left:0;right:0;bottom:0;z-index:2147483641;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px 22px;font-family:"Noto Sans Malayalam",Inter,sans-serif;animation:zbUp .3s cubic-bezier(.2,.9,.3,1)}@keyframes zbUp{from{transform:translateY(100%)}to{transform:none}}' +
+    '.zbs .gr{width:40px;height:4px;border-radius:2px;background:#d4e0e8;margin:0 auto 10px}.zbs .hh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.zbs h4{margin:0;font:800 16px "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}.zbs .x{width:32px;height:32px;border-radius:50%;border:0;background:#eef3f7;color:#3b4c57;font:700 14px Inter,sans-serif;cursor:pointer}.zbs p{margin:0 0 12px;font:600 12px/1.5 "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}' +
+    '.zbs .zbf{display:flex;align-items:center;gap:8px;border:1.5px solid #e1e9ef;border-radius:14px;padding:0 12px;margin-bottom:10px}.zbs .zbf i{font-style:normal;font-size:17px}.zbs .zbf em{font-style:normal;color:#e0345c;font-weight:800}.zbs .zbf input{flex:1;min-width:0;border:0;outline:none;background:transparent;padding:12px 4px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif}.zbs .zbf:has(.inv){border-color:#e0345c;background:#fff6f8}.zbs .gn{margin:0 0 12px;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;color:#0f7d58}.zbs .gn:empty{display:none}.zbs .bt{display:flex;justify-content:center}.zbs .sv{border:0;padding:12px 26px;border-radius:999px;background:linear-gradient(135deg,#22b573,#159a5c);color:#fff;font:800 14px "Noto Sans Malayalam",Inter,sans-serif;box-shadow:0 6px 14px rgba(21,154,92,.3);cursor:pointer}' +
     '#zmed .zbno{margin:14px;background:#eef6fb;border-radius:14px;padding:14px;text-align:center;font:700 13px/1.6 "Noto Sans Malayalam",Inter,sans-serif;color:#3c5566}' +
     '#zmed .go.zbgo{width:-webkit-fit-content;width:fit-content;margin:16px auto 0;padding:12px 24px;border-radius:999px;font-size:14px;background:linear-gradient(135deg,#22b573,#159a5c);opacity:1;box-shadow:0 6px 14px rgba(21,154,92,.3)}' +
     '#zmed .zbav{margin:14px 14px 0;background:#fff;border-radius:20px;padding:14px;box-shadow:0 2px 0 #e3eaef}#zmed .zbav h4{margin:0 0 4px;font:800 14.5px "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zmed .zbav p{margin:0 0 12px;font:600 11.5px "Noto Sans Malayalam",Inter,sans-serif;color:#7a8b96}' +
@@ -112,6 +120,23 @@
   function ifl(icon, html, dd) { return '<label class="zbf' + (dd ? ' dd' : '') + '"><i>' + icon + '</i>' + html + '<em>*</em></label>'; }
   function bPlace() { var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
     return VAL.bp === "other" ? '<span class="zpo">' + inp("bpo", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("bp", pl).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("സ്ഥലം", "Place")); }
+  function isoD(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function nextTxt() { if (!VAL.bd) return ""; var d = new Date(VAL.bd); if (isNaN(d)) return ""; d.setMonth(d.getMonth() + 3);
+    var f = ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+    return "💚 " + T(f + " മുതൽ നിങ്ങൾ തനിയെ 'ലഭ്യം' ആകും", "You will automatically show as available from " + f); }
+  function getDonor() { try { return JSON.parse(localStorage.getItem("zestDonor") || "null"); } catch (e) { return null; } }
+  function setDonor(d) { try { localStorage.setItem("zestDonor", JSON.stringify(d)); } catch (e) {} }
+  function fmtD(d) { return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(); }
+  function donorCard(d) {
+    var last = d.bd ? new Date(d.bd) : null, nx = last ? new Date(last) : null; if (nx) nx.setMonth(nx.getMonth() + 3);
+    var now = new Date(), ok = !nx || nx <= now, left = nx ? Math.ceil((nx - now) / 864e5) : 0, pct = last && !ok ? Math.max(4, Math.min(100, Math.round((now - last) / (nx - last) * 100))) : 100;
+    return '<div class="zbmc' + (ok ? ' ok' : '') + '"><div class="t1"><span>🩸 ' + T("എന്റെ ഡോണർ കാർഡ്", "My donor card") + '</span><span>ZEST</span></div><div class="gg">' + (d.g === "?" ? "?" : d.g) + '</div>' +
+      '<div class="nn">' + String(d.n || "").replace(/</g, "&lt;") + '</div><div class="ll">' + T("അവസാനം കൊടുത്തത്: ", "Last donated: ") + (last ? fmtD(last) : T("—", "—")) + '</div>' +
+      '<div class="pb"><i style="width:' + pct + '%"></i></div><div class="nx">' + (ok ? "💚 " + T("ഇന്ന് മുതൽ നിങ്ങൾക്ക് വീണ്ടും രക്തം നൽകാം", "You can donate blood again from today") : "⏳ " + (ML ? fmtD(nx) + " മുതൽ വീണ്ടും നൽകാം · " + left + " ദിവസം കൂടി" : "You can donate again from " + fmtD(nx) + " · " + left + " days left")) + '</div></div>' +
+      '<div class="zbdn"><button type="button" class="zbagain">🩸 ' + T("ഞാൻ വീണ്ടും രക്തം കൊടുത്തു", "I donated again") + '</button></div>' +
+      '<div class="zblk"><button type="button" class="zbadd">➕ ' + T("മറ്റൊരാളെ ചേർക്കാം", "Add someone else") + '</button><button type="button" class="zbedit">✏️ ' + T("വിവരങ്ങൾ മാറ്റാം", "Edit details") + '</button></div>' +
+      '<p class="pv">🔒 ' + T("ഈ കാർഡ് നിങ്ങളുടെ ഫോണിൽ മാത്രം", "This card is saved only on your phone") + '</p>';
+  }
   function bloodPage(tab) {
     var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
     var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
@@ -123,10 +148,12 @@
         '<div class="zbhw"><h5>' + T("രക്തം വേണമെങ്കിൽ എന്ത് ചെയ്യണം?", "Need blood? Here's how") + '</h5><ol><li>' + T("താഴെയുള്ള ബട്ടൺ അമർത്തി ZEST CENTRE-നെ അറിയിക്കുക", "Tap the button below to tell ZEST Centre") + '</li><li>' + T("ZEST ലഭ്യമായ ദാതാക്കളെ ബന്ധപ്പെടും", "ZEST contacts available donors") + '</li><li>' + T("ദാതാവ് നിങ്ങളെ നേരിട്ട് വിളിക്കും", "A donor calls you directly") + '</li></ol></div>' +
         '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button><p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>';
     }
+    var dn = getDonor();
+    if (dn && !BST.form) return h + donorCard(dn) + '<p class="nt">' + soon() + '</p>';
     return h + '<div class="zbq"><span class="ic">🩸</span><span><b>' + T("നാട്ടിലെ ഒരു ജീവന് നിങ്ങളുടെ രക്തം വേണ്ടി വന്നാൽ?", "If a life in our village needs your blood?") + '</b><small>' + T("ദാതാവായി ചേരാൻ 1 മിനിറ്റ് മതി", "Joining takes just 1 minute") + '</small></span></div>' +
       '<div class="zbyn"><button type="button" data-r="1"' + (BST.ready ? ' class="on"' : '') + '>✅ ' + T("ഞാൻ തയ്യാറാണ്", "I'm ready") + '</button><button type="button" data-r="0"' + (BST.ready ? '' : ' class="on"') + '>' + T("ഇപ്പോൾ ഇല്ല", "Not now") + '</button></div>' +
       (BST.ready && BST.done ? '<div class="zbok"><div class="zbk">✅</div><h4>' + T("നന്ദി! ഒരു ജീവൻ രക്ഷിക്കാൻ നിങ്ങളും തയ്യാർ 💚", "Thank you! You are ready to save a life 💚") + '</h4><p>' + T("(ഇത് മാതൃക മാത്രം – സേവനം തുടങ്ങുമ്പോഴാണ് വിവരങ്ങൾ ZEST-ലേക്ക് പോവുക)", "(Preview only – details are sent to ZEST once the service starts)") + '</p>' +
-        '<button type="button" class="zbmore">➕ ' + T("വീട്ടിലെ മറ്റൊരാളെ കൂടി ചേർക്കാം", "Add another family member") + '</button></div>' :
+        '<button type="button" class="zbmore">➕ ' + T("വീട്ടിലെ മറ്റൊരാളെ കൂടി ചേർക്കാം", "Add another family member") + '</button><br><button type="button" class="zbcard">🩸 ' + T("എന്റെ ഡോണർ കാർഡ് കാണാം", "See my donor card") + '</button></div>' :
       BST.ready ?
       '<div class="zbt">🩸 ' + T("ബ്ലഡ് ഗ്രൂപ്പ്", "Blood group") + ' <em>*</em></div><div class="zbg">' + G.map(function (g) { return '<button type="button" data-g="' + g + '"' + (BST.grp === g ? ' class="on"' : '') + '>' + g + '</button>'; }).join("") + '</div>' +
       '<button type="button" class="zbu' + (BST.grp === "?" ? ' on' : '') + '" data-g="?">🤔 ' + T("അറിയില്ല", "Don't know") + '</button>' +
@@ -134,10 +161,21 @@
       ifl("🙂", inp("n", "text", T("പേര്", "Name"))) + ifl("🏠", inp("h", "text", T("വീട്ടുപേര്", "House name"))) +
       '<div class="r2">' + ifl("📍", '<span class="zpc">' + bPlace() + '</span>') + ifl("📱", inp("m", "tel", T("മൊബൈൽ", "Mobile"), ' inputmode="tel" maxlength="13"')) + '</div>' +
       ifl("🗓️", sel("bl", [["lt3", T("3 മാസത്തിനുള്ളിൽ", "Within 3 months")], ["gt3", T("3 മാസത്തിന് മുമ്പ്", "Over 3 months ago")], ["never", T("ഇതുവരെ കൊടുത്തിട്ടില്ല", "Never")]]).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("അവസാനമായി രക്തം കൊടുത്തത്", "Last donated"))) +
+      '<div class="zbd"' + (VAL.bl === "lt3" ? '' : ' hidden') + '><div class="zbdl">' + T("ഏത് തീയതിയിലാണ് രക്തം കൊടുത്തത്?", "Which date did you donate?") + '</div>' + ifl("📅", inp("bd", "date", "", ' max="' + isoD(new Date()) + '" min="' + isoD(new Date(Date.now() - 92 * 864e5)) + '"')) + '<div class="zbnx">' + nextTxt() + '</div></div>' +
       '</div><button type="button" class="go zbgo">🩸 ' + T("രക്തദാതാവായി ചേരാം", "Join as a donor") + '</button>' +
       '<p class="pv">🔒 ' + T("ഈ വിവരങ്ങൾ ZEST അഡ്മിന് മാത്രമേ കാണാൻ കഴിയൂ", "Only ZEST admins can see these details") + '</p>'
       : '<div class="zbno">🙏 ' + T("ശരി, ഒരു പ്രശ്നവുമില്ല. എപ്പോഴെങ്കിലും തയ്യാറാകുമ്പോൾ ഇവിടെ വന്ന് ചേരാം.", "No problem. You can join here whenever you are ready.") + '</div>') +
       '<p class="nt">' + soon() + '</p>';
+  }
+  function bsheet(html) { var bg = document.createElement("div"); bg.className = "zbs-bg"; var sh = document.createElement("div"); sh.className = "zbs"; sh.setAttribute("data-noi18n", "");
+    sh.innerHTML = '<div class="gr"></div>' + html; function shut() { bg.remove(); sh.remove(); } bg.onclick = shut; document.body.appendChild(bg); document.body.appendChild(sh); sh.querySelector(".x").onclick = shut; return { sh: sh, shut: shut }; }
+  function dateSheet(cb) {
+    var o = bsheet('<div class="hh"><h4>🩸 ' + T("എപ്പോഴാണ് രക്തം കൊടുത്തത്?", "When did you donate?") + '</h4><button type="button" class="x">✕</button></div>' +
+      '<label class="zbf"><i>📅</i><input type="date" class="dd1" max="' + isoD(new Date()) + '" min="' + isoD(new Date(Date.now() - 365 * 864e5)) + '"><em>*</em></label><div class="gn"></div>' +
+      '<div class="bt"><button type="button" class="sv">✅ ' + T("സേവ് ചെയ്യാം", "Save") + '</button></div>');
+    var i = o.sh.querySelector(".dd1"), gn = o.sh.querySelector(".gn");
+    i.onchange = function () { i.classList.remove("inv"); if (!i.value) { gn.textContent = ""; return; } var d = new Date(i.value); d.setMonth(d.getMonth() + 3); gn.textContent = "💚 " + (ML ? fmtD(d) + " മുതൽ വീണ്ടും തനിയെ 'ലഭ്യം' ആകും" : "You will be available again from " + fmtD(d)); };
+    o.sh.querySelector(".sv").onclick = function () { if (!i.value) { i.classList.add("inv"); return; } cb(i.value); o.shut(); };
   }
   function bloodWire(w, tab, rerender) {
     if (tab === "need") { w.querySelector(".zbneed").onclick = function () {
@@ -145,20 +183,31 @@
       var msg = ML ? "ഹലോ ZEST സെന്റർ 👋\n\n🩸 രക്തം ആവശ്യമുണ്ട്.\n\nബ്ലഡ് ഗ്രൂപ്പ്: \nആശുപത്രി / സ്ഥലം: \nഎപ്പോൾ വേണം: \nബന്ധപ്പെടേണ്ട നമ്പർ: "
                    : "Hello ZEST Centre 👋\n\n🩸 Blood needed.\n\nBlood group: \nHospital / place: \nWhen needed: \nContact number: ";
       window.open("https://wa.me/918848313837?text=" + encodeURIComponent(msg), "_blank"); }; return; }
+    var dn = getDonor();
+    if (dn && !BST.form) {
+      w.querySelector(".zbagain").onclick = function () { dateSheet(function (v) { dn.bd = v; setDonor(dn); rerender(); toast(T("തീയതി സേവ് ചെയ്തു ✅", "Date saved ✅")); }); };
+      w.querySelector(".zbadd").onclick = function () { BST.adding = 1; BST.form = 1; BST.done = 0; BST.grp = ""; VAL.n = ""; VAL.m = ""; VAL.bl = ""; VAL.bd = ""; rerender(); };
+      w.querySelector(".zbedit").onclick = function () { BST.adding = 0; BST.form = 1; BST.done = 0; BST.grp = dn.g; VAL.n = dn.n; VAL.h = dn.h; VAL.m = dn.m; VAL.bp = dn.bp; VAL.bpo = dn.bpo; VAL.bl = dn.bd ? "lt3" : (dn.bl || ""); VAL.bd = dn.bd || ""; rerender(); };
+      return; }
     w.querySelectorAll(".zbyn button").forEach(function (b) { b.onclick = function () { BST.ready = +b.dataset.r; var y = w.scrollTop; rerender(); w.scrollTop = y; }; });
     if (!BST.ready) return;
-    if (BST.done) { w.querySelector(".zbmore").onclick = function () { BST.done = 0; BST.grp = ""; VAL.n = ""; VAL.m = ""; VAL.bl = ""; rerender(); var t = w.querySelector(".zbt"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }; return; }
+    if (BST.done) { w.querySelector(".zbcard").onclick = function () { BST.done = 0; BST.form = 0; BST.adding = 0; rerender(); };
+      w.querySelector(".zbmore").onclick = function () { BST.done = 0; BST.adding = 1; BST.form = 1; BST.grp = ""; VAL.n = ""; VAL.m = ""; VAL.bl = ""; VAL.bd = ""; rerender(); var t = w.querySelector(".zbt"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }; return; }
     w.querySelectorAll("[data-g]").forEach(function (b) { b.onclick = function () { BST.grp = b.dataset.g; w.querySelectorAll("[data-g]").forEach(function (x) { x.classList.toggle("on", x === b); }); w.querySelector(".zbg").classList.remove("inv"); }; });
-    function bind(root) { root.querySelectorAll("input,select").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); el.addEventListener("change", function () { VAL[el.name] = el.value; el.classList.remove("inv"); if (el.name === "bp" && el.value === "other") swap(true); }); });
+    function bind(root) { root.querySelectorAll("input,select").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); el.addEventListener("change", function () { VAL[el.name] = el.value; el.classList.remove("inv"); if (el.name === "bp" && el.value === "other") swap(true);
+        if (el.name === "bl") { var dz = w.querySelector(".zbd"); dz.hidden = el.value !== "lt3"; if (!dz.hidden) { var di = dz.querySelector("input"); if (di) di.focus(); } }
+        if (el.name === "bd") w.querySelector(".zbnx").textContent = nextTxt(); }); });
       var pb = root.querySelector(".zpb"); if (pb) pb.onclick = function () { VAL.bp = ""; VAL.bpo = ""; swap(false); }; }
     function swap(f) { var pc = w.querySelector(".zpc"); pc.innerHTML = bPlace(); bind(pc); if (f) { var i = pc.querySelector("input"); if (i) i.focus(); } }
     bind(w.querySelector(".zbfs"));
     w.querySelector(".zbgo").onclick = function () {
       var bad = null, g = w.querySelector(".zbg");
       if (!BST.grp) { g.classList.add("inv"); bad = g; }
-      w.querySelectorAll(".zbfs input,.zbfs select").forEach(function (el) { var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
+      w.querySelectorAll(".zbfs input,.zbfs select").forEach(function (el) { if (el.closest("[hidden]")) return; var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
       if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
-      BST.done = 1; rerender(); var ok = w.querySelector(".zbok"); if (ok) ok.scrollIntoView({ behavior: "smooth", block: "center" });
+      var keep = getDonor(), me = { n: VAL.n, h: VAL.h, m: VAL.m, g: BST.grp, bp: VAL.bp, bpo: VAL.bpo, bl: VAL.bl, bd: VAL.bl === "lt3" ? VAL.bd : "" };
+      if (!(keep && BST.adding)) setDonor(me);
+      BST.done = 1; BST.form = 1; rerender(); var ok = w.querySelector(".zbok"); if (ok) ok.scrollIntoView({ behavior: "smooth", block: "center" });
     };
   }
 
