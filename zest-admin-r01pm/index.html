@@ -22,6 +22,7 @@ html,body{margin:0;height:100%;background:#f3f8fb;font-family:Inter,"Noto Sans M
 .go:disabled{opacity:.6}
 .er{min-height:20px;margin-top:12px;font:700 12.5px "Noto Sans Malayalam",sans-serif;color:#ffd6dc}
 .sm{margin-top:26px;font:600 11px "Noto Sans Malayalam",sans-serif;color:#9fc7de}
+.ins{margin-top:8px}.st{margin:18px auto 0;max-width:300px;text-align:left;background:rgba(255,255,255,.12);border-radius:14px;padding:12px 14px;font:600 12.5px/1.7 "Noto Sans Malayalam",sans-serif;color:#eaf4fb}.st b{color:#ffc44d}.dn{font:800 15px "Noto Sans Malayalam",sans-serif;color:#d9f7e6}
 .ld{display:flex;align-items:center;justify-content:center;height:100%;color:#0b3d5c;font:700 14px "Noto Sans Malayalam",sans-serif}
 </style>
 </head>
@@ -35,6 +36,15 @@ html,body{margin:0;height:100%;background:#f3f8fb;font-family:Inter,"Noto Sans M
   var root = document.getElementById("root");
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function () {});
 
+  var SA = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  var bip = null; addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); bip = e; var b = document.querySelector(".ins"); if (b) b.hidden = false; });
+  function install() {
+    root.innerHTML = '<div class="lg"><img src="/zest-admin-r01pm/adm-192.png" alt=""><h1>ZEST <span>PRO</span></h1><p>🔒 അഡ്മിൻമാർക്ക് മാത്രം</p>' +
+      '<button class="go ins" type="button"' + (bip ? '' : ' hidden') + '>📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ</button>' +
+      '<div class="st">' + (bip ? '' : 'Chrome മെനു <b>⋮</b> → <b>Install app</b> / <b>Install and create shortcut</b> അമർത്തൂ.<br>') + 'ഇൻസ്റ്റാൾ ചെയ്ത ശേഷം ഹോം സ്ക്രീനിലെ <b>ZEST PRO</b> തുറന്ന് PIN നൽകൂ.</div></div>';
+    var b = root.querySelector(".ins");
+    b.onclick = function () { if (!bip) return; bip.prompt(); bip.userChoice.then(function (c) { if (c.outcome === "accepted") { b.outerHTML = '<div class="dn">✅ ഇൻസ്റ്റാൾ ചെയ്തു – ഹോം സ്ക്രീനിലെ ZEST PRO തുറക്കൂ</div>'; } bip = null; }); };
+  }
   function login() {
     root.innerHTML = '<div class="lg"><img src="/zest-admin-r01pm/adm-192.png" alt=""><h1>ZEST <span>PRO</span></h1><p>🔒 അഡ്മിൻമാർക്ക് മാത്രം</p>' +
       '<div class="pin">' + [0, 1, 2, 3, 4, 5].map(function () { return '<input inputmode="numeric" maxlength="1" type="password" autocomplete="off">'; }).join("") + '</div>' +
@@ -72,7 +82,7 @@ html,body{margin:0;height:100%;background:#f3f8fb;font-family:Inter,"Noto Sans M
     }).catch(function () { root.innerHTML = '<div class="ld">ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കൂ</div>'; });
   }
 
-  if (ok(get())) boot(); else login();
+  if (!SA) install(); else if (ok(get())) boot(); else login();
 })();
 </script>
 </body>
