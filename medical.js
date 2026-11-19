@@ -137,6 +137,8 @@
       '<div class="zblk"><button type="button" class="zbadd">➕ ' + T("മറ്റൊരാളെ ചേർക്കാം", "Add someone else") + '</button><button type="button" class="zbedit">✏️ ' + T("വിവരങ്ങൾ മാറ്റാം", "Edit details") + '</button></div>' +
       '<p class="pv">🔒 ' + T("ഈ കാർഡ് നിങ്ങളുടെ ഫോണിൽ മാത്രം", "This card is saved only on your phone") + '</p>';
   }
+  function rPlace() { var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
+    return VAL.rp === "other" ? '<span class="zpo">' + inp("rpo", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("rp", pl).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("സ്ഥലം", "Place")); }
   function bloodPage(tab) {
     var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
     var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
@@ -145,6 +147,12 @@
       return h + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
         G.map(function (g) { var n = BCOUNT[g]; return '<div' + (n ? '' : ' class="z"') + '><b>' + g + '</b><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
         '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
+        '<div class="zbt">🙏 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +
+        ifl("🙂", inp("rn", "text", T("ആവശ്യമുള്ള ആളുടെ പേര്", "Patient name"))) + ifl("🏠", inp("rh", "text", T("വീട്ടുപേര്", "House name"))) +
+        '<div class="r2">' + ifl("📍", '<span class="zpc">' + rPlace() + '</span>') + ifl("📱", inp("rm", "tel", T("മൊബൈൽ", "Mobile"), ' inputmode="tel" maxlength="13"')) + '</div>' +
+        '<div class="r2">' + ifl("🩸", sel("rg", G.map(function (g) { return [g, g]; })).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("ഗ്രൂപ്പ്", "Group"))) + ifl("🧪", inp("ru", "number", T("യൂണിറ്റ്", "Units"), ' inputmode="numeric" min="1" max="20"')) + '</div>' +
+        '<div class="zbdl">' + T("ആവശ്യമുള്ള ദിവസം", "Date needed") + '</div>' + ifl("📅", inp("rd", "date", "", ' min="' + isoD(new Date()) + '"')) +
+        ifl("🏥", inp("rhs", "text", T("രക്തം നൽകേണ്ട ഹോസ്പിറ്റൽ", "Hospital where blood is needed"))) + '</div>' +
         '<div class="zbhw"><h5>' + T("രക്തം വേണമെങ്കിൽ എന്ത് ചെയ്യണം?", "Need blood? Here's how") + '</h5><ol><li>' + T("താഴെയുള്ള ബട്ടൺ അമർത്തി ZEST CENTRE-നെ അറിയിക്കുക", "Tap the button below to tell ZEST Centre") + '</li><li>' + T("ZEST ലഭ്യമായ ദാതാക്കളെ ബന്ധപ്പെടും", "ZEST contacts available donors") + '</li><li>' + T("ദാതാവ് നിങ്ങളെ നേരിട്ട് വിളിക്കും", "A donor calls you directly") + '</li></ol></div>' +
         '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button><p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>';
     }
@@ -178,10 +186,20 @@
     o.sh.querySelector(".sv").onclick = function () { if (!i.value) { i.classList.add("inv"); return; } cb(i.value); o.shut(); };
   }
   function bloodWire(w, tab, rerender) {
-    if (tab === "need") { w.querySelector(".zbneed").onclick = function () {
+    if (tab === "need") {
+      var nf = w.querySelector(".zbneedf");
+      function nbind(root) { root.querySelectorAll("input,select").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); el.addEventListener("change", function () { VAL[el.name] = el.value; el.classList.remove("inv"); if (el.name === "rp" && el.value === "other") nswap(true); }); });
+        var pb = root.querySelector(".zpb"); if (pb) pb.onclick = function () { VAL.rp = ""; VAL.rpo = ""; nswap(false); }; }
+      function nswap(f) { var pc = nf.querySelector(".zpc"); pc.innerHTML = rPlace(); nbind(pc); if (f) { var i = pc.querySelector("input"); if (i) i.focus(); } }
+      nbind(nf);
+      w.querySelector(".zbneed").onclick = function () {
+      var bad = null;
+      nf.querySelectorAll("input,select").forEach(function (el) { var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "rm") ok = v.replace(/\D/g, "").length >= 10; if (ok && el.name === "ru") ok = +v > 0; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
+      if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
       if (!BLOOD_LIVE) { toast(soon()); return; }
-      var msg = ML ? "ഹലോ ZEST സെന്റർ 👋\n\n🩸 രക്തം ആവശ്യമുണ്ട്.\n\nബ്ലഡ് ഗ്രൂപ്പ്: \nആശുപത്രി / സ്ഥലം: \nഎപ്പോൾ വേണം: \nബന്ധപ്പെടേണ്ട നമ്പർ: "
-                   : "Hello ZEST Centre 👋\n\n🩸 Blood needed.\n\nBlood group: \nHospital / place: \nWhen needed: \nContact number: ";
+      var pl = VAL.rp === "other" ? VAL.rpo : VAL.rp, dt = fmtD(new Date(VAL.rd));
+      var msg = ML ? "ഹലോ ZEST സെന്റർ 👋\n\n🩸 രക്തം ആവശ്യമുണ്ട്\n\n🙂 പേര്: " + VAL.rn + "\n🏠 വീട്ടുപേര്: " + VAL.rh + "\n📍 സ്ഥലം: " + pl + "\n📱 മൊബൈൽ: " + VAL.rm + "\n🩸 ബ്ലഡ് ഗ്രൂപ്പ്: " + VAL.rg + "\n🧪 യൂണിറ്റ്: " + VAL.ru + "\n📅 ആവശ്യമുള്ള ദിവസം: " + dt + "\n🏥 ഹോസ്പിറ്റൽ: " + VAL.rhs
+                   : "Hello ZEST Centre 👋\n\n🩸 Blood needed\n\n🙂 Name: " + VAL.rn + "\n🏠 House: " + VAL.rh + "\n📍 Place: " + pl + "\n📱 Mobile: " + VAL.rm + "\n🩸 Blood group: " + VAL.rg + "\n🧪 Units: " + VAL.ru + "\n📅 Date needed: " + dt + "\n🏥 Hospital: " + VAL.rhs;
       window.open("https://wa.me/918848313837?text=" + encodeURIComponent(msg), "_blank"); }; return; }
     var dn = getDonor();
     if (dn && !BST.form) {

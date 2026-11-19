@@ -133,7 +133,7 @@
       var inApp2 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : "eq";
-      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=9"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=10"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
       return; }
     if (a.getAttribute("href") === "#zlib") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp3 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
