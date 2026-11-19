@@ -115,28 +115,28 @@
   var D = {
     blood: {
       don: [
-        { n: "സാമ്പിൾ ദാതാവ് 1", h: "പുത്തൻവീട്", p: "വേളൂർ", g: "O+", ph: "98XXXXXX01", nx: -5 },
+        { n: "സാമ്പിൾ ദാതാവ് 1", h: "പുത്തൻവീട്", p: "വെള്ളൂർ", g: "O+", ph: "98XXXXXX01", nx: -5 },
         { n: "സാമ്പിൾ ദാതാവ് 2", h: "കുന്നുമ്മൽ", p: "കോടഞ്ചേരി", g: "B+", ph: "98XXXXXX02", nx: 41 },
-        { n: "സാമ്പിൾ ദാതാവ് 3", h: "പാറക്കൽ", p: "വേളൂർ", g: "A+", ph: "98XXXXXX03", nx: -60 },
-        { n: "സാമ്പിൾ ദാതാവ് 4", h: "തോട്ടത്തിൽ", p: "നെല്ലിപ്പൊയിൽ", g: "O-", ph: "98XXXXXX04", nx: -1 },
+        { n: "സാമ്പിൾ ദാതാവ് 3", h: "പാറക്കൽ", p: "വെള്ളൂർ", g: "A+", ph: "98XXXXXX03", nx: -60 },
+        { n: "സാമ്പിൾ ദാതാവ് 4", h: "തോട്ടത്തിൽ", p: "കോട്ടെമ്പ്രം", g: "O-", ph: "98XXXXXX04", nx: -1 },
         { n: "സാമ്പിൾ ദാതാവ് 5", h: "കിഴക്കേവീട്", p: "തിരുവമ്പാടി", g: "AB+", ph: "98XXXXXX05", nx: 12 },
-        { n: "സാമ്പിൾ ദാതാവ് 6", h: "മഠത്തിൽ", p: "കോടഞ്ചേരി", g: "B-", ph: "98XXXXXX06", nx: -30 },
-        { n: "സാമ്പിൾ ദാതാവ് 7", h: "പുത്തൻവീട്", p: "വേളൂർ", g: "O+", ph: "98XXXXXX01", nx: -90 }
+        { n: "സാമ്പിൾ ദാതാവ് 6", h: "മഠത്തിൽ", p: "കോട്ടെമ്പ്രം", g: "B-", ph: "98XXXXXX06", nx: -30 },
+        { n: "സാമ്പിൾ ദാതാവ് 7", h: "പുത്തൻവീട്", p: "വെള്ളൂർ", g: "O+", ph: "98XXXXXX01", nx: -90 }
       ],
       req: [
         { n: "രോഗി A", h: "ചാലിൽ", p: "കോടഞ്ചേരി", g: "O+", u: 2, hs: "മെഡിക്കൽ കോളേജ്, കോഴിക്കോട്", d: 1, ph: "97XXXXXX11" },
         { n: "രോഗി B", h: "മേലേടത്ത്", p: "താമരശ്ശേരി", g: "B-", u: 1, hs: "താലൂക്ക് ആശുപത്രി, താമരശ്ശേരി", d: 3, ph: "97XXXXXX12" },
-        { n: "രോഗി C", h: "പുളിക്കൽ", p: "വേളൂർ", g: "A+", u: 3, hs: "ബേബി മെമ്മോറിയൽ, കോഴിക്കോട്", d: -2, ph: "97XXXXXX13", done: 1 }
+        { n: "രോഗി C", h: "പുളിക്കൽ", p: "വെള്ളൂർ", g: "A+", u: 3, hs: "ബേബി മെമ്മോറിയൽ, കോഴിക്കോട്", d: -2, ph: "97XXXXXX13", done: 1 }
       ]
     },
     eq: {
       need: [
-        { it: "വീൽചെയർ", n: "സാമ്പിൾ 1", h: "കുന്നത്ത്", p: "വേളൂർ", ph: "96XXXXXX21", d: 0, days: 30 },
+        { it: "വീൽചെയർ", n: "സാമ്പിൾ 1", h: "കുന്നത്ത്", p: "വെള്ളൂർ", ph: "96XXXXXX21", d: 0, days: 30 },
         { it: "വാട്ടർ ബെഡ്", n: "സാമ്പിൾ 2", h: "പാലക്കൽ", p: "കോടഞ്ചേരി", ph: "96XXXXXX22", d: 2, days: 60 },
         { it: "ഓക്സിജൻ കോൺസൻട്രേറ്റർ", n: "സാമ്പിൾ 3", h: "മുണ്ടക്കൽ", p: "നെല്ലിപ്പൊയിൽ", ph: "96XXXXXX23", d: -4, days: 15, done: 1 }
       ],
       give: [
-        { it: "വാക്കർ", n: "സാമ്പിൾ 4", h: "ചെറുവത്ത്", p: "വേളൂർ", ph: "96XXXXXX24", how: "ZEST CENTRE-ൽ എത്തിക്കാം" },
+        { it: "വാക്കർ", n: "സാമ്പിൾ 4", h: "ചെറുവത്ത്", p: "വെള്ളൂർ", ph: "96XXXXXX24", how: "ZEST CENTRE-ൽ എത്തിക്കാം" },
         { it: "ആശുപത്രി കട്ടിൽ", n: "സാമ്പിൾ 5", h: "ഇല്ലിക്കൽ", p: "കോടഞ്ചേരി", ph: "96XXXXXX25", how: "വീട്ടിൽ വന്ന് എടുക്കണം" },
         { it: "വീൽചെയർ", n: "സാമ്പിൾ 6", h: "കല്ലുങ്കൽ", p: "തിരുവമ്പാടി", ph: "96XXXXXX26", how: "ആവശ്യക്കാരന് നേരിട്ട് കൊടുക്കാം" }
       ]
@@ -167,7 +167,7 @@
   function fsheet(k) {
     var opts = k === "g" ? G.map(function (g) { return [g, g, D.blood.don.filter(function (x) { return x.g === g; }).length]; })
       : k === "a" ? ["y", "s", "l"].map(function (v) { return [v, AV[v], D.blood.don.filter(function (x) { return avk(x) === v; }).length]; })
-      : D.blood.don.map(function (x) { return x.p; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort().map(function (v) { return [v, v, D.blood.don.filter(function (x) { return x.p === v; }).length]; });
+      : ["വെള്ളൂർ", "കോടഞ്ചേരി", "കോട്ടെമ്പ്രം"].map(function (v) { return [v, v, D.blood.don.filter(function (x) { return x.p === v; }).length]; });
     var sel = BF[k].slice(), ttl = { g: "🩸 ബ്ലഡ് ഗ്രൂപ്പ്", a: "✅ ലഭ്യത", p: "📍 സ്ഥലം" }[k];
     var bg = document.createElement("div"); bg.className = "zas-bg"; var sh = document.createElement("div"); sh.className = "zas";
     function draw() {
