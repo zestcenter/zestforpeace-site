@@ -37,13 +37,16 @@ html,body{margin:0;height:100%;background:#f3f8fb;font-family:Inter,"Noto Sans M
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(function () {});
 
   var SA = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
-  var bip = null; addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); bip = e; var b = document.querySelector(".ins"); if (b) b.hidden = false; });
+  var bip = null; addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); bip = e; var e2 = document.querySelector(".er"); if (e2) e2.textContent = ""; });
   function install() {
     root.innerHTML = '<div class="lg"><img src="/zest-admin-r01pm/adm-192.png" alt=""><h1>ZEST <span>PRO</span></h1><p>🔒 അഡ്മിൻമാർക്ക് മാത്രം</p>' +
-      '<button class="go ins" type="button"' + (bip ? '' : ' hidden') + '>📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ</button>' +
-      '<div class="st">' + (bip ? '' : 'Chrome മെനു <b>⋮</b> → <b>Install app</b> / <b>Install and create shortcut</b> അമർത്തൂ.<br>') + 'ഇൻസ്റ്റാൾ ചെയ്ത ശേഷം ഹോം സ്ക്രീനിലെ <b>ZEST PRO</b> തുറന്ന് PIN നൽകൂ.</div></div>';
-    var b = root.querySelector(".ins");
-    b.onclick = function () { if (!bip) return; bip.prompt(); bip.userChoice.then(function (c) { if (c.outcome === "accepted") { b.outerHTML = '<div class="dn">✅ ഇൻസ്റ്റാൾ ചെയ്തു – ഹോം സ്ക്രീനിലെ ZEST PRO തുറക്കൂ</div>'; } bip = null; }); };
+      '<button class="go ins" type="button">📲 ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്യൂ</button><div class="er"></div>' +
+      '<div class="sm">ഇൻസ്റ്റാൾ ചെയ്ത ശേഷം ഹോം സ്ക്രീനിലെ ZEST PRO തുറന്ന് PIN നൽകൂ</div></div>';
+    var b = root.querySelector(".ins"), er = root.querySelector(".er");
+    b.onclick = function () {
+      if (!bip) { er.innerHTML = "ഒരു നിമിഷം… വീണ്ടും അമർത്തൂ.<br>എന്നിട്ടും വരുന്നില്ലെങ്കിൽ ബ്രൗസർ മെനു ⋮ → Install app"; return; }
+      bip.prompt(); bip.userChoice.then(function (c) { if (c.outcome === "accepted") b.outerHTML = '<div class="dn">✅ ഇൻസ്റ്റാൾ ചെയ്തു – ഹോം സ്ക്രീനിലെ ZEST PRO തുറക്കൂ</div>'; bip = null; });
+    };
   }
   function login() {
     root.innerHTML = '<div class="lg"><img src="/zest-admin-r01pm/adm-192.png" alt=""><h1>ZEST <span>PRO</span></h1><p>🔒 അഡ്മിൻമാർക്ക് മാത്രം</p>' +
