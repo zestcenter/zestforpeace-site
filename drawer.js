@@ -169,7 +169,7 @@
   window.ZestDrawer = { open: show, close: hide, appOnly: appOnly };
   /* admin: hidden entry – tap the ZEST logo in the menu header 5 times; admin item shows only on logged-in admin phones */
   (function () {
-    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=2"; s.onload = cb; document.head.appendChild(s); }
+    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=3"; s.onload = cb; document.head.appendChild(s); }
     try { var t = localStorage.getItem("zestAdminTok"); if (t && +t.split(".")[0] > Date.now()) loadAdm(function () {}); } catch (e) {}
     var taps = 0, tt; var lg = dw.querySelector(".zdw-hd2 img");
     if (lg) lg.addEventListener("click", function () { taps++; clearTimeout(tt); tt = setTimeout(function () { taps = 0; }, 1500); if (taps >= 5) { taps = 0; hide(); loadAdm(function () { ZestAdmin.open(); }); } });

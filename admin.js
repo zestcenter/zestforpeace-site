@@ -65,6 +65,21 @@
   }
   if (!addMenu()) { var mo = new MutationObserver(function () { if (addMenu()) mo.disconnect(); }); mo.observe(document.documentElement, { childList: true, subtree: true }); }
 
+
+  CSS += '#zadm .dm{margin:10px 14px 0;padding:8px 12px;border-radius:12px;background:#fff6dc;color:#7a5a00;font:700 11.5px/1.5 ' + F + ';text-align:center}' +
+    '#zadm .tb button{font-size:12.5px;padding:10px 6px}' +
+    '#zadm .it{margin:10px 14px 0;background:#fff;border-radius:18px;padding:13px 14px;box-shadow:0 2px 0 #e3eaef}#zadm .it.dn{opacity:.6}' +
+    '#zadm .ih{display:flex;align-items:center;gap:10px}#zadm .ih>div{flex:1;min-width:0}#zadm .ih b{display:block;font:800 14px/1.35 ' + F + ';color:#0b3d5c}#zadm .ih small{display:block;font:600 11.5px/1.45 ' + F + ';color:#7a8b96}' +
+    '#zadm .bg{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:linear-gradient(135deg,#ff5a6e,#d81b3c);color:#fff;font:800 12.5px Inter,sans-serif}#zadm .bg i{transform:rotate(45deg);font-style:normal;display:block}' +
+    '#zadm .eg{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#e6f3fb;font-size:20px}' +
+    '#zadm .ih em{flex:none;font:800 10.5px ' + F + ';font-style:normal;padding:4px 9px;border-radius:999px}#zadm em.ok{background:#e3f7ec;color:#138a52}#zadm em.wt{background:#eef3f7;color:#5d707c}#zadm em.ur{background:#fdecef;color:#c0254a}' +
+    '#zadm .kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}#zadm .kv span{padding:5px 9px;border-radius:9px;background:#f3f7fa;font:600 11.5px ' + F + ';color:#3b4c57}' +
+    '#zadm .ia{display:flex;gap:6px;margin-top:10px}#zadm .ia button{flex:1;white-space:nowrap;border:0;border-radius:11px;padding:9px 4px;font:800 11.5px ' + F + ';cursor:pointer}#zadm .ia .ca{background:#e6f3fb;color:#0b5d8f}#zadm .ia .wh{background:#e3f7ec;color:#138a52}#zadm .ia .ok{background:linear-gradient(135deg,#22b573,#159a5c);color:#fff}' +
+    '#zadm .mt{display:block;width:100%;margin-top:10px;border:0;border-radius:11px;padding:9px 12px;background:#fff1f3;color:#b0213f;font:700 12.5px ' + F + ';text-align:left;cursor:pointer}' +
+    '#zadm .gc{display:flex;gap:6px;overflow-x:auto;padding:12px 14px 2px;scrollbar-width:none}#zadm .gc button{flex:none;border:1.5px solid #e1e9ef;background:#fff;border-radius:999px;padding:7px 12px;font:800 12.5px Inter,' + F + ';color:#3b4c57;cursor:pointer}#zadm .gc button small{color:#93a3ad;font-weight:700}#zadm .gc button.on{background:#d81b3c;border-color:#d81b3c;color:#fff}#zadm .gc button.on small{color:#ffd5dc}' +
+    '#zadm .sx{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 14px 0}#zadm .sx div{background:#fff;border-radius:14px;padding:10px 4px;text-align:center;font:700 11px ' + F + ';color:#7a8b96;box-shadow:0 2px 0 #e3eaef}#zadm .sx b{display:block;font:800 19px Inter,sans-serif;color:#0b3d5c}#zadm .sx .rd b{color:#d81b3c}';
+  st.textContent = CSS;
+
   var w;
   function shell(title, sub, icon, back) {
     w.innerHTML = '<div class="mh">' + (back ? '<button type="button" class="bk" aria-label="Back">←</button>' : '<button type="button" class="bk" aria-label="Close">✕</button><button type="button" class="lo">ലോഗ് ഔട്ട്</button>') +
@@ -75,13 +90,139 @@
   }
   function home() {
     var bd = shell("അഡ്മിൻ പേജ്", "ZEST അഡ്മിൻമാർക്ക് മാത്രം", "🔒", false);
+    var nb = D.blood.req.filter(function (r) { return !r.done; }).length, ne = D.eq.need.filter(function (r) { return !r.done; }).length, nl = D.lib.req.filter(function (r) { return !r.done; }).length;
     bd.innerHTML = '<div class="tl"><button type="button" data-g="gov"><i>🏛️</i>സർക്കാർ പദ്ധതികൾ<small>അംഗീകാരം കാത്തിരിക്കുന്നവ</small></button>' +
-      '<button type="button" class="off" data-g="soon"><i>🩸</i>ബ്ലഡ് ബാങ്ക്<small>ഉടൻ</small></button>' +
-      '<button type="button" class="off" data-g="soon"><i>🦽</i>മെഡിക്കൽ ഉപകരണങ്ങൾ<small>ഉടൻ</small></button>' +
-      '<button type="button" class="off" data-g="soon"><i>📚</i>ലൈബ്രറി<small>ഉടൻ</small></button></div>';
-    bd.querySelectorAll("[data-g]").forEach(function (b) { b.onclick = function () { if (b.dataset.g === "gov") gov("pending"); else toast("ഉടൻ വരുന്നു 🙂"); }; });
+      '<button type="button" data-g="blood"><i>🩸</i>ബ്ലഡ് ബാങ്ക്<small>' + D.blood.don.length + ' ദാതാക്കൾ</small>' + (nb ? '<b class="n">' + nb + '</b>' : '') + '</button>' +
+      '<button type="button" data-g="eq"><i>🦽</i>മെഡിക്കൽ ഉപകരണങ്ങൾ<small>ആവശ്യങ്ങൾ · ലഭ്യമായവ</small>' + (ne ? '<b class="n">' + ne + '</b>' : '') + '</button>' +
+      '<button type="button" data-g="lib"><i>📚</i>ലൈബ്രറി<small>' + D.lib.books.length + ' പുസ്തകങ്ങൾ</small>' + (nl ? '<b class="n">' + nl + '</b>' : '') + '</button></div>' +
+      '<p class="dm">🧪 ബ്ലഡ് ബാങ്ക്, ഉപകരണങ്ങൾ, ലൈബ്രറി എന്നിവയിൽ ഇപ്പോൾ ഡമ്മി ഡാറ്റയാണ്</p>';
+    bd.querySelectorAll("[data-g]").forEach(function (b) { b.onclick = function () { var g = b.dataset.g; if (g === "gov") gov("pending"); else if (g === "blood") blood("req"); else if (g === "eq") eq("need"); else lib("books"); }; });
     call({ action: "list", status: "pending" }).then(function (j) { var n = (j.items || []).length; var b = bd.querySelector('[data-g="gov"]'); if (n && b) b.insertAdjacentHTML("beforeend", '<b class="n">' + n + '</b>'); }).catch(function () {});
   }
+
+  /* ---------- DUMMY DATA (preview) ---------- */
+  function dIn(n) { var d = new Date(); d.setDate(d.getDate() + n); return d; }
+  function fd(d) { d = new Date(d); return ("0" + d.getDate()).slice(-2) + "/" + ("0" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear(); }
+  var D = {
+    blood: {
+      don: [
+        { n: "സാമ്പിൾ ദാതാവ് 1", h: "പുത്തൻവീട്", p: "വേളൂർ", g: "O+", ph: "98XXXXXX01", nx: -5 },
+        { n: "സാമ്പിൾ ദാതാവ് 2", h: "കുന്നുമ്മൽ", p: "കോടഞ്ചേരി", g: "B+", ph: "98XXXXXX02", nx: 41 },
+        { n: "സാമ്പിൾ ദാതാവ് 3", h: "പാറക്കൽ", p: "വേളൂർ", g: "A+", ph: "98XXXXXX03", nx: -60 },
+        { n: "സാമ്പിൾ ദാതാവ് 4", h: "തോട്ടത്തിൽ", p: "നെല്ലിപ്പൊയിൽ", g: "O-", ph: "98XXXXXX04", nx: -1 },
+        { n: "സാമ്പിൾ ദാതാവ് 5", h: "കിഴക്കേവീട്", p: "തിരുവമ്പാടി", g: "AB+", ph: "98XXXXXX05", nx: 12 },
+        { n: "സാമ്പിൾ ദാതാവ് 6", h: "മഠത്തിൽ", p: "കോടഞ്ചേരി", g: "B-", ph: "98XXXXXX06", nx: -30 },
+        { n: "സാമ്പിൾ ദാതാവ് 7", h: "പുത്തൻവീട്", p: "വേളൂർ", g: "O+", ph: "98XXXXXX01", nx: -90 }
+      ],
+      req: [
+        { n: "രോഗി A", h: "ചാലിൽ", p: "കോടഞ്ചേരി", g: "O+", u: 2, hs: "മെഡിക്കൽ കോളേജ്, കോഴിക്കോട്", d: 1, ph: "97XXXXXX11" },
+        { n: "രോഗി B", h: "മേലേടത്ത്", p: "താമരശ്ശേരി", g: "B-", u: 1, hs: "താലൂക്ക് ആശുപത്രി, താമരശ്ശേരി", d: 3, ph: "97XXXXXX12" },
+        { n: "രോഗി C", h: "പുളിക്കൽ", p: "വേളൂർ", g: "A+", u: 3, hs: "ബേബി മെമ്മോറിയൽ, കോഴിക്കോട്", d: -2, ph: "97XXXXXX13", done: 1 }
+      ]
+    },
+    eq: {
+      need: [
+        { it: "വീൽചെയർ", n: "സാമ്പിൾ 1", h: "കുന്നത്ത്", p: "വേളൂർ", ph: "96XXXXXX21", d: 0, days: 30 },
+        { it: "വാട്ടർ ബെഡ്", n: "സാമ്പിൾ 2", h: "പാലക്കൽ", p: "കോടഞ്ചേരി", ph: "96XXXXXX22", d: 2, days: 60 },
+        { it: "ഓക്സിജൻ കോൺസൻട്രേറ്റർ", n: "സാമ്പിൾ 3", h: "മുണ്ടക്കൽ", p: "നെല്ലിപ്പൊയിൽ", ph: "96XXXXXX23", d: -4, days: 15, done: 1 }
+      ],
+      give: [
+        { it: "വാക്കർ", n: "സാമ്പിൾ 4", h: "ചെറുവത്ത്", p: "വേളൂർ", ph: "96XXXXXX24", how: "ZEST CENTRE-ൽ എത്തിക്കാം" },
+        { it: "ആശുപത്രി കട്ടിൽ", n: "സാമ്പിൾ 5", h: "ഇല്ലിക്കൽ", p: "കോടഞ്ചേരി", ph: "96XXXXXX25", how: "വീട്ടിൽ വന്ന് എടുക്കണം" },
+        { it: "വീൽചെയർ", n: "സാമ്പിൾ 6", h: "കല്ലുങ്കൽ", p: "തിരുവമ്പാടി", ph: "96XXXXXX26", how: "ആവശ്യക്കാരന് നേരിട്ട് കൊടുക്കാം" }
+      ]
+    },
+    lib: {
+      books: [
+        { t: "രണ്ടാമൂഴം", a: "എം.ടി. വാസുദേവൻ നായർ", c: "നോവൽ", st: 1 },
+        { t: "ആടുജീവിതം", a: "ബെന്യാമിൻ", c: "നോവൽ", st: 2, by: "സാമ്പിൾ വായനക്കാരൻ 1", ph: "95XXXXXX31", due: 4 },
+        { t: "അഗ്നിച്ചിറകുകൾ", a: "എ.പി.ജെ. അബ്ദുൽ കലാം", c: "ആത്മകഥ", st: 2, by: "സാമ്പിൾ വായനക്കാരൻ 2", ph: "95XXXXXX32", due: -3 },
+        { t: "ബാല്യകാലസഖി", a: "വൈക്കം മുഹമ്മദ് ബഷീർ", c: "നോവൽ", st: 1 },
+        { t: "ഒരു ദേശത്തിന്റെ കഥ", a: "എസ്.കെ. പൊറ്റെക്കാട്ട്", c: "നോവൽ", st: 1 }
+      ],
+      req: [
+        { t: "ഖസാക്കിന്റെ ഇതിഹാസം", a: "ഒ.വി. വിജയൻ", n: "സാമ്പിൾ വായനക്കാരൻ 3", ph: "95XXXXXX33" },
+        { t: "ബാല്യകാലസഖി", a: "", n: "സാമ്പിൾ വായനക്കാരൻ 4", ph: "95XXXXXX34", ask: 1 }
+      ]
+    }
+  };
+  function dm(t) { return '<p class="dm">🧪 ഡമ്മി ഡാറ്റ – ' + (t || "കാണിക്കാൻ മാത്രം") + '</p>'; }
+  function tabs(arr, cur, fn) { return '<div class="tb">' + arr.map(function (a) { return '<button type="button" data-t="' + a[0] + '"' + (a[0] === cur ? ' class="on"' : '') + '>' + a[1] + '</button>'; }).join("") + '</div>'; }
+  function wireTabs(bd, fn) { bd.querySelectorAll(".tb button").forEach(function (b) { b.onclick = function () { fn(b.dataset.t); }; }); }
+  function acts(ph, extra) { return '<div class="ia"><button type="button" class="ca" data-dm>📞 വിളിക്കാം</button><button type="button" class="wh" data-dm>💬 WhatsApp</button>' + (extra || "") + '</div>'; }
+  function dmWire(bd) { bd.querySelectorAll("[data-dm]").forEach(function (b) { b.onclick = function () { toast("ഡമ്മി ഡാറ്റ – ലൈവ് ആകുമ്പോൾ പ്രവർത്തിക്കും"); }; }); }
+
+  function blood(t, fg) {
+    var bd = shell("ബ്ലഡ് ബാങ്ക്", "രക്തം വേണ്ടവരും ദാതാക്കളും", "🩸", true);
+    var open = D.blood.req.filter(function (r) { return !r.done; }).length;
+    var h = tabs([["req", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["don", "🩸 ദാതാക്കൾ (" + D.blood.don.length + ")"]], t) + dm();
+    if (t === "req") {
+      h += D.blood.req.map(function (r, i) {
+        var av = D.blood.don.filter(function (x) { return x.g === r.g && x.nx <= 0; }).length;
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="bg"><i>' + r.g + '</i></span><div><b>' + r.n + '</b><small>' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ കിട്ടി</em>' : (r.d <= 1 ? '<em class="ur">അടിയന്തരം</em>' : '')) + '</div>' +
+          '<div class="kv"><span>🏥 ' + r.hs + '</span><span>🩸 ' + r.u + ' യൂണിറ്റ്</span><span>📅 ' + fd(dIn(r.d)) + '</span><span>📱 ' + r.ph + '</span></div>' +
+          (r.done ? '' : '<button type="button" class="mt" data-g="' + r.g + '">🔎 ' + r.g + ' ലഭ്യമായ ദാതാക്കൾ: <b>' + av + '</b> ›</button>' + acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കിട്ടി</button>')) + '</div>';
+      }).join("");
+    } else {
+      var G = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
+      h += '<div class="gc"><button type="button" data-f=""' + (!fg ? ' class="on"' : '') + '>എല്ലാം</button>' + G.map(function (g) { var c = D.blood.don.filter(function (x) { return x.g === g; }).length; return '<button type="button" data-f="' + g + '"' + (fg === g ? ' class="on"' : '') + '>' + g + ' <small>' + c + '</small></button>'; }).join("") + '</div>';
+      var L = D.blood.don.filter(function (x) { return !fg || x.g === fg; });
+      h += L.length ? L.map(function (x) {
+        var ok = x.nx <= 0;
+        return '<div class="it"><div class="ih"><span class="bg"><i>' + x.g + '</i></span><div><b>' + x.n + '</b><small>' + x.h + ', ' + x.p + ' · 📱 ' + x.ph + '</small></div>' + (ok ? '<em class="ok">ലഭ്യം</em>' : '<em class="wt">' + fd(dIn(x.nx)) + ' മുതൽ</em>') + '</div>' + acts(x.ph) + '</div>';
+      }).join("") : '<div class="em"><i>🩸</i>ഈ ഗ്രൂപ്പിൽ ദാതാക്കൾ ഇല്ല</div>';
+    }
+    bd.innerHTML = h; wireTabs(bd, function (x) { blood(x); }); dmWire(bd);
+    bd.querySelectorAll(".mt").forEach(function (b) { b.onclick = function () { blood("don", b.dataset.g); }; });
+    bd.querySelectorAll(".gc button").forEach(function (b) { b.onclick = function () { blood("don", b.dataset.f); }; });
+    bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { D.blood.req[b.dataset.i].done = 1; toast("പൂർത്തിയായി ✅"); blood("req"); }; });
+  }
+
+  function eq(t) {
+    var bd = shell("മെഡിക്കൽ ഉപകരണങ്ങൾ", "ആവശ്യമുള്ളവരും കൊടുക്കാൻ തയ്യാറുള്ളവരും", "🦽", true);
+    var open = D.eq.need.filter(function (r) { return !r.done; }).length;
+    var h = tabs([["need", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["give", "🤝 ലഭ്യമായവ (" + D.eq.give.length + ")"]], t) + dm();
+    if (t === "need") {
+      h += D.eq.need.map(function (r, i) {
+        var m = D.eq.give.filter(function (g) { return g.it === r.it; }).length;
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="eg">🦽</span><div><b>' + r.it + '</b><small>' + r.n + ' · ' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ കൊടുത്തു</em>' : (m ? '<em class="ok">' + m + ' ലഭ്യം</em>' : '<em class="wt">ലഭ്യമല്ല</em>')) + '</div>' +
+          '<div class="kv"><span>📅 ' + fd(dIn(r.d)) + ' മുതൽ</span><span>⏳ ' + r.days + ' ദിവസം</span><span>📱 ' + r.ph + '</span></div>' +
+          (r.done ? '' : acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കൊടുത്തു</button>')) + '</div>';
+      }).join("");
+    } else {
+      h += D.eq.give.map(function (r, i) {
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="eg">🤝</span><div><b>' + r.it + '</b><small>' + r.n + ' · ' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="wt">കൈമാറി</em>' : '<em class="ok">ലഭ്യം</em>') + '</div>' +
+          '<div class="kv"><span>🚚 ' + r.how + '</span><span>📱 ' + r.ph + '</span></div>' + (r.done ? '' : acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കൈമാറി</button>')) + '</div>';
+      }).join("");
+    }
+    bd.innerHTML = h; wireTabs(bd, eq); dmWire(bd);
+    bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { (t === "need" ? D.eq.need : D.eq.give)[b.dataset.i].done = 1; toast("അപ്ഡേറ്റ് ചെയ്തു ✅"); eq(t); }; });
+  }
+
+  function lib(t) {
+    var bd = shell("ലൈബ്രറി", "പുസ്തകങ്ങളും വായനക്കാരുടെ ആവശ്യങ്ങളും", "📚", true);
+    var B = D.lib.books, out = B.filter(function (b) { return b.st === 2; }).length, late = B.filter(function (b) { return b.st === 2 && b.due < 0; }).length, rq = D.lib.req.filter(function (r) { return !r.done; }).length;
+    var h = '<div class="sx"><div><b>' + B.length + '</b>ആകെ</div><div><b>' + (B.length - out) + '</b>ലഭ്യം</div><div><b>' + out + '</b>വായനയിൽ</div><div class="rd"><b>' + late + '</b>വൈകിയവ</div></div>' +
+      tabs([["books", "📚 പുസ്തകങ്ങൾ"], ["req", "🙋 അഭ്യർത്ഥനകൾ" + (rq ? " (" + rq + ")" : "")]], t) + dm();
+    if (t === "books") {
+      h += '<button type="button" class="ad" data-dm>➕ പുതിയ പുസ്തകം ചേർക്കുക</button>';
+      h += B.map(function (b, i) {
+        return '<div class="it"><div class="ih"><span class="eg">📖</span><div><b>' + b.t + '</b><small>' + b.a + ' · ' + b.c + '</small></div>' + (b.st === 1 ? '<em class="ok">ലഭ്യം</em>' : '<em class="' + (b.due < 0 ? 'ur' : 'wt') + '">' + (b.due < 0 ? 'വൈകി' : 'വായനയിൽ') + '</em>') + '</div>' +
+          (b.st === 2 ? '<div class="kv"><span>👤 ' + b.by + '</span><span>📱 ' + b.ph + '</span><span>' + (b.due < 0 ? '⚠️ ' + (-b.due) + ' ദിവസം വൈകി' : '📅 തിരികെ: ' + fd(dIn(b.due))) + '</span></div>' + acts(b.ph, '<button type="button" class="ok" data-r="' + i + '">↩️ തിരികെ കിട്ടി</button>')
+            : '<div class="ia"><button type="button" class="ok" data-o="' + i + '">📤 വായിക്കാൻ കൊടുത്തു</button></div>') + '</div>';
+      }).join("");
+    } else {
+      h += D.lib.req.map(function (r, i) {
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="eg">' + (r.ask ? '📖' : '🆕') + '</span><div><b>' + r.t + '</b><small>' + (r.ask ? 'ലൈബ്രറിയിലെ പുസ്തകം ചോദിച്ചു' : 'പുതിയ പുസ്തകം ആവശ്യപ്പെട്ടു' + (r.a ? ' · ' + r.a : '')) + '</small></div>' + (r.done ? '<em class="ok">✅</em>' : '') + '</div>' +
+          '<div class="kv"><span>👤 ' + r.n + '</span><span>📱 ' + r.ph + '</span></div>' + (r.done ? '' : acts(r.ph, '<button type="button" class="ok" data-q="' + i + '">✅ ശരിയാക്കി</button>')) + '</div>';
+      }).join("");
+    }
+    bd.innerHTML = h; wireTabs(bd, lib); dmWire(bd);
+    bd.querySelectorAll("[data-r]").forEach(function (b) { b.onclick = function () { var k = B[b.dataset.r]; k.st = 1; delete k.by; toast("തിരികെ കിട്ടി ✅"); lib("books"); }; });
+    bd.querySelectorAll("[data-o]").forEach(function (b) { b.onclick = function () { var k = B[b.dataset.o]; k.st = 2; k.by = "സാമ്പിൾ വായനക്കാരൻ"; k.ph = "95XXXXXX39"; k.due = 14; toast("14 ദിവസത്തേക്ക് കൊടുത്തു 📤"); lib("books"); }; });
+    bd.querySelectorAll("[data-q]").forEach(function (b) { b.onclick = function () { D.lib.req[b.dataset.q].done = 1; toast("ശരിയാക്കി ✅"); lib("req"); }; });
+  }
+
   function card(s, pending) {
     if (!pending) return '<div class="cd"><div class="done">✅<span>' + esc(s.title) + '<small>' + (s.status === "approved" ? "Info-യിൽ പോസ്റ്റ് ചെയ്തു" : "ഒഴിവാക്കി") + '</small></span></div></div>';
     return '<div class="cd" data-id="' + s.id + '"><label><span>തലക്കെട്ട്</span><input class="t" value="' + esc(s.title) + '"></label>' +
