@@ -3,11 +3,12 @@
   var API = "https://lauftdyrlnhbimqokgye.supabase.co/functions/v1/zest-admin", K = "zestAdminTok";
   var F = 'Inter,"Noto Sans Malayalam",sans-serif';
   function tok() { try { return localStorage.getItem(K) || ""; } catch (e) { return ""; } }
-  function logout() { try { localStorage.removeItem(K); } catch (e) {} location.replace("/zest-admin-r01pm/"); }
+  function okTok() { var e = +String(tok()).split(".")[0]; return e && e > Date.now(); }
+  function logout() { try { localStorage.removeItem(K); } catch (e) {} var a = document.querySelector(".zdw-adm"); if (a) a.remove(); pop(); toast("ലോഗ് ഔട്ട് ചെയ്തു"); }
   function call(o) {
     o.token = tok();
     return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(o) })
-      .then(function (r) { if (r.status === 401) { logout(); throw new Error("auth"); } return r.json(); });
+      .then(function (r) { if (r.status === 401) { try { localStorage.removeItem(K); } catch (e) {} var a = document.querySelector(".zdw-adm"); if (a) a.remove(); pop(); login(); throw new Error("auth"); } return r.json(); });
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function toast(m) { var t = document.createElement("div"); t.className = "zat"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2400); }
@@ -29,11 +30,37 @@
     '.zat{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px ' + F + ';box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
   var st = document.createElement("style"); st.textContent = CSS; document.head.appendChild(st);
 
-  /* gold admin item at the top of the side menu */
+  CSS += '.zap-bg{position:fixed;inset:0;z-index:2147483640;background:rgba(10,30,45,.55)}.zap{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2147483641;width:min(340px,90vw);box-sizing:border-box;border-radius:24px;padding:22px 18px;text-align:center;background:linear-gradient(160deg,#3a2a00,#8a6508 45%,#f0a500);color:#fff;font-family:' + F + ';box-shadow:0 20px 40px rgba(0,0,0,.35)}' +
+    '.zap h4{margin:6px 0 4px;font:800 18px ' + F + '}.zap p{margin:0 0 14px;font:600 12px ' + F + ';color:#fff3cf}.zap .pin{display:flex;gap:6px;justify-content:center;margin-bottom:12px}.zap .pin input{width:38px;height:46px;border-radius:10px;border:0;text-align:center;font:800 20px Inter,sans-serif;color:#3a2a00;outline:none}.zap .pin input:focus{box-shadow:0 0 0 3px #fff}' +
+    '.zap .go{border:0;border-radius:999px;padding:11px 26px;background:#fff;color:#8a6508;font:800 14px ' + F + ';cursor:pointer}.zap .er{min-height:18px;margin-top:10px;font:700 12px ' + F + ';color:#ffe1e6}.zap .x{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(255,255,255,.2);color:#fff;font:700 13px Inter,sans-serif;cursor:pointer}';
+  st.textContent = CSS;
+  function login() {
+    if (document.querySelector(".zap")) return;
+    var bg = document.createElement("div"); bg.className = "zap-bg"; var m = document.createElement("div"); m.className = "zap"; m.setAttribute("data-noi18n", "");
+    m.innerHTML = '<button type="button" class="x" aria-label="Close">✕</button><div style="font-size:30px">🔒</div><h4>അഡ്മിൻ ലോഗിൻ</h4><p>6 അക്ക അഡ്മിൻ PIN നൽകൂ</p><div class="pin">' + [0, 1, 2, 3, 4, 5].map(function () { return '<input inputmode="numeric" maxlength="1" type="password" autocomplete="off">'; }).join("") + '</div><button type="button" class="go">പ്രവേശിക്കുക</button><div class="er"></div>';
+    document.body.appendChild(bg); document.body.appendChild(m);
+    function shut() { bg.remove(); m.remove(); }
+    bg.onclick = shut; m.querySelector(".x").onclick = shut;
+    var ins = [].slice.call(m.querySelectorAll("input")), btn = m.querySelector(".go"), er = m.querySelector(".er");
+    ins.forEach(function (i, n) { i.addEventListener("input", function () { i.value = i.value.replace(/\D/g, "").slice(-1); if (i.value && ins[n + 1]) ins[n + 1].focus(); if (ins.every(function (x) { return x.value; })) send(); });
+      i.addEventListener("keydown", function (e) { if (e.key === "Backspace" && !i.value && ins[n - 1]) ins[n - 1].focus(); }); });
+    ins[0].focus(); btn.onclick = send;
+    function send() {
+      var pin = ins.map(function (x) { return x.value; }).join(""); if (pin.length < 6) { er.textContent = "6 അക്കങ്ങളും നൽകൂ"; return; }
+      btn.disabled = true; er.textContent = "";
+      fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "login", pin: pin }) })
+        .then(function (r) { return r.json().then(function (j) { return [r.status, j]; }); })
+        .then(function (x) { btn.disabled = false;
+          if (x[1].token) { try { localStorage.setItem(K, x[1].token); } catch (e) {} shut(); addMenu(); open(); return; }
+          er.textContent = x[0] === 429 ? "പല തവണ തെറ്റി. 15 മിനിറ്റ് കഴിഞ്ഞ് ശ്രമിക്കൂ" : "PIN തെറ്റാണ്"; ins.forEach(function (i) { i.value = ""; }); ins[0].focus(); })
+        .catch(function () { btn.disabled = false; er.textContent = "ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിക്കൂ"; });
+    }
+  }
+  /* gold admin item at the top of the side menu (only on logged-in admin phones) */
   function addMenu() {
-    var ls = document.querySelector(".zdw .zdw-ls"); if (!ls || ls.querySelector(".zdw-adm")) return !!ls;
+    var ls = document.querySelector(".zdw .zdw-ls"); if (!ls || ls.querySelector(".zdw-adm") || !okTok()) return !!ls;
     var a = document.createElement("a"); a.className = "zdw-adm"; a.href = "#"; a.innerHTML = '<i>🔒</i><span>അഡ്മിൻ പേജ്</span><b>›</b>';
-    a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); if (window.ZestDrawer) ZestDrawer.close(); open(); };
+    a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); if (window.ZestDrawer) ZestDrawer.close(); if (okTok()) open(); else login(); };
     ls.insertBefore(a, ls.firstChild); return true;
   }
   if (!addMenu()) { var mo = new MutationObserver(function () { if (addMenu()) mo.disconnect(); }); mo.observe(document.documentElement, { childList: true, subtree: true }); }
@@ -118,5 +145,5 @@
   }
   function pop() { var o = document.getElementById("zadm"); if (o) o.remove(); removeEventListener("popstate", pop); }
   function close() { if (history.state && history.state.zadm) history.back(); else pop(); }
-  window.ZestAdmin = { open: open };
+  window.ZestAdmin = { open: function () { okTok() ? open() : login(); }, login: login };
 })();
