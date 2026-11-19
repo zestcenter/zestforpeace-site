@@ -80,6 +80,15 @@
     '#zadm .sx{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 14px 0}#zadm .sx div{background:#fff;border-radius:14px;padding:10px 4px;text-align:center;font:700 11px ' + F + ';color:#7a8b96;box-shadow:0 2px 0 #e3eaef}#zadm .sx b{display:block;font:800 19px Inter,sans-serif;color:#0b3d5c}#zadm .sx .rd b{color:#d81b3c}';
   st.textContent = CSS;
 
+  CSS += '#zadm .fb{display:flex;gap:6px;padding:12px 14px 0}#zadm .fb button{flex:1;border:1.5px solid #e1e9ef;background:#fff;border-radius:12px;padding:9px 4px;font:800 12.5px ' + F + ';color:#3b4c57;cursor:pointer}#zadm .fb button.on{border-color:#d81b3c;color:#d81b3c;background:#fff4f6}' +
+    '#zadm .fc{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px 0}#zadm .fc button{border:0;border-radius:999px;padding:5px 10px;background:#d81b3c;color:#fff;font:700 11.5px ' + F + ';cursor:pointer}#zadm .rc{margin:10px 16px 0;font:700 11.5px ' + F + ';color:#7a8b96}' +
+    '#zadm .zas-bg{position:fixed;inset:0;z-index:5;background:rgba(10,30,45,.45)}#zadm .zas{position:fixed;left:0;right:0;bottom:0;z-index:6;max-height:75vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:14px 16px 18px;animation:zaUp .2s ease}@keyframes zaUp{from{transform:translateY(40px);opacity:0}}' +
+    '#zadm .zas .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}#zadm .zas .hd b{font:800 15px ' + F + ';color:#0b3d5c}#zadm .zas .x{width:32px;height:32px;border-radius:50%;border:0;background:#eef3f7;color:#3b4c57;font:700 13px Inter,sans-serif;cursor:pointer}' +
+    '#zadm .zas .r{display:flex;width:100%;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid #eef3f7;background:none;padding:12px 4px;font:700 14px ' + F + ';color:#14232c;cursor:pointer}#zadm .zas .r small{color:#93a3ad;font-weight:700}' +
+    '#zadm .zas .ck{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid #cfdbe3;box-sizing:border-box}#zadm .zas .ck.on{background:#d81b3c;border-color:#d81b3c;position:relative}#zadm .zas .ck.on:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:800 13px/18px Inter,sans-serif;text-align:center}' +
+    '#zadm .zas .go{display:block;margin:14px auto 0;border:0;border-radius:999px;padding:11px 24px;background:linear-gradient(135deg,#ff5a6e,#d81b3c);color:#fff;font:800 13.5px ' + F + ';cursor:pointer}';
+  st.textContent = CSS;
+
   var w;
   function shell(title, sub, icon, back) {
     w.innerHTML = '<div class="mh">' + (back ? '<button type="button" class="bk" aria-label="Back">←</button>' : '<button type="button" class="bk" aria-label="Close">✕</button><button type="button" class="lo">ലോഗ് ഔട്ട്</button>') +
@@ -152,7 +161,28 @@
   function acts(ph, extra) { return '<div class="ia"><button type="button" class="ca" data-dm>📞 വിളിക്കാം</button><button type="button" class="wh" data-dm>💬 WhatsApp</button>' + (extra || "") + '</div>'; }
   function dmWire(bd) { bd.querySelectorAll("[data-dm]").forEach(function (b) { b.onclick = function () { toast("ഡമ്മി ഡാറ്റ – ലൈവ് ആകുമ്പോൾ പ്രവർത്തിക്കും"); }; }); }
 
-  function blood(t, fg) {
+  var G = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"], AV = { y: "ഇപ്പോൾ ലഭ്യം", s: "30 ദിവസത്തിനുള്ളിൽ", l: "പിന്നീട്" };
+  var BF = { g: [], a: [], p: [] };
+  function avk(x) { return x.nx <= 0 ? "y" : x.nx <= 30 ? "s" : "l"; }
+  function fsheet(k) {
+    var opts = k === "g" ? G.map(function (g) { return [g, g, D.blood.don.filter(function (x) { return x.g === g; }).length]; })
+      : k === "a" ? ["y", "s", "l"].map(function (v) { return [v, AV[v], D.blood.don.filter(function (x) { return avk(x) === v; }).length]; })
+      : D.blood.don.map(function (x) { return x.p; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).sort().map(function (v) { return [v, v, D.blood.don.filter(function (x) { return x.p === v; }).length]; });
+    var sel = BF[k].slice(), ttl = { g: "🩸 ബ്ലഡ് ഗ്രൂപ്പ്", a: "✅ ലഭ്യത", p: "📍 സ്ഥലം" }[k];
+    var bg = document.createElement("div"); bg.className = "zas-bg"; var sh = document.createElement("div"); sh.className = "zas";
+    function draw() {
+      sh.innerHTML = '<div class="hd"><b>' + ttl + '</b><button type="button" class="x">✕</button></div>' +
+        '<button type="button" class="r" data-v=""><span>എല്ലാം</span><span class="ck' + (!sel.length ? ' on' : '') + '"></span></button>' +
+        opts.map(function (o) { return '<button type="button" class="r" data-v="' + o[0] + '"><span>' + o[1] + ' <small>' + o[2] + '</small></span><span class="ck' + (sel.indexOf(o[0]) > -1 ? ' on' : '') + '"></span></button>'; }).join("") +
+        '<button type="button" class="go">ദാതാക്കളെ കാണിക്കൂ</button>';
+      sh.querySelector(".x").onclick = shut; bg.onclick = shut;
+      sh.querySelectorAll(".r").forEach(function (r) { r.onclick = function () { var v = r.dataset.v; if (!v) sel = []; else if (sel.indexOf(v) > -1) sel = sel.filter(function (z) { return z !== v; }); else sel.push(v); draw(); }; });
+      sh.querySelector(".go").onclick = function () { BF[k] = sel; shut(); blood("don"); };
+    }
+    function shut() { bg.remove(); sh.remove(); }
+    draw(); w.appendChild(bg); w.appendChild(sh);
+  }
+  function blood(t) {
     var bd = shell("ബ്ലഡ് ബാങ്ക്", "രക്തം വേണ്ടവരും ദാതാക്കളും", "🩸", true);
     var open = D.blood.req.filter(function (r) { return !r.done; }).length;
     var h = tabs([["req", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["don", "🩸 ദാതാക്കൾ (" + D.blood.don.length + ")"]], t) + dm();
@@ -164,17 +194,21 @@
           (r.done ? '' : '<button type="button" class="mt" data-g="' + r.g + '">🔎 ' + r.g + ' ലഭ്യമായ ദാതാക്കൾ: <b>' + av + '</b> ›</button>' + acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കിട്ടി</button>')) + '</div>';
       }).join("");
     } else {
-      var G = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
-      h += '<div class="gc"><button type="button" data-f=""' + (!fg ? ' class="on"' : '') + '>എല്ലാം</button>' + G.map(function (g) { var c = D.blood.don.filter(function (x) { return x.g === g; }).length; return '<button type="button" data-f="' + g + '"' + (fg === g ? ' class="on"' : '') + '>' + g + ' <small>' + c + '</small></button>'; }).join("") + '</div>';
-      var L = D.blood.don.filter(function (x) { return !fg || x.g === fg; });
+      var L = D.blood.don.filter(function (x) { return (!BF.g.length || BF.g.indexOf(x.g) > -1) && (!BF.a.length || BF.a.indexOf(avk(x)) > -1) && (!BF.p.length || BF.p.indexOf(x.p) > -1); })
+        .sort(function (p, q) { return Math.max(p.nx, 0) - Math.max(q.nx, 0) || G.indexOf(p.g) - G.indexOf(q.g); });
+      h += '<div class="fb"><button type="button" data-k="g"' + (BF.g.length ? ' class="on"' : '') + '>🩸 ഗ്രൂപ്പ് ▾</button><button type="button" data-k="a"' + (BF.a.length ? ' class="on"' : '') + '>✅ ലഭ്യത ▾</button><button type="button" data-k="p"' + (BF.p.length ? ' class="on"' : '') + '>📍 സ്ഥലം ▾</button></div>';
+      var ch = []; ["g", "a", "p"].forEach(function (k) { BF[k].forEach(function (v) { ch.push('<button type="button" data-ck="' + k + '" data-cv="' + v + '">' + (k === "a" ? AV[v] : v) + ' ✕</button>'); }); });
+      if (ch.length) h += '<div class="fc">' + ch.join("") + '</div>';
+      h += '<p class="rc">' + L.length + ' ദാതാക്കൾ · ലഭ്യമായവർ ആദ്യം</p>';
       h += L.length ? L.map(function (x) {
         var ok = x.nx <= 0;
         return '<div class="it"><div class="ih"><span class="bg"><i>' + x.g + '</i></span><div><b>' + x.n + '</b><small>' + x.h + ', ' + x.p + ' · 📱 ' + x.ph + '</small></div>' + (ok ? '<em class="ok">ലഭ്യം</em>' : '<em class="wt">' + fd(dIn(x.nx)) + ' മുതൽ</em>') + '</div>' + acts(x.ph) + '</div>';
-      }).join("") : '<div class="em"><i>🩸</i>ഈ ഗ്രൂപ്പിൽ ദാതാക്കൾ ഇല്ല</div>';
+      }).join("") : '<div class="em"><i>🩸</i>ഈ ഫിൽട്ടറിൽ ദാതാക്കൾ ഇല്ല</div>';
     }
-    bd.innerHTML = h; wireTabs(bd, function (x) { blood(x); }); dmWire(bd);
-    bd.querySelectorAll(".mt").forEach(function (b) { b.onclick = function () { blood("don", b.dataset.g); }; });
-    bd.querySelectorAll(".gc button").forEach(function (b) { b.onclick = function () { blood("don", b.dataset.f); }; });
+    var sy = w.scrollTop; bd.innerHTML = h; if (t === "don") w.scrollTop = sy; wireTabs(bd, function (x) { blood(x); }); dmWire(bd);
+    bd.querySelectorAll(".mt").forEach(function (b) { b.onclick = function () { BF = { g: [b.dataset.g], a: ["y"], p: [] }; blood("don"); }; });
+    bd.querySelectorAll(".fb button").forEach(function (b) { b.onclick = function () { fsheet(b.dataset.k); }; });
+    bd.querySelectorAll(".fc button").forEach(function (b) { b.onclick = function () { var k = b.dataset.ck; BF[k] = BF[k].filter(function (v) { return v !== b.dataset.cv; }); blood("don"); }; });
     bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { D.blood.req[b.dataset.i].done = 1; toast("പൂർത്തിയായി ✅"); blood("req"); }; });
   }
 
