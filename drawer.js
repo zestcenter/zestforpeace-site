@@ -62,7 +62,7 @@
   function ln(c, h, ic, t) { return '<a class="zdw-mn" style="--c:' + c + '" href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch">' + CHEV + '</b></a>'; }
   var ZML = window.ZestLang && ZestLang.get() === "ml";
   var items =
-    gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "📅", "EVENTS")) +
+    gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "🛤️", ZML ? "പിന്നിട്ട വഴികൾ" : "OUR JOURNEY")) +
     gp("#f08a00", I.info, ZML ? "അറിയിപ്പുകൾ" : "SERVICE CENTRE INFO", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", ZML ? "പ്രധാന അറിയിപ്പ്" : "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
     gp("#6a4bd1", I.stu, "STUDENTS CORNER", tl("#students", "📖", "REVISION PLANNER", "rev") + tl("#students", "💰", "POCKET MONEY", "mon")) +
     ln("#16996a", "#zlib", BK, "ZEST LIBRARY") + gp("#e0345c", DROP, "MEDICAL HELP", tl("#med-blood", "🩸", "BLOOD BANK") + tl("#med-eq", "🦽", ZML ? "മെഡിക്കൽ ഉപകരണങ്ങൾ" : "MEDICAL EQUIPMENT"));
