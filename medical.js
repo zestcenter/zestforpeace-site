@@ -106,6 +106,7 @@
       toast(soon());
     };
   }
+  var BLOOD_LIVE = false; /* set true when the blood service starts – "Need blood" then opens WhatsApp to the main ZEST number */
   var BST = { ready: 1, grp: "", done: 0 };
   var BCOUNT = { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }; /* sample numbers – will come from the Google Sheet */
   function ifl(icon, html, dd) { return '<label class="zbf' + (dd ? ' dd' : '') + '"><i>' + icon + '</i>' + html + '<em>*</em></label>'; }
@@ -139,7 +140,11 @@
       '<p class="nt">' + soon() + '</p>';
   }
   function bloodWire(w, tab, rerender) {
-    if (tab === "need") { w.querySelector(".zbneed").onclick = function () { toast(soon()); }; return; }
+    if (tab === "need") { w.querySelector(".zbneed").onclick = function () {
+      if (!BLOOD_LIVE) { toast(soon()); return; }
+      var msg = ML ? "ഹലോ ZEST സെന്റർ 👋\n\n🩸 രക്തം ആവശ്യമുണ്ട്.\n\nബ്ലഡ് ഗ്രൂപ്പ്: \nആശുപത്രി / സ്ഥലം: \nഎപ്പോൾ വേണം: \nബന്ധപ്പെടേണ്ട നമ്പർ: "
+                   : "Hello ZEST Centre 👋\n\n🩸 Blood needed.\n\nBlood group: \nHospital / place: \nWhen needed: \nContact number: ";
+      window.open("https://wa.me/918848313837?text=" + encodeURIComponent(msg), "_blank"); }; return; }
     w.querySelectorAll(".zbyn button").forEach(function (b) { b.onclick = function () { BST.ready = +b.dataset.r; var y = w.scrollTop; rerender(); w.scrollTop = y; }; });
     if (!BST.ready) return;
     if (BST.done) { w.querySelector(".zbmore").onclick = function () { BST.done = 0; BST.grp = ""; VAL.n = ""; VAL.m = ""; VAL.bl = ""; rerender(); var t = w.querySelector(".zbt"); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }; return; }
