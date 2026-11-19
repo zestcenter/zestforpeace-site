@@ -45,7 +45,7 @@
 
   var bg = document.createElement("div"); bg.className = "zdw-bg";
   var dw = document.createElement("aside"); dw.className = "zdw"; dw.setAttribute("aria-label", "Main menu"); dw.setAttribute("aria-hidden", "true");
-  var onHome = location.pathname === "/" || /\/index\.html$/.test(location.pathname) && location.pathname.indexOf("/centreinfo") !== 0;
+  var onHome = location.pathname === "/" || location.pathname.indexOf("/zest-admin") === 0 || /\/index\.html$/.test(location.pathname) && location.pathname.indexOf("/centreinfo") !== 0;
   var H = function (id) { return onHome ? "#" + id : "/#" + id; };
   function it(h, ic, t) { return '<a href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span></a>'; }
   var CHEV = '<svg class="zdw-cv" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
