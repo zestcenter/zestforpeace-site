@@ -28,11 +28,11 @@
     /* filter bar – shared */
     '#zlib .fb{display:flex;gap:8px;padding:0 14px}#zlib .fb button{position:relative;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s,background .25s,color .25s,box-shadow .25s,border-color .25s}#zlib .fb button:active{transform:scale(.94)}' +
     '#zlib .fb .n{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:999px;background:#ffc44d;color:#3a2a00;font:800 10.5px Inter,sans-serif;animation:zlPop .35s cubic-bezier(.3,1.6,.5,1)}@keyframes zlPop{from{transform:scale(0)}to{transform:scale(1)}}' +
-    '#zlib .fb .si{font-style:normal;font-size:13px;line-height:1}#zlib .fb .cv2{display:inline-block;font-size:10px;transition:transform .25s}' +
+    '#zlib .fb .sp{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#ffc44d,#f0a500);color:#fff;font:900 12px/1 Inter,sans-serif;font-style:normal;box-shadow:0 2px 4px rgba(240,165,0,.35)}#zlib .fb .si{font-style:normal;font-size:13px;line-height:1}#zlib .fb .cv2{display:inline-block;font-size:10px;transition:transform .25s}' +
     '#zlib .af{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px 0}#zlib .af:empty{display:none}#zlib .af span{display:inline-flex;align-items:center;gap:5px;background:#e6f3fb;color:#0b5d8f;border-radius:999px;padding:5px 6px 5px 10px;font:700 11.5px ' + F + ';animation:zlPop .3s ease}#zlib .af b{display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:#fff;color:#0b5d8f;font:800 10px Inter,sans-serif;cursor:pointer}' +
     '#zlib .cnt{margin:12px 16px 8px;font-size:12px;color:#7a8b96;font-weight:700}' +
     /* V1 – segmented pill bar */
-    '#zlib.v1 .fb{margin:0 14px;padding:5px;background:#fff;border-radius:18px;box-shadow:0 4px 14px rgba(11,61,92,.08)}#zlib.v1 .fb button{flex:1;border:0;background:none;border-radius:14px;padding:10px 4px;font:700 13px ' + F + ';color:#4a5d69}' +
+    '#zlib.v1 .fb{padding:0 14px;gap:8px}#zlib.v1 .fb button{flex:1;border:0;background:#fff;border-radius:14px;padding:10px 4px;font:700 13px ' + F + ';color:#4a5d69;box-shadow:0 3px 10px rgba(11,61,92,.08),inset 0 0 0 1.5px #e3ecf2}' +
     '#zlib.v1 .fb button.on{background:linear-gradient(135deg,#1380b8,#0b5d8f);color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.35)}' +
     /* V2 – icon chips with gradient ring */
     '#zlib.v2 .fb button{flex:1;flex-direction:column;gap:3px;border:0;border-radius:18px;padding:10px 4px 9px;background:#fff;font:700 12px ' + F + ';color:#3c4d57;box-shadow:0 3px 0 #e3eaef}#zlib.v2 .fb button i{font-style:normal;font-size:20px;transition:transform .3s}#zlib.v2 .fb button span{display:flex;align-items:center;gap:4px}' +
@@ -62,6 +62,10 @@
     '.zls .r i{font-style:normal;font-size:18px;width:26px;text-align:center}.zls .r span{flex:1}.zls .r small{font:700 11px Inter,sans-serif;color:#7a8b96}' +
     '.zls .r span.ck{position:relative;flex:none;width:22px;height:22px;border-radius:7px;border:2px solid #c9d6de;transition:background .2s,border-color .2s}.zls .r.on .ck{background:#1380b8;border-color:#1380b8}.zls .ck:after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}.zls .r.on .ck:after{transform:rotate(45deg) scale(1)}' +
     '.zls .ap{display:flex;justify-content:center;padding:12px 16px 18px;border-top:1px solid #eef3f6}.zls .ap button{border:0;border-radius:14px;padding:13px;font:800 14px ' + F + ';cursor:pointer}.zls .ap .c{flex:none;padding:13px 18px;background:#eef3f7;color:#3b4c57}.zls .ap .a{padding:10px 26px;font-size:13px;border-radius:999px;background:linear-gradient(135deg,#1380b8,#0b5d8f);color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.3)}' +
+    '#zlib.v1 .fb button{white-space:nowrap;font-size:12.5px;padding:10px 2px;gap:4px}#zlib.v1 .fb button.sg{flex:1.15;color:#9a6a00;background:linear-gradient(135deg,#fff7df,#ffe7a8);box-shadow:inset 0 0 0 1.5px #ffd36b}' +
+    '.zls .r.ra{border-bottom:1px solid #eef3f6;border-radius:14px 14px 0 0;margin-bottom:4px}' +
+    '.zsg .sgf{padding:4px 18px 6px;overflow:auto}.zsg .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.zsg label{display:block;margin-bottom:10px}.zsg label>span{display:block;font:700 12px "Noto Sans Malayalam",Inter,sans-serif;color:#3c5566;margin:0 0 5px 2px}.zsg em{font-style:normal;color:#e0345c}.zsg input{width:100%;box-sizing:border-box;border:1.5px solid #dde6ee;border-radius:12px;padding:11px 12px;font:500 14px Inter,"Noto Sans Malayalam",sans-serif;outline:none}.zsg input:focus{border-color:#1380b8}.zsg input.inv{border-color:#e0345c;background:#fff6f8}' +
+    '.zsg .ap .a.zwa{flex:none;white-space:nowrap;display:flex;align-items:center;gap:8px;background:#25d366;box-shadow:0 6px 14px rgba(37,211,102,.3)}.zsg .zwa svg{width:18px;height:18px}' +
     '.zlt{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:10px 18px;border-radius:999px;font:700 13px ' + F + ';box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center;max-width:86vw}';
 
   function toast(m) { var t = document.createElement("div"); t.className = "zlt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
@@ -85,10 +89,10 @@
       function n(a) { return a.length ? '<em class="n">' + a.length + '</em>' : ''; }
       var ic = V === "v2", si = function (e) { return ic ? '' : '<i class="si">' + e + '</i>'; };
       w.querySelector(".fb").innerHTML =
-        '<button type="button" data-f="all" class="' + (all ? 'on' : '') + '">' + si("📚") + (ic ? '<i>📚</i><span>' : '') + T("എല്ലാം", "All") + (ic ? '</span>' : '') + '</button>' +
         '<button type="button" data-f="cat" class="dd' + (selC.length ? ' on' : '') + '">' + si("🗂️") + (ic ? '<i>🗂️</i><span>' : '') + T("വിഭാഗം", "Category") + ' <span class="cv2">▾</span>' + (ic ? '</span>' : '') + n(selC) + '</button>' +
-        '<button type="button" data-f="st" class="dd' + (selS.length ? ' on' : '') + '">' + si("✅") + (ic ? '<i>✅</i><span>' : '') + T("ലഭ്യത", "Availability") + ' <span class="cv2">▾</span>' + (ic ? '</span>' : '') + n(selS) + '</button>';
-      w.querySelector('[data-f=all]').onclick = function () { selC = []; selS = []; bar(); list(); };
+        '<button type="button" data-f="st" class="dd' + (selS.length ? ' on' : '') + '">' + si("✅") + (ic ? '<i>✅</i><span>' : '') + T("ലഭ്യത", "Availability") + ' <span class="cv2">▾</span>' + (ic ? '</span>' : '') + n(selS) + '</button>' +
+        '<button type="button" data-f="sug" class="sg">' + (ic ? '<i>➕</i><span>' : '<i class="sp">+</i>') + T("ആവശ്യപ്പെടാം", "Request") + (ic ? '</span>' : '') + '</button>';
+      w.querySelector('[data-f=sug]').onclick = suggest;
       w.querySelector('[data-f=cat]').onclick = function () { pick("cat"); };
       w.querySelector('[data-f=st]').onclick = function () { pick("st"); };
       var af = selC.map(function (k) { return '<span>' + catName(k) + ' <b data-c="' + k + '">✕</b></span>'; }).concat(selS.map(function (k) { return '<span>' + sts()[k - 1][2] + ' <b data-s="' + k + '">✕</b></span>'; }));
@@ -109,15 +113,44 @@
       var sh = document.createElement("div"); sh.className = "zls"; sh.setAttribute("data-noi18n", "");
       function cnt(key) { return BOOKS.filter(function (b) { return isC ? b.k === key && match(b, [], selS) : b.st === key && match(b, selC, []); }).length; }
       sh.innerHTML = '<div class="gr"></div><div class="sh2"><h4>' + (isC ? "🗂️ " + T("വിഭാഗം", "Category") : "✅ " + T("ലഭ്യത", "Availability")) + '</h4><button type="button" class="x" aria-label="Close">✕</button></div><div class="hs">' + T("ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം", "You can pick more than one") + '</div><div class="ls">' +
+        '<div class="r ra' + (tmp.length ? '' : ' on') + '" data-k="__all"><span class="ck"></span><i>' + (isC ? '📚' : '✅') + '</i><span>' + T("എല്ലാം", "All") + '</span><small>' + BOOKS.filter(function (b) { return isC ? match(b, [], selS) : match(b, selC, []); }).length + '</small></div>' +
         rows.map(function (x) { return '<div class="r' + (tmp.indexOf(x[0]) > -1 ? ' on' : '') + '" data-k="' + x[0] + '"><span class="ck"></span><i>' + x[1] + '</i><span>' + x[2] + '</span><small>' + cnt(x[0]) + '</small></div>'; }).join("") +
         '</div><div class="ap"><button type="button" class="a">' + T("പുസ്തകങ്ങൾ കാണിക്കൂ", "Show books") + '</button></div>';
       function upd() {}
-      sh.querySelectorAll(".r").forEach(function (r) { r.onclick = function () { var k = isC ? r.dataset.k : +r.dataset.k, p = tmp.indexOf(k); if (p > -1) tmp.splice(p, 1); else tmp.push(k); r.classList.toggle("on", p < 0); upd(); }; });
+      sh.querySelectorAll(".r").forEach(function (r) { r.onclick = function () {
+        if (r.dataset.k === "__all") tmp = []; else { var k = isC ? r.dataset.k : +r.dataset.k, p = tmp.indexOf(k); if (p > -1) tmp.splice(p, 1); else tmp.push(k); }
+        sh.querySelectorAll(".r").forEach(function (x) { var kk = x.dataset.k; x.classList.toggle("on", kk === "__all" ? !tmp.length : tmp.indexOf(isC ? kk : +kk) > -1); }); upd(); }; });
       function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
       bg.onclick = shut;
       sh.querySelector(".x").onclick = shut;
       sh.querySelector(".a").onclick = function () { if (isC) selC = tmp; else selS = tmp; bar(); list(); shut(); };
       upd(); document.body.appendChild(bg); document.body.appendChild(sh);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { bg.classList.add("on"); sh.classList.add("on"); }); });
+    }
+    function suggest() {
+      var bg = document.createElement("div"); bg.className = "zls-bg";
+      var sh = document.createElement("div"); sh.className = "zls zsg"; sh.setAttribute("data-noi18n", "");
+      sh.innerHTML = '<div class="gr"></div><div class="sh2"><h4>📚 ' + T("പുസ്തകം ആവശ്യപ്പെടാം", "Request a book") + '</h4><button type="button" class="x" aria-label="Close">✕</button></div>' +
+        '<div class="hs">' + T("ലൈബ്രറിയിൽ ഇല്ലാത്ത പുസ്തകം വേണോ? പറഞ്ഞാൽ ZEST വാങ്ങാൻ ശ്രമിക്കും 📚", "Want a book the library doesn\'t have? Tell us and ZEST will try to get it 📚") + '</div>' +
+        '<div class="sgf"><label><span>' + T("പുസ്തകത്തിന്റെ പേര്", "Book name") + ' <em>*</em></span><input class="b1" placeholder="' + T("ഉദാ: ആടുജീവിതം", "e.g. Aadujeevitham") + '"></label>' +
+        '<label><span>' + T("എഴുത്തുകാരൻ (അറിയുമെങ്കിൽ)", "Author (if you know)") + '</span><input class="b2" placeholder="' + T("എഴുത്തുകാരന്റെ പേര്", "Author name") + '"></label>' +
+        '<div class="r2"><label><span>' + T("നിങ്ങളുടെ പേര്", "Your name") + ' <em>*</em></span><input class="b3" placeholder="' + T("പേര്", "Name") + '"></label>' +
+        '<label><span>' + T("മൊബൈൽ നമ്പർ", "Mobile number") + ' <em>*</em></span><input class="b4" type="tel" inputmode="tel" maxlength="13" placeholder="' + T("10 അക്ക നമ്പർ", "10-digit number") + '"></label></div></div>' +
+        '<div class="ap"><button type="button" class="a zwa"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("WhatsApp-ൽ അയക്കൂ", "Send on WhatsApp") + '</button></div>';
+      function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
+      bg.onclick = shut; sh.querySelector(".x").onclick = shut;
+      sh.querySelector(".zwa").onclick = function () {
+        var b1 = sh.querySelector(".b1"), nm = b1.value.trim(), au = sh.querySelector(".b2").value.trim(), b3 = sh.querySelector(".b3"), b4 = sh.querySelector(".b4"), pn = b3.value.trim(), mb = b4.value.trim(), bad = null;
+        if (!nm) { b1.classList.add("inv"); bad = bad || b1; }
+        if (!pn) { b3.classList.add("inv"); bad = bad || b3; }
+        if (mb.replace(/\D/g, "").length < 10) { b4.classList.add("inv"); bad = bad || b4; }
+        if (bad) { bad.focus(); return; }
+        var msg = ML ? "ഹലോ ZEST 👋\n\n📚 ലൈബ്രറിയിലേക്ക് ഈ പുസ്തകം വാങ്ങാമോ?\n\n📖 പുസ്തകം: " + nm + (au ? "\n✍️ എഴുത്തുകാരൻ: " + au : "") + "\n\n🙋 ആവശ്യപ്പെട്ടത്: " + pn + "\n📱 " + mb
+                     : "Hello ZEST 👋\n\n📚 Could the library get this book?\n\n📖 Book: " + nm + (au ? "\n✍️ Author: " + au : "") + "\n\n🙋 Requested by: " + pn + "\n📱 " + mb;
+        window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank"); shut();
+      };
+      sh.querySelectorAll("input").forEach(function (x) { x.oninput = function () { x.classList.remove("inv"); }; });
+      document.body.appendChild(bg); document.body.appendChild(sh);
       requestAnimationFrame(function () { requestAnimationFrame(function () { bg.classList.add("on"); sh.classList.add("on"); }); });
     }
     function render() {
