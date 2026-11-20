@@ -91,7 +91,7 @@
   ready(function () {
     document.body.appendChild(nav);
     if (CI) {
-      var hd = document.querySelector("header.zmh"); if (hd) { hd.insertAdjacentHTML("afterend", hero("/img/hero/info.svg", T("സെന്റർ ഇൻഫോ", "Centre Info"), T("പരിപാടികൾ, അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ", "Programs, announcements and job updates"))); bell(hd.querySelector(".wrap") || hd); }
+      var hd = document.querySelector("header.zmh"); if (hd) { hd.insertAdjacentHTML("afterend", hero("/img/hero/info.svg?v=2", T("സെന്റർ ഇൻഫോ", "Centre Info"), T("പരിപാടികൾ, അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ", "Programs, announcements and job updates"))); bell(hd.querySelector(".wrap") || hd); }
       mark("info"); return;
     }
     home();
@@ -130,15 +130,15 @@
     if (ci) ci.after(pv); else document.body.appendChild(pv); wirePrime(pv);
     /* PRIME page */
     var vp = document.createElement("div"); vp.className = "zview"; vp.id = "zv-prime";
-    vp.innerHTML = hero("/img/hero/prime.svg", "ZEST PRIME", T("ആപ്പിൽ മാത്രം ലഭിക്കുന്ന സേവനങ്ങൾ", "Services only in the ZEST APP")) + '<div class="in" data-noi18n>' + primeGrid(true) + '</div>';
+    vp.innerHTML = hero("/img/hero/prime.svg?v=2", "ZEST PRIME", T("ആപ്പിൽ മാത്രം ലഭിക്കുന്ന സേവനങ്ങൾ", "Services only in the ZEST APP")) + '<div class="in" data-noi18n>' + primeGrid(true) + '</div>';
     after(vp); wirePrime(vp);
     /* ZEST page */
     var vz = document.createElement("div"); vz.className = "zview"; vz.id = "zv-zest";
-    vz.innerHTML = hero(null, "ZEST for Peace", T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village"));
+    vz.innerHTML = hero("/img/hero/zest.svg?v=1", "ZEST for Peace", T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village"));
     after(vz);
     /* ME page */
     var vm = document.createElement("div"); vm.className = "zview"; vm.id = "zv-me";
-    vm.innerHTML = hero("/img/hero/me.svg", T("എന്റെ ZEST", "My ZEST"), T("നിങ്ങളുടെയും കുടുംബത്തിന്റെയും വിവരങ്ങൾ", "You and your family"));
+    vm.innerHTML = hero("/img/hero/me.svg?v=2", T("എന്റെ ZEST", "My ZEST"), T("നിങ്ങളുടെയും കുടുംബത്തിന്റെയും വിവരങ്ങൾ", "You and your family"));
     after(vm);
     var vm2 = document.createElement("div"); vm2.className = "zview"; vm2.id = "zv-me2"; vm2.setAttribute("data-noi18n", "");
     document.body.appendChild(vm2); renderMe(vm2);
