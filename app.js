@@ -225,4 +225,6 @@
     el.querySelector('[data-c=donor]').onclick = function () { loadMed(function () { ZestMed.open("blood"); }); };
     el.querySelector('[data-c=stu]').onclick = function () { clickHash("#students"); };
   }
+  /* reveal after the app layout is built (no website flash) */
+  ready(function () { setTimeout(function () { requestAnimationFrame(function () { html.classList.remove("zboot"); }); }, 30); });
 })();
