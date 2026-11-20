@@ -33,7 +33,7 @@
   var css = document.createElement("style");
   css.textContent =
     'html.zapp body{display:flex!important;flex-direction:column!important}html.zapp body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}' +
-    'html.zapp .wa{bottom:calc(96px + env(safe-area-inset-bottom))!important}html.zapp .ig{bottom:calc(96px + 3.75rem + env(safe-area-inset-bottom))!important;display:flex!important}' +
+    'html.zapp .wa{bottom:calc(96px + env(safe-area-inset-bottom))!important}html.zapp .ig{bottom:calc(96px + 3.1rem + env(safe-area-inset-bottom))!important;display:flex!important}html.zapp .wa,html.zapp .ig{width:2.55rem!important;height:2.55rem!important}html.zapp .wa svg,html.zapp .ig svg{width:1.3rem!important;height:1.3rem!important}' +
     '.znav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;transform:none!important;margin:0!important;z-index:2147483000;height:calc(72px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid #e9eff3;box-shadow:0 -6px 18px rgba(11,61,92,.06);display:grid;grid-template-columns:repeat(5,1fr);align-items:center}' +
     '.znav a{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;font:700 11px ' + F + ';color:#8796a1;white-space:nowrap;-webkit-tap-highlight-color:transparent}' +
     '.znav a b{display:grid;place-items:center;width:52px;height:30px;border-radius:15px;transition:background .2s}.znav .zsi{width:22px;height:22px}' +
@@ -66,7 +66,8 @@
     'html.zapp .zsc{background:none!important;box-shadow:none!important;color:#0b3d5c!important;margin:10px 16px 0!important;padding:0!important}html.zapp .zsc-h{display:none!important}html.zapp .zsc .z3cs{padding:4px 0 2px!important}' +
     'html.zapp .z3c{background:#fff!important;border:1.5px solid #dbe9f2!important;color:#0b3d5c!important;box-shadow:0 4px 12px rgba(11,61,92,.08)!important}html.zapp .z3i{background:#eef6fb!important}' +
     'html.zapp .z3c.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 18px rgba(19,128,184,.35)!important}html.zapp .z3c.on .z3i{background:#fff!important}html.zapp .z3c.on .z3a{stroke:#fff!important}' +
-    'html.zapp .z3c.hv,html.zapp .z3c:not(.on):hover{background:#f2f8fc!important;border-color:#bfe3f6!important}html.zapp .z3h{color:#5d707c!important}' +
+    'html.zapp .z3c.hv,html.zapp .z3c:not(.on):hover{background:#f2f8fc!important;border-color:#bfe3f6!important}html.zapp .zsc .z3h{color:#5d707c!important}html.zapp #centre-info .z3h{color:#fff!important;font-weight:700!important;font-size:11px!important;opacity:1!important;text-shadow:0 1px 2px rgba(0,0,0,.25)}' +
+    'html.zapp .zjw{padding:.6rem 1.15rem!important;font-size:.82rem!important;min-height:0!important;gap:.45rem!important}html.zapp .zjw svg{width:.95rem!important;height:.95rem!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -163,6 +164,8 @@
       za.innerHTML = '<button type="button"><img src="/img/zest-centre.webp?v=2" alt="ZEST Centre"><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em>' + T("ZEST-നെ കുറിച്ച് അറിയാം", "Know about ZEST") + ' <span class="zar">→</span></em></button>';
       pg.after(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
+    /* clubs CTA text */
+    var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ZEST ക്ലബ്ബുകളിൽ അംഗമാവാം", "Join a ZEST club"); }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
