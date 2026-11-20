@@ -40,6 +40,11 @@
     '.znav a.on{color:#0b3d5c}.znav a.on b{background:#dcefff;color:#1380b8}' +
     '.znav a.c b{width:48px;height:48px;border-radius:16px;margin-top:-22px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);color:#fff;box-shadow:0 8px 16px -4px rgba(11,93,143,.55)}.znav a.c{color:#0b3d5c}.znav a.c.on b{background:linear-gradient(135deg,#f2b33a,#d98a12)}' +
     '.zbellh{position:relative;display:grid;place-items:center;width:40px;height:40px;margin-right:8px;border-radius:12px;background:#eef6fb;color:#0b3d5c;text-decoration:none;flex:none}.zbellh .zsi{width:21px;height:21px}' +
+    'html.zapp header.main .logo,html.zapp .zmh-logo{width:9.6rem!important;margin-right:auto!important;flex:none}' +
+    'html.zapp .zbellh{width:34px;height:34px;border-radius:10px;margin-right:6px}html.zapp .zbellh .zsi{width:18px;height:18px}' +
+    'html.zapp .zlg{height:24px!important;font-size:10px!important;margin-left:6px!important}html.zapp .zlg span{padding:0 7px!important}' +
+    'html.zapp header.main .burger,html.zapp .zmh-bg{width:34px!important;height:34px!important;border-radius:10px!important;gap:.25rem!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{width:1.15rem!important}' +
+    'html.zapp header.main .wrap,html.zapp .zmh-w{gap:.4rem!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -173,7 +178,7 @@
       '<button type="button" class="zadd">' + ic("plus") + T("കുടുംബാംഗത്തെ ചേർക്കാം", "Add family member") + '</button>' +
       '<div class="zff"><div class="r2"><div><label>' + T("പേര്", "Name") + ' *</label><input id="zf-n" maxlength="40"></div><div><label>' + T("ബന്ധം", "Relation") + ' *</label><select id="zf-r">' + REL.map(function (r) { return '<option>' + r + '</option>'; }).join("") + '</select></div></div>' +
       '<label>' + T("വയസ്സ് / ക്ലാസ്", "Age / class") + '</label><input id="zf-a" maxlength="20" placeholder="' + T("ഉദാ: 42 വയസ്സ് / Class 9", "e.g. 42 years / Class 9") + '"><button type="button" class="go">' + T("ചേർക്കാം", "Add") + '</button></div>' +
-      '<p class="zpv">🔒 ' + T("ഈ വിവരങ്ങൾ ഈ ഫോണിൽ മാത്രം. ZEST എവിടെയും സൂക്ഷിക്കുന്നില്ല.", "Saved only on this phone. ZEST does not store it anywhere.") + '</p></div>' +
+      '</div>' +
       '<div class="zsh">' + T("എന്റെ കാർഡുകൾ", "My cards") + '</div><div class="zmc"><button type="button" data-c="donor" style="background:linear-gradient(140deg,#ff6a7e,#c8102e)">' + ic("drop") + '<b>' + T("എന്റെ ഡോണർ കാർഡ്", "My donor card") + '</b><small>' + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") + '</small></button><button type="button" data-c="stu" style="background:linear-gradient(140deg,#9b7bff,#6a4ee0)">' + ic("cap") + '<b>' + T("എന്റെ പഠന ഇടം", "My study space") + '</b><small>Students Corner</small></button></div>' +
       '<div class="zsh">' + T("സെറ്റിംഗ്സ്", "Settings") + '</div><div class="zcd" style="padding:4px 12px">' +
       '<a class="zrow" href="#notify" style="--c:#fff3dc;--k:#c77700"><i>' + ic("bell") + '</i><span><b>' + T("നോട്ടിഫിക്കേഷൻ", "Notifications") + '</b><small>' + T("പുതിയ അറിയിപ്പുകൾ", "New updates") + '</small></span><em>' + ic("arr") + '</em></a>' +
