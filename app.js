@@ -33,7 +33,7 @@
   var css = document.createElement("style");
   css.textContent =
     'html.zapp body{display:flex!important;flex-direction:column!important}html.zapp body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}' +
-    'html.zapp .wa,html.zapp .ig,html.zapp .ig-side,html.zapp .igw{bottom:calc(96px + env(safe-area-inset-bottom))!important}' +
+    'html.zapp .wa{bottom:calc(96px + env(safe-area-inset-bottom))!important}html.zapp .ig{bottom:calc(96px + 3.75rem + env(safe-area-inset-bottom))!important;display:flex!important}' +
     '.znav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;transform:none!important;margin:0!important;z-index:2147483000;height:calc(72px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid #e9eff3;box-shadow:0 -6px 18px rgba(11,61,92,.06);display:grid;grid-template-columns:repeat(5,1fr);align-items:center}' +
     '.znav a{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;font:700 11px ' + F + ';color:#8796a1;white-space:nowrap;-webkit-tap-highlight-color:transparent}' +
     '.znav a b{display:grid;place-items:center;width:52px;height:30px;border-radius:15px;transition:background .2s}.znav .zsi{width:22px;height:22px}' +
@@ -43,7 +43,7 @@
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
-    '.zth img{position:relative;z-index:1;display:block;width:86%;max-width:360px;aspect-ratio:780/320;object-fit:cover;margin:0 auto;border-radius:20px;box-shadow:0 10px 24px rgba(0,0,0,.25);border:3px solid rgba(255,255,255,.6);background:#e6f3fb}' +
+    '.zth h2:first-child{margin-top:18px}.zth img{position:relative;z-index:1;display:block;width:86%;max-width:360px;aspect-ratio:780/320;object-fit:cover;margin:0 auto;border-radius:20px;box-shadow:0 10px 24px rgba(0,0,0,.25);border:3px solid rgba(255,255,255,.6);background:#e6f3fb}' +
     '.zth h2{position:relative;z-index:1;margin:12px 0 4px;font:800 22px ' + F + ';color:#fff}.zth p{position:relative;z-index:1;margin:0;font:600 12.5px ' + F + ';color:#cfe6f5}' +
     /* centre card actions */
     '.zca{margin:14px 0 2px;font-family:' + F + '}.zca .hr{display:flex;justify-content:center;gap:12px;margin-bottom:10px;font:700 12.5px ' + F + ';color:#fff}.zca .hr .op{color:#7ff0b5}' +
@@ -80,7 +80,7 @@
   nav.innerHTML = NAV.map(function (n) { return '<a href="' + (n[0] === "info" ? "/centreinfo/" : n[0] === "home" ? "/" : "/#tab-" + n[0]) + '" data-t="' + n[0] + '"' + (n[0] === "prime" ? ' class="c"' : '') + '><b>' + ic(n[1]) + '</b>' + n[2] + '</a>'; }).join("");
   function mark(t) { nav.querySelectorAll("a").forEach(function (a) { a.classList.toggle("on", a.dataset.t === t); }); }
 
-  function hero(img, t, s, id) { return '<div class="zth"' + (id ? ' id="' + id + '"' : '') + ' data-noi18n><img src="' + img + '" alt=""><h2>' + t + '</h2><p>' + s + '</p></div>'; }
+  function hero(img, t, s, id) { return '<div class="zth"' + (id ? ' id="' + id + '"' : '') + ' data-noi18n>' + (img ? '<img src="' + img + '" alt="">' : '') + '<h2>' + t + '</h2><p>' + s + '</p></div>'; }
   function bell(hd) {
     if (!hd || hd.querySelector(".zbellh")) return;
     var a = document.createElement("a"); a.className = "zbellh"; a.href = "/centreinfo/"; a.setAttribute("aria-label", T("അറിയിപ്പുകൾ", "Updates")); a.innerHTML = ic("bell");
@@ -117,13 +117,11 @@
     var hd = document.querySelector("header.main"); bell(hd && (hd.querySelector(".wrap") || hd));
     /* centre card: hours + quick actions after the photo */
     var ci = document.getElementById("centre-info");
-    if (ci && !ci.querySelector(".zca")) {
+    if (ci && HOURS && !ci.querySelector(".zca")) {
       var ph = null; ci.querySelectorAll("*").forEach(function (e) { if (ph) return; var bi = getComputedStyle(e).backgroundImage; if ((e.tagName === "IMG" && /about1/.test(e.src)) || /about1/.test(bi)) ph = e; });
-      var box = ci.querySelector(".z3bt,.z3b,[class*=z3f]");
       var host = ph; if (host) while (host.parentElement && host.parentElement !== ci && host.parentElement.offsetWidth < ci.offsetWidth * 0.85) host = host.parentElement;
       var ca = document.createElement("div"); ca.className = "zca"; ca.setAttribute("data-noi18n", "");
-      ca.innerHTML = (HOURS ? '<div class="hr"><span class="op">● ' + T("ഇപ്പോൾ തുറന്നിരിക്കുന്നു", "Open now") + '</span><span>' + HOURS + '</span></div>' : '') +
-        '<div class="bt"><a href="tel:+914962993552">' + ic("phone") + T("വിളിക്കാം", "Call") + '</a><a href="https://www.google.com/maps/search/?api=1&query=ZEST+FOR+PEACE+Kodencheri" target="_blank" rel="noopener">' + ic("pin") + T("വഴി", "Directions") + '</a><a class="g" href="https://wa.me/918848313837" target="_blank" rel="noopener">' + ic("msg") + 'WhatsApp</a></div>';
+      ca.innerHTML = '<div class="hr"><span class="op">● ' + T("ഇപ്പോൾ തുറന്നിരിക്കുന്നു", "Open now") + '</span><span>' + HOURS + '</span></div>';
       if (host && host !== ci) host.after(ca);
     }
     /* PRIME SPOT on home */
@@ -136,7 +134,7 @@
     after(vp); wirePrime(vp);
     /* ZEST page */
     var vz = document.createElement("div"); vz.className = "zview"; vz.id = "zv-zest";
-    vz.innerHTML = hero("/media/p-about2-4cc556675d.webp", "ZEST for Peace", T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village"));
+    vz.innerHTML = hero(null, "ZEST for Peace", T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village"));
     after(vz);
     /* ME page */
     var vm = document.createElement("div"); vm.className = "zview"; vm.id = "zv-me";
