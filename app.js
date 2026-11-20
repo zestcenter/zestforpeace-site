@@ -40,7 +40,7 @@
     '.znav a.on{color:#0b3d5c}.znav a.on b{background:#dcefff;color:#1380b8}' +
     '.znav a.c b{width:48px;height:48px;border-radius:16px;margin-top:-22px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);color:#fff;box-shadow:0 8px 16px -4px rgba(11,93,143,.55)}.znav a.c{color:#0b3d5c}.znav a.c.on b{background:linear-gradient(135deg,#f2b33a,#d98a12)}' +
     '.zbellh{position:relative;display:grid;place-items:center;width:40px;height:40px;margin-right:8px;border-radius:12px;background:#eef6fb;color:#0b3d5c;text-decoration:none;flex:none}.zbellh .zsi{width:21px;height:21px}' +
-    'html.zapp header.main .logo,html.zapp .zmh-logo{width:8.4rem!important;margin-right:auto!important;flex:none}' +
+    'html.zapp header.main .logo,html.zapp .zmh-logo{width:7.2rem!important;margin-right:auto!important;flex:none}' +
     'html.zapp .zbellh{display:none!important}' +
     'html.zapp .zlg{height:24px!important;font-size:10px!important;margin:0 4px 0 auto!important}html.zapp .zlg span{padding:0 7px!important}' +
     'html.zapp header.main .burger,html.zapp .zmh-bg{width:34px!important;height:34px!important;border-radius:10px!important;gap:.25rem!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{width:1.15rem!important}' +
