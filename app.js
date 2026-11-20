@@ -45,7 +45,9 @@
     'html.zapp .zlg{height:24px!important;font-size:10px!important;margin:0 4px 0 auto!important}html.zapp .zlg span{padding:0 7px!important}' +
     'html.zapp header.main .burger,html.zapp .zmh-bg{width:34px!important;height:34px!important;border-radius:10px!important;gap:.25rem!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{width:1.15rem!important}' +
     'html.zapp header.main .wrap,html.zapp .zmh-w{gap:.25rem!important}' +
-    'html.zapp header.main,html.zapp header.zmh{border-radius:0 0 22px 22px!important;border-bottom:1px solid rgba(255,255,255,.7)!important;box-shadow:0 .35rem 1.2rem rgba(10,60,120,.12)!important}' +
+    'html.zapp header.main,html.zapp header.zmh{margin:8px 10px 0!important;top:8px!important;border-radius:28px!important;border:1px solid rgba(255,255,255,.75)!important;box-shadow:0 .4rem 1.4rem rgba(10,60,120,.16)!important}' +
+    'html.zapp header.main .wrap,html.zapp .zmh-w{padding-left:.9rem!important;padding-right:.45rem!important}' +
+    'html.zapp header.main .burger,html.zapp .zmh-bg{border-radius:50%!important;background:#1380b8!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{background:#fff!important}' +
     'html.zapp header.main .wrap,html.zapp .zmh-w{padding-top:.3rem!important;padding-bottom:.4rem!important}' +
     'html.zapp[data-zt=home] #centre-info{padding-top:1rem!important}' +
     /* hero */
