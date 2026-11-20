@@ -57,6 +57,10 @@
     '#zabout button{display:block;width:100%;max-width:34rem;margin:0 auto;border:0;padding:12px 12px 18px;border-radius:24px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 8px 20px -6px rgba(11,93,143,.45);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}#zabout button:active{transform:scale(.98)}' +
     '#zabout img{display:block;width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:16px}#zabout b{display:block;white-space:nowrap;margin:14px 0 2px;font:700 clamp(17px,5.6vw,24px)/1.35 Manjari,' + F + ';color:#fff;letter-spacing:.01em;text-shadow:0 2px 8px rgba(0,0,0,.18)}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 10px ' + F + ';font-style:normal}' +
     'html.zapp #centre-info .zu-photo{aspect-ratio:16/10!important;height:auto!important;min-height:0!important;align-self:start!important;width:92%!important;margin:.6rem auto 12px!important}html.zapp #centre-info .zu-head{min-height:0!important}' +
+    '#zjoin{display:none;padding:18px 16px 22px}html.zapp[data-zt=home] #zjoin{display:block}html.zapp #zjoin{order:14}' +
+    '#zjoin a{position:relative;display:flex;align-items:center;gap:8px;max-width:34rem;margin:0 auto;padding:9px 40px 9px 14px;border-radius:12px;background:linear-gradient(135deg,#e3f3fc,#bfe3f6);border:1px solid #cfe6f3;box-shadow:0 2px 0 #cfe6f3;text-decoration:none;color:#0b5d8f;-webkit-tap-highlight-color:transparent}' +
+    '#zjoin b{font:800 12.5px/1.2 Inter,"Noto Sans Malayalam",sans-serif;white-space:nowrap}#zjoin small{font:600 10.5px/1.2 "Noto Sans Malayalam",Inter,sans-serif;color:#3f7fa6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+    '#zjoin em{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:22px;height:22px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#1380b8}#zjoin em .zsi{width:13px;height:13px}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -152,6 +156,12 @@
       var za = document.createElement("div"); za.id = "zabout"; za.setAttribute("data-noi18n", "");
       za.innerHTML = '<button type="button"><img src="/img/hero/zest-card.svg?v=1" alt=""><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em>' + T("ZEST-നെ കുറിച്ച് അറിയാം →", "Know about ZEST →") + '</em></button>';
       pg.before(za); za.querySelector("button").onclick = function () { go("zest"); };
+    }
+    /* JOIN WITH ZEST at the very end of home */
+    if (!document.getElementById("zjoin")) {
+      var zj = document.createElement("div"); zj.id = "zjoin"; zj.setAttribute("data-noi18n", "");
+      zj.innerHTML = '<a href="#join"><b>💛 JOIN WITH ZEST</b><small>' + T("അംഗമാകാം", "Become a member") + '</small><em>' + ic("arr") + '</em></a>';
+      document.body.appendChild(zj);
     }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
