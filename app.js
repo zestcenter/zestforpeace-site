@@ -55,7 +55,7 @@
     'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 clamp(1.05rem,5.7vw,1.6rem)/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}' +
     '#zabout{display:none;padding:22px 16px 6px;font-family:' + F + '}html.zapp[data-zt=home] #zabout{display:block}html.zapp #zabout{order:5}' +
     '#zabout button{display:block;width:100%;max-width:34rem;margin:0 auto;border:0;padding:12px 12px 18px;border-radius:24px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 8px 20px -6px rgba(11,93,143,.45);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}#zabout button:active{transform:scale(.98)}' +
-    '#zabout img{display:block;width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:16px}#zabout b{display:block;margin:14px 0 3px;font:800 19px ' + F + ';color:#fff}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 11.5px ' + F + ';font-style:normal}' +
+    '#zabout img{display:block;width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:16px}#zabout b{display:block;margin:14px 0 2px;font:800 23px/1.3 "Baloo Chettan 2",' + F + ';color:#fff;letter-spacing:.01em;text-shadow:0 2px 8px rgba(0,0,0,.18)}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 10px ' + F + ';font-style:normal}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -66,6 +66,7 @@
     '.zca .bt{display:flex;gap:6px}.zca .bt a{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 0;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;text-decoration:none;font:800 12px ' + F + ';white-space:nowrap}.zca .bt a.g{background:#22b573}.zca .zsi{width:16px;height:16px}' +
     /* prime grid */
     '.zpg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.zpg button{border:0;padding:0 0 12px;border-radius:22px;overflow:hidden;background:#fff;text-align:left;box-shadow:0 4px 14px rgba(11,61,92,.08);cursor:pointer;font-family:' + F + ';-webkit-tap-highlight-color:transparent}.zpg button:active{transform:scale(.97)}' +
+    '.zpg button{position:relative}.zpg button i.go{position:absolute;right:10px;bottom:10px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#1380b8;color:#fff;box-shadow:0 4px 10px -2px rgba(19,128,184,.5)}.zpg button i.go .zsi{width:15px;height:15px;animation:zpgo 1.6s ease-in-out infinite}.zpg b{padding-right:40px!important}@keyframes zpgo{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}' +
     '.zpg img{display:block;width:100%;aspect-ratio:780/320;object-fit:cover}.zpg b{display:block;padding:10px 12px 0;font:800 14px ' + F + ';color:#0b2a3d}.zpg small{display:block;padding:3px 12px 0;font:600 11px/1.4 ' + F + ';color:#7a8b96}' +
     '#zprime2 .tag{margin-top:0}' +
     /* views */
@@ -89,6 +90,7 @@
     /* centre info page */
     'html.zapp #sec-projects,html.zapp footer.addr{display:none!important}';
   document.head.appendChild(css);
+  var fl = document.createElement("link"); fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700;800&display=swap"; document.head.appendChild(fl);
 
   /* ---------- bottom navigation ---------- */
   var NAV = [["home", "home", T("ഹോം", "Home")], ["info", "bell", T("അറിയിപ്പ്", "Updates")], ["prime", "star", "PRIME"], ["zest", "users", "ZEST"], ["me", "user", T("ഞാൻ", "Me")]];
@@ -125,7 +127,7 @@
     ["lib", "library", T("ZEST ലൈബ്രറി", "ZEST Library"), T("പുസ്തകങ്ങൾ തിരയാം, ചോദിക്കാം", "Find and request books")],
     ["blood", "blood", T("ബ്ലഡ് ബാങ്ക്", "Blood Bank"), T("രക്തം നൽകാം / വേണം", "Give or request blood")],
     ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")]];
-  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '"><img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '</button>'; }).join("") + '</div>'; }
+  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '"><img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }).join("") + '</div>'; }
   function wirePrime(el) { el.querySelectorAll(".zpg button").forEach(function (b) { b.onclick = function () { openPrime(b.dataset.k); }; }); }
 
   function after(el) { var h = document.querySelector("body>header"); if (h) h.after(el); else document.body.prepend(el); }
@@ -147,7 +149,7 @@
     var pg = document.getElementById("programs");
     if (pg && !document.getElementById("zabout")) {
       var za = document.createElement("div"); za.id = "zabout"; za.setAttribute("data-noi18n", "");
-      za.innerHTML = '<button type="button"><img src="/img/hero/zest-card.svg?v=1" alt=""><b>ZEST for Peace</b><small>' + T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village") + '</small><em>' + T("ZEST-നെ കുറിച്ച് അറിയാം →", "Know about ZEST →") + '</em></button>';
+      za.innerHTML = '<button type="button"><img src="/img/hero/zest-card.svg?v=1" alt=""><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em>' + T("ZEST-നെ കുറിച്ച് അറിയാം →", "Know about ZEST →") + '</em></button>';
       pg.before(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
     /* PRIME SPOT on home */
