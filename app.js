@@ -53,6 +53,9 @@
     'html.zapp body>section:not(#centre-info){padding-top:2.2rem!important;padding-bottom:1.4rem!important}' +
     'html.zapp body>section:not(#centre-info) .wrap>.tag{margin:0 0 .3rem!important;font:400 .95rem/1.25 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:.03em!important;gap:.6rem!important}html.zapp body>section:not(#centre-info) .wrap>.tag::before{width:1.25rem!important;height:1.25rem!important}' +
     'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 clamp(1.05rem,5.7vw,1.6rem)/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}' +
+    '#zabout{display:none;padding:22px 16px 6px;font-family:' + F + '}html.zapp[data-zt=home] #zabout{display:block}html.zapp #zabout{order:5}' +
+    '#zabout button{display:block;width:100%;max-width:34rem;margin:0 auto;border:0;padding:12px 12px 18px;border-radius:24px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 8px 20px -6px rgba(11,93,143,.45);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}#zabout button:active{transform:scale(.98)}' +
+    '#zabout img{display:block;width:100%;aspect-ratio:780/320;object-fit:cover;border-radius:16px}#zabout b{display:block;margin:14px 0 3px;font:800 19px ' + F + ';color:#fff}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:12px;padding:8px 20px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 13px ' + F + ';font-style:normal}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -140,6 +143,13 @@
     /* clubs heading */
     var cw = document.querySelector("#clubs .wrap");
     if (cw && !cw.querySelector("h2")) { var ch = document.createElement("h2"); ch.className = "ml zh2 in"; ch.setAttribute("data-noi18n", ""); ch.textContent = T("ZESTന്റെ പ്രധാന ക്ലബ്ബുകൾ", "Main clubs of ZEST"); cw.appendChild(ch); }
+    /* about ZEST banner above projects */
+    var pg = document.getElementById("programs");
+    if (pg && !document.getElementById("zabout")) {
+      var za = document.createElement("div"); za.id = "zabout"; za.setAttribute("data-noi18n", "");
+      za.innerHTML = '<button type="button"><img src="/img/hero/zest.svg?v=1" alt=""><b>' + T("ZEST-നെ കുറിച്ച് അറിയാം", "Know about ZEST") + '</b><small>' + T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village") + '</small><em>' + T("കൂടുതൽ അറിയാം →", "Learn more →") + '</em></button>';
+      pg.before(za); za.querySelector("button").onclick = function () { go("zest"); };
+    }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
