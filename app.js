@@ -204,7 +204,7 @@
     after(vz);
     /* ME page */
     var vm = document.createElement("div"); vm.className = "zview"; vm.id = "zv-me";
-    vm.innerHTML = hero("/img/hero/me.svg?v=2", T("എന്റെ ZEST", "My ZEST"), T("നിങ്ങളുടെയും കുടുംബത്തിന്റെയും വിവരങ്ങൾ", "You and your family"));
+    vm.innerHTML = hero("/img/hero/me.svg?v=2", T("എന്റെ ZEST", "My ZEST"), T("എന്റെയും കുടുംബത്തിന്റെയും വിവരങ്ങൾ", "Me and my family"));
     after(vm);
     var vm2 = document.createElement("div"); vm2.className = "zview"; vm2.id = "zv-me2"; vm2.setAttribute("data-noi18n", "");
     document.body.appendChild(vm2); renderMe(vm2);
