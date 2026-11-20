@@ -183,7 +183,7 @@
       if (d.length < 10 || d.length > 15) { err(E, "ശരിയായ WhatsApp നമ്പർ നൽകുക. (Enter a valid WhatsApp number.)"); return; }
       if (!navigator.onLine) { err(E, "Internet connection ആവശ്യമാണ്. (Please connect to the internet.)"); return; }
       err(E, ""); B.disabled = true; B.textContent = "SENDING…";
-      rpc("zest_register", { p_name: name, p_house: f.house.value, p_age: f.age.value, p_class: f.cls.value, p_whatsapp: f.wa.value, p_club: f.club.value, p_feedback: f.fb.value })
+      rpc("zest_register", { p_name: name, p_house: "", p_age: "", p_class: "", p_whatsapp: f.wa.value, p_club: "", p_feedback: "" }) /* login only – the form details go to the Google Sheet */
         .then(function () {
           try {
             var fd = new FormData();
