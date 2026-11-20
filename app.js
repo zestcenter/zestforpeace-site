@@ -71,6 +71,13 @@
     'html.zapp #centre-info .zu-panel{background:#f3f8fc!important;background-image:radial-gradient(circle at 90% 0%,#d6ecfa 0,transparent 45%),radial-gradient(circle at 0% 100%,#fff4dc 0,transparent 40%)!important;box-shadow:0 8px 24px rgba(11,61,92,.08)!important;border:1px solid #dfeaf2!important}html.zapp #centre-info .z3c:not(.on){background:#fff!important}html.zapp #centre-info .zu-panel:before,html.zapp #centre-info .zu-panel:after{display:none!important}' +
     'html.zapp #centre-info .zu-h{background:none!important;-webkit-text-fill-color:#0b3d5c!important;color:#0b3d5c!important}html.zapp #centre-info .zu-sub{color:#5d8aa8!important}' +
     'html.zapp #centre-info .z3c{border-color:#dbe9f2!important}html.zapp #centre-info .z3e{color:#5d8aa8!important;border-color:#cfe0ea!important}' +
+    '.zsg{margin:18px 0 6px;padding:16px;border-radius:20px;background:linear-gradient(135deg,#fff8e1,#fff1d6);border:1.5px solid #f1dc9c}.zsg-h{display:flex;align-items:center;gap:12px;margin-bottom:12px}.zsg-h i{font-style:normal;font-size:30px;line-height:1}' +
+    '.zsg-h b{display:block;font:800 15px/1.3 ' + F + ';color:#7a5a00}.zsg-h small{display:block;margin-top:4px;font:700 12px/1.3 ' + F + ';color:#9a7410}' +
+    '.zsg textarea{display:block;width:100%;box-sizing:border-box;padding:10px 12px;border-radius:14px;border:2px solid #1380b8;background:#fff;font:500 14px/1.5 ' + F + ';color:#0b2a3d;resize:vertical;outline:0}.zsg textarea.err{border-color:#e0345c;animation:zsgS .3s}@keyframes zsgS{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}' +
+    '.zsg button{display:block;width:100%;margin-top:10px;padding:12px;border:0;border-radius:14px;background:#25d366;color:#fff;font:800 14px ' + F + ';cursor:pointer}.zsg button:active{transform:scale(.98)}' +
+    '.zpg button{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important}.zpg img{flex:none}' +
+    'html.zapp #centre-info .zu-head{display:flex!important;flex-direction:column!important;gap:0!important}html.zapp #centre-info .zu-sub{order:2;margin:0 0 .4rem!important;font:600 clamp(1.05rem,5.7vw,1.6rem)/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;color:#0b2a3d!important;letter-spacing:-.01em;white-space:nowrap;animation:none!important}' +
+    'html.zapp #centre-info .zu-h{order:1;margin:0 0 .3rem!important;font:400 .95rem/1.25 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:.03em!important;-webkit-text-fill-color:#111!important;color:#111!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -175,8 +182,17 @@
     if (ci) ci.after(pv); else document.body.appendChild(pv); wirePrime(pv);
     /* PRIME page */
     var vp = document.createElement("div"); vp.className = "zview"; vp.id = "zv-prime";
-    vp.innerHTML = hero("/img/hero/prime.svg?v=2", "ZEST PRIME", T("ആപ്പിൽ മാത്രം ലഭിക്കുന്ന സേവനങ്ങൾ", "Services only in the ZEST APP")) + '<div class="in" data-noi18n>' + primeGrid(true) + '</div>';
+    vp.innerHTML = hero("/img/hero/prime.svg?v=2", "ZEST PRIME", T("APP EXCLUSIVE സേവനങ്ങൾ", "APP EXCLUSIVE services")) + '<div class="in" data-noi18n>' + primeGrid(true) +
+      '<div class="zsg"><div class="zsg-h"><i>💡</i><span><b>' + T("ഇനി എന്തൊക്കെ വേണം?", "What else should we add?") + '</b><small>' + T("പുതിയ ഫീച്ചർ നിർദ്ദേശിക്കാം", "Suggest a new feature") + '</small></span></div>' +
+      '<textarea rows="3" placeholder="' + T("നിങ്ങളുടെ ആശയം ഇവിടെ എഴുതൂ…", "Type your idea…") + '"></textarea><button type="button">💬 ' + T("WhatsApp-ൽ അയക്കൂ", "Send on WhatsApp") + '</button></div></div>';
     after(vp); wirePrime(vp);
+    vp.querySelector(".zsg button").onclick = function () {
+      var ta = vp.querySelector(".zsg textarea"), v = ta.value.trim();
+      if (!v) { ta.focus(); ta.classList.add("err"); setTimeout(function () { ta.classList.remove("err"); }, 900); return; }
+      var who = ""; try { who = localStorage.getItem("zestAuth") || ""; } catch (e) {}
+      var msg = T("💡 ZEST PRIME – നിർദ്ദേശം", "💡 ZEST PRIME – Suggestion") + "\n\n" + v + (who ? "\n\n– " + who : "");
+      window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank");
+    };
     /* ZEST page */
     var vz = document.createElement("div"); vz.className = "zview"; vz.id = "zv-zest";
     vz.innerHTML = hero("/img/hero/zest.svg?v=1", "ZEST for Peace", T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village"));
