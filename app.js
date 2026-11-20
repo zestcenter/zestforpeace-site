@@ -45,6 +45,9 @@
     'html.zapp .zlg{height:24px!important;font-size:10px!important;margin:0 4px 0 auto!important}html.zapp .zlg span{padding:0 7px!important}' +
     'html.zapp header.main .burger,html.zapp .zmh-bg{width:34px!important;height:34px!important;border-radius:10px!important;gap:.25rem!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{width:1.15rem!important}' +
     'html.zapp header.main .wrap,html.zapp .zmh-w{gap:.25rem!important}' +
+    'html.zapp header.main,html.zapp header.zmh{border-radius:0 0 22px 22px!important;border-bottom:1px solid rgba(255,255,255,.7)!important;box-shadow:0 .35rem 1.2rem rgba(10,60,120,.12)!important}' +
+    'html.zapp header.main .wrap,html.zapp .zmh-w{padding-top:.3rem!important;padding-bottom:.4rem!important}' +
+    'html.zapp[data-zt=home] #centre-info{padding-top:1rem!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
