@@ -52,7 +52,7 @@
     'html.zapp[data-zt=home] #centre-info{padding-top:1rem!important}' +
     'html.zapp body>section:not(#centre-info){padding-top:2.2rem!important;padding-bottom:1.4rem!important}' +
     'html.zapp body>section:not(#centre-info) .wrap>.tag{margin:0 0 .3rem!important;font:400 .95rem/1.25 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:.03em!important;gap:.6rem!important}html.zapp body>section:not(#centre-info) .wrap>.tag::before{width:1.25rem!important;height:1.25rem!important}' +
-    'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 1.6rem/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:normal!important}' +
+    'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 clamp(1.05rem,5.7vw,1.6rem)/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -137,9 +137,12 @@
       ca.innerHTML = '<div class="hr"><span class="op">● ' + T("ഇപ്പോൾ തുറന്നിരിക്കുന്നു", "Open now") + '</span><span>' + HOURS + '</span></div>';
       if (host && host !== ci) host.after(ca);
     }
+    /* clubs heading */
+    var cw = document.querySelector("#clubs .wrap");
+    if (cw && !cw.querySelector("h2")) { var ch = document.createElement("h2"); ch.className = "ml zh2 in"; ch.setAttribute("data-noi18n", ""); ch.textContent = T("ZESTന്റെ പ്രധാന ക്ലബ്ബുകൾ", "Main clubs of ZEST"); cw.appendChild(ch); }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
-    pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>' + T("ആപ്പിൽ മാത്രം", "App Exclusive") + '</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
+    pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
     if (ci) ci.after(pv); else document.body.appendChild(pv); wirePrime(pv);
     /* PRIME page */
     var vp = document.createElement("div"); vp.className = "zview"; vp.id = "zv-prime";
