@@ -50,6 +50,9 @@
     'html.zapp header.main .burger,html.zapp .zmh-bg{border-radius:50%!important;background:#1380b8!important}html.zapp header.main .burger span,html.zapp .zmh-bg span{background:#fff!important}' +
     'html.zapp header.main .wrap,html.zapp .zmh-w{padding-top:.3rem!important;padding-bottom:.4rem!important}' +
     'html.zapp[data-zt=home] #centre-info{padding-top:1rem!important}' +
+    'html.zapp body>section:not(#centre-info){padding-top:2.2rem!important;padding-bottom:1.4rem!important}' +
+    'html.zapp body>section:not(#centre-info) .wrap>.tag{margin:0 0 .3rem!important;font:400 .95rem/1.25 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:.03em!important;gap:.6rem!important}html.zapp body>section:not(#centre-info) .wrap>.tag::before{width:1.25rem!important;height:1.25rem!important}' +
+    'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 1.6rem/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:normal!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -61,7 +64,7 @@
     /* prime grid */
     '.zpg{display:grid;grid-template-columns:1fr 1fr;gap:12px}.zpg button{border:0;padding:0 0 12px;border-radius:22px;overflow:hidden;background:#fff;text-align:left;box-shadow:0 4px 14px rgba(11,61,92,.08);cursor:pointer;font-family:' + F + ';-webkit-tap-highlight-color:transparent}.zpg button:active{transform:scale(.97)}' +
     '.zpg img{display:block;width:100%;aspect-ratio:780/320;object-fit:cover}.zpg b{display:block;padding:10px 12px 0;font:800 14px ' + F + ';color:#0b2a3d}.zpg small{display:block;padding:3px 12px 0;font:600 11px/1.4 ' + F + ';color:#7a8b96}' +
-    '#zprime2{padding:2.2rem 0 .8rem}#zprime2 .tag{margin-top:0}' +
+    '#zprime2 .tag{margin-top:0}' +
     /* views */
     '.zview{display:none;font-family:' + F + '}.zview .in{max-width:34rem;margin:0 auto;padding:18px 16px 10px}' +
     '.zsh{display:flex;align-items:center;gap:10px;margin:18px 2px 10px;font:800 16px ' + F + ';color:#0b2a3d}.zsh:before{content:"";width:5px;height:22px;border-radius:3px;background:#1380b8}' +
@@ -136,7 +139,7 @@
     }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
-    pv.innerHTML = '<div class="wrap"><p class="tag">App Exclusive</p><h2 class="ml">ZEST PRIME SPOT</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
+    pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>' + T("ആപ്പിൽ മാത്രം", "App Exclusive") + '</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
     if (ci) ci.after(pv); else document.body.appendChild(pv); wirePrime(pv);
     /* PRIME page */
     var vp = document.createElement("div"); vp.className = "zview"; vp.id = "zv-prime";
