@@ -107,7 +107,7 @@
     'html.zapp[data-zt=home] #numbers,html.zapp[data-zt=home] #about,html.zapp[data-zt=home] #documentary,html.zapp[data-zt=home] #news,html.zapp[data-zt=home] #stories,html.zapp[data-zt=home] #join,html.zapp[data-zt=home] #contact{display:none!important}' +
     'html.zapp[data-zt=prime] body>section,html.zapp[data-zt=prime] #contact,html.zapp[data-zt=me] body>section:not(#join),html.zapp[data-zt=me] #contact,html.zapp[data-zt=zest] #centre-info,html.zapp[data-zt=zest] #zprime2,html.zapp[data-zt=zest] #join{display:none!important}' +
     'html.zapp[data-zt=prime] #zv-prime,html.zapp[data-zt=zest] #zv-zest,html.zapp[data-zt=me] #zv-me{display:block}' +
-    'html.zapp body>header{order:0}html.zapp #zv-prime,html.zapp #zv-zest,html.zapp #zv-me{order:1}html.zapp #centre-info{order:4}html.zapp #zprime2{order:3}html.zapp #about{order:4}html.zapp #numbers{order:5}html.zapp #programs{order:6}html.zapp #clubs{order:7}html.zapp #documentary{order:8}html.zapp #news{order:9}html.zapp #stories{order:10}html.zapp #zv-me2{order:11}html.zapp #join{order:12}html.zapp #contact{order:13}html.zapp body>*{order:20}html.zapp body>header,html.zapp body>section,html.zapp body>footer,html.zapp .zview{flex:none}' +
+    'html.zapp body>header{order:0}html.zapp #zv-prime,html.zapp #zv-zest,html.zapp #zv-me{order:1}html.zapp #centre-info{order:3}html.zapp #zprime2{order:4}html.zapp #about{order:4}html.zapp #numbers{order:5}html.zapp #programs{order:6}html.zapp #clubs{order:7}html.zapp #documentary{order:8}html.zapp #news{order:9}html.zapp #stories{order:10}html.zapp #zv-me2{order:11}html.zapp #join{order:12}html.zapp #contact{order:13}html.zapp body>*{order:20}html.zapp body>header,html.zapp body>section,html.zapp body>footer,html.zapp .zview{flex:none}' +
     'html.zapp[data-zt=me] #zv-me2{display:block}' +
     /* centre info page */
     'html.zapp #sec-projects,html.zapp footer.addr{display:none!important}';
@@ -184,7 +184,7 @@
     var vp = document.createElement("div"); vp.className = "zview"; vp.id = "zv-prime";
     vp.innerHTML = hero("/img/hero/prime.svg?v=2", "ZEST PRIME", T("APP EXCLUSIVE സേവനങ്ങൾ", "APP EXCLUSIVE services")) + '<div class="in" data-noi18n>' + primeGrid(true) +
       '<div class="zsg"><div class="zsg-h"><i>💡</i><span><b>' + T("ഇനി എന്തൊക്കെ വേണം?", "What else should we add?") + '</b><small>' + T("പുതിയ ഫീച്ചർ നിർദ്ദേശിക്കാം", "Suggest a new feature") + '</small></span></div>' +
-      '<textarea rows="3" placeholder="' + T("നിങ്ങളുടെ ആശയം ഇവിടെ എഴുതൂ…", "Type your idea…") + '"></textarea><button type="button">💬 ' + T("WhatsApp-ൽ അയക്കൂ", "Send on WhatsApp") + '</button></div></div>';
+      '<textarea rows="3" placeholder="' + T("നിങ്ങളുടെ ആശയം ഇവിടെ എഴുതൂ…", "Type your idea…") + '"></textarea><button type="button">SUBMIT</button></div></div>';
     after(vp); wirePrime(vp);
     vp.querySelector(".zsg button").onclick = function () {
       var ta = vp.querySelector(".zsg textarea"), v = ta.value.trim();

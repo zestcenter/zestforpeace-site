@@ -59,7 +59,7 @@
       TL.map(function (t, i) { return '<button class="zs-tc" data-i="' + i + '"><img src="/img/hero/' + t[0] + '.svg" alt=""><b>' + t[1] + '</b><small>' + t[2] + '</small><em class="' + t[3] + '">Open ›</em></button>'; }).join("") + '</div>' +
       '<p class="zpvn" style="margin:16px 0 0;padding:10px 12px;border-radius:14px;background:#e8f3fa;color:#3b5868;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p>' +
       '<div class="zs-sg"><div class="sh"><i>💡</i><span><b>What else should we add?</b><small>Suggest a new feature</small></span><button class="sgo">💬 Send</button></div>' +
-      '<div class="sgx"><textarea class="sgt" rows="3" placeholder="Type your idea…"></textarea><button class="sgb">💬 Send on WhatsApp</button></div></div></div>';
+      '<div class="sgx"><textarea class="sgt" rows="3" placeholder="Type your idea…"></textarea><button class="sgb" data-noi18n>SUBMIT</button></div></div></div>';
     s.querySelector(".x0").onclick = close;
     s.querySelector(".sgb").onclick = function () {
       var ta = s.querySelector(".sgt"), v = ta.value.trim();
