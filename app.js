@@ -116,7 +116,7 @@
   ready(function () {
     document.body.appendChild(nav);
     if (CI) {
-      var hd = document.querySelector("header.zmh"); if (hd) { hd.insertAdjacentHTML("afterend", hero("/img/hero/info.svg?v=2", T("സെന്റർ ഇൻഫോ", "Centre Info"), T("പരിപാടികൾ, അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ", "Programs, announcements and job updates"))); bell(hd.querySelector(".wrap") || hd); }
+      var hd = document.querySelector("header.zmh"); if (hd) { hd.insertAdjacentHTML("afterend", hero("/img/hero/info.svg?v=2", T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"), T("പരിപാടികൾ, അറിയിപ്പുകൾ, ജോലി ഒഴിവുകൾ", "Programs, announcements and job updates"))); bell(hd.querySelector(".wrap") || hd); }
       mark("info"); return;
     }
     home();
