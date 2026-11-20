@@ -70,7 +70,7 @@
     '#zadm .tb button{font-size:12.5px;padding:10px 6px}' +
     '#zadm .it{margin:10px 14px 0;background:#fff;border-radius:18px;padding:13px 14px;box-shadow:0 2px 0 #e3eaef}#zadm .it.dn{opacity:.6}' +
     '#zadm .ih{display:flex;align-items:center;gap:10px}#zadm .ih>div{flex:1;min-width:0}#zadm .ih b{display:block;font:800 14px/1.35 ' + F + ';color:#0b3d5c}#zadm .ih small{display:block;font:600 11.5px/1.45 ' + F + ';color:#7a8b96}' +
-    '#zadm .bg{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50% 50% 50% 8px;transform:rotate(-45deg);background:linear-gradient(135deg,#ff5a6e,#d81b3c);color:#fff;font:800 12.5px Inter,sans-serif}#zadm .bg i{transform:rotate(45deg);font-style:normal;display:block}' +
+    '#zadm .bg{position:relative;flex:none;display:block;width:34px;height:49px}#zadm .bg svg{display:block;width:34px;height:49px;filter:drop-shadow(0 3px 5px rgba(216,27,60,.25))}#zadm .bg i{position:absolute;left:0;right:0;top:22px;text-align:center;font:900 10.5px Inter,sans-serif;font-style:normal;color:#fff}' +
     '#zadm .eg{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#e6f3fb;font-size:20px}' +
     '#zadm .ih em{flex:none;font:800 10.5px ' + F + ';font-style:normal;padding:4px 9px;border-radius:999px}#zadm em.ok{background:#e3f7ec;color:#138a52}#zadm em.wt{background:#eef3f7;color:#5d707c}#zadm em.ur{background:#fdecef;color:#c0254a}' +
     '#zadm .kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}#zadm .kv span{padding:5px 9px;border-radius:9px;background:#f3f7fa;font:600 11.5px ' + F + ';color:#3b4c57}' +
@@ -161,6 +161,7 @@
   function acts(ph, extra) { return '<div class="ia"><button type="button" class="ca" data-dm>📞 വിളിക്കാം</button><button type="button" class="wh" data-dm>💬 WhatsApp</button>' + (extra || "") + '</div>'; }
   function dmWire(bd) { bd.querySelectorAll("[data-dm]").forEach(function (b) { b.onclick = function () { toast("ഡമ്മി ഡാറ്റ – ലൈവ് ആകുമ്പോൾ പ്രവർത്തിക്കും"); }; }); }
 
+  var BAGS = '<svg viewBox="0 0 58 84" aria-hidden="true"><rect x="22" y="2" width="14" height="10" rx="3" fill="#9fb3c1"/><rect x="4" y="10" width="50" height="62" rx="14" fill="#fff" stroke="#c8102e" stroke-width="2.5"/><rect x="9" y="24" width="40" height="43" rx="10" fill="#e0234a"/><rect x="14" y="16" width="20" height="3" rx="1.5" fill="#e6edf2"/><path d="M29 72 V82" stroke="#c8102e" stroke-width="3" stroke-linecap="round"/></svg>';
   var G = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"], AV = { y: "ഇപ്പോൾ ലഭ്യം", s: "30 ദിവസത്തിനുള്ളിൽ", l: "പിന്നീട്" };
   var BF = { g: [], a: [], p: [] };
   function avk(x) { return x.nx <= 0 ? "y" : x.nx <= 30 ? "s" : "l"; }
@@ -189,7 +190,7 @@
     if (t === "req") {
       h += D.blood.req.map(function (r, i) {
         var av = D.blood.don.filter(function (x) { return x.g === r.g && x.nx <= 0; }).length;
-        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="bg"><i>' + r.g + '</i></span><div><b>' + r.n + '</b><small>' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ കിട്ടി</em>' : (r.d <= 1 ? '<em class="ur">അടിയന്തരം</em>' : '')) + '</div>' +
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="bg">' + BAGS + '<i>' + r.g + '</i></span><div><b>' + r.n + '</b><small>' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ കിട്ടി</em>' : (r.d <= 1 ? '<em class="ur">അടിയന്തരം</em>' : '')) + '</div>' +
           '<div class="kv"><span>🏥 ' + r.hs + '</span><span>🩸 ' + r.u + ' യൂണിറ്റ്</span><span>📅 ' + fd(dIn(r.d)) + '</span><span>📱 ' + r.ph + '</span></div>' +
           (r.done ? '' : '<button type="button" class="mt" data-g="' + r.g + '">🔎 ' + r.g + ' ലഭ്യമായ ദാതാക്കൾ: <b>' + av + '</b> ›</button>' + acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കിട്ടി</button>')) + '</div>';
       }).join("");
@@ -202,7 +203,7 @@
       h += '<p class="rc">' + L.length + ' ദാതാക്കൾ · ലഭ്യമായവർ ആദ്യം</p>';
       h += L.length ? L.map(function (x) {
         var ok = x.nx <= 0;
-        return '<div class="it"><div class="ih"><span class="bg"><i>' + x.g + '</i></span><div><b>' + x.n + '</b><small>' + x.h + ', ' + x.p + ' · 📱 ' + x.ph + '</small></div>' + (ok ? '<em class="ok">ലഭ്യം</em>' : '<em class="wt">' + fd(dIn(x.nx)) + ' മുതൽ</em>') + '</div>' + acts(x.ph) + '</div>';
+        return '<div class="it"><div class="ih"><span class="bg">' + BAGS + '<i>' + x.g + '</i></span><div><b>' + x.n + '</b><small>' + x.h + ', ' + x.p + ' · 📱 ' + x.ph + '</small></div>' + (ok ? '<em class="ok">ലഭ്യം</em>' : '<em class="wt">' + fd(dIn(x.nx)) + ' മുതൽ</em>') + '</div>' + acts(x.ph) + '</div>';
       }).join("") : '<div class="em"><i>🩸</i>ഈ ഫിൽട്ടറിൽ ദാതാക്കൾ ഇല്ല</div>';
     }
     var sy = w.scrollTop; bd.innerHTML = h; if (t === "don") w.scrollTop = sy; wireTabs(bd, function (x) { blood(x); }); dmWire(bd);

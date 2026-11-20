@@ -133,7 +133,7 @@
       var inApp2 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : "eq";
-      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=11"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=12"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
       return; }
     if (a.getAttribute("href") === "#zlib") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp3 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
@@ -169,7 +169,7 @@
   window.ZestDrawer = { open: show, close: hide, appOnly: appOnly };
   /* admin: hidden entry – tap the ZEST logo in the menu header 5 times; admin item shows only on logged-in admin phones */
   (function () {
-    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=5"; s.onload = cb; document.head.appendChild(s); }
+    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=6"; s.onload = cb; document.head.appendChild(s); }
     try { var t = localStorage.getItem("zestAdminTok"); if (t && +t.split(".")[0] > Date.now()) loadAdm(function () {}); } catch (e) {}
     var taps = 0, tt; var lg = dw.querySelector(".zdw-hd2 img");
     if (lg) lg.addEventListener("click", function () { taps++; clearTimeout(tt); tt = setTimeout(function () { taps = 0; }, 1500); if (taps >= 5) { taps = 0; hide(); loadAdm(function () { ZestAdmin.open(); }); } });
