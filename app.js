@@ -55,7 +55,7 @@
     'html.zapp body>section:not(#centre-info) .wrap>h2{position:relative!important;font:600 clamp(1.05rem,5.7vw,1.6rem)/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:-.01em!important;margin:0 0 1.3rem!important;white-space:nowrap!important;overflow:hidden;text-overflow:ellipsis}' +
     '#zabout{display:none;padding:22px 16px 6px;font-family:' + F + '}html.zapp[data-zt=home] #zabout{display:block}html.zapp #zabout{order:5}' +
     '#zabout button{display:block;width:100%;max-width:34rem;margin:0 auto;border:0;padding:12px 12px 18px;border-radius:24px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 8px 20px -6px rgba(11,93,143,.45);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}#zabout button:active{transform:scale(.98)}' +
-    '#zabout img{display:block;width:100%;aspect-ratio:780/320;object-fit:cover;border-radius:16px}#zabout b{display:block;margin:14px 0 3px;font:800 19px ' + F + ';color:#fff}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:12px;padding:8px 20px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 13px ' + F + ';font-style:normal}' +
+    '#zabout img{display:block;width:100%;aspect-ratio:5/3;object-fit:cover;border-radius:16px}#zabout b{display:block;margin:14px 0 3px;font:800 19px ' + F + ';color:#fff}#zabout small{display:block;font:600 12px ' + F + ';color:#cfe6f5}#zabout em{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:999px;background:#fff;color:#0b5d8f;font:800 11.5px ' + F + ';font-style:normal}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -147,7 +147,7 @@
     var pg = document.getElementById("programs");
     if (pg && !document.getElementById("zabout")) {
       var za = document.createElement("div"); za.id = "zabout"; za.setAttribute("data-noi18n", "");
-      za.innerHTML = '<button type="button"><img src="/img/hero/zest.svg?v=1" alt=""><b>' + T("ZEST-നെ കുറിച്ച് അറിയാം", "Know about ZEST") + '</b><small>' + T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village") + '</small><em>' + T("കൂടുതൽ അറിയാം →", "Learn more →") + '</em></button>';
+      za.innerHTML = '<button type="button"><img src="/img/hero/zest-card.svg?v=1" alt=""><b>ZEST for Peace</b><small>' + T("നാട് വളരാൻ നാടിനൊപ്പം", "Growing together with our village") + '</small><em>' + T("ZEST-നെ കുറിച്ച് അറിയാം →", "Know about ZEST →") + '</em></button>';
       pg.before(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
     /* PRIME SPOT on home */
