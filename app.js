@@ -66,8 +66,11 @@
     'html.zapp .zsc{background:none!important;box-shadow:none!important;color:#0b3d5c!important;margin:10px 16px 0!important;padding:0!important}html.zapp .zsc-h{display:none!important}html.zapp .zsc .z3cs{padding:4px 0 2px!important}' +
     'html.zapp .z3c{background:#fff!important;border:1.5px solid #dbe9f2!important;color:#0b3d5c!important;box-shadow:0 4px 12px rgba(11,61,92,.08)!important}html.zapp .z3i{background:#eef6fb!important}' +
     'html.zapp .z3c.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f)!important;border-color:transparent!important;color:#fff!important;box-shadow:0 8px 18px rgba(19,128,184,.35)!important}html.zapp .z3c.on .z3i{background:#fff!important}html.zapp .z3c.on .z3a{stroke:#fff!important}' +
-    'html.zapp .z3c.hv,html.zapp .z3c:not(.on):hover{background:#f2f8fc!important;border-color:#bfe3f6!important}html.zapp .zsc .z3h{color:#5d707c!important}html.zapp #centre-info .z3h{color:#e4eef4!important;font-weight:500!important;font-size:11px!important;opacity:1!important}' +
+    'html.zapp .z3c.hv,html.zapp .z3c:not(.on):hover{background:#f2f8fc!important;border-color:#bfe3f6!important}html.zapp .zsc .z3h{color:#5d707c!important}html.zapp #centre-info .z3h{color:#7a8b96!important;font-weight:500!important;font-size:11px!important;opacity:1!important}' +
     'html.zapp .zjw{padding:.42rem .9rem!important;font-size:.72rem!important;min-height:0!important;width:auto!important;gap:.35rem!important}html.zapp .zjw svg{width:.8rem!important;height:.8rem!important}' +
+    'html.zapp #centre-info .zu-panel{background:#fff!important;box-shadow:0 8px 24px rgba(11,61,92,.08)!important;border:1px solid #e3edf3!important}html.zapp #centre-info .zu-panel:before,html.zapp #centre-info .zu-panel:after{display:none!important}' +
+    'html.zapp #centre-info .zu-h{background:none!important;-webkit-text-fill-color:#0b3d5c!important;color:#0b3d5c!important}html.zapp #centre-info .zu-sub{color:#5d8aa8!important}' +
+    'html.zapp #centre-info .z3c{border-color:#dbe9f2!important}html.zapp #centre-info .z3e{color:#5d8aa8!important;border-color:#cfe0ea!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
