@@ -107,6 +107,7 @@
     'html.zapp #documentary a.yt{display:inline-flex!important;align-items:center;gap:5px;width:auto!important;min-height:0!important;padding:4px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;text-transform:none!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp #documentary a.yt svg{width:14px!important;height:14px!important}' +
     'html.zapp #stories .tag{transform:none!important;opacity:1!important;transition:none!important}' +
     'html.zapp .z3l small{display:block!important}' +
+    'html.zapp .z3cs .z3l{font-size:10px!important;line-height:1.35!important}html.zapp .z3cs .z3l small{font-size:9px!important;line-height:1.2!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -171,6 +172,7 @@
       var WAS = '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>';
       function clr(el) { if (!el) return; el.setAttribute("data-zfs", ""); [el].concat([].slice.call(el.querySelectorAll("*"))).forEach(function (x) { x.style && x.style.removeProperty("font-size"); }); }
       function fix() {
+        document.querySelectorAll(".z3cs").forEach(clr);
         document.querySelectorAll(".z3k,.card.tk").forEach(function (c) {
           var row = c.querySelector(".z3row"), inn = c.querySelector(".z3in");
           if (!row && inn) { row = document.createElement("span"); row.className = "z3row"; var ti = inn.querySelector(".z3ti"); (ti || inn.lastChild).after(row); }
