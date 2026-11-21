@@ -26,13 +26,13 @@ var b=p.querySelector(".st");b.onclick=function(){var k=status()[0];if(k==="inst
 var MS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 function dfmt(d){return d.getDate()+" "+MS[d.getMonth()]}
 function opts(kind,iso){var a=iso.split("-"),d=new Date(+a[0],a[1]-1,+a[2]),add=function(n){var x=new Date(d);x.setDate(x.getDate()+n);return x},now=new Date();
-var L=kind==="program"?[["day_before","The day before",add(-1),18],["morning","On the day morning",d,8]]:[["before3","3 days before last date",add(-3),9],["before1","1 day before last date",add(-1),18],["lastday","On the last date",d,8]];
+var L=kind==="later"?[["later1","Tomorrow morning",add(1),9],["later3","After 3 days",add(3),9],["later7","After 1 week",add(7),9]]:kind==="program"?[["day_before","The day before",add(-1),18],["morning","On the day morning",d,8]]:[["before3","3 days before last date",add(-3),9],["before1","1 day before last date",add(-1),18],["lastday","On the last date",d,8]];
 return L.map(function(o){var t=new Date(o[2]);t.setHours(o[3],0,0,0);return{k:o[0],l:o[1],w:dfmt(o[2])+", "+(o[3]>12?o[3]-12+":00 PM":o[3]+":00 AM"),past:t<now}})}
 function openRemind(btn){
 var id=btn.dataset.rem,kind=btn.dataset.k,iso=btn.dataset.d,ti=btn.dataset.t;
 if(!app){var q=sheet('<h4>🔔 Remind me</h4><div class="s">'+ti+'</div><div class="main"><span style="font-size:22px">📲</span><span><b>Reminders work in the ZEST APP</b><small>Install the app to get a reminder on your phone</small></span></div><button class="sv">Install ZEST APP</button>');q.querySelector(".sv").onclick=function(){location.href="/app/"};return}
 var O=opts(kind,iso),have=(PREFS&&PREFS.reminders&&PREFS.reminders[id])||null;
-var p=sheet('<h4>🔔 When should we remind you?</h4><div class="s">'+ti+'</div>'+O.map(function(o){var on=have?have.indexOf(o.k)>=0:!o.past&&o.k!=="before3";return '<div class="op'+(o.past?" off":on?" on":"")+'" data-k="'+o.k+'"><span class="cb">'+(on&&!o.past?"✓":"")+'</span><span><b>'+o.l+'</b><small>'+o.w+(o.past?" · passed":"")+'</small></span></div>'}).join("")+'<button class="sv">Save reminder</button>'+(have?'<div class="note"><a href="#" class="rmv" style="color:#c0392b;font-weight:800">Remove reminder</a></div>':''));
+var p=sheet('<h4>🔔 When should we remind you?</h4><div class="s">'+ti+'</div>'+O.map(function(o){var on=have?have.indexOf(o.k)>=0:!o.past&&o.k!=="before3"&&o.k!=="later3"&&o.k!=="later7";return '<div class="op'+(o.past?" off":on?" on":"")+'" data-k="'+o.k+'"><span class="cb">'+(on&&!o.past?"✓":"")+'</span><span><b>'+o.l+'</b><small>'+o.w+(o.past?" · passed":"")+'</small></span></div>'}).join("")+'<button class="sv">Save reminder</button>'+(have?'<div class="note"><a href="#" class="rmv" style="color:#c0392b;font-weight:800">Remove reminder</a></div>':''));
 p.querySelectorAll(".op").forEach(function(o){o.onclick=function(){var on=!o.classList.contains("on");o.classList.toggle("on",on);o.querySelector(".cb").textContent=on?"✓":""}});
 function save(slots){var sv=p.querySelector(".sv");sv.disabled=true;sv.textContent="Saving…";ensure().then(function(ep){if(!ep){sv.disabled=false;sv.textContent="Save reminder";toast(Notification.permission==="denied"?"Notifications are blocked – allow them in phone settings":"Please allow notifications");return}
 rpc("zest_set_reminder",{p_endpoint:ep,p_post:id,p_date:iso,p_slots:slots}).then(function(n){if(n===null||n<0){sv.disabled=false;sv.textContent="Save reminder";toast("Could not save – check internet");return}
@@ -40,7 +40,7 @@ PREFS=PREFS||{ep:ep,reminders:{},topics:[]};PREFS.ep=ep;PREFS.reminders=PREFS.re
 p.querySelector(".sv").onclick=function(){save([].filter.call(p.querySelectorAll(".op.on"),function(){return true}).map(function(o){return o.dataset.k}))};
 var rm=p.querySelector(".rmv");if(rm)rm.onclick=function(e){e.preventDefault();save([])};
 }
-var LBL={day_before:"Day before",morning:"Morning",before3:"3 days before",before1:"Day before",lastday:"Last day"};
+var LBL={day_before:"Day before",morning:"Morning",before3:"3 days before",before1:"Day before",lastday:"Last day",later1:"Tomorrow",later3:"In 3 days",later7:"In 1 week"};
 function mark(){document.querySelectorAll("[data-rem]").forEach(function(b){var r=PREFS&&PREFS.reminders&&PREFS.reminders[b.dataset.rem];b.classList.toggle("on",!!r);b.innerHTML=r?(b.classList.contains("rmc")?"✓ Reminder set":"✓ Reminder set · "+r.map(function(k){return LBL[k]||k}).join(", ")):"🔔 Remind me"})}
 var mt;new MutationObserver(function(){clearTimeout(mt);mt=setTimeout(mark,150)}).observe(document.documentElement,{childList:true,subtree:true});
 document.addEventListener("click",function(e){var r=e.target.closest("[data-rem]");if(r){e.preventDefault();e.stopPropagation();openRemind(r);return}

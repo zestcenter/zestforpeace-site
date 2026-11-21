@@ -178,6 +178,9 @@
           if (!row && inn) { row = document.createElement("span"); row.className = "z3row"; var ti = inn.querySelector(".z3ti"); (ti || inn.lastChild).after(row); }
           clr(row); clr(c.querySelector(".z3dt"));
           var md = c.querySelector(".z3md"); if (md && !md.__z) { md.__z = 1; md.setAttribute("data-noi18n", ""); var tn = [].filter.call(md.childNodes, function (x) { return x.nodeType === 3 && x.textContent.trim(); })[0]; if (tn) tn.textContent = T("വിശദാംശങ്ങൾ", "Details") + " "; else if (!md.querySelector("svg")) md.textContent = T("വിശദാംശങ്ങൾ", "Details"); }
+          if (row && !c.querySelector("[data-rem]")) { var sb = c.querySelector("[data-sh],[data-share]"), cid = sb && (sb.getAttribute("data-sh") || sb.getAttribute("data-share")), dtl = c.querySelector(".z3dl"), closed = /closed|completed/i.test(c.textContent) && dtl && !/post/i.test(dtl.textContent);
+            if (cid && dtl && /post|പോസ്റ്റ്/i.test(dtl.textContent)) { var td = new Date(), tt = (c.querySelector(".z3ti") || {}).textContent || ""; var iso = td.getFullYear() + "-" + ("0" + (td.getMonth() + 1)).slice(-2) + "-" + ("0" + td.getDate()).slice(-2);
+              var rb = document.createElement("span"); rb.className = "z3rm rmc"; rb.setAttribute("role", "button"); rb.tabIndex = 0; rb.setAttribute("data-rem", cid); rb.setAttribute("data-k", "later"); rb.setAttribute("data-d", iso); rb.setAttribute("data-t", tt.trim()); rb.textContent = "🔔 Remind me"; row.appendChild(rb); } }
           var dl = c.querySelector(".z3dl"); if (dl && !dl.__z) { dl.__z = 1; dl.setAttribute("data-noi18n", ""); if (/post|പോസ്റ്റ്/i.test(dl.textContent)) dl.innerHTML = "POST<br>DATE"; else if (/program|പരിപാടി|പ്രോഗ്രാം/i.test(dl.textContent)) dl.innerHTML = "PROGRAM<br>DATE"; else dl.innerHTML = "LAST<br>DATE"; }
           var ab = c.querySelector(".z3ab");
           if (ab && !ab.querySelector(".zw,.zenq")) {
