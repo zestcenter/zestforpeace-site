@@ -88,7 +88,7 @@
     '#zproj{display:none}html.zapp[data-zt=zest] #zproj{display:block}html.zapp #zproj{order:6;background:#eef3f7}html.zapp[data-zt=zest] #programs{display:none!important}' +
     '.zpj{display:grid;gap:20px}.zpk{background:#fff;border-radius:26px;box-shadow:0 10px 26px -12px rgba(11,61,92,.35);overflow:hidden}.zpk-im{padding:12px 12px 0}.zpk-im img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;background:#e6f0f6}' +
     '.zpk-b{padding:14px 18px 2px}.zpk-c{font:700 12.5px ' + F + '}.zpk h3{margin:6px 0 6px!important;font:800 18px/1.3 ' + F + '!important;color:#0b2a3d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-    '.zpk p{margin:0;font:400 13px/1.7 ' + F + ';color:#4a5d69;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(13px*1.7*4)}.zpk.op p{-webkit-line-clamp:unset;display:block}' +
+    '.zpk p{margin:0;font:400 13px/1.7 ' + F + ';color:#4a5d69;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(14.5px*1.7*4)}.zpk.op p{-webkit-line-clamp:unset;display:block}' +
     '.zpk ul{display:none;margin:12px 0 2px;padding:4px 14px;list-style:none;border-radius:16px;background:#f4f9fc;border:1px solid #e3edf3}.zpk.op ul{display:block}.zpk li{display:flex;gap:8px;padding:7px 0;font:500 12.5px/1.5 ' + F + ';color:#0b2a3d}.zpk li+li{border-top:1px solid #e9f0f4}.zpk li i{font-style:normal;font-weight:900}' +
     '.zpk-cut{position:relative;height:24px;margin:6px 0 2px}.zpk-cut:before{content:"";position:absolute;left:20px;right:20px;top:11px;border-top:2px dashed #d5e1e9}.zpk{position:relative}.zpk-cut:after{content:"";position:absolute;left:0;right:0;top:0;height:24px;background:radial-gradient(circle at 0 50%,#eef3f7 11px,transparent 12px),radial-gradient(circle at 100% 50%,#eef3f7 11px,transparent 12px)}' +
     '.zpk-f{display:flex;align-items:center;gap:8px;padding:2px 16px 16px}.zpk-more{display:inline-flex!important;align-items:center;gap:5px;padding:5px 12px!important;border-radius:999px;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 11px/1.2 ' + F + '!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3);cursor:pointer}.zpk-more b{display:inline-block;transition:transform .2s}.zpk.op .zpk-more b{transform:rotate(180deg)}' +
@@ -245,6 +245,26 @@
       if (L2[m[1]] && hd && /[\u0D00-\u0D7F]/.test(hd.textContent)) hd.innerHTML = '<span class="zl">' + L2[m[1]][0] + '</span><br><span class="zl">' + L2[m[1]][1] + '</span>';
       t.setAttribute("role", "link"); t.addEventListener("click", function () { zpjOpen(m[1]); });
     });
+    /* readable text: standard minimum sizes (min 12px, body 14.5px) */
+    (function () {
+      var busy = 0;
+      function fix() {
+        busy = 1;
+        var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, seen = new Set();
+        while ((n = w.nextNode())) {
+          var e = n.parentElement; if (!e || seen.has(e) || !n.textContent.trim()) continue; seen.add(e);
+          if (e.closest("body>header,.zlg,svg,script,style,[data-zfs]")) continue;
+          var o = e.getAttribute("data-zf0"); var f = o ? +o : parseFloat(getComputedStyle(e).fontSize);
+          var t = f < 12 ? 12 : (f >= 12.9 && f < 14) ? 14.5 : 0;
+          if (!o) e.setAttribute("data-zf0", f);
+          if (t && e.style.getPropertyValue("font-size") !== t + "px") e.style.setProperty("font-size", t + "px", "important");
+        }
+        setTimeout(function () { busy = 0; }, 0);
+      }
+      var tm; function later() { if (busy) return; clearTimeout(tm); tm = setTimeout(fix, 120); }
+      fix(); setTimeout(fix, 800); setTimeout(fix, 2500);
+      new MutationObserver(later).observe(document.body, { childList: true, subtree: true, characterData: true });
+    })();
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
