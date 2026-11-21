@@ -8,6 +8,8 @@
   var CI = /^\/centreinfo/.test(location.pathname);
   var HOURS = ""; /* e.g. "9:00 AM – 5:00 PM" – shown on the centre card once set */
   var html = document.documentElement; html.classList.add("zapp");
+  var ZFZ = { s: 0.9, m: 1, l: 1.12, x: 1.25 }; function zfzGet() { try { return localStorage.getItem("zestFont") || "m"; } catch (e) { return "m"; } }
+  html.style.setProperty("--zfz", ZFZ[zfzGet()] || 1);
   var F = 'Inter,"Noto Sans Malayalam",sans-serif';
   var IC = {
     home: '<path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"/>',
@@ -108,6 +110,7 @@
     'html.zapp #stories .tag{transform:none!important;opacity:1!important;transition:none!important}' +
     'html.zapp .z3l small{display:block!important}' +
     'html.zapp .z3cs .z3l{font-size:10px!important;line-height:1.35!important}html.zapp .z3cs .z3l small{font-size:9px!important;line-height:1.2!important}' +
+    'html.zapp body{zoom:var(--zfz,1)}.zfzr{border-bottom:0!important;cursor:default}.zfz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 0 12px}.zfz button{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;min-height:58px;padding:8px 2px;border:1.5px solid #dbe9f2;border-radius:12px;background:#fff;color:#0b3d5c;font-family:inherit;cursor:pointer}.zfz button b{font-family:Inter,sans-serif;font-weight:800;line-height:1}.zfz button small{font-size:10.5px;font-weight:700;line-height:1.2;text-align:center}.zfz button.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f);border-color:transparent;color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.3)}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -412,6 +415,8 @@
       '<div class="zsh">' + T("സെറ്റിംഗ്സ്", "Settings") + '</div><div class="zcd" style="padding:4px 12px">' +
       '<a class="zrow" href="#notify" style="--c:#fff3dc;--k:#c77700"><i>' + ic("bell") + '</i><span><b>' + T("നോട്ടിഫിക്കേഷൻ", "Notifications") + '</b><small>' + T("പുതിയ അറിയിപ്പുകൾ", "New updates") + '</small></span><em>' + ic("arr") + '</em></a>' +
       '<a class="zrow" href="#settings"><i>' + ic("globe") + '</i><span><b>' + T("ഭാഷ", "Language") + '</b><small>മലയാളം / English</small></span><em>' + ic("arr") + '</em></a>' +
+      '<div class="zrow zfzr" style="--c:#e8f3fb;--k:#1380b8"><i><b style="font:800 15px/1 Inter,sans-serif">Aa</b></i><span><b>' + T("അക്ഷര വലിപ്പം", "Text size") + '</b><small>' + T("ആപ്പിലെ എഴുത്തിന്റെ വലിപ്പം", "Size of text in the app") + '</small></span></div>' +
+      '<div class="zfz">' + [["s", T("ചെറുത്", "Small"), 12], ["m", T("സാധാരണ", "Normal"), 14], ["l", T("വലുത്", "Large"), 17], ["x", T("ഏറ്റവും വലുത്", "Extra large"), 20]].map(function (o) { return '<button type="button" data-z="' + o[0] + '"' + (zfzGet() === o[0] ? ' class="on"' : '') + '><b style="font-size:' + o[2] + 'px">A</b><small>' + o[1] + '</small></button>'; }).join("") + '</div>' +
       '</div>' +
       '<div class="zsh">' + T("ZEST-ൽ ചേരാം", "Join ZEST") + '</div></div>';
     var ff = el.querySelector(".zff");
@@ -423,6 +428,7 @@
     el.querySelectorAll(".zfm button").forEach(function (b) { b.onclick = function () { var l = fam(); l.splice(+b.dataset.d, 1); setFam(l); renderMe(el); }; });
     el.querySelector('[data-c=donor]').onclick = function () { loadMed(function () { ZestMed.open("blood"); }); };
     el.querySelector('[data-c=stu]').onclick = function () { clickHash("#students"); };
+    el.querySelectorAll(".zfz button").forEach(function (b) { b.onclick = function () { var z = b.getAttribute("data-z"); try { localStorage.setItem("zestFont", z); } catch (e) {} html.style.setProperty("--zfz", ZFZ[z] || 1); el.querySelectorAll(".zfz button").forEach(function (x) { x.classList.toggle("on", x === b); }); dispatchEvent(new Event("resize")); }; });
   }
   /* reveal after the app layout is built (no website flash) */
   ready(function () { setTimeout(function () { requestAnimationFrame(function () { html.classList.remove("zboot"); }); }, 30); });
