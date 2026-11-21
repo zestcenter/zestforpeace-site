@@ -84,6 +84,7 @@
     '.zpg button i.go{width:16px!important;height:16px!important}.zpg button i.go .zsi{width:9px!important;height:9px!important}' +
     'html.zapp .zth h2,html.zapp .mh h2,html.zapp .zhx h2,html.zapp .who2 h2,html.zapp .zsc2 h2,html.zapp .w2-hd h2{font-family:Manjari,Inter,"Noto Sans Malayalam",sans-serif!important;font-weight:700!important;font-size:25px!important;letter-spacing:.01em!important;line-height:1.3!important}' +
     'html.zapp .wa,html.zapp .ig,html.zapp .ig-side,html.zapp .igw{display:none!important}' +
+    'html.zapp #centre-info .z3k{box-shadow:0 4px 14px rgba(11,61,92,.10)!important}html.zapp #centre-info .z3s{padding-bottom:24px!important}html.zapp #centre-info .z3d{display:none!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
