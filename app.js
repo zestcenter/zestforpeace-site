@@ -86,7 +86,7 @@
     'html.zapp .wa,html.zapp .ig,html.zapp .ig-side,html.zapp .igw{display:none!important}' +
     'html.zapp #centre-info .z3k{filter:drop-shadow(0 3px 6px rgba(11,61,92,.12))!important;box-shadow:none!important}html.zapp #centre-info .z3s{padding-bottom:24px!important}html.zapp #centre-info .z3d{display:none!important}' +
     '#zproj{display:none}html.zapp[data-zt=zest] #zproj{display:block}html.zapp #zproj{order:6;background:#eef3f7}html.zapp[data-zt=zest] #programs{display:none!important}' +
-    '.zpj{display:grid;gap:20px}.zpk{background:#fff;border-radius:26px;box-shadow:0 10px 26px -12px rgba(11,61,92,.35);overflow:hidden}.zpk-im{padding:12px 12px 0}.zpk-im img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px;background:#e6f0f6}' +
+    '.zpj{display:grid;gap:20px}.zpk{background:#fff;border-radius:26px;box-shadow:0 10px 26px -12px rgba(11,61,92,.35);overflow:hidden}.zpk-im{padding:12px 12px 0}.zpk-im img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;background:#e6f0f6}' +
     '.zpk-b{padding:14px 18px 2px}.zpk-c{font:700 12.5px ' + F + '}.zpk h3{margin:6px 0 6px!important;font:800 18px/1.3 ' + F + '!important;color:#0b2a3d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
     '.zpk p{margin:0;font:400 13px/1.7 ' + F + ';color:#4a5d69;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;min-height:calc(13px*1.7*4)}.zpk.op p{-webkit-line-clamp:unset;display:block}' +
     '.zpk ul{display:none;margin:12px 0 2px;padding:4px 14px;list-style:none;border-radius:16px;background:#f4f9fc;border:1px solid #e3edf3}.zpk.op ul{display:block}.zpk li{display:flex;gap:8px;padding:7px 0;font:500 12.5px/1.5 ' + F + ';color:#0b2a3d}.zpk li+li{border-top:1px solid #e9f0f4}.zpk li i{font-style:normal;font-weight:900}' +
@@ -213,7 +213,7 @@
       var zp = document.createElement("section"); zp.id = "zproj"; zp.setAttribute("data-noi18n", "");
       var hh = '<div class="wrap"><p class="tag">Our Projects</p><h2 class="ml zh2 in">ZESTന്റെ മുഖ്യ പദ്ധതികൾ</h2><div class="zpj">';
       PJ.forEach(function (p, i) {
-        hh += '<article class="zpk" data-i="' + i + '"><div class="zpk-im"><img src="/media/' + p[0] + '.webp" alt="" loading="lazy"><h3>' + p[5] + '</h3></div><div class="zpk-b"><p>' + p[6] + '</p><ul>' +
+        hh += '<article class="zpk" id="pj-' + p[0].split('-')[1] + '" data-i="' + i + '"><div class="zpk-im"><img src="/media/' + p[0] + '.webp" alt="" loading="lazy"><h3>' + p[5] + '</h3></div><div class="zpk-b"><p>' + p[6] + '</p><ul>' +
           p[7].map(function (x) { return '<li><i style="color:' + p[4] + '">✓</i>' + x + '</li>'; }).join("") + '</ul></div>' +
           '<div class="zpk-cut"></div><div class="zpk-f"><button type="button" class="zpk-more"><span>' + T("മുഴുവൻ വിവരങ്ങൾ", "Full details") + '</span> <b>⌄</b></button><button type="button" class="zpk-sh" aria-label="Share">' + SHI + '</button><button type="button" class="zpk-wa" aria-label="WhatsApp">' + WAI + '</button></div></article>';
       });
@@ -223,12 +223,15 @@
         var k = e.target.closest(".zpk"); if (!k) return; var p = PJ[+k.getAttribute("data-i")];
         if (e.target.closest(".zpk-more")) { var op = k.classList.toggle("op"); k.querySelector(".zpk-more span").textContent = op ? T("വിവരങ്ങൾ ചുരുക്കുക", "Show less") : T("മുഴുവൻ വിവരങ്ങൾ", "Full details"); }
         else if (e.target.closest(".zpk-wa")) { window.open("https://wa.me/918848313837?text=" + encodeURIComponent(T("ZEST – " + p[5] + " എന്ന പദ്ധതിയെ കുറിച്ച് കൂടുതൽ അറിയണം.", "I would like to know more about ZEST " + p[5] + ".")), "_blank"); }
-        else if (e.target.closest(".zpk-sh")) { var tx = p[5] + " – ZEST for Peace\n\n" + p[6] + "\n\nhttps://zestforpeace.com"; if (navigator.share) navigator.share({ title: p[5], text: tx }).catch(function () {}); else window.open("https://wa.me/?text=" + encodeURIComponent(tx), "_blank"); }
+        else if (e.target.closest(".zpk-sh")) { var tx = "https://zestforpeace.com/?pj=" + p[0].split('-')[1]; if (navigator.share) navigator.share({ url: tx }).catch(function () {}); else window.open("https://wa.me/?text=" + encodeURIComponent(tx), "_blank"); }
       });
     }
     /* fit project titles on one line */
     function zpkFit(){document.querySelectorAll('.zpk-im h3').forEach(function(h){var f=19;h.style.setProperty('font-size',f+'px','important');while(h.scrollWidth>h.clientWidth&&f>12){f-=.5;h.style.setProperty('font-size',f+'px','important');}});}
     setTimeout(zpkFit,300);window.addEventListener('resize',zpkFit);document.addEventListener('click',function(e){if(e.target.closest('.znav'))setTimeout(zpkFit,60);});
+    /* open a shared project link: ?pj=<slug> */
+    window.zpjOpen = function (k) { go("zest"); setTimeout(function () { var c = document.getElementById("pj-" + k); if (c) scrollTo(0, c.getBoundingClientRect().top + scrollY - 90); }, 350); };
+    (function () { var k = new URLSearchParams(location.search).get("pj"); if (k) setTimeout(function () { zpjOpen(k); }, 400); })();
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
