@@ -101,6 +101,7 @@
     'html.zapp div.zth{padding:0!important;background:#0b3d5c!important;border-radius:0 0 28px 28px!important}html.zapp div.zth:after{display:none}html.zapp div.zth img{width:100%!important;max-width:none!important;aspect-ratio:780/430!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}html.zapp div.zth:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)}html.zapp div.zth h2,html.zapp div.zth p{position:absolute!important;z-index:3;margin:0!important;text-shadow:0 1px 6px rgba(0,0,0,.35)}html.zapp div.zth h2{left:20px;right:20px;bottom:33px;font-size:21px!important;text-align:left}html.zapp div.zth h2:before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}html.zapp div.zth p{left:20px;right:20px;bottom:16px;font-size:12px!important;text-align:left;color:#e3f1fa!important}' +
     'html.zapp .tl-ext{display:none!important}html.zapp #stories .tag{margin-left:0!important}html.zapp .tl::before{bottom:auto!important;height:var(--zend,100%)}html.zapp .tl-fill{max-height:var(--zend,100%)}' +
     'html.zapp #about .q1{display:none!important}html.zapp .zig-btn{display:inline-flex!important;align-items:center;gap:5px;margin:14px 0 0!important;padding:6px 12px!important;border-radius:999px!important;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp .zig-btn svg{stroke:#0b5d8f!important;width:14px!important;height:14px!important}' +
+    'html.zapp .z3rm.on{background:linear-gradient(135deg,#ffe08a,#f5b623)!important;border-color:#e9a514!important;color:#5a3a00!important;box-shadow:0 4px 12px -4px rgba(201,138,0,.45)!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -198,7 +199,7 @@
       pg.after(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
     /* clubs CTA text */
-    var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ZEST ക്ലബ്ബുകളിൽ അംഗമാവാം", "Join a ZEST club"); }
+    var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ക്ലബ്ബിൽ അംഗമാവാം", "Join a club"); }
     /* centre card label -> ZEST Bulletin */
     var zh = document.querySelector("#centre-info .zu-h"); if (zh) { zh.setAttribute("data-noi18n", ""); var tn = zh.lastChild; if (tn && tn.nodeType === 3) tn.textContent = T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"); else zh.appendChild(document.createTextNode(T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"))); }
     /* ZEST tab: main projects (cards) */
