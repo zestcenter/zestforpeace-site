@@ -94,7 +94,7 @@
     '.zpk-f{display:flex;align-items:center;gap:8px;padding:2px 16px 16px}.zpk-more{display:inline-flex!important;align-items:center;gap:5px;padding:5px 12px!important;border-radius:999px;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 11px/1.2 ' + F + '!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3);cursor:pointer}.zpk-more b{display:inline-block;transition:transform .2s}.zpk.op .zpk-more b{transform:rotate(180deg)}' +
     '.zpk-sh,.zpk-wa{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;padding:0;cursor:pointer}.zpk-sh{margin-left:auto;background:#fff;border:1.5px solid #cfe0ea}.zpk-wa{background:#25d366;border:0}.zpk-sh svg{width:15px;height:15px}.zpk-wa svg{width:17px;height:17px}' +
     '.zpk-im{position:relative}.zpk-im:after{content:"";position:absolute;left:12px;right:12px;top:12px;bottom:0;border-radius:18px;background:linear-gradient(180deg,transparent 45%,rgba(8,30,45,.85));pointer-events:none}' +
-    '.zpk-im h3{position:absolute;z-index:1;left:28px;right:28px;bottom:18px;margin:0!important;color:#fff!important;font:800 20px/1.3 ' + F + '!important;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:normal!important}.zpk-im h3:after{content:"";display:block;width:44px;height:4px;margin-top:9px;border-radius:3px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}.zpk-b{padding-top:14px!important}' +
+    '.zpk-im h3{position:absolute;z-index:1;left:28px;right:28px;bottom:18px;margin:0!important;color:#fff!important;font:600 19px/1.4 ' + F + '!important;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:nowrap!important;overflow:hidden}.zpk-im h3:after{content:"";display:block;width:44px;height:4px;margin-top:9px;border-radius:3px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}.zpk-b{padding-top:14px!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -226,6 +226,9 @@
         else if (e.target.closest(".zpk-sh")) { var tx = p[5] + " – ZEST for Peace\n\n" + p[6] + "\n\nhttps://zestforpeace.com"; if (navigator.share) navigator.share({ title: p[5], text: tx }).catch(function () {}); else window.open("https://wa.me/?text=" + encodeURIComponent(tx), "_blank"); }
       });
     }
+    /* fit project titles on one line */
+    function zpkFit(){document.querySelectorAll('.zpk-im h3').forEach(function(h){var f=19;h.style.setProperty('font-size',f+'px','important');while(h.scrollWidth>h.clientWidth&&f>12){f-=.5;h.style.setProperty('font-size',f+'px','important');}});}
+    setTimeout(zpkFit,300);window.addEventListener('resize',zpkFit);document.addEventListener('click',function(e){if(e.target.closest('.znav'))setTimeout(zpkFit,60);});
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
