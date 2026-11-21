@@ -112,6 +112,7 @@
     'html.zapp .z3cs .z3l{font-size:10px!important;line-height:1.35!important}html.zapp .z3cs .z3l small{font-size:9px!important;line-height:1.2!important}' +
     'html.zapp body{zoom:var(--zfz,1)}.zfzr{border-bottom:0!important;cursor:default}.zfz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 0 12px}.zfz button{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;min-height:58px;padding:8px 2px;border:1.5px solid #dbe9f2;border-radius:12px;background:#fff;color:#0b3d5c;font-family:inherit;cursor:pointer}.zfz button b{font-family:Inter,sans-serif;font-weight:800;line-height:1}.zfz button small{font-size:10.5px;font-weight:700;line-height:1.2;text-align:center}.zfz button.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f);border-color:transparent;color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.3)}' +
     'html.zapp .zlg{position:relative!important;height:28px!important;width:64px!important;border:0!important;background:#e3f2fb!important;border-radius:999px!important;padding:0!important;overflow:visible!important;box-shadow:inset 0 1px 3px rgba(11,61,92,.15)!important}html.zapp .zlg span{position:relative;z-index:1;flex:1;justify-content:center;padding:0!important;background:none!important;color:#6a8fa6!important;font:800 11px/1 Inter,"Noto Sans Malayalam",sans-serif!important;transition:color .25s}html.zapp .zlg span.on{color:#fff!important}html.zapp .zlg:after{content:"";position:absolute;top:3px;bottom:3px;width:29px;border-radius:999px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 2px 6px rgba(11,93,143,.4);left:3px;transition:left .25s}html[data-lang=ml].zapp .zlg:after{left:32px}' +
+    '.zspk{flex:none;display:grid!important;place-items:center;width:32px;height:32px;border-radius:50%;background:#e6f5fd;border:1.5px solid #bfe3f6;margin-right:6px;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}.zspk svg{width:16px;height:16px}.zspk.on{background:#1380b8;border-color:#1380b8}.zspk.on svg path{stroke:#fff;fill:#fff}.zpk-f .zspk{margin:0 0 0 auto}.zpk-f .zspk+.zpk-sh{margin-left:0!important}.zpl{position:fixed;left:10px;right:10px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:9998;background:#0b3d5c;border-radius:20px;padding:10px 14px;color:#fff;box-shadow:0 12px 26px -8px rgba(11,61,92,.6);display:flex;align-items:center;gap:10px;font-family:Inter,"Noto Sans Malayalam",sans-serif;transform:translateY(150%);transition:transform .3s}.zpl.on{transform:none}.zpl .pp{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;border:0;padding:0;cursor:pointer}.zpl .pp i{display:inline-block;width:4px;height:14px;background:#0b3d5c;margin:0 2px;border-radius:2px}.zpl .pp.ps i{display:none}.zpl .pp.ps:after{content:"";border-left:13px solid #0b3d5c;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}.zpl .tt{flex:1;min-width:0}.zpl .tt b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.zpl .bar{height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin-top:6px;overflow:hidden}.zpl .bar span{display:block;width:0;height:100%;background:#7fc6ea;transition:width .4s}.zpl small{display:block;font-size:10px;opacity:.8;white-space:nowrap;margin-top:4px}.zpl .sp{font:800 11px Inter,sans-serif;background:rgba(255,255,255,.15);padding:5px 9px;border-radius:99px;border:0;color:#fff;cursor:pointer}.zpl .x{font-size:18px;opacity:.85;background:none;border:0;color:#fff;padding:0 2px;cursor:pointer}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -429,6 +430,51 @@
     el.querySelector('[data-c=donor]').onclick = function () { loadMed(function () { ZestMed.open("blood"); }); };
     el.querySelector('[data-c=stu]').onclick = function () { clickHash("#students"); };
   }
+  /* read aloud (🔊): phone's own text-to-speech */
+  ready(function () {
+    if (!("speechSynthesis" in window)) return;
+    var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="#0b5d8f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4Z" fill="#0b5d8f"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
+    var pl = document.createElement("div"); pl.className = "zpl"; pl.setAttribute("data-noi18n", ""); pl.setAttribute("data-zfs", "");
+    pl.innerHTML = '<button type="button" class="pp" aria-label="Pause"><i></i><i></i></button><div class="tt"><b></b><div class="bar"><span></span></div><small>' + T("🔊 വായിക്കുന്നു…", "🔊 Reading…") + '</small></div><button type="button" class="sp">1x</button><button type="button" class="x" aria-label="Close">✕</button>';
+    document.body.appendChild(pl);
+    var Q = [], qi = 0, rate = 1, cur = null, btn = null, paused = false, mlv = null, env = null;
+    function voices() { var v = speechSynthesis.getVoices() || []; mlv = v.filter(function (x) { return /^ml/i.test(x.lang); })[0] || null; env = v.filter(function (x) { return /^en[-_]IN/i.test(x.lang); })[0] || v.filter(function (x) { return /^en/i.test(x.lang); })[0] || null; }
+    voices(); if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = voices;
+    function chunks(t) { var out = [], parts = String(t).replace(/\s+/g, " ").split(/(?<=[.!?।\n:])\s+/); parts.forEach(function (p) { while (p.length > 180) { var c = p.lastIndexOf(" ", 180); if (c < 60) c = 180; out.push(p.slice(0, c)); p = p.slice(c); } if (p.trim()) out.push(p.trim()); }); return out; }
+    function prog() { pl.querySelector(".bar span").style.width = (Q.length ? Math.round(qi / Q.length * 100) : 0) + "%"; }
+    function stop() { speechSynthesis.cancel(); Q = []; qi = 0; pl.classList.remove("on"); if (btn) btn.classList.remove("on"); btn = null; paused = false; pl.querySelector(".pp").classList.remove("ps"); }
+    function next() {
+      if (qi >= Q.length) { prog(); setTimeout(stop, 600); return; }
+      var t = Q[qi], u = new SpeechSynthesisUtterance(t), ml = /[ഀ-ൿ]/.test(t);
+      u.lang = ml ? "ml-IN" : "en-IN"; var v = ml ? mlv : env; if (v) u.voice = v; u.rate = rate;
+      u.onend = function () { if (cur !== u) return; qi++; prog(); next(); };
+      u.onerror = function (e) { if (cur !== u || e.error === "interrupted" || e.error === "canceled") return; stop(); alert(T("ഈ ഫോണിൽ മലയാളം ശബ്ദം ലഭ്യമല്ല. Settings → Text-to-speech → Google-ൽ മലയാളം ഡൗൺലോഡ് ചെയ്യൂ.", "Voice not available on this phone. Install a voice in Settings → Text-to-speech.")); };
+      cur = u; speechSynthesis.speak(u);
+    }
+    function play(text, title, b) {
+      stop(); Q = chunks(text); if (!Q.length) return; btn = b; if (b) b.classList.add("on");
+      pl.querySelector(".tt b").textContent = "🔊 " + title; pl.classList.add("on"); prog(); next();
+    }
+    pl.querySelector(".pp").onclick = function () { var b = this; if (!paused) { speechSynthesis.pause(); paused = true; b.classList.add("ps"); } else { speechSynthesis.resume(); paused = false; b.classList.remove("ps"); if (!speechSynthesis.speaking) next(); } };
+    pl.querySelector(".sp").onclick = function () { rate = rate === 1 ? 0.75 : 1; this.textContent = rate === 1 ? "1x" : "0.75x"; var keep = qi; speechSynthesis.cancel(); cur = null; qi = keep; paused = false; pl.querySelector(".pp").classList.remove("ps"); setTimeout(next, 80); };
+    pl.querySelector(".x").onclick = stop;
+    function txt(el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; }
+    function add() {
+      document.querySelectorAll(".z3k .z3ab,.card.tk .z3ab").forEach(function (ab) { var b = ab.querySelector(".zspk"); if (!b) { b = document.createElement("button"); b.type = "button"; b.className = "zspk"; b.setAttribute("aria-label", T("കേൾക്കാം", "Listen")); b.innerHTML = SPK; } if (ab.firstChild !== b) ab.insertBefore(b, ab.firstChild); });
+      document.querySelectorAll(".zpk-f").forEach(function (f) { if (f.querySelector(".zspk")) return; var sh = f.querySelector(".zpk-sh"); if (!sh) return; var b = document.createElement("button"); b.type = "button"; b.className = "zspk"; b.setAttribute("aria-label", T("കേൾക്കാം", "Listen")); b.innerHTML = SPK; f.insertBefore(b, sh); });
+    }
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest(".zspk"); if (!b) return; e.preventDefault(); e.stopPropagation();
+      if (b === btn && pl.classList.contains("on")) { stop(); return; }
+      var c = b.closest(".z3k,.card.tk,.zpk"); if (!c) return;
+      var title = txt(c.querySelector(".z3ti,.zpk-im h3")), body = "";
+      if (c.classList.contains("zpk")) { body = txt(c.querySelector(".zpk-b p")) + ". " + [].map.call(c.querySelectorAll(".zpk-b li"), function (li) { return txt(li).replace(/^✓\s*/, ""); }).join(". "); }
+      else { var d = c.querySelector(".zdet"); body = d ? txt(d) : ""; var cal = c.querySelector(".z3cal"), dl = c.querySelector(".z3dl"); if (!body && cal) body = (dl && /last/i.test(dl.textContent) ? T("അവസാന തീയതി ", "Last date ") : dl && /program/i.test(dl.textContent) ? T("തീയതി ", "Date ") : T("പോസ്റ്റ് ചെയ്തത് ", "Posted on ")) + txt(cal); }
+      play(title + ". " + body, title, b);
+    }, true);
+    var at; new MutationObserver(function () { clearTimeout(at); at = setTimeout(add, 80); }).observe(document.body, { childList: true, subtree: true });
+    add(); addEventListener("pagehide", function () { speechSynthesis.cancel(); });
+  });
   /* reveal after the app layout is built (no website flash) */
   ready(function () { setTimeout(function () { requestAnimationFrame(function () { html.classList.remove("zboot"); }); }, 30); });
 })();
