@@ -33,7 +33,7 @@
   var css = document.createElement("style");
   css.textContent =
     'html.zapp body{display:flex!important;flex-direction:column!important}html.zapp body{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}' +
-    'html.zapp .wa{bottom:calc(96px + env(safe-area-inset-bottom))!important}html.zapp .ig{bottom:calc(96px + 3.1rem + env(safe-area-inset-bottom))!important;display:flex!important}html.zapp .wa,html.zapp .ig{width:2.55rem!important;height:2.55rem!important}html.zapp .wa svg,html.zapp .ig svg{width:1.3rem!important;height:1.3rem!important}' +
+    'html.zapp .wa{bottom:calc(96px + env(safe-area-inset-bottom))!important}html.zapp .ig{bottom:calc(96px + 3.1rem + env(safe-area-inset-bottom))!important}html.zapp .wa,html.zapp .ig{width:2.55rem!important;height:2.55rem!important}html.zapp .wa svg,html.zapp .ig svg{width:1.3rem!important;height:1.3rem!important}' +
     '.znav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;transform:none!important;margin:0!important;z-index:2147483000;height:calc(72px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid #e9eff3;box-shadow:0 -6px 18px rgba(11,61,92,.06);display:grid;grid-template-columns:repeat(5,1fr);align-items:center}' +
     '.znav a{display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;font:700 11px ' + F + ';color:#8796a1;white-space:nowrap;-webkit-tap-highlight-color:transparent}' +
     '.znav a b{display:grid;place-items:center;width:52px;height:30px;border-radius:15px;transition:background .2s}.znav .zsi{width:22px;height:22px}' +
@@ -83,6 +83,7 @@
     'html.zapp .z3md svg,html.zapp .zu-more a svg,html.zapp .zu-more button svg,html.zapp .zjw svg{width:10px!important;height:10px!important;stroke:currentColor!important}html.zapp .zu-more a:after,html.zapp .zu-more a:before,html.zapp .zjw:before,html.zapp .zjw:after{display:none!important}' +
     '.zpg button i.go{width:16px!important;height:16px!important}.zpg button i.go .zsi{width:9px!important;height:9px!important}' +
     'html.zapp .zth h2,html.zapp .mh h2,html.zapp .zhx h2,html.zapp .who2 h2,html.zapp .zsc2 h2,html.zapp .w2-hd h2{font-family:Manjari,Inter,"Noto Sans Malayalam",sans-serif!important;font-weight:700!important;font-size:25px!important;letter-spacing:.01em!important;line-height:1.3!important}' +
+    'html.zapp .wa,html.zapp .ig,html.zapp .ig-side,html.zapp .igw{display:none!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -181,6 +182,8 @@
     }
     /* clubs CTA text */
     var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ZEST ക്ലബ്ബുകളിൽ അംഗമാവാം", "Join a ZEST club"); }
+    /* centre card label -> ZEST Bulletin */
+    var zh = document.querySelector("#centre-info .zu-h"); if (zh) { zh.setAttribute("data-noi18n", ""); var tn = zh.lastChild; if (tn && tn.nodeType === 3) tn.textContent = T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"); else zh.appendChild(document.createTextNode(T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"))); }
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
