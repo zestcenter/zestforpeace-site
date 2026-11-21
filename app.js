@@ -97,6 +97,7 @@
     '.zpk-im h3{position:absolute;z-index:1;left:28px;right:28px;bottom:18px;margin:0!important;color:#fff!important;font:600 16px/1.4 ' + F + '!important;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:normal!important}.zpk-im h3:after{content:"";display:block;width:44px;height:4px;margin-top:9px;border-radius:3px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}.zpk-b{padding-top:14px!important}' +
     'html.zapp #programs .zb-t h3{right:24px!important}html.zapp #programs .zb-t.b h3{right:40px!important}html.zapp #programs .zb-t .zgo{position:absolute;bottom:9px;right:8px;width:14px;height:14px;border-radius:50%;background:#1380b8;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25);z-index:2}html.zapp #programs .zb-t.b .zgo{width:17px;height:17px;bottom:15px;right:12px}html.zapp #programs .zb-t .zgo:after{content:;position:absolute;inset:0;border-radius:50%;border:2px solid #3fa7d6;animation:zgP 1.8s ease-out infinite}html.zapp #programs .zb-t .zgo svg{animation:zgA 1.8s ease-in-out infinite}@keyframes zgA{0%,100%{transform:translateX(-1px)}50%{transform:translateX(2px)}}@keyframes zgP{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.9);opacity:0}}html.zapp #programs .zb-t .zgo svg{width:8px;height:8px}html.zapp #programs .zb-t.b .zgo svg{width:10px;height:10px}html.zapp #programs .zb-t{cursor:pointer}html.zapp #programs .zb-t:active{transform:scale(.97);transition:transform .15s}' +
     'html.zapp #programs .zb-t h3{font-size:.72rem!important}html.zapp #programs .zb-t.b h3{font-size:.95rem!important}' +
+    '.znav .zdv{display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;width:27px;height:27px;background:url(/icons/dove-gray.png) center/contain no-repeat}.znav a.on .zdv{background-image:url(/icons/dove-blue.png)}html.zapp #programs .zb-t h3 .zl{white-space:nowrap}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -134,9 +135,9 @@
   var fl = document.createElement("link"); fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Manjari:wght@700&display=swap"; document.head.appendChild(fl);
 
   /* ---------- bottom navigation ---------- */
-  var NAV = [["home", "home", T("ഹോം", "Home")], ["info", "bell", T("അറിയിപ്പ്", "Updates")], ["prime", "star", "PRIME"], ["zest", "users", "ZEST"], ["me", "user", T("ഞാൻ", "Me")]];
+  var NAV = [["home", "home", T("ഹോം", "Home")], ["info", "bell", T("അറിയിപ്പ്", "Updates")], ["prime", "star", "PRIME"], ["zest", "dove", "ZEST"], ["me", "user", T("ഞാൻ", "Me")]];
   var nav = document.createElement("div"); nav.className = "znav"; nav.setAttribute("data-noi18n", "");
-  nav.innerHTML = NAV.map(function (n) { return '<a href="' + (n[0] === "info" ? "/centreinfo/" : n[0] === "home" ? "/" : "/#tab-" + n[0]) + '" data-t="' + n[0] + '"' + (n[0] === "prime" ? ' class="c"' : '') + '><b>' + ic(n[1]) + '</b>' + n[2] + '</a>'; }).join("");
+  nav.innerHTML = NAV.map(function (n) { return '<a href="' + (n[0] === "info" ? "/centreinfo/" : n[0] === "home" ? "/" : "/#tab-" + n[0]) + '" data-t="' + n[0] + '"' + (n[0] === "prime" ? ' class="c"' : '') + '><b>' + (n[1] === "dove" ? '<i class="zdv"></i>' : ic(n[1])) + '</b>' + n[2] + '</a>'; }).join("");
   function mark(t) { nav.querySelectorAll("a").forEach(function (a) { a.classList.toggle("on", a.dataset.t === t); }); }
 
   function hero(img, t, s, id) { return '<div class="zth"' + (id ? ' id="' + id + '"' : '') + ' data-noi18n>' + (img ? '<img src="' + img + '" alt="">' : '') + '<h2>' + t + '</h2><p>' + s + '</p></div>'; }
@@ -238,6 +239,8 @@
     document.querySelectorAll("#programs .zb-t").forEach(function (t) {
       var m = (t.getAttribute("style") || "").match(/--i-p-([a-z]+)/); if (!m) return;
       t.insertAdjacentHTML("beforeend", '<span class="zgo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>');
+      var L2 = { senior: ["സീനിയർ സിറ്റിസൺ", "കോർണർ"], women: ["വുമൺ എംപവർമെന്റ്", "പ്രോഗ്രാം"] }, hd = t.querySelector("h3");
+      if (L2[m[1]] && hd && /[\u0D00-\u0D7F]/.test(hd.textContent)) hd.innerHTML = '<span class="zl">' + L2[m[1]][0] + '</span><br><span class="zl">' + L2[m[1]][1] + '</span>';
       t.setAttribute("role", "link"); t.addEventListener("click", function () { zpjOpen(m[1]); });
     });
     /* PRIME SPOT on home */
