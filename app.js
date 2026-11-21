@@ -415,8 +415,7 @@
       '<div class="zsh">' + T("സെറ്റിംഗ്സ്", "Settings") + '</div><div class="zcd" style="padding:4px 12px">' +
       '<a class="zrow" href="#notify" style="--c:#fff3dc;--k:#c77700"><i>' + ic("bell") + '</i><span><b>' + T("നോട്ടിഫിക്കേഷൻ", "Notifications") + '</b><small>' + T("പുതിയ അറിയിപ്പുകൾ", "New updates") + '</small></span><em>' + ic("arr") + '</em></a>' +
       '<a class="zrow" href="#settings"><i>' + ic("globe") + '</i><span><b>' + T("ഭാഷ", "Language") + '</b><small>മലയാളം / English</small></span><em>' + ic("arr") + '</em></a>' +
-      '<div class="zrow zfzr" style="--c:#e8f3fb;--k:#1380b8"><i><b style="font:800 15px/1 Inter,sans-serif">Aa</b></i><span><b>' + T("അക്ഷര വലിപ്പം", "Text size") + '</b><small>' + T("ആപ്പിലെ എഴുത്തിന്റെ വലിപ്പം", "Size of text in the app") + '</small></span></div>' +
-      '<div class="zfz">' + [["s", T("ചെറുത്", "Small"), 12], ["m", T("സാധാരണ", "Normal"), 14], ["l", T("വലുത്", "Large"), 17], ["x", T("ഏറ്റവും വലുത്", "Extra large"), 20]].map(function (o) { return '<button type="button" data-z="' + o[0] + '"' + (zfzGet() === o[0] ? ' class="on"' : '') + '><b style="font-size:' + o[2] + 'px">A</b><small>' + o[1] + '</small></button>'; }).join("") + '</div>' +
+      '<a class="zrow" href="#textsize" style="--c:#e8f3fb;--k:#1380b8"><i><b style="font:800 14px/1 Inter,sans-serif">Aa</b></i><span><b>' + T("അക്ഷര വലിപ്പം", "Text size") + '</b><small>' + ({ s: T("ചെറുത്", "Small"), m: T("സാധാരണ", "Normal"), l: T("വലുത്", "Large"), x: T("ഏറ്റവും വലുത്", "Extra large") })[zfzGet()] + '</small></span><em>' + ic("arr") + '</em></a>' +
       '</div>' +
       '<div class="zsh">' + T("ZEST-ൽ ചേരാം", "Join ZEST") + '</div></div>';
     var ff = el.querySelector(".zff");
@@ -428,7 +427,6 @@
     el.querySelectorAll(".zfm button").forEach(function (b) { b.onclick = function () { var l = fam(); l.splice(+b.dataset.d, 1); setFam(l); renderMe(el); }; });
     el.querySelector('[data-c=donor]').onclick = function () { loadMed(function () { ZestMed.open("blood"); }); };
     el.querySelector('[data-c=stu]').onclick = function () { clickHash("#students"); };
-    el.querySelectorAll(".zfz button").forEach(function (b) { b.onclick = function () { var z = b.getAttribute("data-z"); try { localStorage.setItem("zestFont", z); } catch (e) {} html.style.setProperty("--zfz", ZFZ[z] || 1); el.querySelectorAll(".zfz button").forEach(function (x) { x.classList.toggle("on", x === b); }); dispatchEvent(new Event("resize")); }; });
   }
   /* reveal after the app layout is built (no website flash) */
   ready(function () { setTimeout(function () { requestAnimationFrame(function () { html.classList.remove("zboot"); }); }, 30); });
