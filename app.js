@@ -99,9 +99,12 @@
     'html.zapp #programs .zb-t h3{font-size:.72rem!important}html.zapp #programs .zb-t.b h3{font-size:.95rem!important}' +
     '.znav .zdv{display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;width:27px;height:27px;background:url(/icons/dove-gray.png) center/contain no-repeat}.znav a.on .zdv{background-image:url(/icons/dove-blue.png)}html.zapp #programs .zb-t h3 .zl{white-space:nowrap}' +
     'html.zapp div.zth{padding:0!important;background:#0b3d5c!important;border-radius:0 0 28px 28px!important}html.zapp div.zth:after{display:none}html.zapp div.zth img{width:100%!important;max-width:none!important;aspect-ratio:780/430!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}html.zapp div.zth:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)}html.zapp div.zth h2,html.zapp div.zth p{position:absolute!important;z-index:3;margin:0!important;text-shadow:0 1px 6px rgba(0,0,0,.35)}html.zapp div.zth h2{left:20px;right:20px;bottom:33px;font-size:21px!important;text-align:left}html.zapp div.zth h2:before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}html.zapp div.zth p{left:20px;right:20px;bottom:16px;font-size:12px!important;text-align:left;color:#e3f1fa!important}' +
-    'html.zapp .tl-ext{display:none!important}html.zapp #stories .tag{margin-left:0!important}html.zapp .tl::before{bottom:auto!important;height:var(--zend,100%)}html.zapp .tl-fill{max-height:var(--zend,100%)}' +
+    'html.zapp .tl-ext{display:none!important}html.zapp .tl::before{top:var(--zst,0)!important;bottom:auto!important;height:calc(var(--zend,100%) - var(--zst,0px))}html.zapp .tl-fill{top:var(--zst,0)!important;max-height:calc(var(--zend,100%) - var(--zst,0px))}#zext{position:absolute;width:4px;margin-left:-2px;background:#d3e7f3;z-index:5;pointer-events:none;display:none}#zext i{display:block;width:100%;height:0;background:linear-gradient(180deg,#1380b8,#3fa7d6)}html.zapp #about .zabh .tag{margin:0!important;font:400 .95rem/1.25 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:.03em!important;gap:.6rem!important}html.zapp #about .zabh .tag::before{width:1.25rem!important;height:1.25rem!important}html.zapp[data-zt=zest] #about{padding-bottom:4px!important}html.zapp[data-zt=zest] #numbers{padding-top:4px!important}html.zapp #about .zrm{background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;padding:4px 10px!important;min-height:0!important;border-radius:999px!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;text-transform:none!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp #about .zrm svg{stroke:#0b5d8f!important}' +
     'html.zapp #about .q1{display:none!important}html.zapp .zig-btn{display:inline-flex!important;align-items:center;gap:5px;margin:14px 0 0!important;padding:6px 12px!important;border-radius:999px!important;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp .zig-btn svg{stroke:#0b5d8f!important;width:14px!important;height:14px!important}' +
     'html.zapp .z3rm.on{background:linear-gradient(135deg,#ffe08a,#f5b623)!important;border-color:#e9a514!important;color:#5a3a00!important;box-shadow:0 4px 12px -4px rgba(201,138,0,.45)!important}' +
+    'html.zapp .z3cd{display:none!important}html.zapp .z3c{padding:6px 3px 5px!important;gap:3px!important;border-radius:12px!important}html.zapp .z3i{width:23px!important;height:23px!important;border-radius:8px!important}html.zapp .z3i svg{width:13px!important;height:13px!important}html.zapp .z3cs{gap:6px!important}html.zapp .z3row{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:5px!important;min-height:22px;margin-top:8px!important}html.zapp .z3row .z3md,html.zapp .z3row .z3rm{flex:none;margin:0!important;padding:3px 8px!important;font-size:10px!important;line-height:1.3!important;white-space:nowrap!important;min-height:0!important}html.zapp .z3row .z3md svg{width:8px!important;height:8px!important}html.zapp .z3ti{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}html.zapp .z3k{display:flex!important;flex-direction:column!important}html.zapp .z3k .z3t{flex:1 1 auto}html.zapp .z3cal span{font-size:8px!important;line-height:1.2!important;letter-spacing:0!important}html.zapp .z3cal b{font-size:13px!important;line-height:1.1!important}html.zapp .z3dl{font-size:8.5px!important;line-height:1.2!important}html.zapp .z3ab{margin-left:auto!important}html.zapp .fsec h2.h{display:flex!important;align-items:center;gap:10px;border:0!important;padding:0!important;font:600 20.5px/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;color:#111!important;text-transform:none!important}html.zapp .fsec h2.h:before{content:"";flex:none;width:20px;height:20px;border:1.5px solid #5f6f5f;border-radius:50%;background:radial-gradient(circle,#5f6f5f 0 4.5px,transparent 5px);box-sizing:border-box}' +
+    'html.zapp #centre-info .z3bot .z3s{padding-bottom:12px!important}html.zapp #centre-info .zu-more{margin-top:0!important}' +
+    'html.zapp #documentary a.yt{display:inline-flex!important;align-items:center;gap:5px;width:auto!important;min-height:0!important;padding:4px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;text-transform:none!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp #documentary a.yt svg{width:14px!important;height:14px!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -160,6 +163,38 @@
     }
     home();
   });
+  ready(function () {
+    /* bulletin cards (home + bulletin page): tidy footer, labels, WhatsApp for every card */
+    (function () {
+      var WAS = '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>';
+      function clr(el) { if (!el) return; el.setAttribute("data-zfs", ""); [el].concat([].slice.call(el.querySelectorAll("*"))).forEach(function (x) { x.style && x.style.removeProperty("font-size"); }); }
+      function fix() {
+        document.querySelectorAll(".z3k,.card.tk").forEach(function (c) {
+          var row = c.querySelector(".z3row"), inn = c.querySelector(".z3in");
+          if (!row && inn) { row = document.createElement("span"); row.className = "z3row"; var ti = inn.querySelector(".z3ti"); (ti || inn.lastChild).after(row); }
+          clr(row); clr(c.querySelector(".z3dt"));
+          var dl = c.querySelector(".z3dl"); if (dl && !dl.__z) { dl.__z = 1; dl.setAttribute("data-noi18n", ""); if (/post|പോസ്റ്റ്/i.test(dl.textContent)) dl.innerHTML = "POST<br>DATE"; else if (/program|പരിപാടി|പ്രോഗ്രാം/i.test(dl.textContent)) dl.innerHTML = "PROGRAM<br>DATE"; else dl.innerHTML = "LAST<br>DATE"; }
+          var ab = c.querySelector(".z3ab");
+          if (ab && !ab.querySelector(".zw,.zenq")) {
+            var sh = ab.querySelector("[data-sh],[data-share]"); if (!sh) return;
+            if (sh.hasAttribute("data-sh")) ab.insertAdjacentHTML("afterbegin", '<span class="zw" role="button" tabindex="0" aria-label="WhatsApp" data-wa="' + sh.getAttribute("data-sh") + '">' + WAS + '</span>');
+            else {
+              var t = sh.getAttribute("data-t") || "", no = sh.getAttribute("data-no"), PR = { info: "info", program: "prgm", job: "job" }, kd = sh.getAttribute("data-kind");
+              var link = no ? "https://zestforpeace.com/app/" + (PR[kd] || "info") + no : "https://zestforpeace.com/centreinfo/";
+              var msg = T("ഹലോ ZEST സെന്റർ 👋", "Hello ZEST Centre 👋") + "\n\n📌 " + t + "\n\n" + T("ഈ ജോലിക്ക് അപേക്ഷിക്കാൻ സഹായിക്കാമോ?", "Can you help me apply for this job?") + "\n\n🔗 " + link;
+              ab.insertAdjacentHTML("afterbegin", '<a class="zenq" aria-label="WhatsApp" href="https://wa.me/918848313837?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">' + WAS.replace("<svg ", '<svg fill="#fff" ') + '</a>');
+            }
+          }
+        });
+        if (CI) {
+          var H = { "sec-week": T("ഈ ആഴ്ച", "This week"), "sec-programs": T("പരിപാടികൾ", "Programs"), "sec-info": T("അറിയിപ്പുകൾ", "Announcements"), "sec-jobs": T("ജോലി ഒഴിവുകൾ", "Job vacancies") };
+          Object.keys(H).forEach(function (id) { var h = document.querySelector("#" + id + " > h2.h"); if (h && h.textContent !== H[id]) { h.setAttribute("data-noi18n", ""); h.textContent = H[id]; } });
+        }
+      }
+      var ft; new MutationObserver(function () { clearTimeout(ft); ft = setTimeout(fix, 60); }).observe(document.body, { childList: true, subtree: true });
+      fix();
+    })();
+  });
 
   function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=12"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=7"; s.onload = cb; document.head.appendChild(s); }
@@ -199,7 +234,7 @@
       pg.after(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
     /* clubs CTA text */
-    var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ക്ലബ്ബിൽ അംഗമാവാം", "Join a club"); }
+    var jw = document.querySelector(".zjw span"); if (jw) { jw.setAttribute("data-noi18n", ""); jw.textContent = T("ക്ലബ്ബുകളിൽ അംഗമാവാം", "Join our clubs"); }
     /* centre card label -> ZEST Bulletin */
     var zh = document.querySelector("#centre-info .zu-h"); if (zh) { zh.setAttribute("data-noi18n", ""); var tn = zh.lastChild; if (tn && tn.nodeType === 3) tn.textContent = T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"); else zh.appendChild(document.createTextNode(T("ZEST ബുള്ളറ്റിൻ", "ZEST Bulletin"))); }
     /* ZEST tab: main projects (cards) */
@@ -269,12 +304,26 @@
       fix(); setTimeout(fix, 800); setTimeout(fix, 2500);
       new MutationObserver(later).observe(document.body, { childList: true, subtree: true, characterData: true });
     })();
-    /* Our Journey: timeline line ends at the last dot */
+    /* Our Journey: line runs from the first dot (2016) to the last, then on to the gallery dot */
     (function () {
       var tl = document.getElementById("tl"); if (!tl) return;
-      function end() { var l = tl.querySelector(".ti:last-child"); if (l && l.offsetHeight) tl.style.setProperty("--zend", (l.offsetTop + 24) + "px"); }
-      end(); addEventListener("load", end); addEventListener("resize", end); document.addEventListener("click", function (e) { if (e.target.closest(".znav")) setTimeout(end, 80); });
-      if (window.ResizeObserver) new ResizeObserver(end).observe(tl);
+      var x = document.createElement("div"); x.id = "zext"; x.innerHTML = "<i></i>"; document.body.appendChild(x);
+      var f = x.firstChild, top = 0, h = 0;
+      function pos() {
+        var ti = tl.querySelectorAll(".ti"), a = ti[0], l = ti[ti.length - 1];
+        if (!a || !a.offsetHeight) { x.style.display = "none"; return; }
+        tl.style.setProperty("--zst", (a.offsetTop + 24) + "px"); tl.style.setProperty("--zend", (l.offsetTop + 24) + "px");
+        var tg = document.querySelector("#stories .tag"); if (!tg || !tg.offsetHeight) { x.style.display = "none"; return; }
+        var r = tl.getBoundingClientRect(), X = r.left + parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.1;
+        tg.style.marginLeft = "0px"; var b = tg.getBoundingClientRect(), dot = parseFloat(getComputedStyle(tg, "::before").width) || 20;
+        var dx = X - (b.left + dot / 2); if (Math.abs(dx) < 40) { tg.style.setProperty("margin-left", dx + "px", "important"); b = tg.getBoundingClientRect(); }
+        top = l.getBoundingClientRect().top + 24 + scrollY; h = Math.max(0, b.top + b.height / 2 - dot / 2 + scrollY - top);
+        x.style.display = "block"; x.style.left = (X + scrollX) + "px"; x.style.top = top + "px"; x.style.height = h + "px"; fill();
+      }
+      function fill() { if (!h) return; var p = (innerHeight * .6 - (top - scrollY)) / h; f.style.height = (Math.max(0, Math.min(1, p)) * 100) + "%"; }
+      var rq = 0; addEventListener("scroll", function () { if (!rq) { rq = 1; requestAnimationFrame(function () { rq = 0; pos(); }); } }, { passive: true });
+      addEventListener("resize", pos); addEventListener("load", pos); document.addEventListener("click", function (e) { if (e.target.closest(".znav")) setTimeout(pos, 120); });
+      if (window.ResizeObserver) new ResizeObserver(pos).observe(document.body); setTimeout(pos, 500); pos();
     })();
     /* ZEST tab gallery: heading + follow button below the Instagram feed */
     (function () {
