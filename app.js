@@ -105,6 +105,8 @@
     'html.zapp .z3cd{display:none!important}html.zapp .z3c{padding:6px 3px 5px!important;gap:3px!important;border-radius:12px!important}html.zapp .z3i{width:23px!important;height:23px!important;border-radius:8px!important}html.zapp .z3i svg{width:13px!important;height:13px!important}html.zapp .z3cs{gap:6px!important}html.zapp .z3row{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:5px!important;min-height:22px;margin-top:8px!important}html.zapp .z3row .z3md,html.zapp .z3row .z3rm{flex:none;margin:0!important;padding:3px 8px!important;font-size:10px!important;line-height:1.3!important;white-space:nowrap!important;min-height:0!important}html.zapp .z3row .z3md svg{width:8px!important;height:8px!important}html.zapp .z3ti{display:-webkit-box!important;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}html.zapp .z3k{display:flex!important;flex-direction:column!important}html.zapp .z3k .z3t{flex:1 1 auto}html.zapp .z3cal span{font-size:8px!important;line-height:1.2!important;letter-spacing:0!important}html.zapp .z3cal b{font-size:13px!important;line-height:1.1!important}html.zapp .z3dl{font-size:8.5px!important;line-height:1.2!important}html.zapp .z3ab{margin-left:auto!important}html.zapp .fsec h2.h{display:flex!important;align-items:center;gap:10px;border:0!important;padding:0!important;font:600 20.5px/1.3 Inter,"Noto Sans Malayalam",sans-serif!important;color:#111!important;text-transform:none!important}html.zapp .fsec h2.h:before{content:"";flex:none;width:20px;height:20px;border:1.5px solid #5f6f5f;border-radius:50%;background:radial-gradient(circle,#5f6f5f 0 4.5px,transparent 5px);box-sizing:border-box}' +
     'html.zapp #centre-info .z3bot .z3s{padding-bottom:12px!important}html.zapp #centre-info .zu-more{margin-top:0!important}' +
     'html.zapp #documentary a.yt{display:inline-flex!important;align-items:center;gap:5px;width:auto!important;min-height:0!important;padding:4px 10px!important;border-radius:999px!important;background:linear-gradient(135deg,#e6f5fd,#bfe3f6)!important;border:1px solid #bfe3f6!important;color:#0b5d8f!important;font:800 12px/1.2 Inter,"Noto Sans Malayalam",sans-serif!important;letter-spacing:0!important;text-transform:none!important;box-shadow:0 4px 12px -4px rgba(11,61,92,.3)!important}html.zapp #documentary a.yt svg{width:14px!important;height:14px!important}' +
+    'html.zapp #stories .tag{transform:none!important;opacity:1!important;transition:none!important}' +
+    'html.zapp .z3l small{display:block!important}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -191,6 +193,8 @@
           Object.keys(H).forEach(function (id) { var h = document.querySelector("#" + id + " > h2.h"); if (h && h.textContent !== H[id]) { h.setAttribute("data-noi18n", ""); h.textContent = H[id]; } });
         }
       }
+      if (ML) { var CL = { week: ["ഈ", "ആഴ്ച"], program: ["ZEST", "പ്രോഗ്രാം"], info: ["പ്രധാന", "അറിയിപ്പ്"], job: ["ജോലി", "ഒഴിവ്"] };
+        setTimeout(function () { document.querySelectorAll(".z3c[data-k]").forEach(function (c) { var l = c.querySelector(".z3l"), v = CL[c.getAttribute("data-k")]; if (l && v) { l.setAttribute("data-noi18n", ""); l.innerHTML = v[0] + "<small>" + v[1] + "</small>"; } }); }, 50); }
       var ft; new MutationObserver(function () { clearTimeout(ft); ft = setTimeout(fix, 60); }).observe(document.body, { childList: true, subtree: true });
       fix();
     })();
@@ -314,11 +318,12 @@
         if (!a || !a.offsetHeight) { x.style.display = "none"; return; }
         tl.style.setProperty("--zst", (a.offsetTop + 24) + "px"); tl.style.setProperty("--zend", (l.offsetTop + 24) + "px");
         var tg = document.querySelector("#stories .tag"); if (!tg || !tg.offsetHeight) { x.style.display = "none"; return; }
-        var r = tl.getBoundingClientRect(), X = r.left + parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.1;
-        tg.style.marginLeft = "0px"; var b = tg.getBoundingClientRect(), dot = parseFloat(getComputedStyle(tg, "::before").width) || 20;
-        var dx = X - (b.left + dot / 2); if (Math.abs(dx) < 40) { tg.style.setProperty("margin-left", dx + "px", "important"); b = tg.getBoundingClientRect(); }
-        top = l.getBoundingClientRect().top + 24 + scrollY; h = Math.max(0, b.top + b.height / 2 - dot / 2 + scrollY - top);
-        x.style.display = "block"; x.style.left = (X + scrollX) + "px"; x.style.top = top + "px"; x.style.height = h + "px"; fill();
+        function off(e) { var t = 0, l2 = 0; while (e) { t += e.offsetTop; l2 += e.offsetLeft; e = e.offsetParent; } return { t: t, l: l2 }; }
+        var X = off(tl).l + parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.1;
+        tg.style.removeProperty("margin-left"); var dot = parseFloat(getComputedStyle(tg, "::before").width) || 20, ob = off(tg);
+        var dx = X - (ob.l + dot / 2); if (Math.abs(dx) < 40) { tg.style.setProperty("margin-left", dx + "px", "important"); }
+        ob = off(tg); top = off(l).t + 24; h = Math.max(0, ob.t + tg.offsetHeight / 2 - dot / 2 + 1 - top);
+        x.style.display = "block"; x.style.left = X + "px"; x.style.top = top + "px"; x.style.height = h + "px"; fill();
       }
       function fill() { if (!h) return; var p = (innerHeight * .6 - (top - scrollY)) / h; f.style.height = (Math.max(0, Math.min(1, p)) * 100) + "%"; }
       var rq = 0; addEventListener("scroll", function () { if (!rq) { rq = 1; requestAnimationFrame(function () { rq = 0; pos(); }); } }, { passive: true });
