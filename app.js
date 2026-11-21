@@ -83,7 +83,7 @@
     'html.zapp .z3md svg,html.zapp .zu-more a svg,html.zapp .zu-more button svg,html.zapp .zjw svg{width:10px!important;height:10px!important;stroke:currentColor!important}html.zapp .zu-more a:after,html.zapp .zu-more a:before,html.zapp .zjw:before,html.zapp .zjw:after{display:none!important}' +
     '.zpg button i.go{width:16px!important;height:16px!important}.zpg button i.go .zsi{width:9px!important;height:9px!important}' +
     'html.zapp .zth h2,html.zapp .mh h2,html.zapp .zhx h2,html.zapp .who2 h2,html.zapp .zsc2 h2,html.zapp .w2-hd h2{font-family:Manjari,Inter,"Noto Sans Malayalam",sans-serif!important;font-weight:700!important;font-size:25px!important;letter-spacing:.01em!important;line-height:1.3!important}' +
-    'html.zapp .wa,html.zapp .ig,html.zapp .ig-side,html.zapp .igw{display:none!important}' +
+    'html.zapp .wa,html.zapp .ig{display:none!important}html.zapp[data-zt=zest] #zproj{order:11}' +
     'html.zapp #centre-info .z3k{filter:drop-shadow(0 3px 6px rgba(11,61,92,.12))!important;box-shadow:none!important}html.zapp #centre-info .z3s{padding-bottom:24px!important}html.zapp #centre-info .z3d{display:none!important}' +
     '#zproj{display:none}html.zapp[data-zt=zest] #zproj{display:block}html.zapp #zproj{order:6;background:#eef3f7}html.zapp[data-zt=zest] #programs{display:none!important}' +
     '.zpj{display:grid;gap:20px}.zpk{background:#fff;border-radius:26px;box-shadow:0 10px 26px -12px rgba(11,61,92,.35);overflow:hidden}.zpk-im{padding:12px 12px 0}.zpk-im img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;background:#e6f0f6}' +
@@ -99,6 +99,7 @@
     'html.zapp #programs .zb-t h3{font-size:.72rem!important}html.zapp #programs .zb-t.b h3{font-size:.95rem!important}' +
     '.znav .zdv{display:block!important;opacity:1!important;visibility:visible!important;transform:none!important;width:27px;height:27px;background:url(/icons/dove-gray.png) center/contain no-repeat}.znav a.on .zdv{background-image:url(/icons/dove-blue.png)}html.zapp #programs .zb-t h3 .zl{white-space:nowrap}' +
     'html.zapp div.zth{padding:0!important;background:#0b3d5c!important;border-radius:0 0 28px 28px!important}html.zapp div.zth:after{display:none}html.zapp div.zth img{width:100%!important;max-width:none!important;aspect-ratio:780/430!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}html.zapp div.zth:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)}html.zapp div.zth h2,html.zapp div.zth p{position:absolute!important;z-index:3;margin:0!important;text-shadow:0 1px 6px rgba(0,0,0,.35)}html.zapp div.zth h2{left:20px;right:20px;bottom:33px;font-size:21px!important;text-align:left}html.zapp div.zth h2:before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}html.zapp div.zth p{left:20px;right:20px;bottom:16px;font-size:12px!important;text-align:left;color:#e3f1fa!important}' +
+    'html.zapp .tl-ext{display:none!important}html.zapp #stories .tag{margin-left:0!important}html.zapp .tl::before{bottom:auto!important;height:var(--zend,100%)}html.zapp .tl-fill{max-height:var(--zend,100%)}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -265,6 +266,13 @@
       var tm; function later() { if (busy) return; clearTimeout(tm); tm = setTimeout(fix, 120); }
       fix(); setTimeout(fix, 800); setTimeout(fix, 2500);
       new MutationObserver(later).observe(document.body, { childList: true, subtree: true, characterData: true });
+    })();
+    /* Our Journey: timeline line ends at the last dot */
+    (function () {
+      var tl = document.getElementById("tl"); if (!tl) return;
+      function end() { var l = tl.querySelector(".ti:last-child"); if (l && l.offsetHeight) tl.style.setProperty("--zend", (l.offsetTop + 24) + "px"); }
+      end(); addEventListener("load", end); addEventListener("resize", end); document.addEventListener("click", function (e) { if (e.target.closest(".znav")) setTimeout(end, 80); });
+      if (window.ResizeObserver) new ResizeObserver(end).observe(tl);
     })();
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
