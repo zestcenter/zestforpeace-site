@@ -95,6 +95,7 @@
     '.zpk-sh,.zpk-wa{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;padding:0;cursor:pointer}.zpk-sh{margin-left:auto;background:#fff;border:1.5px solid #cfe0ea}.zpk-wa{background:#25d366;border:0}.zpk-sh svg{width:15px;height:15px}.zpk-wa svg{width:17px;height:17px}' +
     '.zpk-im{position:relative}.zpk-im:after{content:"";position:absolute;left:12px;right:12px;top:12px;bottom:0;border-radius:18px;background:linear-gradient(180deg,transparent 45%,rgba(8,30,45,.85));pointer-events:none}' +
     '.zpk-im h3{position:absolute;z-index:1;left:28px;right:28px;bottom:18px;margin:0!important;color:#fff!important;font:600 19px/1.4 ' + F + '!important;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:nowrap!important;overflow:hidden}.zpk-im h3:after{content:"";display:block;width:44px;height:4px;margin-top:9px;border-radius:3px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}.zpk-b{padding-top:14px!important}' +
+    'html.zapp #programs .zb-t h3{right:24px!important}html.zapp #programs .zb-t.b h3{right:40px!important}html.zapp #programs .zb-t .zgo{position:absolute;bottom:9px;right:8px;width:14px;height:14px;border-radius:50%;background:#1380b8;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.25);z-index:2}html.zapp #programs .zb-t.b .zgo{width:17px;height:17px;bottom:15px;right:12px}html.zapp #programs .zb-t .zgo:after{content:;position:absolute;inset:0;border-radius:50%;border:2px solid #3fa7d6;animation:zgP 1.8s ease-out infinite}html.zapp #programs .zb-t .zgo svg{animation:zgA 1.8s ease-in-out infinite}@keyframes zgA{0%,100%{transform:translateX(-1px)}50%{transform:translateX(2px)}}@keyframes zgP{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.9);opacity:0}}html.zapp #programs .zb-t .zgo svg{width:8px;height:8px}html.zapp #programs .zb-t.b .zgo svg{width:10px;height:10px}html.zapp #programs .zb-t{cursor:pointer}html.zapp #programs .zb-t:active{transform:scale(.97);transition:transform .15s}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -232,6 +233,12 @@
     /* open a shared project link: ?pj=<slug> */
     window.zpjOpen = function (k) { go("zest"); setTimeout(function () { var c = document.getElementById("pj-" + k); if (c) scrollTo(0, c.getBoundingClientRect().top + scrollY - 90); }, 350); };
     (function () { var k = new URLSearchParams(location.search).get("pj"); if (k) setTimeout(function () { zpjOpen(k); }, 400); })();
+    /* home project tiles: arrow + open in ZEST tab */
+    document.querySelectorAll("#programs .zb-t").forEach(function (t) {
+      var m = (t.getAttribute("style") || "").match(/--i-p-([a-z]+)/); if (!m) return;
+      t.insertAdjacentHTML("beforeend", '<span class="zgo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>');
+      t.setAttribute("role", "link"); t.addEventListener("click", function () { zpjOpen(m[1]); });
+    });
     /* PRIME SPOT on home */
     var pv = document.createElement("section"); pv.id = "zprime2";
     pv.innerHTML = '<div class="wrap"><p class="tag" data-noi18n>App Exclusive</p><h2 class="ml zh2 in" data-noi18n>' + T("ZEST പ്രൈം സേവനങ്ങൾ", "ZEST PRIME SPOT") + '</h2>' + primeGrid(false).replace('class="zpg"', 'class="zpg" data-noi18n') + '</div>';
