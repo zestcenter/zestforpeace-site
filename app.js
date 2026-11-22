@@ -192,6 +192,7 @@
     'html.zapp .zsc2 .zs-sg .sgt{border:1.5px solid #d6e0ea!important;border-radius:12px!important;background:#fff!important}' +
     'html.zapp .zsc2 .zs-sg .sgb{' + BTN + ';border-radius:999px!important;font:700 14px ' + UF + '!important}' +
     'html.zapp #zabout b{bottom:40px!important}html.zapp #zabout em{bottom:13px!important;padding:2px 8px!important;font-size:9.5px!important;gap:3px!important}' +
+    'html.zapp .card.tk{scroll-margin-top:110px}' +
     /* cards */
     'html.zapp .zpg button b{font:700 14.5px/1.35 ' + UF + '!important;color:#0b2540!important}html.zapp .zpg button small{font:500 12px/1.45 ' + UF + '!important;color:#6b7c8d!important}' +
     'html.zapp .zmc button[data-c="donor"]{background:linear-gradient(140deg,#0b3d5c,#1380b8)!important}html.zapp .zmc button[data-c="stu"]{background:linear-gradient(140deg,#1380b8,#3fa7d6)!important}' +
