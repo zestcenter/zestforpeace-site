@@ -260,8 +260,8 @@
     ["lib", "library", T("ZEST ലൈബ്രറി", "ZEST Library"), T("പുസ്തകങ്ങൾ തിരയാം, ചോദിക്കാം", "Find and request books")],
     ["blood", "blood", T("ബ്ലഡ് ബാങ്ക്", "Blood Bank"), T("രക്തം നൽകാം / വേണം", "Give or request blood")],
     ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")],
-    ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ജോലി ഒഴിവുകൾ, ഒത്തുകൂടൽ", "Jobs, meetups")]];
-  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '">' + (p[0] === "pv" ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }).join("") + '</div>'; }
+    ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഉടൻ വരുന്നു", "Coming soon")]];
+  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '">' + (p[0] === "pv" && !desc ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }).join("") + '</div>'; }
   function wirePrime(el) { el.querySelectorAll(".zpg button").forEach(function (b) { b.onclick = function () { openPrime(b.dataset.k); }; }); }
 
   function after(el) { var h = document.querySelector("body>header"); if (h) h.after(el); else document.body.prepend(el); }
