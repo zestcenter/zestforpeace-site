@@ -99,10 +99,10 @@
   }
   function home() {
     var bd = shell("അഡ്മിൻ പേജ്", "ZEST അഡ്മിൻമാർക്ക് മാത്രം", "🔒", false);
-    var nb = D.blood.req.filter(function (r) { return !r.done; }).length, ne = D.eq.need.filter(function (r) { return !r.done; }).length, nl = D.lib.req.filter(function (r) { return !r.done; }).length;
+    var nb = D.blood.req.filter(function (r) { return !r.done; }).length, ne = D.eq.need.filter(function (r) { return !r.done; }).length, nl = D.lib.req.filter(function (r) { return !r.done; }).length, nd = D.drv.req.filter(function (r) { return !r.done; }).length;
     bd.innerHTML = '<div class="tl"><button type="button" data-g="gov"><i>🏛️</i>സർക്കാർ പദ്ധതികൾ<small>അംഗീകാരം കാത്തിരിക്കുന്നവ</small></button>' +
       '<button type="button" data-g="blood"><i>🩸</i>ബ്ലഡ് ബാങ്ക്<small>' + D.blood.don.length + ' ദാതാക്കൾ</small>' + (nb ? '<b class="n">' + nb + '</b>' : '') + '</button>' +
-      '<button type="button" data-g="eq"><i>🦽</i>മെഡിക്കൽ ഉപകരണങ്ങൾ<small>ആവശ്യങ്ങൾ · ലഭ്യമായവ</small>' + (ne ? '<b class="n">' + ne + '</b>' : '') + '</button>' +
+      '<button type="button" data-g="eq"><i>🦽</i>മെഡിക്കൽ സപ്പോർട്ട്<small>ഉപകരണങ്ങൾ · ഡ്രൈവർ</small>' + ((ne + nd) ? '<b class="n">' + (ne + nd) + '</b>' : '') + '</button>' +
       '<button type="button" data-g="lib"><i>📚</i>ലൈബ്രറി<small>' + D.lib.books.length + ' പുസ്തകങ്ങൾ</small>' + (nl ? '<b class="n">' + nl + '</b>' : '') + '</button></div>' +
       '<p class="dm">🧪 ബ്ലഡ് ബാങ്ക്, ഉപകരണങ്ങൾ, ലൈബ്രറി എന്നിവയിൽ ഇപ്പോൾ ഡമ്മി ഡാറ്റയാണ്</p>';
     bd.querySelectorAll("[data-g]").forEach(function (b) { b.onclick = function () { var g = b.dataset.g; if (g === "gov") gov("pending"); else if (g === "blood") blood("req"); else if (g === "eq") eq("need"); else lib("books"); }; });
@@ -139,6 +139,18 @@
         { it: "വാക്കർ", n: "സാമ്പിൾ 4", h: "ചെറുവത്ത്", p: "വെള്ളൂർ", ph: "96XXXXXX24", how: "ZEST CENTRE-ൽ എത്തിക്കാം" },
         { it: "ആശുപത്രി കട്ടിൽ", n: "സാമ്പിൾ 5", h: "ഇല്ലിക്കൽ", p: "കോടഞ്ചേരി", ph: "96XXXXXX25", how: "വീട്ടിൽ വന്ന് എടുക്കണം" },
         { it: "വീൽചെയർ", n: "സാമ്പിൾ 6", h: "കല്ലുങ്കൽ", p: "തിരുവമ്പാടി", ph: "96XXXXXX26", how: "ആവശ്യക്കാരന് നേരിട്ട് കൊടുക്കാം" }
+      ]
+    },
+    drv: {
+      req: [
+        { n: "സാമ്പിൾ 7", h: "കുന്നുമ്മൽ", p: "വെള്ളൂർ", ph: "93XXXXXX41", hs: "MIMS, കോഴിക്കോട്", d: 1, tm: "9:00 AM", pk: "വെള്ളൂർ, കോട്ടെമ്പ്രം റോഡ്" },
+        { n: "സാമ്പിൾ 8", h: "പാറക്കൽ", p: "കോടഞ്ചേരി", ph: "93XXXXXX42", hs: "താലൂക്ക് ആശുപത്രി, താമരശ്ശേരി", d: 3, tm: "10:30 AM", pk: "കോടഞ്ചേരി ടൗൺ", dr: "സാമ്പിൾ ഡ്രൈവർ 1" },
+        { n: "സാമ്പിൾ 9", h: "മഠത്തിൽ", p: "വെള്ളൂർ", ph: "93XXXXXX43", hs: "മെഡിക്കൽ കോളേജ്, കോഴിക്കോട്", d: -2, tm: "8:00 AM", pk: "വെള്ളൂർ", dr: "സാമ്പിൾ ഡ്രൈവർ 2", done: 1 }
+      ],
+      vol: [
+        { n: "സാമ്പിൾ ഡ്രൈവർ 1", h: "പുത്തൻപുര", p: "വെള്ളൂർ", ph: "92XXXXXX51", veh: "🚗 കാർ", days: "ചൊവ്വ, വെള്ളി, ശനി", tm: "രാവിലെ" },
+        { n: "സാമ്പിൾ ഡ്രൈവർ 2", h: "ചെറുവത്ത്", p: "കോടഞ്ചേരി", ph: "92XXXXXX52", veh: "🛺 ഓട്ടോ", days: "എല്ലാ ദിവസവും, അടിയന്തരം", tm: "രാവിലെ, വൈകുന്നേരം" },
+        { n: "സാമ്പിൾ ഡ്രൈവർ 3", h: "കല്ലുങ്കൽ", p: "കോട്ടെമ്പ്രം", ph: "92XXXXXX53", veh: "🚗 കാർ", days: "ഞായർ", tm: "ഉച്ചയ്ക്ക്" }
       ]
     },
     lib: {
@@ -213,10 +225,35 @@
     bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { D.blood.req[b.dataset.i].done = 1; toast("പൂർത്തിയായി ✅"); blood("req"); }; });
   }
 
+  var MSV = "eq";
+  function msv() { var ne = D.eq.need.filter(function (r) { return !r.done; }).length, nd = D.drv.req.filter(function (r) { return !r.done; }).length;
+    return '<div class="tb msv" style="margin-bottom:10px;background:#dfeaf3"><button type="button" data-s="eq"' + (MSV === "eq" ? ' class="on"' : '') + '>🦽 ഉപകരണങ്ങൾ' + (ne ? " (" + ne + ")" : "") + '</button><button type="button" data-s="drv"' + (MSV === "drv" ? ' class="on"' : '') + '>🚗 ഡ്രൈവർ' + (nd ? " (" + nd + ")" : "") + '</button></div>'; }
+  function msvWire(bd) { bd.querySelectorAll(".msv button").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); MSV = b.dataset.s; MSV === "drv" ? drv("req") : eq("need"); }; }); }
+  function drv(t) {
+    MSV = "drv";
+    var bd = shell("മെഡിക്കൽ സപ്പോർട്ട്", "ആശുപത്രി യാത്രയ്ക്ക് വളണ്ടിയർ ഡ്രൈവർ", "🚗", true);
+    var open = D.drv.req.filter(function (r) { return !r.done; }).length;
+    var h = msv() + '<div class="dtb">' + tabs([["req", "🙏 യാത്ര ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["vol", "🚗 ഡ്രൈവർമാർ (" + D.drv.vol.length + ")"]], t) + '</div>' + dm();
+    if (t === "req") {
+      h += D.drv.req.map(function (r, i) {
+        return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="eg">🏥</span><div><b>' + r.hs + '</b><small>' + r.n + ' · ' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ പൂർത്തിയായി</em>' : (r.dr ? '<em class="ok">ഡ്രൈവർ ഉണ്ട്</em>' : '<em class="wt">ഡ്രൈവർ വേണം</em>')) + '</div>' +
+          '<div class="kv"><span>📅 ' + fd(dIn(r.d)) + ' · ' + r.tm + '</span><span>📍 ' + r.pk + '</span><span>📱 ' + r.ph + '</span>' + (r.dr ? '<span>🚗 ' + r.dr + '</span>' : '') + '</div>' +
+          (r.done ? '' : acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ പൂർത്തിയായി</button>')) + '</div>';
+      }).join("");
+    } else {
+      h += D.drv.vol.map(function (r) {
+        return '<div class="it"><div class="ih"><span class="eg">🚗</span><div><b>' + r.n + '</b><small>' + r.h + ', ' + r.p + '</small></div><em class="ok">' + r.veh + '</em></div>' +
+          '<div class="kv"><span>📅 ' + r.days + '</span><span>⏰ ' + r.tm + '</span><span>📱 ' + r.ph + '</span></div>' + acts(r.ph, '') + '</div>';
+      }).join("");
+    }
+    bd.innerHTML = h; msvWire(bd); bd.querySelectorAll(".dtb .tb button").forEach(function (b) { b.onclick = function () { drv(b.dataset.t); }; }); dmWire(bd);
+    bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { D.drv.req[b.dataset.i].done = 1; toast("പൂർത്തിയായി ✅"); drv("req"); }; });
+  }
   function eq(t) {
-    var bd = shell("മെഡിക്കൽ ഉപകരണങ്ങൾ", "ആവശ്യമുള്ളവരും കൊടുക്കാൻ തയ്യാറുള്ളവരും", "🦽", true);
+    MSV = "eq";
+    var bd = shell("മെഡിക്കൽ സപ്പോർട്ട്", "ഉപകരണങ്ങൾ · ആശുപത്രി യാത്ര", "🦽", true);
     var open = D.eq.need.filter(function (r) { return !r.done; }).length;
-    var h = tabs([["need", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["give", "🤝 ലഭ്യമായവ (" + D.eq.give.length + ")"]], t) + dm();
+    var h = msv() + '<div class="etb">' + tabs([["need", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["give", "🤝 ലഭ്യമായവ (" + D.eq.give.length + ")"]], t) + '</div>' + dm();
     if (t === "need") {
       h += D.eq.need.map(function (r, i) {
         var m = D.eq.give.filter(function (g) { return g.it === r.it; }).length;
@@ -230,7 +267,7 @@
           '<div class="kv"><span>🚚 ' + r.how + '</span><span>📱 ' + r.ph + '</span></div>' + (r.done ? '' : acts(r.ph, '<button type="button" class="ok" data-i="' + i + '">✅ കൈമാറി</button>')) + '</div>';
       }).join("");
     }
-    bd.innerHTML = h; wireTabs(bd, eq); dmWire(bd);
+    bd.innerHTML = h; msvWire(bd); bd.querySelectorAll(".etb .tb button").forEach(function (b) { b.onclick = function () { eq(b.dataset.t); }; }); dmWire(bd);
     bd.querySelectorAll(".ia .ok").forEach(function (b) { b.onclick = function () { (t === "need" ? D.eq.need : D.eq.give)[b.dataset.i].done = 1; toast("അപ്ഡേറ്റ് ചെയ്തു ✅"); eq(t); }; });
   }
 
