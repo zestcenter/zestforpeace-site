@@ -263,7 +263,7 @@
     ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")],
     ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഗൾഫിലെ നാട്ടുകാരുടെ കൂട്ടായ്മ", "Our people in the Gulf"), 1]];
   function primeGrid(desc) {
-    function tile(p) { return '<button type="button" data-k="' + p[0] + '">' + (p[4] && !desc ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }
+    function tile(p) { return '<button type="button" data-k="' + p[0] + '">' + (p[4] && !desc ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc && !p[4] ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }
     if (!desc) return '<div class="zpg">' + PR.map(tile).join("") + '</div>';
     var live = PR.filter(function (p) { return !p[4]; }), soon = PR.filter(function (p) { return p[4]; });
     return '<div class="zpg">' + live.map(tile).join("") + '</div>' + (soon.length ? '<h3 class="zsoonh">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</h3><div class="zpg">' + soon.map(tile).join("") + '</div>' : '');
