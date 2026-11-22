@@ -165,7 +165,8 @@
     function tab(i) { t1.setAttribute("aria-selected", i === 1); t2.setAttribute("aria-selected", i !== 1); reg.hidden = i !== 1; log.hidden = i !== 2; rec.hidden = i !== 3; }
     t1.addEventListener("click", function () { tab(1); });
     t2.addEventListener("click", function () { tab(2); });
-    if (get("zestUser")) tab(2);
+    var TESTING = true; /* testing period: only the details form, no separate username / password */
+    if (TESTING) { g.querySelector(".zg-tabs").style.display = "none"; tab(1); } else if (get("zestUser")) tab(2);
     g.querySelector("#zgFg").addEventListener("click", function () { tab(3); });
     g.querySelector("#zgBack").addEventListener("click", function () { tab(2); });
     rec.addEventListener("submit", function (e) {
@@ -209,9 +210,13 @@
             fetch(GFORM, { method: "POST", mode: "no-cors", body: fd }).catch(function () {});
           } catch (x) {}
           set("zestUser", name);
-          done(name, "Zest@" + d.slice(-4), waNum(f.wa.value));
+          if (TESTING) unlock(name); else done(name, "Zest@" + d.slice(-4), waNum(f.wa.value));
         })
-        .catch(function () { B.disabled = false; B.textContent = "SUBMIT"; err(E, "Submit ചെയ്യാനായില്ല, വീണ്ടും ശ്രമിക്കുക. (Could not submit – please try again.)"); });
+        .catch(function () {
+          if (TESTING && navigator.onLine) { /* e.g. number already registered – testers still get in; details still go to the Google Sheet */
+            try { var fd2 = new FormData(); fd2.append("entry.1632416990", name); fd2.append("entry.1816773413", f.house.value.trim()); fd2.append("entry.678258537", f.age.value.trim()); fd2.append("entry.2001662289", f.cls.value.trim() || "-"); fd2.append("entry.143003087", f.wa.value.trim()); if (f.club.value) fd2.append("entry.1402189304", f.club.value); fd2.append("entry.402692972", f.fb.value.trim() || "-"); fetch(GFORM, { method: "POST", mode: "no-cors", body: fd2 }).catch(function () {}); } catch (x) {}
+            set("zestUser", name); unlock(name); return; }
+          B.disabled = false; B.textContent = "SUBMIT"; err(E, "Submit ചെയ്യാനായില്ല, വീണ്ടും ശ്രമിക്കുക. (Could not submit – please try again.)"); });
     });
 
     function done(name, pass, num) {
