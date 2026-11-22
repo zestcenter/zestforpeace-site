@@ -8,7 +8,7 @@
     { k: "stu", i: "🎓", ml: "സ്റ്റുഡന്റ്സ്<br>കോർണർ", en: "Students<br>Corner", bg: "#efe9fd" },
     { k: "lib", i: "📚", ml: "ZEST<br>ലൈബ്രറി", en: "ZEST<br>Library", bg: "#e8f7ef" },
     { k: "blood", i: "🩸", ml: "ബ്ലഡ്<br>ബാങ്ക്", en: "Blood<br>Bank", bg: "#ffe9ef" },
-    { k: "eq", i: "🦽", ml: "മെഡിക്കൽ<br>ഉപകരണം", en: "Medical<br>Equipment", bg: "#e6f3fb" }
+    { k: "eq", i: "🦽", ml: "മെഡിക്കൽ<br>സപ്പോർട്ട്", en: "Medical<br>Support", bg: "#e6f3fb" }
   ];
   var st = document.createElement("style");
   st.textContent = '#zprime{padding:1.4rem 0 .6rem;margin:1.2rem 0;background:linear-gradient(160deg,#f2f9fd,#e3f1fa);border-top:1.5px solid #bfe0f2;border-bottom:1.5px solid #bfe0f2;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c}' +
@@ -50,6 +50,6 @@
     if (k === "stu") { var a = document.createElement("a"); a.href = "#students"; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); return; }
     if (k === "lib") { if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=8"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); } return; }
     var w = k === "blood" ? "blood" : "eq";
-    if (window.ZestMed) ZestMed.open(w); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=12"; sc.onload = function () { ZestMed.open(w); }; document.head.appendChild(sc); }
+    if (window.ZestMed) ZestMed.open(w); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=13"; sc.onload = function () { ZestMed.open(w); }; document.head.appendChild(sc); }
   });
 })();

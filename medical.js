@@ -4,7 +4,8 @@
   function T(m, e) { return ML ? m : e; }
   var WA = '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>';
   function places() { return [T("കോട്ടെമ്പ്രം", "Kottembram"), T("കോടഞ്ചേരി", "Kodencheri"), T("വെള്ളൂർ", "Velloor"), T("മറ്റുള്ളവ", "Other")]; }
-  var CSS = '#zmed{position:fixed;inset:0;z-index:2147483600;background:#f3f8fb;overflow:auto;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;-webkit-overflow-scrolling:touch;animation:zmIn .25s ease}' +
+  var CSS = '#zmed .zsv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 14px 4px}#zmed .zsv button{background:#fff;border:1.5px solid #e2e9ef;border-radius:16px;padding:10px 8px;text-align:center;cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(11,61,92,.05)}#zmed .zsv i{display:block;font-style:normal;font-size:22px}#zmed .zsv b{display:block;font:800 13px Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;margin-top:2px}#zmed .zsv small{font:500 10.5px Inter,"Noto Sans Malayalam",sans-serif;color:#7a8b96}#zmed .zsv .on{border-color:#1380b8;background:#eaf5fc;box-shadow:0 0 0 3px rgba(19,128,184,.12)}#zmed .f .lb{margin:12px 2px 7px}#zmed .zdc.inv{outline:2px solid #e2574c;outline-offset:3px;border-radius:12px}' +
+    '#zmed{position:fixed;inset:0;z-index:2147483600;background:#f3f8fb;overflow:auto;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c;-webkit-overflow-scrolling:touch;animation:zmIn .25s ease}' +
     '@keyframes zmIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}' +
     '#zmed .hd{position:sticky;top:0;z-index:2;background:#fff;padding:12px 14px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #e2ecf3}' +
     '#zmed .bk{width:36px;height:36px;border-radius:11px;border:0;background:#eef6fb;color:#0b5d8f;font:700 18px Inter,sans-serif;cursor:pointer}#zmed .hd b{font-size:16px}' +
@@ -91,6 +92,44 @@
       '<p>💚 ' + T("ZEST App-ലൂടെയുള്ള ഈ കൈമാറ്റം തീർത്തും സൗജന്യമായിരിക്കും.", "This exchange through the ZEST App is completely free.") + '</p></div>' +
       '<button type="button" class="go eqg">' + WA + (need ? T("ZEST CENTRE-ൽ അന്വേഷിക്കാം", "Ask ZEST Centre") : T("ZEST CENTRE-ൽ അറിയിക്കാം", "Tell ZEST Centre")) + '</button>' +
       '<p class="nt">' + soon() + '</p>';
+  }
+  var SVC = "eq", DRV = { veh: "", days: [], tm: [] };
+  function svcBar() {
+    return '<div class="zsv"><button type="button" data-svc="eq"' + (SVC === "eq" ? ' class="on"' : '') + '><i>🦽</i><b>' + T("ഉപകരണങ്ങൾ", "Equipment") + '</b><small>' + T("വീൽചെയർ, ബെഡ്…", "Wheelchair, bed…") + '</small></button>' +
+      '<button type="button" data-svc="drv"' + (SVC === "drv" ? ' class="on"' : '') + '><i>🚗</i><b>' + T("ഡ്രൈവർ", "Driver") + '</b><small>' + T("ആശുപത്രി യാത്ര", "Hospital trips") + '</small></button></div>';
+  }
+  function chips(key, list, multi) { var v = DRV[key]; return '<div class="ch zdc' + (multi ? ' multi' : '') + '" data-k="' + key + '">' + list.map(function (o) { var on = multi ? v.indexOf(o[0]) > -1 : v === o[0]; return '<button type="button" data-v="' + o[0] + '"' + (on ? ' class="on"' : '') + '>' + o[1] + '</button>'; }).join("") + '</div>'; }
+  function drvPage(tab) {
+    var need = tab !== "give", today = new Date(), iso = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2) + "T00:00";
+    return '<div class="mhr"><h3>' + T("ആശുപത്രി യാത്രയ്ക്ക് വളണ്ടിയർ ഡ്രൈവർ", "Volunteer drivers for hospital trips") + '</h3><p>' + T("വണ്ടിയില്ലാത്തവർക്ക് ആശുപത്രിയിൽ പോകാൻ നാട്ടിലെ വളണ്ടിയർമാർ കൂട്ടിക്കൊണ്ടുപോകും.", "Volunteers from our village take people without a vehicle to hospital.") + '</p></div>' +
+      '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("യാത്ര വേണം", "Need a ride") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🚗 ' + T("ഞാൻ ഡ്രൈവ് ചെയ്യാം", "I can drive") + '</button></div>' +
+      '<div class="f">' +
+      '<div class="r2">' + fld("n", T("പേര്", "Name"), inp("n", "text", T("നിങ്ങളുടെ പേര്", "Your name"))) + fld("h", T("വീട്ടുപേര്", "House name"), inp("h", "text", T("വീട്ടുപേര്", "House name"))) + '</div>' +
+      fld("m", T("മൊബൈൽ നമ്പർ", "Mobile number"), inp("m", "tel", T("10 അക്ക നമ്പർ", "10-digit number"), ' inputmode="tel" maxlength="13"')) +
+      (need ? '<div class="r2">' + fld("hos", T("ആശുപത്രി", "Hospital"), inp("hos", "text", T("ഉദാ: MIMS, കോഴിക്കോട്", "e.g. MIMS, Kozhikode"))) + fld("dt", T("തീയതി · സമയം", "Date · time"), inp("dt", "datetime-local", "", ' min="' + iso + '"')) + '</div>' +
+              fld("pk", T("എവിടെ നിന്ന് കൂട്ടണം?", "Pick up from?"), inp("pk", "text", T("സ്ഥലം / വീട്", "Place / house")))
+            : '<div class="lb">' + T("വാഹനം", "Vehicle") + ' <em class="rqm">*</em></div>' + chips("veh", [["car", "🚗 " + T("കാർ", "Car")], ["auto", "🛺 " + T("ഓട്ടോ", "Auto")], ["bike", "🏍️ " + T("ബൈക്ക്", "Bike")]]) +
+              '<div class="lb">' + T("ഏത് ദിവസങ്ങളിൽ പറ്റും?", "Which days?") + '</div>' + chips("days", [["mon", T("തിങ്കൾ", "Mon")], ["tue", T("ചൊവ്വ", "Tue")], ["wed", T("ബുധൻ", "Wed")], ["thu", T("വ്യാഴം", "Thu")], ["fri", T("വെള്ളി", "Fri")], ["sat", T("ശനി", "Sat")], ["sun", T("ഞായർ", "Sun")], ["emg", T("അടിയന്തരം", "Emergency")]], 1) +
+              '<div class="lb">' + T("സമയം", "Time") + '</div>' + chips("tm", [["mor", T("രാവിലെ", "Morning")], ["noon", T("ഉച്ചയ്ക്ക്", "Afternoon")], ["eve", T("വൈകുന്നേരം", "Evening")]], 1)) +
+      '</div><div class="ntb"><p>💚 ' + (need ? T("ZEST അടുത്തുള്ള ഒരു വളണ്ടിയർ ഡ്രൈവറെ ഏർപ്പാടാക്കും.", "ZEST will arrange a volunteer driver near you.") : T("അടുത്തുള്ള ആവശ്യം വന്നാൽ ZEST നിങ്ങളെ വിളിക്കും.", "ZEST will call you when someone nearby needs a ride.")) + '</p>' +
+      '<p>⛽ ' + (need ? T("ഇന്ധന ചെലവ് ഡ്രൈവറുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the driver.") : T("ഇന്ധന ചെലവ് യാത്രക്കാരുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the passenger.")) + '</p></div>' +
+      '<button type="button" class="go eqg drg">' + WA + T("WhatsApp-ൽ അയക്കുക", "Send on WhatsApp") + '</button>' +
+      '<p class="nt">' + soon() + '</p>';
+  }
+  function drvWire(w, tab) {
+    var need = tab !== "give";
+    w.querySelectorAll(".f input").forEach(function (el) { el.addEventListener("input", function () { VAL[el.name] = el.value; el.classList.remove("inv"); }); });
+    w.querySelectorAll(".zdc").forEach(function (g) { g.addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; var k = g.dataset.k, v = b.dataset.v;
+      if (g.classList.contains("multi")) { var a = DRV[k], p = a.indexOf(v); if (p > -1) a.splice(p, 1); else a.push(v); b.classList.toggle("on", p < 0); }
+      else { DRV[k] = v; g.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); }); }
+      g.classList.remove("inv"); }); });
+    w.querySelector(".drg").onclick = function () {
+      var bad = null;
+      w.querySelectorAll(".f input").forEach(function (el) { var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
+      if (!need && !DRV.veh) { var vg = w.querySelector('.zdc[data-k="veh"]'); vg.classList.add("inv"); bad = bad || vg; }
+      if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
+      toast(soon());
+    };
   }
   function eqWire(w, tab, rerender) {
     var need = tab !== "give", key = need ? "need" : "give", g = w.querySelector(".g"), last = g.querySelectorAll(".t").length - 1;
@@ -237,16 +276,17 @@
     ML = true; var cur = "need";
     function render(tab) {
       cur = tab;
-      var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ ഉപകരണങ്ങൾ", "Medical Equipment");
-      var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ആവശ്യക്കാർക്ക് ചികിത്സാ ഉപകരണങ്ങൾ", "Medical equipment for those in need");
-      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button><img class="zhimg" src="/img/hero/' + (which === "blood" ? "blood" : "equipment") + '.svg" alt=""><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage(tab) : eqPage(tab));
+      var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ സപ്പോർട്ട്", "Medical Support");
+      var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ചികിത്സയ്ക്ക് നാട്ടുകാരുടെ കൈത്താങ്ങ്", "Neighbours helping with treatment");
+      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button><img class="zhimg" src="/img/hero/' + (which === "blood" ? "blood" : "equipment") + '.svg" alt=""><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage(tab) : svcBar() + (SVC === "drv" ? drvPage(tab) : eqPage(tab)));
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
-      if (which !== "blood") eqWire(w, tab); else bloodWire(w, tab, function () { render(cur); }); var g = which === "blood" ? w.querySelector(".g") : null; if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
+      if (which !== "blood") { if (SVC === "drv") drvWire(w, tab); else eqWire(w, tab); w.querySelectorAll(".zsv button").forEach(function (b) { b.onclick = function () { SVC = b.dataset.svc; render("need"); }; }); } else bloodWire(w, tab, function () { render(cur); }); var g = which === "blood" ? w.querySelector(".g") : null; if (g) g.addEventListener("click", function (e) { var b = e.target.closest(".t"); if (!b) return; if (g.classList.contains("multi")) b.classList.toggle("sel"); else g.querySelectorAll(".t").forEach(function (x) { x.classList.toggle("sel", x === b); }); });
       w.querySelectorAll(".tb button").forEach(function (b) { b.onclick = function () { render(b.dataset.tab); w.scrollTop = 0; }; });
       w.querySelectorAll(".go:not(.eqg):not(.zbgo),.yn button").forEach(function (b) { b.onclick = function () { toast(soon()); }; });
     }
+    if (which === "drv") SVC = "drv"; else if (which === "eq") SVC = "eq";
     render(which === "blood" ? "give" : "need");
     document.body.appendChild(w);
     try { history.pushState({ zmed: 1 }, ""); } catch (e) {}

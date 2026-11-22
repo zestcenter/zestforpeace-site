@@ -213,7 +213,7 @@
     })();
   });
 
-  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=12"; s.onload = cb; document.head.appendChild(s); }
+  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=13"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=8"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
   /* ask name / house / mobile before sending a suggestion (nothing is saved on the phone) */
@@ -293,7 +293,7 @@
   var PR = [["stu", "students", T("സ്റ്റുഡന്റ്സ് കോർണർ", "Students Corner"), T("റിവിഷൻ പ്ലാനർ, പോക്കറ്റ് മണി", "Revision planner, pocket money")],
     ["lib", "library", T("ZEST ലൈബ്രറി", "ZEST Library"), T("പുസ്തകങ്ങൾ തിരയാം, ചോദിക്കാം", "Find and request books")],
     ["blood", "blood", T("ബ്ലഡ് ബാങ്ക്", "Blood Bank"), T("രക്തം നൽകാം / വേണം", "Give or request blood")],
-    ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")],
+    ["eq", "equipment", T("മെഡിക്കൽ സപ്പോർട്ട്", "Medical Support"), T("ഉപകരണങ്ങൾ, ആശുപത്രി യാത്ര", "Equipment, hospital trips")],
     ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഗൾഫിലെ നാട്ടുകാരുടെ കൂട്ടായ്മ", "Our people in the Gulf"), 1]];
   function primeGrid(desc) {
     function tile(p) { return '<button type="button" data-k="' + p[0] + '">' + (p[4] && !desc ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc && !p[4] ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }
