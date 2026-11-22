@@ -1,3 +1,20 @@
+/* Website: the app is not public yet – install buttons stay, but tapping them only says "coming soon" (the /app/ page itself still works for people given the link) */
+(function () {
+  var sa = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  if (sa || /^\/app\/?$/.test(location.pathname)) return;
+  window.zAppSoon = function () {
+    var ml = true; try { ml = (localStorage.getItem("zestLang") || "ml") === "ml"; } catch (e) {}
+    var o = document.getElementById("zsoon"); if (o) o.remove();
+    var t = document.createElement("div"); t.id = "zsoon"; t.setAttribute("data-noi18n", "");
+    t.textContent = ml ? "📲 ZEST APP ഉടൻ വരുന്നു" : "📲 ZEST APP coming soon";
+    t.style.cssText = "position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:2147483647;background:#0b3d5c;color:#fff;padding:11px 20px;border-radius:999px;font:700 14px Inter,'Noto Sans Malayalam',sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.25);white-space:nowrap";
+    document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200);
+  };
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest && e.target.closest('a[href="/app/"],a[href$="/app/"],a[href="/app"],#zaBtn,#instgo,.zab a,.zao-i');
+    if (!t) return; e.preventDefault(); e.stopImmediatePropagation(); window.zAppSoon();
+  }, true);
+})();
 /* ZEST APP – sign-up / login gate. Runs only inside the installed app (standalone mode). */
 (function () {
   var SB = "https://lauftdyrlnhbimqokgye.supabase.co/rest/v1/rpc/";
