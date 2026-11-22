@@ -65,7 +65,8 @@
     gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "🛤️", ZML ? "പിന്നിട്ട വഴികൾ" : "OUR JOURNEY")) +
     gp("#f08a00", I.info, ZML ? "അറിയിപ്പുകൾ" : "SERVICE CENTRE INFO", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", ZML ? "പ്രധാന അറിയിപ്പ്" : "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
     gp("#6a4bd1", I.stu, "STUDENTS CORNER", tl("#students", "📖", "REVISION PLANNER", "rev") + tl("#students", "💰", "POCKET MONEY", "mon")) +
-    ln("#16996a", "#zlib", BK, "ZEST LIBRARY") + gp("#e0345c", DROP, "MEDICAL HELP", tl("#med-blood", "🩸", "BLOOD BANK") + tl("#med-eq", "🦽", ZML ? "മെഡിക്കൽ ഉപകരണങ്ങൾ" : "MEDICAL EQUIPMENT"));
+    ln("#16996a", "#zlib", BK, "ZEST LIBRARY") + gp("#e0345c", DROP, "MEDICAL HELP", tl("#med-blood", "🩸", "BLOOD BANK") + tl("#med-eq", "🦽", ZML ? "മെഡിക്കൽ ഉപകരണങ്ങൾ" : "MEDICAL EQUIPMENT")) +
+    ln("#0b7fc0", "#zpv", '<path d="M10.5 13.5 3 11l1.5-1.5 7 1L16 6a2.1 2.1 0 0 1 3 3l-4.5 4.5 1 7L14 22l-2.5-7.5Z"/>', ZML ? "പ്രവാസി കണക്ട്" : "PRAVASI CONNECT");
   var BOT = '<div class="zdw-bt"><a class="zdw-sg" href="#settings"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></svg></i><span data-noi18n class="zsgl">Settings</span></a>' +
     '<a class="zdw-jn" href="' + H("join") + '"><b>💛 JOIN WITH ZEST</b><small data-noi18n>' + '</small><em><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></em></a></div>';
   dw.innerHTML = '<div class="zdw-sc"><div class="zdw-hd2"><img src="/icons/icon-192.png" alt=""><div><b data-noi18n>ZEST for Peace</b><small data-noi18n>നാട് വളരാൻ നാടിനൊപ്പം</small></div><button class="zdw-x" aria-label="Close menu">✕</button></div><div class="zdw-ls" role="navigation">' + items + '</div></div>' + BOT + '<div class="zdw-ft"><b>zestforpeace.com</b></div>';
@@ -134,6 +135,11 @@
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : "eq";
       if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=12"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      return; }
+    if (a.getAttribute("href") === "#zpv") { e.preventDefault(); e.stopImmediatePropagation(); hide();
+      var inApp4 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+      if (!inApp4) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
+      if (window.zOpenPV) zOpenPV();
       return; }
     if (a.getAttribute("href") === "#zlib") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp3 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
