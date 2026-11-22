@@ -67,6 +67,7 @@
       var ml = window.ZestLang && ZestLang.get() === "ml", dd = load(), me = dd.list.filter(function (x) { return x.id === dd.cur; })[0] || dd.list[0];
       var who = me ? "\n\n– " + me.n + (me.c ? " (" + me.c + ")" : "") : "";
       var msg = (ml ? "💡 സ്റ്റുഡന്റ്സ് കോർണർ – നിർദ്ദേശം" : "💡 Students Corner – Suggestion") + "\n\n" + v + who;
+      if (window.zWho) return zWho(ml ? "💡 സ്റ്റുഡന്റ്സ് കോർണർ – നിർദ്ദേശം" : "💡 Students Corner – Suggestion", v);
       window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank");
     };
     s.querySelectorAll(".w2-p[data-id]").forEach(function (b) { b.onclick = function () { pick(b.dataset.id); }; });

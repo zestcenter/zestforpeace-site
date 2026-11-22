@@ -216,6 +216,40 @@
   function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=12"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=7"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
+  /* ask name / house / mobile before sending a suggestion (nothing is saved on the phone) */
+  function zWho(head, text) {
+    var F = 'Inter,"Noto Sans Malayalam",sans-serif';
+    if (!document.getElementById("zwho-css")) { var c = document.createElement("style"); c.id = "zwho-css"; c.textContent =
+      '.zwbg{position:fixed;inset:0;z-index:2147483640;background:rgba(10,30,45,.45);opacity:0;transition:opacity .25s}.zwbg.on{opacity:1}' +
+      '.zwsh{position:fixed;left:0;right:0;bottom:0;z-index:2147483641;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px calc(18px + env(safe-area-inset-bottom));font-family:' + F + ';transform:translateY(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);max-width:34rem;margin:0 auto}.zwsh.on{transform:none}' +
+      '.zwsh .gr{width:40px;height:4px;border-radius:4px;background:#dbe4ec;margin:0 auto 14px}.zwsh h4{margin:0 0 4px;font:800 17px ' + F + ';color:#0b2540}.zwsh p{margin:0 0 14px;font:500 12.5px/1.5 ' + F + ';color:#6b7c8d}' +
+      '.zwsh label{display:block;font:700 12.5px ' + F + ';color:#34495e;margin:10px 2px 6px}.zwsh label em{font-style:normal;color:#e2574c}.zwsh label small{font-weight:500;color:#9aa8b5}' +
+      '.zwsh input{width:100%;box-sizing:border-box;border:1.5px solid #d6e0ea;border-radius:12px;padding:11px 12px;font:500 15px ' + F + ';color:#0b2540;background:#fbfcfd;outline:none}.zwsh input:focus{border-color:#1380b8;box-shadow:0 0 0 4px rgba(19,128,184,.12)}.zwsh input.inv{border-color:#e2574c;background:#fff6f5}' +
+      '.zwsh .go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:16px;border:0;background:#25d366;color:#fff;padding:14px;border-radius:14px;font:800 15px ' + F + ';cursor:pointer}';
+      document.head.appendChild(c); }
+    var bg = document.createElement("div"); bg.className = "zwbg";
+    var sh = document.createElement("div"); sh.className = "zwsh"; sh.setAttribute("data-noi18n", "");
+    sh.innerHTML = '<div class="gr"></div><h4>' + T("നിങ്ങളുടെ വിവരങ്ങൾ", "Your details") + '</h4><p>' + T("ആരാണ് അയക്കുന്നത് എന്ന് അറിയാൻ മാത്രം.", "Just so we know who sent it.") + '</p>' +
+      '<label>' + T("പേര്", "Name") + ' <em>*</em></label><input class="w1" autocomplete="name">' +
+      '<label>' + T("വീട്ടുപേര്", "House name") + ' <small>(' + T("നിർബന്ധമില്ല", "optional") + ')</small></label><input class="w2">' +
+      '<label>' + T("മൊബൈൽ നമ്പർ", "Mobile number") + ' <em>*</em></label><input class="w3" type="tel" inputmode="tel" autocomplete="tel">' +
+      '<button type="button" class="go">💬 ' + T("WhatsApp-ൽ അയക്കുക", "Send on WhatsApp") + '</button>';
+    document.body.appendChild(bg); document.body.appendChild(sh);
+    requestAnimationFrame(function () { bg.classList.add("on"); sh.classList.add("on"); });
+    function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
+    bg.onclick = shut;
+    sh.querySelectorAll("input").forEach(function (x) { x.oninput = function () { x.classList.remove("inv"); }; });
+    sh.querySelector(".go").onclick = function () {
+      var a = sh.querySelector(".w1"), h = sh.querySelector(".w2"), m = sh.querySelector(".w3"), nm = a.value.trim(), hs = h.value.trim(), mb = m.value.trim(), bad = null;
+      if (!nm) { a.classList.add("inv"); bad = a; }
+      if (mb.replace(/\D/g, "").length < 10) { m.classList.add("inv"); bad = bad || m; }
+      if (bad) { bad.focus(); return; }
+      var msg = head + "\n\n" + text + "\n\n🙋 " + nm + (hs ? ", " + hs : "") + "\n📱 " + mb;
+      window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank"); shut();
+    };
+    setTimeout(function () { sh.querySelector(".w1").focus(); }, 320);
+  }
+  window.zWho = zWho;
   function openPV() {
     var F = 'Inter,"Noto Sans Malayalam",sans-serif';
     if (!document.getElementById("zpv-css")) { var c = document.createElement("style"); c.id = "zpv-css"; c.textContent =
@@ -246,8 +280,7 @@
     w.querySelector(".sb").onclick = function () {
       var ta = w.querySelector("textarea"), v = ta.value.trim();
       if (!v) { ta.focus(); ta.classList.add("err"); setTimeout(function () { ta.classList.remove("err"); }, 900); return; }
-      var who = ""; try { who = localStorage.getItem("zestAuth") || ""; } catch (e) {}
-      window.open("https://wa.me/918921369102?text=" + encodeURIComponent(T("✈️ പ്രവാസി കണക്ട് – ആശയം", "✈️ Pravasi Connect – Idea") + "\n\n" + v + (who ? "\n\n– " + who : "")), "_blank");
+      zWho(T("✈️ പ്രവാസി കണക്ട് – ആശയം", "✈️ Pravasi Connect – Idea"), v);
     };
   }
   window.zOpenPV = openPV;
@@ -411,9 +444,7 @@
     vp.querySelector(".zsg button").onclick = function () {
       var ta = vp.querySelector(".zsg textarea"), v = ta.value.trim();
       if (!v) { ta.focus(); ta.classList.add("err"); setTimeout(function () { ta.classList.remove("err"); }, 900); return; }
-      var who = ""; try { who = localStorage.getItem("zestAuth") || ""; } catch (e) {}
-      var msg = T("💡 ZEST PRIME – നിർദ്ദേശം", "💡 ZEST PRIME – Suggestion") + "\n\n" + v + (who ? "\n\n– " + who : "");
-      window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank");
+      zWho(T("💡 ZEST PRIME – നിർദ്ദേശം", "💡 ZEST PRIME – Suggestion"), v);
     };
     /* ZEST page */
     var vz = document.createElement("div"); vz.className = "zview"; vz.id = "zv-zest";
