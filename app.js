@@ -179,6 +179,14 @@
     'html.zapp #zlib .mh p,html.zapp #zmed .mh p{position:absolute!important;z-index:3!important;left:20px!important;right:20px!important;bottom:14px!important;margin:0!important;font:500 12.5px/1.3 ' + UF + '!important;color:#e3f1fa!important;text-align:left!important}' +
     'html.zapp #zlib .mh .bk,html.zapp #zmed .mh .bk,html.zapp #zlib .mh .lsw,html.zapp #zmed .mh .lsw{z-index:4!important}' +
     'html.zapp #zlib .mh .bk,html.zapp #zmed .mh .bk{background:rgba(11,61,92,.55)!important}' +
+    /* students corner: hero only (rest of the page keeps its own look) */
+    'html.zapp .zsc2 .w2-hd{position:relative!important;padding:0!important;text-align:left!important;background:#0b3d5c!important;border-radius:0 0 28px 28px!important;overflow:hidden!important}html.zapp .zsc2 .w2-hd::after{display:none!important}' +
+    'html.zapp .zsc2 .w2-hd::before{content:""!important;position:absolute!important;inset:0!important;z-index:2!important;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)!important;pointer-events:none}' +
+    'html.zapp .zsc2 .w2-hd .zhimg{display:block!important;width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:780/430!important;object-fit:cover!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}' +
+    'html.zapp .zsc2 .w2-hd h2{position:absolute!important;z-index:3!important;left:20px!important;right:20px!important;bottom:33px!important;margin:0!important;font:800 22px/1.25 ' + UF + '!important;color:#fff!important;text-align:left!important;text-shadow:0 1px 6px rgba(0,0,0,.35)}' +
+    'html.zapp .zsc2 .w2-hd h2::before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}' +
+    'html.zapp .zsc2 .w2-hd p{position:absolute!important;z-index:3!important;left:20px!important;right:20px!important;bottom:14px!important;margin:0!important;font:500 12.5px/1.3 ' + UF + '!important;color:#e3f1fa!important;text-align:left!important}' +
+    'html.zapp .zsc2 .x0,html.zapp .zsc2 .w2-hd .lsw{z-index:4!important}html.zapp .zsc2 .x0{background:rgba(11,61,92,.55)!important}' +
     /* cards */
     'html.zapp .zpg button b{font:700 14.5px/1.35 ' + UF + '!important;color:#0b2540!important}html.zapp .zpg button small{font:500 12px/1.45 ' + UF + '!important;color:#6b7c8d!important}' +
     'html.zapp .zmc button[data-c="donor"]{background:linear-gradient(140deg,#0b3d5c,#1380b8)!important}html.zapp .zmc button[data-c="stu"]{background:linear-gradient(140deg,#1380b8,#3fa7d6)!important}' +
