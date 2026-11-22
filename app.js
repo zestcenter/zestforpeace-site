@@ -113,6 +113,7 @@
     'html.zapp body{zoom:var(--zfz,1)}.zfzr{border-bottom:0!important;cursor:default}.zfz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 0 12px}.zfz button{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;min-height:58px;padding:8px 2px;border:1.5px solid #dbe9f2;border-radius:12px;background:#fff;color:#0b3d5c;font-family:inherit;cursor:pointer}.zfz button b{font-family:Inter,sans-serif;font-weight:800;line-height:1}.zfz button small{font-size:10.5px;font-weight:700;line-height:1.2;text-align:center}.zfz button.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f);border-color:transparent;color:#fff;box-shadow:0 6px 14px rgba(19,128,184,.3)}' +
     'html.zapp .zlg{position:relative!important;height:28px!important;width:64px!important;border:0!important;background:#e3f2fb!important;border-radius:999px!important;padding:0!important;overflow:visible!important;box-shadow:inset 0 1px 3px rgba(11,61,92,.15)!important}html.zapp .zlg span{position:relative;z-index:1;flex:1;justify-content:center;padding:0!important;background:none!important;color:#6a8fa6!important;font:800 11px/1 Inter,"Noto Sans Malayalam",sans-serif!important;transition:color .25s}html.zapp .zlg span.on{color:#fff!important}html.zapp .zlg:after{content:"";position:absolute;top:3px;bottom:3px;width:29px;border-radius:999px;background:linear-gradient(135deg,#1e90cf,#0b5d8f);box-shadow:0 2px 6px rgba(11,93,143,.4);left:3px;transition:left .25s}html[data-lang=ml].zapp .zlg:after{left:32px}' +
     '.zspk{flex:none;display:grid!important;place-items:center;width:32px;height:32px;border-radius:50%;background:#e6f5fd;border:1.5px solid #bfe3f6;margin-right:6px;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}.zspk svg{width:16px;height:16px}.zspk.on{background:#1380b8;border-color:#1380b8}.zspk.on svg path{stroke:#fff;fill:#fff}.zpk-f .zspk{margin:0 0 0 auto}.zpk-f .zspk+.zpk-sh{margin-left:0!important}.zpl{position:fixed;left:10px;right:10px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:9998;background:#0b3d5c;border-radius:20px;padding:10px 14px;color:#fff;box-shadow:0 12px 26px -8px rgba(11,61,92,.6);display:flex;align-items:center;gap:10px;font-family:Inter,"Noto Sans Malayalam",sans-serif;transform:translateY(150%);transition:transform .3s}.zpl.on{transform:none}.zpl .pp{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;border:0;padding:0;cursor:pointer}.zpl .pp i{display:inline-block;width:4px;height:14px;background:#0b3d5c;margin:0 2px;border-radius:2px}.zpl .pp.ps i{display:none}.zpl .pp.ps:after{content:"";border-left:13px solid #0b3d5c;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:4px}.zpl .tt{flex:1;min-width:0}.zpl .tt b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.zpl .bar{height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin-top:6px;overflow:hidden}.zpl .bar span{display:block;width:0;height:100%;background:#7fc6ea;transition:width .4s}.zpl small{display:block;font-size:10px;opacity:.8;white-space:nowrap;margin-top:4px}.zpl .sp{font:800 11px Inter,sans-serif;background:rgba(255,255,255,.15);padding:5px 9px;border-radius:99px;border:0;color:#fff;cursor:pointer}.zpl .x{font-size:18px;opacity:.85;background:none;border:0;color:#fff;padding:0 2px;cursor:pointer}' +
+    '.zpg button{position:relative}.zpg .zsn{position:absolute;z-index:2;left:14px;top:14px;background:#f0a500;color:#3a2600;font:800 9.5px/1.2 Inter,"Noto Sans Malayalam",sans-serif;font-style:normal;padding:3px 8px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.15)}.zpg.zpc .zsn{left:4px;top:4px;font-size:8px;padding:2px 5px}.zpg button[data-k=pv]{box-shadow:inset 0 0 0 2px #f0a500}' +
     /* hero */
     '.zth{position:relative;margin:0;padding:26px 22px 24px;background:linear-gradient(160deg,#0b3d5c,#1380b8 65%,#3fa7d6);color:#fff;border-radius:0 0 28px 28px;text-align:center;overflow:hidden;font-family:' + F + '}' +
     '.zth:after{content:"";position:absolute;right:-50px;top:-50px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.08)}' +
@@ -214,7 +215,43 @@
   function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=12"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=7"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
+  function openPV() {
+    var F = 'Inter,"Noto Sans Malayalam",sans-serif';
+    if (!document.getElementById("zpv-css")) { var c = document.createElement("style"); c.id = "zpv-css"; c.textContent =
+      '#zpv{position:fixed;inset:0;z-index:2147483600;background:#f3f6f9;overflow:auto;font-family:' + F + ';-webkit-overflow-scrolling:touch;animation:zpvIn .25s ease}@keyframes zpvIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}' +
+      '#zpv .hh{position:relative;background:#0b3d5c;border-radius:0 0 28px 28px;overflow:hidden}#zpv .hh img{display:block;width:100%;aspect-ratio:780/430;object-fit:cover}' +
+      '#zpv .hh:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)}' +
+      '#zpv .hh h2{position:absolute;z-index:3;left:20px;right:20px;bottom:33px;margin:0;font:800 21px ' + F + ';color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}#zpv .hh h2:before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}' +
+      '#zpv .hh p{position:absolute;z-index:3;left:20px;right:20px;bottom:14px;margin:0;font:600 12px ' + F + ';color:#e3f1fa}' +
+      '#zpv .bk{position:absolute;z-index:4;left:14px;top:14px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(11,61,92,.55);color:#fff;font:700 20px Inter,sans-serif;cursor:pointer}' +
+      '#zpv .sn{position:absolute;z-index:4;right:14px;top:18px;display:inline-flex;align-items:center;gap:6px;background:#f0a500;color:#3a2600;font:800 11.5px ' + F + ';padding:5px 12px;border-radius:20px}#zpv .sn:before{content:"";width:7px;height:7px;border-radius:50%;background:#3a2600;animation:zpvP 1.2s infinite}@keyframes zpvP{50%{opacity:.25}}' +
+      '#zpv .in{max-width:34rem;margin:0 auto;padding:18px 16px 40px}#zpv .nt{font:500 13px/1.65 ' + F + ';color:#4a5d6e;margin:2px 4px 16px}' +
+      '#zpv .sg{background:#fff;border-radius:20px;padding:16px;border:1.5px solid #cfe4f3}#zpv .sg .h{display:flex;gap:10px;align-items:center;margin-bottom:14px}#zpv .sg .h i{font-style:normal;flex:none;width:40px;height:40px;border-radius:12px;background:#fff4dc;display:grid;place-items:center;font-size:20px}' +
+      '#zpv .sg b{display:block;font:800 14.5px/1.45 ' + F + ';color:#0b2540}#zpv .sg small{font:500 11.5px ' + F + ';color:#7a8a99}' +
+      '#zpv textarea{width:100%;box-sizing:border-box;border:1.5px solid #d6e0ea;border-radius:12px;padding:10px 12px;font:500 14px ' + F + ';color:#0b2540;background:#fbfcfd;outline:none;resize:vertical}#zpv textarea:focus{border-color:#1380b8;box-shadow:0 0 0 4px rgba(19,128,184,.12)}#zpv textarea.err{border-color:#e2574c}' +
+      '#zpv .sb{display:block;width:100%;margin-top:12px;border:0;background:linear-gradient(135deg,#0d5a8c,#1380b8);color:#fff;padding:13px;border-radius:14px;font:800 14px ' + F + ';cursor:pointer}';
+      document.head.appendChild(c); }
+    var o = document.getElementById("zpv"); if (o) o.remove();
+    var w = document.createElement("div"); w.id = "zpv"; w.setAttribute("data-noi18n", "");
+    w.innerHTML = '<div class="hh"><img src="/img/hero/pravasi.svg?v=1" alt=""><button type="button" class="bk" aria-label="Back">‹</button><span class="sn">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</span><h2>' + T("പ്രവാസി കണക്ട്", "Pravasi Connect") + '</h2><p>' + T("ഗൾഫിലും നമ്മൾ നാട്ടുകാർ ഒരുമിച്ച്", "Our village, together in the Gulf too") + '</p></div>' +
+      '<div class="in"><div class="nt">' + T("ഗൾഫിലുള്ള നമ്മുടെ നാട്ടുകാരെ ഒരുമിപ്പിക്കാനുള്ള പുതിയ സംവിധാനം ഉടൻ വരുന്നു.", "A new way to bring our people in the Gulf together is coming soon.") + '</div>' +
+      '<div class="sg"><div class="h"><i>💡</i><div><b>' + T("പ്രവാസി കണക്ടിൽ എന്തൊക്കെ സേവനങ്ങൾ വേണം?", "What services should Pravasi Connect have?") + '</b><small>' + T("നിങ്ങളുടെ ആശയം പറയൂ", "Share your idea") + '</small></div></div>' +
+      '<textarea rows="4" placeholder="' + T("നിങ്ങളുടെ ആശയം ഇവിടെ എഴുതൂ…", "Type your idea…") + '"></textarea><button type="button" class="sb">' + T("അയക്കുക", "Send") + '</button></div></div>';
+    document.body.appendChild(w);
+    function onPop() { var x = document.getElementById("zpv"); if (x) x.remove(); removeEventListener("popstate", onPop); }
+    try { history.pushState({ zpv: 1 }, ""); } catch (e) {}
+    addEventListener("popstate", onPop);
+    w.querySelector(".bk").onclick = function () { if (history.state && history.state.zpv) history.back(); else onPop(); };
+    w.querySelector(".sb").onclick = function () {
+      var ta = w.querySelector("textarea"), v = ta.value.trim();
+      if (!v) { ta.focus(); ta.classList.add("err"); setTimeout(function () { ta.classList.remove("err"); }, 900); return; }
+      var who = ""; try { who = localStorage.getItem("zestAuth") || ""; } catch (e) {}
+      window.open("https://wa.me/918921369102?text=" + encodeURIComponent(T("✈️ പ്രവാസി കണക്ട് – ആശയം", "✈️ Pravasi Connect – Idea") + "\n\n" + v + (who ? "\n\n– " + who : "")), "_blank");
+    };
+  }
+  window.zOpenPV = openPV;
   function openPrime(k) {
+    if (k === "pv") return openPV();
     if (k === "stu") return clickHash("#students");
     if (k === "lib") return loadLib(function () { ZestLib.open(); });
     loadMed(function () { ZestMed.open(k === "blood" ? "blood" : "eq"); });
@@ -222,8 +259,9 @@
   var PR = [["stu", "students", T("സ്റ്റുഡന്റ്സ് കോർണർ", "Students Corner"), T("റിവിഷൻ പ്ലാനർ, പോക്കറ്റ് മണി", "Revision planner, pocket money")],
     ["lib", "library", T("ZEST ലൈബ്രറി", "ZEST Library"), T("പുസ്തകങ്ങൾ തിരയാം, ചോദിക്കാം", "Find and request books")],
     ["blood", "blood", T("ബ്ലഡ് ബാങ്ക്", "Blood Bank"), T("രക്തം നൽകാം / വേണം", "Give or request blood")],
-    ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")]];
-  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '"><img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }).join("") + '</div>'; }
+    ["eq", "equipment", T("മെഡിക്കൽ ഉപകരണം", "Medical Equipment"), T("വീൽചെയർ, ബെഡ്, വാക്കർ", "Wheelchair, bed, walker")],
+    ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഗൾഫിലെ നാട്ടുകാരുടെ കൂട്ടായ്മ", "Our people in the Gulf")]];
+  function primeGrid(desc) { return '<div class="zpg">' + PR.map(function (p) { return '<button type="button" data-k="' + p[0] + '">' + (p[0] === "pv" ? '<em class="zsn">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }).join("") + '</div>'; }
   function wirePrime(el) { el.querySelectorAll(".zpg button").forEach(function (b) { b.onclick = function () { openPrime(b.dataset.k); }; }); }
 
   function after(el) { var h = document.querySelector("body>header"); if (h) h.after(el); else document.body.prepend(el); }
