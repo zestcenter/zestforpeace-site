@@ -1422,9 +1422,22 @@ window.ZAIC=function(kind,body){return aicHTML({kind:kind,body:body})};
 <nav id="mn"><a href="#top">HOME</a><a href="#centre-info">ZEST CENTRE INFO</a><a href="#about">ABOUT US</a><a href="#programs">PROJECTS</a><a href="#clubs">CLUBS</a><a href="#documentary">DOCUMENTARY</a><a href="#join">JOIN WITH ZEST</a><a href="#students" class="nsc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>STUDENTS CORNER</a><a href="#settings" class="nset">SETTINGS</a></nav>
 </div></header>
 
-<div class="hero"><video id="hv" src="/media/hero-v2.mp4" poster="/media/hero-poster.webp" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"></video><script>/* app: hero video is hidden – stop its 2 MB download */(function(){try{if(matchMedia("(display-mode: standalone)").matches||navigator.standalone){var v=document.getElementById("hv");v.removeAttribute("autoplay");v.preload="none";v.removeAttribute("src");v.load()}}catch(e){}})();</script></div>
+<div id="zwh"><a href="#about" class="zwh-c" data-noi18n><img src="/img/zest-centre.webp?v=2" alt="ZEST Centre" fetchpriority="high"><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em><span class="zwh-t">ZEST-നെ കുറിച്ച് അറിയാം</span> <span class="zwh-a">→</span></em></a></div>
+<style>
+#zwh{padding:14px 16px 6px;font-family:Inter,"Noto Sans Malayalam",sans-serif}
+html.zapp #zwh{display:none}
+#zwh .zwh-c{position:relative;display:block;max-width:34rem;margin:0 auto;border-radius:24px;overflow:hidden;background:#0b3d5c;box-shadow:0 10px 24px -8px rgba(11,61,92,.5);text-align:center;text-decoration:none;-webkit-tap-highlight-color:transparent}
+#zwh .zwh-c:after{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(180deg,rgba(11,61,92,0),rgba(11,61,92,.55) 40%,rgba(8,40,62,.92));pointer-events:none}
+#zwh img{display:block;width:100%;aspect-ratio:16/11;object-fit:cover}
+#zwh b,#zwh em{position:absolute;left:0;right:0;z-index:1;margin:0 auto}
+#zwh b{bottom:44px;display:block;white-space:nowrap;font:700 clamp(17px,5.2vw,26px)/1.3 "Noto Sans Malayalam",Inter,sans-serif;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+#zwh em{bottom:14px;width:max-content;display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,#e6f5fd,#bfe3f6);border:1px solid rgba(255,255,255,.9);color:#0b5d8f;box-shadow:0 4px 12px -4px rgba(0,0,0,.35);font:800 11px Inter,"Noto Sans Malayalam",sans-serif;font-style:normal}
+#zwh .zwh-a{display:inline-block;animation:zwhA 1.4s ease-in-out infinite}@keyframes zwhA{0%,100%{transform:translateX(0)}50%{transform:translateX(3px)}}
+@media(min-width:900px){#zwh .zwh-c{max-width:46rem}}
+</style>
+<script>(function(){function f(){try{var ml=window.ZestLang?ZestLang.get()==="ml":(localStorage.getItem("zestLang")==="ml");var t=document.querySelector("#zwh .zwh-t");if(t)t.textContent=ml?"ZEST-നെ കുറിച്ച് അറിയാം":"Know about ZEST"}catch(e){}}f();document.addEventListener("DOMContentLoaded",f)})();</script>
 
-<div class="mq" aria-hidden="true"><div><span>Service Center</span><span>Ideal Students Batch</span><span>Women Empowerment Program</span><span>Library &amp; Reading Room</span><span>Kids Development Programs – Kalimuttam</span><span>Football Turf</span><span>Senior Citizen Corner</span><span>Kids Park</span><span>Women’s Playground</span><span>Service Center</span><span>Ideal Students Batch</span><span>Women Empowerment Program</span><span>Library &amp; Reading Room</span><span>Kids Development Programs – Kalimuttam</span><span>Football Turf</span><span>Senior Citizen Corner</span><span>Kids Park</span><span>Women’s Playground</span></div></div>
+
 
 <section id="centre-info" class="zu-sec"><div class="wrap">
 <div class="zu-panel">
@@ -1756,8 +1769,8 @@ if(fk){var ch=box.querySelector('.z3c[data-k="'+fk+'"]');if(ch){ch.click();setTi
 })();
 </script>
 <script src="/notify.js?v=40" defer></script>
-<script src="/drawer.js?v=49" defer></script><script src="/app.js?v=91" defer></script>
-<script src="/prime.js?v=20" defer></script>
+<script src="/drawer.js?v=49" defer></script><script src="/app.js?v=91" defer></script><script src="/web.js?v=1" defer></script>
+<script src="/prime.js?v=21" defer></script>
 <script src="/popup.js?v=8" defer></script>
 <script>(function(){var f=document.querySelector('iframe[src*="lightwidget.com"]');if(!f)return;var go=function(){if(go.d)return;go.d=1;var s=document.createElement('script');s.src='https://cdn.lightwidget.com/widgets/lightwidget.js';s.async=true;document.body.appendChild(s)};if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'600px'}).observe(f)}else go()})();</script>
 </body>

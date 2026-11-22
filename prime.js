@@ -8,7 +8,9 @@
     { k: "stu", i: "🎓", ml: "സ്റ്റുഡന്റ്സ്<br>കോർണർ", en: "Students<br>Corner", bg: "#efe9fd" },
     { k: "lib", i: "📚", ml: "ZEST<br>ലൈബ്രറി", en: "ZEST<br>Library", bg: "#e8f7ef" },
     { k: "blood", i: "🩸", ml: "ബ്ലഡ്<br>ബാങ്ക്", en: "Blood<br>Bank", bg: "#ffe9ef" },
-    { k: "eq", i: "🦽", ml: "മെഡിക്കൽ<br>സപ്പോർട്ട്", en: "Medical<br>Support", bg: "#e6f3fb" }
+    { k: "eq", i: "🦽", ml: "മെഡിക്കൽ<br>സപ്പോർട്ട്", en: "Medical<br>Support", bg: "#e6f3fb" },
+    { k: "pv", i: "✈️", ml: "പ്രവാസി<br>കണക്ട്", en: "Pravasi<br>Connect", bg: "#fff4dc", s: 1 },
+    { k: "ch", i: "🏆", ml: "ചലഞ്ച്<br>& വിൻ", en: "Challenge<br>& Win", bg: "#f1ecfd", s: 1 }
   ];
   var st = document.createElement("style");
   st.textContent = '#zprime{padding:1.4rem 0 .6rem;margin:1.2rem 0;background:linear-gradient(160deg,#f2f9fd,#e3f1fa);border-top:1.5px solid #bfe0f2;border-bottom:1.5px solid #bfe0f2;font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#14232c}' +
@@ -28,7 +30,7 @@
   document.head.appendChild(st);
   var s = document.createElement("section"); s.id = "zprime"; s.setAttribute("data-noi18n", "");
   s.innerHTML = '<div class="wrap"><div class="zp-hd"><h2 class="zp-h"><span class="zp-lv" aria-hidden="true"></span><span class="zp-g">ZEST PRIME SPOT</span></h2><span class="zp-bd">APP EXCLUSIVE</span></div><div class="zp-r">' +
-    IT.map(function (x) { return '<button type="button" class="zp-t" data-k="' + x.k + '" style="background:' + x.bg + '"><i>' + x.i + '</i>' + (ml ? x.ml : x.en) + '</button>'; }).join("") +
+    IT.map(function (x) { return '<button type="button" class="zp-t" data-k="' + x.k + '" style="background:' + x.bg + (x.s ? ';position:relative' : '') + '">' + (x.s ? '<em style="position:absolute;top:6px;right:6px;background:#e3f2fb;color:#0b5d8f;font:700 8.5px/1.2 Inter,\'Noto Sans Malayalam\',sans-serif;font-style:normal;padding:2px 6px;border-radius:999px">' + (ml ? "ഉടൻ വരുന്നു" : "Soon") + '</em>' : '') + '<i>' + x.i + '</i>' + (ml ? x.ml : x.en) + '</button>'; }).join("") +
     '</div><div class="zp-bar"><div class="zp-tr"><i></i></div><button type="button" class="zp-nx" aria-label="More"><b></b><em>»</em></button></div></div>';
   host.parentNode.insertBefore(s, host.nextSibling);
   var r = s.querySelector(".zp-r"), nx = s.querySelector(".zp-nx"), th = s.querySelector(".zp-tr i");
@@ -47,6 +49,7 @@
   r.addEventListener("click", function (e) {
     var b = e.target.closest(".zp-t"); if (!b) return; var k = b.dataset.k;
     if (!inApp()) { if (window.ZestDrawer && ZestDrawer.appOnly) ZestDrawer.appOnly(ml); return; }
+    if ((k === "pv" || k === "ch") && window.zOpenPV) return zOpenPV(k);
     if (k === "stu") { var a = document.createElement("a"); a.href = "#students"; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); return; }
     if (k === "lib") { if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=8"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); } return; }
     var w = k === "blood" ? "blood" : "eq";
