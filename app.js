@@ -150,7 +150,7 @@
     'html.zapp #sec-projects,html.zapp footer.addr{display:none!important}';
   document.head.appendChild(css);
   /* ===== ZEST APP design system: one font, one type scale, brand colours only ===== */
-  var fl = document.createElement("link"); fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Malayalam:wght@400;500;600;700;800&display=swap"; document.head.appendChild(fl);
+  var fl = document.createElement("link"); fl.rel = "stylesheet"; fl.href = "https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Noto+Sans+Malayalam:wght@500;700&display=swap"; document.head.appendChild(fl);
   var UF = 'Inter,"Noto Sans Malayalam",system-ui,sans-serif';
   var RING = 'content:"";flex:none;box-sizing:border-box;width:18px;height:18px;border:1.5px solid #1380b8;border-radius:50%;background:radial-gradient(circle,#1380b8 0 3.5px,transparent 4px)';
   var BTN = 'background:linear-gradient(135deg,#0d5a8c,#1380b8)!important;color:#fff!important;border:0!important;box-shadow:0 6px 16px rgba(19,128,184,.28)!important';
@@ -213,9 +213,9 @@
     'html.zapp #zmed .tb .on{color:#0b3d5c!important}html.zapp #zmed .t.sel{border-color:#1380b8!important;box-shadow:0 0 0 3px rgba(19,128,184,.15)!important}html.zapp #zmed .t.sel::after{background:#1380b8!important}';
   document.head.appendChild(zu);
   /* blood bank section titles: ring instead of emoji */
-  new MutationObserver(function () {
+  var zbq = 0; new MutationObserver(function () { if (zbq) return; zbq = 1; requestAnimationFrame(function () { zbq = 0;
     document.querySelectorAll("#zmed .zbt").forEach(function (b) { var n = b.firstChild; if (n && n.nodeType === 3 && /^[^\u0D00-\u0D7FA-Za-z0-9]+\s/.test(n.textContent)) n.textContent = n.textContent.replace(/^[^\u0D00-\u0D7FA-Za-z0-9]+\s/, ""); });
-  }).observe(document.documentElement, { childList: true, subtree: true });
+  }); }).observe(document.documentElement, { childList: true, subtree: true });
 
 
   /* ---------- bottom navigation ---------- */
@@ -452,9 +452,9 @@
     /* readable text: standard minimum sizes (min 12px, body 14.5px) */
     (function () {
       var busy = 0;
-      function fix() {
+      function fix(root) {
         busy = 1;
-        var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, seen = new Set();
+        var w = document.createTreeWalker(root && root.nodeType === 1 ? root : document.body, NodeFilter.SHOW_TEXT), n, seen = new Set();
         while ((n = w.nextNode())) {
           var e = n.parentElement; if (!e || seen.has(e) || !n.textContent.trim()) continue; seen.add(e);
           if (e.closest("body>header,.zlg,svg,script,style,[data-zfs]")) continue;
@@ -465,7 +465,7 @@
         }
         setTimeout(function () { busy = 0; }, 0);
       }
-      var tm; function later() { if (busy) return; clearTimeout(tm); tm = setTimeout(fix, 120); }
+      var tm, pend = []; function later(ms) { if (busy) return; ms.forEach(function (m) { m.addedNodes.forEach(function (n) { pend.push(n.nodeType === 1 ? n : n.parentElement); }); if (m.type === "characterData" && m.target.parentElement) pend.push(m.target.parentElement); }); clearTimeout(tm); tm = setTimeout(function () { var r = pend; pend = []; r.forEach(function (n) { if (n && n.isConnected) fix(n); }); }, 150); }
       fix(); setTimeout(fix, 800); setTimeout(fix, 2500);
       new MutationObserver(later).observe(document.body, { childList: true, subtree: true, characterData: true });
     })();
