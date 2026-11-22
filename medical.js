@@ -113,7 +113,7 @@
               '<div class="lb">' + T("സമയം", "Time") + '</div>' + chips("tm", [["mor", T("രാവിലെ", "Morning")], ["noon", T("ഉച്ചയ്ക്ക്", "Afternoon")], ["eve", T("വൈകുന്നേരം", "Evening")]], 1)) +
       '</div><div class="ntb"><p>💚 ' + (need ? T("ZEST അടുത്തുള്ള ഒരു വളണ്ടിയർ ഡ്രൈവറെ ഏർപ്പാടാക്കും.", "ZEST will arrange a volunteer driver near you.") : T("അടുത്തുള്ള ആവശ്യം വന്നാൽ ZEST നിങ്ങളെ വിളിക്കും.", "ZEST will call you when someone nearby needs a ride.")) + '</p>' +
       '<p>⛽ ' + (need ? T("ഇന്ധന ചെലവ് ഡ്രൈവറുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the driver.") : T("ഇന്ധന ചെലവ് യാത്രക്കാരുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the passenger.")) + '</p></div>' +
-      '<button type="button" class="go eqg drg">' + WA + T("WhatsApp-ൽ അയക്കുക", "Send on WhatsApp") + '</button>' +
+      '<button type="button" class="go eqg drg">' + WA + T("സബ്മിറ്റ്", "Submit") + '</button>' +
       '<p class="nt">' + soon() + '</p>';
   }
   function drvWire(w, tab) {

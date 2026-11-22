@@ -213,7 +213,7 @@
     })();
   });
 
-  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=14"; s.onload = cb; document.head.appendChild(s); }
+  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=15"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=8"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
   /* ask name / house / mobile before sending a suggestion (nothing is saved on the phone) */
@@ -233,7 +233,7 @@
       '<label>' + T("പേര്", "Name") + ' <em>*</em></label><input class="w1" autocomplete="name">' +
       '<label>' + T("വീട്ടുപേര്", "House name") + ' <small>(' + T("നിർബന്ധമില്ല", "optional") + ')</small></label><input class="w2">' +
       '<label>' + T("മൊബൈൽ നമ്പർ", "Mobile number") + ' <em>*</em></label><input class="w3" type="tel" inputmode="tel" autocomplete="tel">' +
-      '<button type="button" class="go">💬 ' + T("WhatsApp-ൽ അയക്കുക", "Send on WhatsApp") + '</button>';
+      '<button type="button" class="go"><svg viewBox="0 0 24 24" fill="#fff" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("സബ്മിറ്റ്", "Submit") + '</button>';
     document.body.appendChild(bg); document.body.appendChild(sh);
     requestAnimationFrame(function () { bg.classList.add("on"); sh.classList.add("on"); });
     function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
