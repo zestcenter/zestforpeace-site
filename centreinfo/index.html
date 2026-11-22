@@ -614,6 +614,7 @@ function render(rows, demo){
   $('week').innerHTML = week.length ? week.map((p, i) => (p._i = i + 1, p._n = week.length, `<div class="tli${isNew(p) ? ' new' : ''}">${card(Object.assign({}, p, {_i: i + 1, _n: week.length}), p.kind !== 'program').replace('id="p-', 'id="w-')}</div>`)).join('') : '<div class="state">അടുത്ത 7 ദിവസത്തിൽ പരിപാടികളോ അറിയിപ്പുകളോ ഇല്ല</div>';
   const setN = (k, n) => { const e = document.querySelector('.z3c[data-k="' + k + '"] .z3n'); if(e) e.textContent = n > 99 ? '99+' : n; };
   setN('week', week.length); setN('program', prog.length); setN('info', info.length); setN('job', jobs.length);
+  if(!window.__zAuto && !location.hash){ window.__zAuto = 1; if(!week.length){ const f = [['program', prog], ['info', info], ['job', jobs]].find(a => a[1].length); const c = f && document.querySelector('.zsc .z3c[data-k="' + f[0] + '"]'); if(c) setTimeout(() => c.click(), 0); } }
   $('jobs').classList.toggle('tl', !!jobs.length);
   $('jobs').innerHTML = jobs.length ? tl(jobs, true, lastLbl) : EMPTY;
   limit($('week')); limit($('programs')); limit($('info')); limit($('jobs'));
