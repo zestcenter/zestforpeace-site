@@ -193,6 +193,15 @@
     'html.zapp .zsc2 .zs-sg .sgb{' + BTN + ';border-radius:999px!important;font:700 14px ' + UF + '!important}' +
     'html.zapp #zabout b{bottom:40px!important}html.zapp #zabout em{bottom:13px!important;padding:2px 8px!important;font-size:9.5px!important;gap:3px!important}' +
     'html.zapp .card.tk{scroll-margin-top:110px}' +
+    /* students corner – student space: same hero as every page, only "My tools" below */
+    'html.zapp .zsc2 .zs-sum{display:none!important}' +
+    'html.zapp .zsc2 .zdh{position:relative!important;padding:0!important;aspect-ratio:780/430!important;background:#0b3d5c url(/img/hero/students.svg) center/cover no-repeat!important;border-radius:0 0 28px 28px!important;overflow:hidden!important}' +
+    'html.zapp .zsc2 .zdh::after{display:none!important}html.zapp .zsc2 .zdh::before{content:""!important;position:absolute!important;inset:0!important;z-index:1!important;background:linear-gradient(180deg,rgba(6,34,54,0) 35%,rgba(6,34,54,.25) 55%,rgba(6,34,54,.7) 78%,rgba(6,34,54,.92) 100%)!important}' +
+    'html.zapp .zsc2 .zdh .me{position:absolute!important;z-index:3!important;left:20px!important;right:20px!important;bottom:14px!important;max-width:none!important;margin:0!important;display:block!important}html.zapp .zsc2 .zdh .me>i{display:none!important}' +
+    'html.zapp .zsc2 .zdh .me b{font:800 22px/1.25 ' + UF + '!important;color:#fff!important;text-shadow:0 1px 6px rgba(0,0,0,.35);margin-bottom:5px!important}html.zapp .zsc2 .zdh .me b::before{content:"";display:block;width:36px;height:4px;border-radius:4px;margin-bottom:8px;background:linear-gradient(90deg,#ffc44d,#3fa7d6)}' +
+    'html.zapp .zsc2 .zdh .me small{font:500 12.5px/1.3 ' + UF + '!important;color:#e3f1fa!important}' +
+    'html.zapp .zsc2 .zdh .chip{position:absolute!important;right:0!important;bottom:2px!important;background:rgba(255,255,255,.2)!important}html.zapp .zsc2 .zdh .me>span{display:block!important;padding-right:84px!important}' +
+    'html.zapp .zsc2 .zdh .x1{z-index:4!important;background:rgba(11,61,92,.55)!important}html.zapp .zsc2.dash .w2-bd{padding-top:8px!important}' +
     /* cards */
     'html.zapp .zpg button b{font:700 14.5px/1.35 ' + UF + '!important;color:#0b2540!important}html.zapp .zpg button small{font:500 12px/1.45 ' + UF + '!important;color:#6b7c8d!important}' +
     'html.zapp .zmc button[data-c="donor"]{background:linear-gradient(140deg,#0b3d5c,#1380b8)!important}html.zapp .zmc button[data-c="stu"]{background:linear-gradient(140deg,#1380b8,#3fa7d6)!important}' +
