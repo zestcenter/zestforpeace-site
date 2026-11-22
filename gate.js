@@ -237,5 +237,29 @@
         .catch(function () { B.disabled = false; B.textContent = "LOGIN"; err(E, "Login ചെയ്യാനായില്ല, വീണ്ടും ശ്രമിക്കുക. (Could not log in – please try again.)"); });
     });
   }
-  if (document.body) build(); else document.addEventListener("DOMContentLoaded", build);
+  /* testing period: new installs must enter the test access username + password before register / login (people already signed in are not asked) */
+  var TH = "776349449ca7143c42733834eba8c761c59f5040f8592a43d88e2277f42fddd0";
+  function sha(t) { return crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)).then(function (b) { return [].map.call(new Uint8Array(b), function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""); }); }
+  function testGate() {
+    if (get("zestTest") === TH.slice(0, 16)) return build();
+    if (document.getElementById("zgate")) return;
+    var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
+    var g = document.createElement("div"); g.id = "zgate"; g.setAttribute("role", "dialog"); g.setAttribute("aria-label", "ZEST APP test access");
+    g.innerHTML = '<div class="zg-w"><div class="zg-logo"><img src="/icons/icon-192.png" alt="ZEST APP"></div><h1 class="zg-h">ZEST APP</h1><p class="zg-s">നാട് വളരാൻ നാടിനൊപ്പം</p>' +
+      '<div class="zg-c"><p class="zg-ok">🔒 ടെസ്റ്റിങ് ആക്സസ്</p><p class="zg-n" style="text-align:center;margin:-.2rem 0 1rem">ZEST APP ഇപ്പോൾ ടെസ്റ്റിങ്ങിലാണ്. ZEST നൽകിയ Username, Password നൽകൂ.<br>(The app is in testing. Enter the access details given by ZEST.)</p>' +
+      '<form class="zg-f" id="zgTest" novalidate><label><span>Username</span><input name="u" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>' +
+      '<label><span>Password</span><input name="p" type="password" autocomplete="current-password" required></label>' +
+      '<p class="zg-e" id="zgTE" hidden></p><button type="submit" class="zg-b blue">CONTINUE</button></form></div></div>';
+    document.body.appendChild(g);
+    var f = g.querySelector("#zgTest"), E = g.querySelector("#zgTE");
+    f.addEventListener("submit", function (e) {
+      e.preventDefault(); var u = f.u.value.trim().toLowerCase(), p = f.p.value;
+      if (!u || !p) { E.hidden = false; E.textContent = "Username, Password രണ്ടും നൽകൂ. (Enter both.)"; return; }
+      sha(u + ":" + p).then(function (h) {
+        if (h !== TH) { E.hidden = false; E.textContent = "Username അല്ലെങ്കിൽ Password തെറ്റാണ്. (Wrong username or password.)"; return; }
+        set("zestTest", TH.slice(0, 16)); g.remove(); build();
+      }).catch(function () { E.hidden = false; E.textContent = "വീണ്ടും ശ്രമിക്കുക. (Please try again.)"; });
+    });
+  }
+  if (document.body) testGate(); else document.addEventListener("DOMContentLoaded", testGate);
 })();
