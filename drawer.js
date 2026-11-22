@@ -60,9 +60,11 @@
   function tl(h, em, t, go) { return '<a class="zdw-tl" data-zfs="" href="' + h + '"' + (go ? ' data-go="' + go + '"' : '') + '><i>' + em + '</i><span>' + t + '</span></a>'; }
   function gp(c, ic, t, inner) { return '<div class="zdw-gp" style="--c:' + c + '"><button type="button" class="zdw-gh" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch">' + CHEV + '</b></button><div class="zdw-sub"><div class="zdw-sub-in zdw-tg">' + inner + '</div></div></div>'; }
   function ln(c, h, ic, t) { return '<a class="zdw-mn" style="--c:' + c + '" href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch">' + CHEV + '</b></a>'; }
-  var ZML = window.ZestLang && ZestLang.get() === "ml";
+  var ZML = window.ZestLang && ZestLang.get() === "ml"; var ZAPP = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
   var items =
-    gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ<br>കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "🛤️", ZML ? "പിന്നിട്ട വഴികൾ" : "OUR JOURNEY")) +
+    (ZAPP ? gp("#1380b8", I.home, "MAIN PAGE", tl("#zgo-home-centre-info", "📢", ZML ? "ZEST<br>ബുള്ളറ്റിൻ" : "ZEST BULLETIN") + tl("#zgo-home-zprime2", "⭐", ZML ? "പ്രൈം<br>സേവനങ്ങൾ" : "PRIME SERVICES") + tl(H("ci-info"), "📌", ZML ? "പ്രധാന<br>അറിയിപ്പുകൾ" : "KEY NOTICES") + tl("#zgo-home-programs", "🧩", ZML ? "പ്രധാന<br>പദ്ധതികൾ" : "OUR PROJECTS") + tl("#zgo-home-clubs", "👥", ZML ? "ZEST<br>ക്ലബ്ബുകൾ" : "ZEST CLUBS")) +
+      gp("#0b3d5c", '<path d="M3 13c3 0 5-2 7-5 1.5 3 4 5 8 5-2 4-6 6-10 6-2.5 0-4-1-5-2"/><path d="M14 6l3-3"/>', "ZEST", tl("#zgo-zest-about", "ℹ️", ZML ? "എന്താണ്<br>ZEST?" : "ABOUT ZEST") + tl("#zgo-zest-zproj", "🏗️", ZML ? "ZEST<br>പ്രോജക്ടുകൾ" : "ZEST PROJECTS") + tl("#zgo-zest-documentary", "▶️", ZML ? "ZEST<br><b style=\"font:inherit;font-size:9.5px;letter-spacing:-.2px;white-space:nowrap\">ഡോക്യുമെന്ററി</b>" : "ZEST DOCUMENTARY") + tl("#zgo-zest-news", "🛤️", ZML ? "പിന്നിട്ട<br>വഴികൾ" : "OUR JOURNEY") + tl("#zgo-zest-stories", "📸", ZML ? "ദൈനംദിന<br>കാഴ്ചകൾ" : "DAILY MOMENTS"))
+    : gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ<br>കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "🛤️", ZML ? "പിന്നിട്ട വഴികൾ" : "OUR JOURNEY"))) +
     gp("#f08a00", I.info, ZML ? "അറിയിപ്പുകൾ" : "SERVICE CENTRE INFO", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", ZML ? "പ്രധാന അറിയിപ്പ്" : "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
     gp("#6a4bd1", I.stu, "STUDENTS CORNER", tl("#students", "📖", "REVISION PLANNER", "rev") + tl("#students", "💰", "POCKET MONEY", "mon")) +
     ln("#16996a", "#zlib", BK, "ZEST LIBRARY") + gp("#e0345c", DROP, "MEDICAL HELP", tl("#med-blood", "🩸", "BLOOD BANK") + tl("#med-eq", "🦽", ZML ? "മെഡിക്കൽ ഉപകരണങ്ങൾ" : "MEDICAL EQUIPMENT") + tl("#med-drv", "🚗", ZML ? "ആശുപത്രി യാത്ര" : "HOSPITAL RIDES")) +
@@ -135,6 +137,12 @@
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : mh === "#med-drv" ? "drv" : "eq";
       if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=15"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      return; }
+    var zg = /^#zgo-(home|zest)-(.+)$/.exec(a.getAttribute("href") || "");
+    if (zg) { e.preventDefault(); e.stopImmediatePropagation(); hide();
+      if (zg[1] === "home") history.replaceState(null, "", location.pathname + location.search); else history.replaceState(null, "", "#tab-zest");
+      dispatchEvent(new HashChangeEvent("hashchange"));
+      setTimeout(function () { var el = document.getElementById(zg[2]); if (el) { var y = el.getBoundingClientRect().top + scrollY - 90; scrollTo({ top: y, behavior: "smooth" }); } }, 160);
       return; }
     if (a.getAttribute("href") === "#zpv") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp4 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
