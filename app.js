@@ -250,7 +250,12 @@
     setTimeout(function () { sh.querySelector(".w1").focus(); }, 320);
   }
   window.zWho = zWho;
-  function openPV() {
+  var SOONP = {
+    pv: { img: "pravasi.svg?v=1", t: T("പ്രവാസി കണക്ട്", "Pravasi Connect"), s: T("ഗൾഫിലും നമ്മൾ നാട്ടുകാർ ഒരുമിച്ച്", "Our village, together in the Gulf too"), nt: T("ഗൾഫിലുള്ള നമ്മുടെ നാട്ടുകാരെ ഒരുമിപ്പിക്കാനുള്ള പുതിയ സംവിധാനം ഉടൻ വരുന്നു.", "A new way to bring our people in the Gulf together is coming soon."), q: T("പ്രവാസി കണക്ടിൽ എന്തൊക്കെ സേവനങ്ങൾ വേണം?", "What services should Pravasi Connect have?"), hd: T("✈️ പ്രവാസി കണക്ട് – ആശയം", "✈️ Pravasi Connect – Idea") },
+    ch: { img: "challenge.svg?v=1", t: T("ചലഞ്ച് & വിൻ", "Challenge & Win"), s: T("പങ്കെടുക്കാം, ജയിക്കാം", "Take part, win"), nt: T("നാട്ടുകാർക്കായി രസകരമായ ചലഞ്ചുകളും സമ്മാനങ്ങളും ഉടൻ വരുന്നു.", "Fun challenges and prizes for our village are coming soon."), q: T("ചലഞ്ച് & വിൻ-ൽ എന്തൊക്കെ വേണം?", "What should Challenge & Win have?"), hd: T("🏆 ചലഞ്ച് & വിൻ – ആശയം", "🏆 Challenge & Win – Idea") }
+  };
+  function openPV(k) {
+    var C = SOONP[k] || SOONP.pv;
     var F = 'Inter,"Noto Sans Malayalam",sans-serif';
     if (!document.getElementById("zpv-css")) { var c = document.createElement("style"); c.id = "zpv-css"; c.textContent =
       '#zpv{position:fixed;inset:0;z-index:2147483600;background:#f3f6f9;overflow:auto;font-family:' + F + ';-webkit-overflow-scrolling:touch;animation:zpvIn .25s ease}@keyframes zpvIn{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}' +
@@ -268,9 +273,9 @@
       document.head.appendChild(c); }
     var o = document.getElementById("zpv"); if (o) o.remove();
     var w = document.createElement("div"); w.id = "zpv"; w.setAttribute("data-noi18n", "");
-    w.innerHTML = '<div class="hh"><img src="/img/hero/pravasi.svg?v=1" alt=""><button type="button" class="bk" aria-label="Back">‹</button><span class="sn">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</span><h2>' + T("പ്രവാസി കണക്ട്", "Pravasi Connect") + '</h2><p>' + T("ഗൾഫിലും നമ്മൾ നാട്ടുകാർ ഒരുമിച്ച്", "Our village, together in the Gulf too") + '</p></div>' +
-      '<div class="in"><div class="nt">' + T("ഗൾഫിലുള്ള നമ്മുടെ നാട്ടുകാരെ ഒരുമിപ്പിക്കാനുള്ള പുതിയ സംവിധാനം ഉടൻ വരുന്നു.", "A new way to bring our people in the Gulf together is coming soon.") + '</div>' +
-      '<div class="sg"><div class="h"><i>💡</i><div><b>' + T("പ്രവാസി കണക്ടിൽ എന്തൊക്കെ സേവനങ്ങൾ വേണം?", "What services should Pravasi Connect have?") + '</b><small>' + T("നിങ്ങളുടെ ആശയം പറയൂ", "Share your idea") + '</small></div></div>' +
+    w.innerHTML = '<div class="hh"><img src="/img/hero/' + C.img + '" alt=""><button type="button" class="bk" aria-label="Back">‹</button><span class="sn">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</span><h2>' + C.t + '</h2><p>' + C.s + '</p></div>' +
+      '<div class="in"><div class="nt">' + C.nt + '</div>' +
+      '<div class="sg"><div class="h"><i>💡</i><div><b>' + C.q + '</b><small>' + T("നിങ്ങളുടെ ആശയം പറയൂ", "Share your idea") + '</small></div></div>' +
       '<textarea rows="4" placeholder="' + T("നിങ്ങളുടെ ആശയം ഇവിടെ എഴുതൂ…", "Type your idea…") + '"></textarea><button type="button" class="sb">' + T("അയക്കുക", "Send") + '</button></div></div>';
     document.body.appendChild(w);
     function onPop() { var x = document.getElementById("zpv"); if (x) x.remove(); removeEventListener("popstate", onPop); }
@@ -280,12 +285,12 @@
     w.querySelector(".sb").onclick = function () {
       var ta = w.querySelector("textarea"), v = ta.value.trim();
       if (!v) { ta.focus(); ta.classList.add("err"); setTimeout(function () { ta.classList.remove("err"); }, 900); return; }
-      zWho(T("✈️ പ്രവാസി കണക്ട് – ആശയം", "✈️ Pravasi Connect – Idea"), v);
+      zWho(C.hd, v);
     };
   }
   window.zOpenPV = openPV;
   function openPrime(k) {
-    if (k === "pv") return openPV();
+    if (k === "pv" || k === "ch") return openPV(k);
     if (k === "stu") return clickHash("#students");
     if (k === "lib") return loadLib(function () { ZestLib.open(); });
     loadMed(function () { ZestMed.open(k === "blood" ? "blood" : "eq"); });
@@ -294,7 +299,8 @@
     ["lib", "library", T("ZEST ലൈബ്രറി", "ZEST Library"), T("പുസ്തകങ്ങൾ തിരയാം, ചോദിക്കാം", "Find and request books")],
     ["blood", "blood", T("ബ്ലഡ് ബാങ്ക്", "Blood Bank"), T("രക്തം നൽകാം / വേണം", "Give or request blood")],
     ["eq", "equipment", T("മെഡിക്കൽ സപ്പോർട്ട്", "Medical Support"), T("ഉപകരണങ്ങൾ, ആശുപത്രി യാത്ര", "Equipment, hospital trips")],
-    ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഗൾഫിലെ നാട്ടുകാരുടെ കൂട്ടായ്മ", "Our people in the Gulf"), 1]];
+    ["pv", "pravasi", T("പ്രവാസി കണക്ട്", "Pravasi Connect"), T("ഗൾഫിലെ നാട്ടുകാരുടെ കൂട്ടായ്മ", "Our people in the Gulf"), 1],
+    ["ch", "challenge", T("ചലഞ്ച് & വിൻ", "Challenge & Win"), T("പങ്കെടുക്കാം, ജയിക്കാം", "Take part, win"), 1]];
   function primeGrid(desc) {
     function tile(p) { return '<button type="button" data-k="' + p[0] + '">' + (p[4] && !desc ? '<em class="zsn" data-zfs="">' + T("ഉടൻ വരുന്നു", "Coming soon") + '</em>' : '') + '<img src="/img/hero/' + p[1] + '.svg" alt=""><b>' + p[2] + '</b>' + (desc && !p[4] ? '<small>' + p[3] + '</small>' : '') + '<i class="go">' + ic("arr") + '</i></button>'; }
     if (!desc) return '<div class="zpg">' + PR.map(tile).join("") + '</div>';
