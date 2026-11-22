@@ -566,6 +566,7 @@
       '<a class="zrow" href="#notify" style="--c:#fff3dc;--k:#c77700"><i>' + ic("bell") + '</i><span><b>' + T("നോട്ടിഫിക്കേഷൻ", "Notifications") + '</b><small>' + T("പുതിയ അറിയിപ്പുകൾ", "New updates") + '</small></span><em>' + ic("arr") + '</em></a>' +
       '<a class="zrow" href="#settings"><i>' + ic("globe") + '</i><span><b>' + T("ഭാഷ", "Language") + '</b><small>മലയാളം / English</small></span><em>' + ic("arr") + '</em></a>' +
       '<a class="zrow" href="#textsize" style="--c:#e8f3fb;--k:#1380b8"><i><b style="font:800 14px/1 Inter,sans-serif">Aa</b></i><span><b>' + T("അക്ഷര വലിപ്പം", "Text size") + '</b><small>' + ({ s: T("ചെറുത്", "Small"), m: T("സാധാരണ", "Normal"), l: T("വലുത്", "Large"), x: T("ഏറ്റവും വലുത്", "Extra large") })[zfzGet()] + '</small></span><em>' + ic("arr") + '</em></a>' +
+      '<a class="zrow" href="#voice" style="--c:#e8f3fb;--k:#1380b8"><i><b style="font:700 15px/1 Inter,sans-serif">🔊</b></i><span><b>' + T("ശബ്ദം", "Voice") + '</b><small>' + (function () { var a = "", b = ""; try { a = localStorage.getItem("zestVoiceML") || ""; b = localStorage.getItem("zestVoiceEN") || ""; } catch (e) {} return a || b ? T("തിരഞ്ഞെടുത്തത്", "Selected") : T("ഫോണിന്റെ സാധാരണ ശബ്ദം", "Phone default"); })() + '</small></span><em>' + ic("arr") + '</em></a>' +
       '</div>' +
       '<div class="zsh">' + T("ZEST-ൽ ചേരാം", "Join ZEST") + '</div></div>';
     var ff = el.querySelector(".zff");
@@ -586,7 +587,10 @@
     pl.innerHTML = '<button type="button" class="pp" aria-label="Pause"><i></i><i></i></button><div class="tt"><b></b><div class="bar"><span></span></div><small>' + T("🔊 വായിക്കുന്നു…", "🔊 Reading…") + '</small></div><button type="button" class="sp">1x</button><button type="button" class="x" aria-label="Close">✕</button>';
     document.body.appendChild(pl);
     var Q = [], qi = 0, rate = 1, cur = null, btn = null, paused = false, mlv = null, env = null;
-    function voices() { var v = speechSynthesis.getVoices() || []; mlv = v.filter(function (x) { return /^ml/i.test(x.lang); })[0] || null; env = v.filter(function (x) { return /^en[-_]IN/i.test(x.lang); })[0] || v.filter(function (x) { return /^en/i.test(x.lang); })[0] || null; }
+    function voices() { var v = speechSynthesis.getVoices() || [], sm = "", se = ""; try { sm = localStorage.getItem("zestVoiceML") || ""; se = localStorage.getItem("zestVoiceEN") || ""; } catch (e) {}
+      var pick = function (u) { return u ? v.filter(function (x) { return x.voiceURI === u; })[0] || null : null; };
+      mlv = pick(sm) || v.filter(function (x) { return /^ml/i.test(x.lang); })[0] || null; env = pick(se) || v.filter(function (x) { return /^en[-_]IN/i.test(x.lang); })[0] || v.filter(function (x) { return /^en/i.test(x.lang); })[0] || null; }
+    window.zVoiceReload = voices;
     voices(); if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = voices;
     function chunks(t) { var out = [], parts = String(t).replace(/\s+/g, " ").split(/(?<=[.!?।\n:])\s+/); parts.forEach(function (p) { while (p.length > 180) { var c = p.lastIndexOf(" ", 180); if (c < 60) c = 180; out.push(p.slice(0, c)); p = p.slice(c); } if (p.trim()) out.push(p.trim()); }); return out; }
     function prog() { pl.querySelector(".bar span").style.width = (Q.length ? Math.round(qi / Q.length * 100) : 0) + "%"; }
