@@ -134,20 +134,18 @@
         '<div class="hs">' + T("ലൈബ്രറിയിൽ ഇല്ലാത്ത പുസ്തകം വേണോ? പറഞ്ഞാൽ ZEST വാങ്ങാൻ ശ്രമിക്കും 📚", "Want a book the library doesn\'t have? Tell us and ZEST will try to get it 📚") + '</div>' +
         '<div class="sgf"><label><span>' + T("പുസ്തകത്തിന്റെ പേര്", "Book name") + ' <em>*</em></span><input class="b1" placeholder="' + T("ഉദാ: ആടുജീവിതം", "e.g. Aadujeevitham") + '"></label>' +
         '<label><span>' + T("എഴുത്തുകാരൻ (അറിയുമെങ്കിൽ)", "Author (if you know)") + '</span><input class="b2" placeholder="' + T("എഴുത്തുകാരന്റെ പേര്", "Author name") + '"></label>' +
-        '<div class="r2"><label><span>' + T("നിങ്ങളുടെ പേര്", "Your name") + ' <em>*</em></span><input class="b3" placeholder="' + T("പേര്", "Name") + '"></label>' +
-        '<label><span>' + T("മൊബൈൽ നമ്പർ", "Mobile number") + ' <em>*</em></span><input class="b4" type="tel" inputmode="tel" maxlength="13" placeholder="' + T("10 അക്ക നമ്പർ", "10-digit number") + '"></label></div></div>' +
-        '<div class="ap"><button type="button" class="a zwa"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("WhatsApp-ൽ അയക്കൂ", "Send on WhatsApp") + '</button></div>';
+        '</div>' +
+        '<div class="ap"><button type="button" class="a zwa" style="background:linear-gradient(135deg,#0d5a8c,#1380b8);justify-content:center;text-align:center">' + T("സബ്മിറ്റ്", "Submit") + '</button></div>';
       function shut() { bg.classList.remove("on"); sh.classList.remove("on"); setTimeout(function () { bg.remove(); sh.remove(); }, 300); }
       bg.onclick = shut; sh.querySelector(".x").onclick = shut;
       sh.querySelector(".zwa").onclick = function () {
-        var b1 = sh.querySelector(".b1"), nm = b1.value.trim(), au = sh.querySelector(".b2").value.trim(), b3 = sh.querySelector(".b3"), b4 = sh.querySelector(".b4"), pn = b3.value.trim(), mb = b4.value.trim(), bad = null;
-        if (!nm) { b1.classList.add("inv"); bad = bad || b1; }
-        if (!pn) { b3.classList.add("inv"); bad = bad || b3; }
-        if (mb.replace(/\D/g, "").length < 10) { b4.classList.add("inv"); bad = bad || b4; }
-        if (bad) { bad.focus(); return; }
-        var msg = ML ? "ഹലോ ZEST 👋\n\n📚 ലൈബ്രറിയിലേക്ക് ഈ പുസ്തകം വാങ്ങാമോ?\n\n📖 പുസ്തകം: " + nm + (au ? "\n✍️ എഴുത്തുകാരൻ: " + au : "") + "\n\n🙋 ആവശ്യപ്പെട്ടത്: " + pn + "\n📱 " + mb
-                     : "Hello ZEST 👋\n\n📚 Could the library get this book?\n\n📖 Book: " + nm + (au ? "\n✍️ Author: " + au : "") + "\n\n🙋 Requested by: " + pn + "\n📱 " + mb;
-        window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank"); shut();
+        var b1 = sh.querySelector(".b1"), nm = b1.value.trim(), au = sh.querySelector(".b2").value.trim();
+        if (!nm) { b1.classList.add("inv"); b1.focus(); return; }
+        var head = T("📚 ലൈബ്രറി – പുസ്തകം ആവശ്യപ്പെടൽ", "📚 Library – Book request");
+        var body = T("📖 പുസ്തകം: ", "📖 Book: ") + nm + (au ? T("\n✍️ എഴുത്തുകാരൻ: ", "\n✍️ Author: ") + au : "");
+        shut();
+        if (window.zWho) setTimeout(function () { zWho(head, body); }, 320);
+        else window.open("https://wa.me/918921369102?text=" + encodeURIComponent(head + "\n\n" + body), "_blank");
       };
       sh.querySelectorAll("input").forEach(function (x) { x.oninput = function () { x.classList.remove("inv"); }; });
       document.body.appendChild(bg); document.body.appendChild(sh);
