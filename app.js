@@ -542,7 +542,7 @@
     /* "join" buttons anywhere → Me tab */
     document.addEventListener("click", function (e) {
       var a = e.target.closest && e.target.closest('a[href="#join"],a[href$="/#join"]');
-      if (!a || nav.contains(a)) return; e.preventDefault(); e.stopPropagation(); go("me"); setTimeout(function () { var j = document.getElementById("join"); if (j) j.scrollIntoView({ behavior: "smooth" }); }, 80);
+      if (!a || nav.contains(a)) return; e.preventDefault(); e.stopPropagation(); ["zmhb", "bg"].forEach(function (id) { var b = document.getElementById(id); if (b && b.getAttribute("aria-expanded") === "true") b.click(); }); var zx = document.querySelector(".zdw.on .zdw-x, .zdw.open .zdw-x"); if (zx) zx.click(); go("me"); setTimeout(function () { var j = document.getElementById("join"); if (j) j.scrollIntoView({ behavior: "smooth" }); }, 80);
     }, true);
     nav.addEventListener("click", function (e) {
       var a = e.target.closest("a"); if (!a) return; var t = a.dataset.t; if (t === "info") return;
