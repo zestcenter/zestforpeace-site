@@ -277,7 +277,7 @@
     function render(tab) {
       cur = tab;
       var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ സപ്പോർട്ട്", "Medical Support");
-      var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ചികിത്സയ്ക്ക് നാട്ടുകാരുടെ കൈത്താങ്ങ്", "Neighbours helping with treatment");
+      var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ഉപകരണങ്ങൾ, ആശുപത്രി യാത്ര", "Equipment, hospital trips");
       w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button><img class="zhimg" src="/img/hero/' + (which === "blood" ? "blood" : "equipment") + '.svg" alt=""><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage(tab) : svcBar() + (SVC === "drv" ? drvPage(tab) : eqPage(tab)));
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
