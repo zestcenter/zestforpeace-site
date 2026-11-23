@@ -85,7 +85,7 @@
     'html.zapp .z3md svg,html.zapp .zu-more a svg,html.zapp .zu-more button svg,html.zapp .zjw svg{width:10px!important;height:10px!important;stroke:currentColor!important}html.zapp .zu-more a:after,html.zapp .zu-more a:before,html.zapp .zjw:before,html.zapp .zjw:after{display:none!important}' +
     '.zpg button i.go{width:16px!important;height:16px!important}.zpg button i.go .zsi{width:9px!important;height:9px!important}' +
     'html.zapp .zth h2,html.zapp .mh h2,html.zapp .zhx h2,html.zapp .who2 h2,html.zapp .zsc2 h2,html.zapp .w2-hd h2{font-family:Manjari,Inter,"Noto Sans Malayalam",sans-serif!important;font-weight:700!important;font-size:25px!important;letter-spacing:.01em!important;line-height:1.3!important}' +
-    'html.zapp .wa,html.zapp .ig{display:none!important}html.zapp[data-zt=zest] #zproj{order:11}' +
+    'html.zapp .wa,html.zapp .ig{display:none!important}html.zapp[data-zt=zest] #zproj{order:6}' +
     'html.zapp #centre-info .z3k{filter:drop-shadow(0 3px 6px rgba(11,61,92,.12))!important;box-shadow:none!important}html.zapp #centre-info .z3s{padding-bottom:24px!important}html.zapp #centre-info .z3d{display:none!important}' +
     '#zproj{display:none}html.zapp[data-zt=zest] #zproj{display:block}html.zapp #zproj{order:6;background:#eef3f7}html.zapp[data-zt=zest] #programs{display:none!important}' +
     '.zpj{display:grid;gap:20px}.zpk{background:#fff;border-radius:26px;box-shadow:0 10px 26px -12px rgba(11,61,92,.35);overflow:hidden}.zpk-im{padding:12px 12px 0}.zpk-im img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;background:#e6f0f6}' +
