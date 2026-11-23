@@ -168,7 +168,7 @@
         T("ഹലോ ZEST സെന്റർ 👋\n\n🤝 മെഡിക്കൽ ഉപകരണം കൊടുക്കാം", "Hello ZEST Centre 👋\n\n🤝 I can give medical equipment") + "\n🧰 " + T("ഉപകരണം", "Equipment") + ": " + names + who + "\n🔁 " + hw); }
     };
   }
-  var BLOOD_LIVE = false; /* set true when the blood service starts – "Need blood" then opens WhatsApp to the main ZEST number */
+  var BLOOD_LIVE = true; /* set true when the blood service starts – "Need blood" then opens WhatsApp to the main ZEST number */
   var BST = { ready: 1, grp: "", done: 0 };
   function bagSvg() { return '<svg class="zbsv" viewBox="0 0 58 84" aria-hidden="true"><rect class="pt" x="22" y="2" width="14" height="10" rx="3"/><rect class="bd" x="4" y="10" width="50" height="62" rx="14"/><rect class="lqs" x="9" y="44" width="40" height="23" rx="10"/><rect class="lqf" x="9" y="24" width="40" height="43" rx="10"/><rect class="hl" x="14" y="16" width="20" height="3" rx="1.5"/><path class="tb" d="M29 72 V82"/></svg>'; }
   var BCOUNT = { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }; /* sample numbers – will come from the Google Sheet */
@@ -199,7 +199,7 @@
     var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
     if (!give) {
       var tot = 0; G.forEach(function (g) { tot += BCOUNT[g]; });
-      return h + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
+      return h + (BLOOD_LIVE ? '<style>#zmed .zbav,#zmed .zbtot{display:none!important}</style>' : '') + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
         G.map(function (g) { var n = BCOUNT[g]; return '<div' + (n ? '' : ' class="z"') + '><i class="bgi">' + bagSvg() + '<b>' + g + '</b></i><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
         '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
         '<div class="zbt">🙏 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +
@@ -209,7 +209,7 @@
         '<div class="zbdl">' + T("ആവശ്യമുള്ള ദിവസം", "Date needed") + '</div>' + ifl("📅", inp("rd", "date", "", ' min="' + isoD(new Date()) + '"')) +
         ifl("🏥", inp("rhs", "text", T("രക്തം നൽകേണ്ട ഹോസ്പിറ്റൽ", "Hospital where blood is needed"))) + '</div>' +
         '<div class="zbhw"><h5>' + T("രക്തം വേണമെങ്കിൽ എന്ത് ചെയ്യണം?", "Need blood? Here's how") + '</h5><ol><li>' + T("താഴെയുള്ള ബട്ടൺ അമർത്തി ZEST CENTRE-നെ അറിയിക്കുക", "Tap the button below to tell ZEST Centre") + '</li><li>' + T("ZEST ലഭ്യമായ ദാതാക്കളെ ബന്ധപ്പെടും", "ZEST contacts available donors") + '</li><li>' + T("ദാതാവ് നിങ്ങളെ നേരിട്ട് വിളിക്കും", "A donor calls you directly") + '</li></ol></div>' +
-        '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button><p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>';
+        '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button>' + (BLOOD_LIVE ? '' : '<p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>');
     }
     var dn = getDonor();
     if (dn && !BST.form) return h + donorCard(dn);
