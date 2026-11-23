@@ -61,6 +61,8 @@
   function toast(m) { var t = document.createElement("div"); t.className = "zmt"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2200); }
   function chips(list, cls) { return '<div class="ch ' + (cls || "") + '">' + list.map(function (p, i) { return '<button type="button"' + (i === 0 ? ' class="on"' : '') + '>' + p + '</button>'; }).join("") + '</div>'; }
   function single(root) { root.querySelectorAll(".ch,.bg").forEach(function (g) { if (g.classList.contains("multi")) return; g.addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; g.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); }); }); }); }
+  function sendWA(form, data, msg) { if (window.zSheet) zSheet(form, data); window.open("https://wa.me/918848313837?text=" + encodeURIComponent(msg), "_blank"); toast(T("നന്ദി! വിവരങ്ങൾ ZEST CENTRE-ൽ ലഭിച്ചു 💚", "Thank you! ZEST Centre has your details 💚")); }
+  function plc(a, b) { return VAL[a] === "other" ? (VAL[b] || "") : (VAL[a] || ""); }
   function soon() { return T("ഈ സേവനം ഉടൻ തുടങ്ങും 🙂 ഇപ്പോൾ കാണാൻ മാത്രം", "This service starts soon 🙂 Preview only"); }
 
   function items() { return [["🦽", T("വീൽചെയർ", "Wheelchair"), "#e3f1fa"], ["🛏️", T("ആശുപത്രി കട്ടിൽ", "Hospital bed"), "#efe9fd"], ["🚶", T("വാക്കർ", "Walker"), "#fff1e2"], ["🩼", T("ക്രച്ചസ്", "Crutches"), "#ffe9ef"], ["🫁", T("ഓക്സിജൻ മെഷീൻ", "Oxygen machine"), "#e6f3fb"], ["🪑", T("കമ്മോഡ് ചെയർ", "Commode chair"), "#e8f7ef"], ["🌡️", T("BP / ഷുഗർ മെഷീൻ", "BP / Sugar meter"), "#fff1e2"], ["💨", T("നെബുലൈസർ", "Nebuliser"), "#efe9fd"], ["➕", T("മറ്റുള്ളവ", "Other"), "#eef2f5"]]; }
@@ -91,7 +93,7 @@
       '</div><div class="ntb">' + (need ? '<p>🔍 ' + T("ലഭിക്കുന്ന ഉപകരണങ്ങൾ പൂർണമായും പരിശോധിച്ചതിന് ശേഷം മാത്രം കൈപ്പറ്റുക.", "Check the equipment fully before you accept it.") + '</p>' : '') +
       '<p>💚 ' + T("ZEST App-ലൂടെയുള്ള ഈ കൈമാറ്റം തീർത്തും സൗജന്യമായിരിക്കും.", "This exchange through the ZEST App is completely free.") + '</p></div>' +
       '<button type="button" class="go eqg">' + WA + (need ? T("ZEST CENTRE-ൽ അന്വേഷിക്കാം", "Ask ZEST Centre") : T("ZEST CENTRE-ൽ അറിയിക്കാം", "Tell ZEST Centre")) + '</button>' +
-      '<p class="nt">' + soon() + '</p>';
+      '';
   }
   var SVC = "eq", DRV = { veh: "", days: [], tm: [] };
   function svcBar() {
@@ -114,7 +116,7 @@
       '</div><div class="ntb"><p>💚 ' + (need ? T("ZEST അടുത്തുള്ള ഒരു വളണ്ടിയർ ഡ്രൈവറെ ഏർപ്പാടാക്കും.", "ZEST will arrange a volunteer driver near you.") : T("അടുത്തുള്ള ആവശ്യം വന്നാൽ ZEST നിങ്ങളെ വിളിക്കും.", "ZEST will call you when someone nearby needs a ride.")) + '</p>' +
       '<p>⛽ ' + (need ? T("ഇന്ധന ചെലവ് ഡ്രൈവറുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the driver.") : T("ഇന്ധന ചെലവ് യാത്രക്കാരുമായി സംസാരിച്ച് തീരുമാനിക്കാം.", "Fuel cost can be agreed with the passenger.")) + '</p></div>' +
       '<button type="button" class="go eqg drg">' + WA + T("സബ്മിറ്റ്", "Submit") + '</button>' +
-      '<p class="nt">' + soon() + '</p>';
+      '';
   }
   function drvWire(w, tab) {
     var need = tab !== "give";
@@ -128,7 +130,14 @@
       w.querySelectorAll(".f input").forEach(function (el) { var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
       if (!need && !DRV.veh) { var vg = w.querySelector('.zdc[data-k="veh"]'); vg.classList.add("inv"); bad = bad || vg; }
       if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
-      toast(soon());
+      var DL = { mon: T("തിങ്കൾ", "Mon"), tue: T("ചൊവ്വ", "Tue"), wed: T("ബുധൻ", "Wed"), thu: T("വ്യാഴം", "Thu"), fri: T("വെള്ളി", "Fri"), sat: T("ശനി", "Sat"), sun: T("ഞായർ", "Sun"), emg: T("അടിയന്തരം", "Emergency"), mor: T("രാവിലെ", "Morning"), noon: T("ഉച്ചയ്ക്ക്", "Afternoon"), eve: T("വൈകുന്നേരം", "Evening"), car: T("കാർ", "Car"), auto: T("ഓട്ടോ", "Auto"), bike: T("ബൈക്ക്", "Bike") };
+      function lj(a) { return (a || []).map(function (k) { return DL[k] || k; }).join(", "); }
+      var who = "\n\n🙂 " + T("പേര്", "Name") + ": " + VAL.n + "\n🏠 " + T("വീട്ടുപേര്", "House") + ": " + VAL.h + "\n📱 " + T("മൊബൈൽ", "Mobile") + ": " + VAL.m;
+      if (need) { var dt = (VAL.dt || "").replace("T", " ");
+        sendWA("driver", { Type: "Need a ride", Name: VAL.n, House: VAL.h, Mobile: VAL.m, Hospital: VAL.hos, DateTime: dt, Pickup: VAL.pk },
+          T("ഹലോ ZEST സെന്റർ 👋\n\n🚗 ആശുപത്രി യാത്രയ്ക്ക് ഡ്രൈവർ വേണം", "Hello ZEST Centre 👋\n\n🚗 Need a driver for a hospital trip") + who + "\n🏥 " + T("ആശുപത്രി", "Hospital") + ": " + VAL.hos + "\n📅 " + T("തീയതി · സമയം", "Date · time") + ": " + dt + "\n📍 " + T("എവിടെ നിന്ന്", "Pick up") + ": " + VAL.pk); }
+      else sendWA("driver", { Type: "Volunteer driver", Name: VAL.n, House: VAL.h, Mobile: VAL.m, Vehicle: DL[DRV.veh] || DRV.veh, Days: lj(DRV.days), Time: lj(DRV.tm) },
+          T("ഹലോ ZEST സെന്റർ 👋\n\n🚗 ഞാൻ വളണ്ടിയർ ഡ്രൈവർ ആകാം", "Hello ZEST Centre 👋\n\n🚗 I can be a volunteer driver") + who + "\n🚘 " + T("വാഹനം", "Vehicle") + ": " + (DL[DRV.veh] || DRV.veh) + (DRV.days && DRV.days.length ? "\n📅 " + T("ദിവസങ്ങൾ", "Days") + ": " + lj(DRV.days) : "") + (DRV.tm && DRV.tm.length ? "\n🕒 " + T("സമയം", "Time") + ": " + lj(DRV.tm) : ""));
     };
   }
   function eqWire(w, tab, rerender) {
@@ -150,7 +159,13 @@
         if (!ok) { el.classList.add("inv"); bad = bad || el; } });
       if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
       if (need && SEL[key].indexOf(last) > -1 && VAL.othN && EXTRA.indexOf(VAL.othN.trim()) < 0) { EXTRA.push(VAL.othN.trim()); try { localStorage.setItem("zestEqExtra", JSON.stringify(EXTRA)); } catch (e) {} }
-      toast(soon());
+      var all = eqItems(need), names = SEL[key].map(function (i) { return i === last ? (VAL[need ? "othN" : "othG"] || "") : all[i][1]; }).filter(Boolean).join(", "), place = plc("p", "po");
+      var who = "\n\n🙂 " + T("പേര്", "Name") + ": " + VAL.n + "\n🏠 " + T("വീട്ടുപേര്", "House") + ": " + VAL.h + "\n📍 " + T("സ്ഥലം", "Place") + ": " + place + "\n📱 " + T("മൊബൈൽ", "Mobile") + ": " + VAL.m;
+      if (need) sendWA("equipment", { Type: "Need", Equipment: names, Name: VAL.n, House: VAL.h, Place: place, Mobile: VAL.m, Date: VAL.d, Days: VAL.dd },
+        T("ഹലോ ZEST സെന്റർ 👋\n\n🦽 മെഡിക്കൽ ഉപകരണം വേണം", "Hello ZEST Centre 👋\n\n🦽 Need medical equipment") + "\n🧰 " + T("ഉപകരണം", "Equipment") + ": " + names + who + "\n📅 " + T("തീയതി", "Date") + ": " + VAL.d + "\n⏳ " + T("ദിവസം", "Days") + ": " + VAL.dd);
+      else { var hw = VAL.how === "lend" ? T("കുറച്ച് ദിവസത്തേക്ക് കൊടുക്കാം", "Lend for a few days") : T("പൂർണമായും കൊടുക്കാം", "Give it away");
+        sendWA("equipment", { Type: "Can give", Equipment: names, Name: VAL.n, House: VAL.h, Place: place, Mobile: VAL.m, How: hw },
+        T("ഹലോ ZEST സെന്റർ 👋\n\n🤝 മെഡിക്കൽ ഉപകരണം കൊടുക്കാം", "Hello ZEST Centre 👋\n\n🤝 I can give medical equipment") + "\n🧰 " + T("ഉപകരണം", "Equipment") + ": " + names + who + "\n🔁 " + hw); }
     };
   }
   var BLOOD_LIVE = false; /* set true when the blood service starts – "Need blood" then opens WhatsApp to the main ZEST number */
@@ -197,7 +212,7 @@
         '<button type="button" class="go eqg zbneed">' + WA + T("ZEST CENTRE-നെ അറിയിക്കാം", "Tell ZEST Centre") + '</button><p class="nt">' + soon() + ' ' + T("(ഇപ്പോഴുള്ളത് മാതൃകാ എണ്ണം)", "(sample numbers)") + '</p>';
     }
     var dn = getDonor();
-    if (dn && !BST.form) return h + donorCard(dn) + '<p class="nt">' + soon() + '</p>';
+    if (dn && !BST.form) return h + donorCard(dn);
     return h + '<div class="zbq"><span class="ic">🩸</span><span><b>' + T("നാട്ടിലെ ഒരു ജീവന് നിങ്ങളുടെ രക്തം വേണ്ടി വന്നാൽ?", "If a life in our village needs your blood?") + '</b><small>' + T("ദാതാവായി ചേരാൻ 1 മിനിറ്റ് മതി", "Joining takes just 1 minute") + '</small></span></div>' +
       '<div class="zbyn"><button type="button" data-r="1"' + (BST.ready ? ' class="on"' : '') + '>✅ ' + T("ഞാൻ തയ്യാറാണ്", "I'm ready") + '</button><button type="button" data-r="0"' + (BST.ready ? '' : ' class="on"') + '>' + T("ഇപ്പോൾ ഇല്ല", "Not now") + '</button></div>' +
       (BST.ready && BST.done ? '<div class="zbok"><div class="zbk">✅</div><h4>' + T("നന്ദി! ഒരു ജീവൻ രക്ഷിക്കാൻ നിങ്ങളും തയ്യാർ 💚", "Thank you! You are ready to save a life 💚") + '</h4><p>' + T("(ഇത് മാതൃക മാത്രം – സേവനം തുടങ്ങുമ്പോഴാണ് വിവരങ്ങൾ ZEST-ലേക്ക് പോവുക)", "(Preview only – details are sent to ZEST once the service starts)") + '</p>' +
@@ -213,7 +228,7 @@
       '</div><button type="button" class="go zbgo">🩸 ' + T("രക്തദാതാവായി ചേരാം", "Join as a donor") + '</button>' +
       '<p class="pv">🔒 ' + T("ഈ വിവരങ്ങൾ ZEST അഡ്മിന് മാത്രമേ കാണാൻ കഴിയൂ", "Only ZEST admins can see these details") + '</p>'
       : '<div class="zbno">🙏 ' + T("ശരി, ഒരു പ്രശ്നവുമില്ല. എപ്പോഴെങ്കിലും തയ്യാറാകുമ്പോൾ ഇവിടെ വന്ന് ചേരാം.", "No problem. You can join here whenever you are ready.") + '</div>') +
-      '<p class="nt">' + soon() + '</p>';
+      '';
   }
   function bsheet(html) { var bg = document.createElement("div"); bg.className = "zbs-bg"; var sh = document.createElement("div"); sh.className = "zbs"; sh.setAttribute("data-noi18n", "");
     sh.innerHTML = '<div class="gr"></div>' + html; function shut() { bg.remove(); sh.remove(); } bg.onclick = shut; document.body.appendChild(bg); document.body.appendChild(sh); sh.querySelector(".x").onclick = shut; return { sh: sh, shut: shut }; }
@@ -265,6 +280,9 @@
       w.querySelectorAll(".zbfs input,.zbfs select").forEach(function (el) { if (el.closest("[hidden]")) return; var v = (el.value || "").trim(), ok = !!v; if (ok && el.name === "m") ok = v.replace(/\D/g, "").length >= 10; if (!ok) { el.classList.add("inv"); bad = bad || el; } });
       if (bad) { bad.scrollIntoView({ behavior: "smooth", block: "center" }); toast(T("എല്ലാ വിവരങ്ങളും പൂരിപ്പിക്കൂ", "Please fill in all the details")); return; }
       var keep = getDonor(), me = { n: VAL.n, h: VAL.h, m: VAL.m, g: BST.grp, bp: VAL.bp, bpo: VAL.bpo, bl: VAL.bl, bd: VAL.bl === "lt3" ? VAL.bd : "" };
+      var BLL = { lt3: T("3 മാസത്തിനുള്ളിൽ", "Within 3 months"), gt3: T("3 മാസത്തിന് മുമ്പ്", "Over 3 months ago"), never: T("ഇതുവരെ കൊടുത്തിട്ടില്ല", "Never") }, bplace = plc("bp", "bpo"), last = (BLL[VAL.bl] || "") + (VAL.bl === "lt3" && VAL.bd ? " (" + fmtD(new Date(VAL.bd)) + ")" : "");
+      sendWA("blood_donor", { Name: VAL.n, House: VAL.h, Mobile: VAL.m, Group: BST.grp, Place: bplace, LastDonation: last },
+        T("ഹലോ ZEST സെന്റർ 👋\n\n🩸 ഞാൻ രക്തദാതാവായി രജിസ്റ്റർ ചെയ്യുന്നു", "Hello ZEST Centre 👋\n\n🩸 Registering as a blood donor") + "\n\n🙂 " + T("പേര്", "Name") + ": " + VAL.n + "\n🏠 " + T("വീട്ടുപേര്", "House") + ": " + VAL.h + "\n📍 " + T("സ്ഥലം", "Place") + ": " + bplace + "\n📱 " + T("മൊബൈൽ", "Mobile") + ": " + VAL.m + "\n🩸 " + T("ബ്ലഡ് ഗ്രൂപ്പ്", "Blood group") + ": " + BST.grp + "\n🗓️ " + T("അവസാനം കൊടുത്തത്", "Last donation") + ": " + last);
       if (!(keep && BST.adding)) setDonor(me);
       BST.done = 1; BST.form = 1; rerender(); var ok = w.querySelector(".zbok"); if (ok) ok.scrollIntoView({ behavior: "smooth", block: "center" });
     };
@@ -279,7 +297,7 @@
       cur = tab;
       var title = which === "blood" ? "🩸 " + T("ബ്ലഡ് ബാങ്ക്", "Blood Bank") : "🦽 " + T("മെഡിക്കൽ സപ്പോർട്ട്", "Medical Support");
       var cap = which === "blood" ? "🩸" : "🦽", sub = which === "blood" ? T("അടിയന്തര ഘട്ടത്തിൽ ഒരു ജീവൻ രക്ഷിക്കാം", "Save a life in an emergency") : T("ഉപകരണങ്ങൾ, ആശുപത്രി യാത്ര", "Equipment, hospital trips");
-      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button><img class="zhimg" src="/img/hero/' + (which === "blood" ? "blood" : "equipment") + '.svg" alt=""><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div><div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' + (which === "blood" ? bloodPage(tab) : svcBar() + (SVC === "drv" ? drvPage(tab) : eqPage(tab)));
+      w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button><img class="zhimg" src="/img/hero/' + (which === "blood" ? "blood" : "equipment") + '.svg" alt=""><h2>' + title.replace(/^\S+\s/, "") + '</h2><p>' + sub + '</p></div>' + (which === "blood" && tab === "need" && !BLOOD_LIVE ? '<div class="soon">👀 ' + T("ഇത് ഇപ്പോൾ കാണാൻ മാത്രം – ഉടൻ തുടങ്ങും", "Preview – this service starts soon") + '</div>' : '') + (which === "blood" ? bloodPage(tab) : svcBar() + (SVC === "drv" ? drvPage(tab) : eqPage(tab)));
       w.querySelector(".bk").onclick = close;
       w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(cur); w.scrollTop = y; };
       single(w);
