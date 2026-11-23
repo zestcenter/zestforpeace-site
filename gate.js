@@ -1,3 +1,6 @@
+/* all forms → one Google Sheet (a tab per form) via Apps Script; nothing is stored in the app */
+window.zSheet = window.zSheet || function (form, data) { try { var b = new URLSearchParams(); b.append("form", form); for (var k in data) if (data[k] != null && String(data[k]).trim() !== "") b.append(k, String(data[k]).trim()); fetch("https://script.google.com/macros/s/AKfycbyK73G8Mydnrxb4aGWxf1xRfEPHMXEuzoLbtSnMaquZWvnM7kyw0Eh8vWu1Srzes8pO/exec", { method: "POST", mode: "no-cors", body: b }).catch(function () {}); } catch (e) {} };
+window.zEntryMap = { "entry.1632416990": "Name", "entry.1816773413": "House", "entry.678258537": "Age", "entry.2001662289": "Class", "entry.143003087": "WhatsApp", "entry.1402189304": "Club", "entry.402692972": "Comments" };
 /* Website: the app is not public yet – install buttons stay, but tapping them only says "coming soon" (the /app/ page itself still works for people given the link) */
 (function () {
   var sa = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
@@ -207,14 +210,14 @@
             var fd = new FormData();
             fd.append("entry.1632416990", name); fd.append("entry.1816773413", f.house.value.trim()); fd.append("entry.678258537", f.age.value.trim());
             fd.append("entry.2001662289", f.cls.value.trim() || "-"); fd.append("entry.143003087", f.wa.value.trim()); if (f.club.value) fd.append("entry.1402189304", f.club.value); fd.append("entry.402692972", f.fb.value.trim() || "-");
-            fetch(GFORM, { method: "POST", mode: "no-cors", body: fd }).catch(function () {});
+            fetch(GFORM, { method: "POST", mode: "no-cors", body: fd }).catch(function () {}); zSheet("register", { Name: name, House: f.house.value, Age: f.age.value, Class: f.cls.value, WhatsApp: f.wa.value, Club: f.club.value, Comments: f.fb.value });
           } catch (x) {}
           set("zestUser", name);
           if (TESTING) unlock(name); else done(name, "Zest@" + d.slice(-4), waNum(f.wa.value));
         })
         .catch(function () {
           if (TESTING && navigator.onLine) { /* e.g. number already registered – testers still get in; details still go to the Google Sheet */
-            try { var fd2 = new FormData(); fd2.append("entry.1632416990", name); fd2.append("entry.1816773413", f.house.value.trim()); fd2.append("entry.678258537", f.age.value.trim()); fd2.append("entry.2001662289", f.cls.value.trim() || "-"); fd2.append("entry.143003087", f.wa.value.trim()); if (f.club.value) fd2.append("entry.1402189304", f.club.value); fd2.append("entry.402692972", f.fb.value.trim() || "-"); fetch(GFORM, { method: "POST", mode: "no-cors", body: fd2 }).catch(function () {}); } catch (x) {}
+            try { var fd2 = new FormData(); fd2.append("entry.1632416990", name); fd2.append("entry.1816773413", f.house.value.trim()); fd2.append("entry.678258537", f.age.value.trim()); fd2.append("entry.2001662289", f.cls.value.trim() || "-"); fd2.append("entry.143003087", f.wa.value.trim()); if (f.club.value) fd2.append("entry.1402189304", f.club.value); fd2.append("entry.402692972", f.fb.value.trim() || "-"); fetch(GFORM, { method: "POST", mode: "no-cors", body: fd2 }).catch(function () {}); zSheet("register", { Name: name, House: f.house.value, Age: f.age.value, Class: f.cls.value, WhatsApp: f.wa.value, Club: f.club.value, Comments: f.fb.value }); } catch (x) {}
             set("zestUser", name); unlock(name); return; }
           B.disabled = false; B.textContent = "SUBMIT"; err(E, "Submit ചെയ്യാനായില്ല, വീണ്ടും ശ്രമിക്കുക. (Could not submit – please try again.)"); });
     });

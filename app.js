@@ -290,7 +290,7 @@
     })();
   });
 
-  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=15"; s.onload = cb; document.head.appendChild(s); }
+  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=16"; s.onload = cb; document.head.appendChild(s); }
   function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=8"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
   /* ask name / house / mobile before sending a suggestion (nothing is saved on the phone) */
@@ -322,6 +322,7 @@
       if (mb.replace(/\D/g, "").length < 10) { m.classList.add("inv"); bad = bad || m; }
       if (bad) { bad.focus(); return; }
       var msg = head + "\n\n" + text + "\n\n🙋 " + nm + (hs ? ", " + hs : "") + "\n📱 " + mb;
+      if (window.zSheet) { var fk = /ലൈബ്രറി|Library/i.test(head) ? "library" : /പ്രവാസി|Pravasi/i.test(head) ? "pravasi" : /ചലഞ്ച്|Challenge/i.test(head) ? "challenge" : "suggestion"; zSheet(fk, { Name: nm, House: hs, Mobile: mb, Section: head.replace(/^[^\wഀ-ൿ]+/, ""), Message: text }); }
       window.open("https://wa.me/918921369102?text=" + encodeURIComponent(msg), "_blank"); shut();
     };
     setTimeout(function () { sh.querySelector(".w1").focus(); }, 320);

@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap"></noscript>
 <link rel="manifest" href="/manifest.webmanifest">
 <script src="/i18n.js?v=39"></script>
-<script src="/gate.js?v=33"></script>
+<script src="/gate.js?v=34"></script>
 <meta name="theme-color" content="#1380b8">
 <meta name="application-name" content="ZEST APP">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
@@ -1594,7 +1594,7 @@ function u(){tick=false;var r=tl.getBoundingClientRect(),vh=window.innerHeight,p
 function o(){if(!tick){tick=true;requestAnimationFrame(u)}}
 u();addEventListener("scroll",o,{passive:true});addEventListener("resize",o)})();
 (function(){var f=document.getElementById("jf"),fr=document.getElementById("jfr"),ok=document.getElementById("jok");if(!f||!fr)return;var sent=false,bt=f.querySelector("button[type=submit]");
-f.addEventListener("submit",function(){[].forEach.call(f.querySelectorAll("[data-dash]"),function(x){if(!x.value.trim())x.value="-"});sent=true;bt.disabled=true;bt.textContent="SENDING…";ok.hidden=true});
+f.addEventListener("submit",function(){[].forEach.call(f.querySelectorAll("[data-dash]"),function(x){if(!x.value.trim())x.value="-"});sent=true;bt.disabled=true;bt.textContent="SENDING…";ok.hidden=true;try{var d={},M=window.zEntryMap||{};[].forEach.call(f.elements,function(x){if(x.name&&M[x.name])d[M[x.name]]=x.value});if(window.zSheet)zSheet("join",d)}catch(e){}});
 fr.addEventListener("load",function(){if(!sent)return;sent=false;f.reset();bt.disabled=false;bt.textContent="SUBMIT";ok.hidden=false;ok.scrollIntoView({block:"center",behavior:"smooth"})})})();
 </script>
 <script>
@@ -1769,8 +1769,8 @@ if(fk){var ch=box.querySelector('.z3c[data-k="'+fk+'"]');if(ch){ch.click();setTi
 })();
 </script>
 <script src="/notify.js?v=40" defer></script>
-<script src="/drawer.js?v=51" defer></script><script src="/app.js?v=92" defer></script><script src="/web.js?v=9" defer></script>
-<script src="/prime.js?v=21" defer></script>
+<script src="/drawer.js?v=52" defer></script><script src="/app.js?v=93" defer></script><script src="/web.js?v=9" defer></script>
+<script src="/prime.js?v=22" defer></script>
 <script src="/popup.js?v=8" defer></script>
 <script>(function(){var f=document.querySelector('iframe[src*="lightwidget.com"]');if(!f)return;var go=function(){if(go.d)return;go.d=1;var s=document.createElement('script');s.src='https://cdn.lightwidget.com/widgets/lightwidget.js';s.async=true;document.body.appendChild(s)};if('IntersectionObserver' in window){new IntersectionObserver(function(e,o){if(e[0].isIntersecting){o.disconnect();go()}},{rootMargin:'600px'}).observe(f)}else go()})();</script>
 </body>

@@ -240,6 +240,7 @@
       var pl = VAL.rp === "other" ? VAL.rpo : VAL.rp, dt = fmtD(new Date(VAL.rd));
       var msg = ML ? "ഹലോ ZEST സെന്റർ 👋\n\n🩸 രക്തം ആവശ്യമുണ്ട്\n\n🙂 പേര്: " + VAL.rn + "\n🏠 വീട്ടുപേര്: " + VAL.rh + "\n📍 സ്ഥലം: " + pl + "\n📱 മൊബൈൽ: " + VAL.rm + "\n🩸 ബ്ലഡ് ഗ്രൂപ്പ്: " + VAL.rg + "\n🧪 യൂണിറ്റ്: " + VAL.ru + "\n📅 ആവശ്യമുള്ള ദിവസം: " + dt + "\n🏥 ഹോസ്പിറ്റൽ: " + VAL.rhs
                    : "Hello ZEST Centre 👋\n\n🩸 Blood needed\n\n🙂 Name: " + VAL.rn + "\n🏠 House: " + VAL.rh + "\n📍 Place: " + pl + "\n📱 Mobile: " + VAL.rm + "\n🩸 Blood group: " + VAL.rg + "\n🧪 Units: " + VAL.ru + "\n📅 Date needed: " + dt + "\n🏥 Hospital: " + VAL.rhs;
+      if (window.zSheet) zSheet("blood_need", { Name: VAL.rn, House: VAL.rh, Place: pl, Mobile: VAL.rm, Group: VAL.rg, Units: VAL.ru, Date: dt, Hospital: VAL.rhs });
       window.open("https://wa.me/918848313837?text=" + encodeURIComponent(msg), "_blank"); }; return; }
     var dn = getDonor();
     if (dn && !BST.form) {
