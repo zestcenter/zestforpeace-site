@@ -44,7 +44,7 @@
     var showP = function () {
       if (document.getElementById("zlp")) return;
       var p = document.createElement("div"); p.id = "zlp"; p.setAttribute("role", "dialog");
-      p.innerHTML = '<div class="tp"></div><div class="in"><div class="hr"><img src="/media/logowhite-90f1572681.png" alt="ZEST for Peace"><h3></h3><p></p></div>' +
+      p.innerHTML = '<div class="tp"></div><div class="in"><div class="hr"><img src="/media/logowhite-450.webp" alt="ZEST for Peace"><h3></h3><p></p></div>' +
         '<div class="cd"><div class="q"></div><div class="qs"></div><div class="ls">' +
         '<button type="button" class="o" data-l="en"><span class="tk"></span><span class="gl">Aa</span><b>English</b><small>Default</small></button>' +
         '<button type="button" class="o" data-l="ml"><span class="tk"></span><span class="gl">അ</span><b>മലയാളം</b><small>Malayalam</small></button></div>' +

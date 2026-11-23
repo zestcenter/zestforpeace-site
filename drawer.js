@@ -4,7 +4,7 @@
   var btn = document.getElementById("bg") || document.getElementById("zmhb");
   var nav = document.getElementById("mn") || document.getElementById("zmhn");
   if (!btn || !nav) return;
-  var LOGO = "/media/logowhite-90f1572681.png";
+  var LOGO = "/media/logowhite-450.webp";
   var I = {
     home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     info: '<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>',

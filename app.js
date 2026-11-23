@@ -406,7 +406,7 @@
     var pg = document.getElementById("programs");
     if (pg && !document.getElementById("zabout")) {
       var za = document.createElement("div"); za.id = "zabout"; za.setAttribute("data-noi18n", "");
-      za.innerHTML = '<button type="button"><img src="/img/zest-centre.webp?v=2" alt="ZEST Centre"><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em data-zfs="">' + T("ZEST-നെ കുറിച്ച് അറിയാം", "Know about ZEST") + ' <span class="zar">→</span></em></button>';
+      za.innerHTML = '<button type="button"><img src="/img/zest-centre-800.webp" alt="ZEST Centre" loading="lazy" decoding="async"><b>നാട് വളരാൻ നാടിനൊപ്പം</b><em data-zfs="">' + T("ZEST-നെ കുറിച്ച് അറിയാം", "Know about ZEST") + ' <span class="zar">→</span></em></button>';
       pg.after(za); za.querySelector("button").onclick = function () { go("zest"); };
     }
     /* clubs CTA text */
