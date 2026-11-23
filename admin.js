@@ -3,12 +3,13 @@
   var API = "https://lauftdyrlnhbimqokgye.supabase.co/functions/v1/zest-admin", K = "zestAdminTok";
   var F = 'Inter,"Noto Sans Malayalam",sans-serif';
   function tok() { try { return localStorage.getItem(K) || ""; } catch (e) { return ""; } }
+  var TESTOPEN = true; /* testing: admin page open without PIN; server data still needs PIN */
   function okTok() { var e = +String(tok()).split(".")[0]; return e && e > Date.now(); }
   function logout() { try { localStorage.removeItem(K); } catch (e) {} var a = document.querySelector(".zdw-adm"); if (a) a.remove(); pop(); toast("ലോഗ് ഔട്ട് ചെയ്തു"); }
   function call(o) {
     o.token = tok();
     return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(o) })
-      .then(function (r) { if (r.status === 401) { try { localStorage.removeItem(K); } catch (e) {} var a = document.querySelector(".zdw-adm"); if (a) a.remove(); pop(); login(); throw new Error("auth"); } return r.json(); });
+      .then(function (r) { if (r.status === 401) { try { localStorage.removeItem(K); } catch (e) {} if (!TESTOPEN) { var a = document.querySelector(".zdw-adm"); if (a) a.remove(); pop(); } login(); throw new Error("auth"); } return r.json(); });
   }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function toast(m) { var t = document.createElement("div"); t.className = "zat"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 2400); }
@@ -58,9 +59,9 @@
   }
   /* gold admin item at the top of the side menu (only on logged-in admin phones) */
   function addMenu() {
-    var ls = document.querySelector(".zdw .zdw-ls"); if (!ls || ls.querySelector(".zdw-adm") || !okTok()) return !!ls;
+    var ls = document.querySelector(".zdw .zdw-ls"); if (!ls || ls.querySelector(".zdw-adm") || !(okTok() || TESTOPEN)) return !!ls;
     var a = document.createElement("a"); a.className = "zdw-adm"; a.href = "#"; a.innerHTML = '<i>🔒</i><span>അഡ്മിൻ പേജ്</span><b>›</b>';
-    a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); if (window.ZestDrawer) ZestDrawer.close(); if (okTok()) open(); else login(); };
+    a.onclick = function (e) { e.preventDefault(); e.stopPropagation(); if (window.ZestDrawer) ZestDrawer.close(); if (okTok() || TESTOPEN) open(); else login(); };
     ls.insertBefore(a, ls.firstChild); return true;
   }
   if (!addMenu()) { var mo = new MutationObserver(function () { if (addMenu()) mo.disconnect(); }); mo.observe(document.documentElement, { childList: true, subtree: true }); }
@@ -358,5 +359,5 @@
   }
   function pop() { var o = document.getElementById("zadm"); if (o) o.remove(); removeEventListener("popstate", pop); }
   function close() { if (history.state && history.state.zadm) history.back(); else pop(); }
-  window.ZestAdmin = { open: function () { okTok() ? open() : login(); }, login: login };
+  window.ZestAdmin = { open: function () { (okTok() || TESTOPEN) ? open() : login(); }, login: login };
 })();
