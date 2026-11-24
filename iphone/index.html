@@ -6,62 +6,104 @@
 <meta name="robots" content="noindex">
 <title>ZEST APP – iPhone</title>
 <link rel="manifest" href="/manifest.webmanifest">
-<meta name="theme-color" content="#1380b8">
+<meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-title" content="ZEST APP">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="48x48" href="/icons/favicon-48.png">
 <script>if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) location.replace("/");</script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&family=Noto+Sans+Malayalam:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Noto+Sans+Malayalam:wght@500;600;700;800&display=swap">
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,"Noto Sans Malayalam",sans-serif;background:linear-gradient(180deg,#e6f3fb,#fff 40%);color:#0b2a3d;padding:28px 20px 150px;min-height:100vh}
-.hd{text-align:center}
-.hd img{width:84px;height:84px;border-radius:22px;box-shadow:0 12px 28px -10px rgba(11,61,92,.45)}
-h1{margin:14px 0 4px;font-size:24px;font-weight:800;color:#0b3d5c}
-.sub{margin:0;font-size:15px;color:#5d707c;font-weight:500}
-.st{display:flex;gap:14px;align-items:center;background:#fff;border-radius:22px;padding:16px;margin:14px 0;box-shadow:0 10px 26px -14px rgba(11,61,92,.3)}
-.n{flex:none;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1e90cf,#0b5d8f);color:#fff;font:800 19px Inter,sans-serif;display:grid;place-items:center}
-.t{font-size:18px;font-weight:700;line-height:1.45}
-.t small{display:block;font-size:14px;font-weight:500;color:#5d707c;margin-top:2px}
-.ic{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#e6f3fb;vertical-align:middle;margin:0 2px}
-.ic svg{width:20px;height:20px;stroke:#1380b8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.steps{margin-top:22px}
-.ok{text-align:center;margin-top:20px;font-size:15px;color:#33434d;line-height:1.6}
-.ok img{width:44px;height:44px;border-radius:12px;vertical-align:middle;margin-right:6px}
-.ar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);text-align:center;color:#0b5d8f;font-weight:800;font-size:16px;animation:b 1.1s ease-in-out infinite}
-.ar svg{display:block;margin:4px auto 0;width:46px;height:46px;stroke:#1380b8;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.ar.top{bottom:auto;top:10px;left:auto;right:14px;transform:none;animation:bt 1.1s ease-in-out infinite}
-.ar.top svg{transform:rotate(180deg)}
-@keyframes b{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
-@keyframes bt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.and{display:none;background:#fff;border-radius:22px;padding:20px;margin-top:22px;text-align:center;font-size:16px;line-height:1.6;box-shadow:0 10px 26px -14px rgba(11,61,92,.3)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{font-family:Inter,"Noto Sans Malayalam",sans-serif;color:#0b2a3d;background:#fff;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.top{position:relative;padding:18px 20px 0;display:flex;align-items:center;gap:10px}
+.top img{width:40px;height:40px;border-radius:11px;box-shadow:0 6px 14px -6px rgba(11,61,92,.4)}
+.top b{font-size:16px;font-weight:800;color:#0b3d5c}
+.lg{margin-left:auto;display:flex;background:#e6f3fb;border-radius:999px;padding:3px;cursor:pointer}
+.lg b{padding:6px 12px;border-radius:999px;font:800 13px Inter,"Noto Sans Malayalam",sans-serif;color:#0b5d8f}
+.lg b.on{background:linear-gradient(135deg,#1e90cf,#0b5d8f);color:#fff}
+.ill{margin:24px 22px 0;height:300px;border-radius:30px;background:radial-gradient(circle at 75% 15%,#d6ecfa,transparent 55%),linear-gradient(180deg,#eef6fb,#e3f1fa);position:relative;overflow:hidden;display:flex;justify-content:center;align-items:flex-end}
+.ph{width:230px;height:250px;border-radius:30px 30px 0 0;background:#fff;box-shadow:0 20px 40px -18px rgba(11,61,92,.45);position:relative}
+.ln{position:absolute;left:18px;right:18px;height:10px;border-radius:5px;background:#eef3f6}
+.bar{position:absolute;left:0;right:0;bottom:22px;display:flex;justify-content:space-around;align-items:center}
+.bar span{width:16px;height:4px;border-radius:2px;background:#c9d6df}
+.hl{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:#fff;box-shadow:0 0 0 3px #1380b8,0 0 0 10px rgba(19,128,184,.18)}
+.sh{width:22px;height:22px;stroke:#1380b8;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tap{position:absolute;font-size:34px;animation:tp 1.2s ease-in-out infinite}
+@keyframes tp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.sheet{position:absolute;left:10px;right:10px;bottom:0;background:#f3f6f9;border-radius:18px 18px 0 0;padding:14px 10px 10px;box-shadow:0 -8px 20px -10px rgba(0,0,0,.2)}
+.sheet .r{padding:9px 10px;font-size:12px;color:#9aa9b3;font-weight:600}
+.sheet .r.on{white-space:nowrap;display:flex;align-items:center;justify-content:space-between;background:#fff;color:#0b2a3d;border-radius:10px;box-shadow:0 0 0 2.5px #1380b8,0 0 0 8px rgba(19,128,184,.15);font-size:12.5px;font-weight:800;margin:4px 0}
+.sheet .r.on .sh{width:18px;height:18px}
+.hdr{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:16px 10px;white-space:nowrap;border-bottom:1px solid #eef3f6;font-size:11px;font-weight:700}
+.hdr .c{color:#9aa9b3;font-size:10px}.hdr>span:nth-child(2){font-size:10px}.hdr .a{color:#1380b8;font-weight:800;padding:5px 12px;border-radius:999px;box-shadow:0 0 0 2.5px #1380b8,0 0 0 8px rgba(19,128,184,.15);font-size:12.5px}
+.pv{position:absolute;left:18px;right:18px;top:70px;display:flex;gap:10px;align-items:center}
+.pv img{width:42px;height:42px;border-radius:11px}.pv i{flex:1;height:10px;border-radius:5px;background:#eef3f6}
+.home{position:absolute;inset:0;border-radius:30px 30px 0 0;background:linear-gradient(160deg,#5a8bd6,#8e6fd1);padding:26px 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 10px;align-content:start}
+.home span{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.35);justify-self:center}
+.home .z{background:#fff url(/icons/apple-touch-icon.png) center/cover;box-shadow:0 0 0 3px #fff,0 0 0 9px rgba(255,255,255,.35)}
+.st{padding:24px 26px 0;flex:1}
+.k{font:800 13px Inter,"Noto Sans Malayalam",sans-serif;color:#1380b8;letter-spacing:.04em}
+h1{margin:8px 0 8px;font-size:25px;line-height:1.38;font-weight:800;color:#0b3d5c}
+p.d{margin:0;font-size:15.5px;line-height:1.6;color:#5d707c}
+.ft{margin-top:auto;padding:16px 22px calc(22px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px}
+.dots{display:flex;gap:6px;margin-right:auto}.dots i{width:8px;height:8px;border-radius:4px;background:#d3e3ee;transition:width .25s}.dots i.on{width:24px;background:#1380b8}
+.bk{white-space:nowrap;padding:14px 8px;border-radius:999px;color:#0b5d8f;font-weight:800;font-size:15px;background:none;border:0;font-family:inherit}
+.nx{white-space:nowrap;padding:15px 22px;border-radius:999px;background:linear-gradient(135deg,#e6f5fd,#bfe3f6);border:1px solid #bfe3f6;color:#0b5d8f;font-weight:800;font-size:16px;font-family:inherit;box-shadow:0 8px 20px -8px rgba(11,61,92,.35)}
+.and{display:none;margin:30px 22px;background:#f3f8fc;border-radius:22px;padding:22px;text-align:center;font-size:16px;line-height:1.6}
 .and a{display:inline-block;margin-top:12px;padding:13px 26px;border-radius:999px;background:linear-gradient(135deg,#e6f5fd,#bfe3f6);color:#0b5d8f;font-weight:800;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="hd">
-  <img src="/icons/apple-touch-icon.png" alt="ZEST APP">
-  <h1>iPhone-ൽ ZEST APP</h1>
-  <p class="sub">3 എളുപ്പ ഘട്ടങ്ങൾ മാത്രം</p>
-</div>
-
-<div class="steps" id="ios">
-  <div class="st"><div class="n">1</div><div class="t">താഴെയുള്ള <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></span> ബട്ടൺ ഞെക്കുക<small id="where">സ്ക്രീനിന്റെ ഏറ്റവും താഴെ. കാണുന്നില്ലെങ്കിൽ താഴെ വലതുവശത്തെ ⋯ ഞെക്കി, അതിൽ "Share" ഞെക്കുക</small></div></div>
-  <div class="st"><div class="n">2</div><div class="t">താഴേക്ക് നീക്കി <span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg></span> <b>"Add to Home Screen"</b> ഞെക്കുക<small>മലയാളത്തിൽ: "ഹോം സ്ക്രീനിലേക്ക് ചേർക്കുക"</small></div></div>
-  <div class="st"><div class="n">3</div><div class="t">മുകളിൽ വലതുവശത്തെ <b>"Add"</b> ഞെക്കുക</div></div>
-  <p class="ok"><img src="/icons/apple-touch-icon.png" alt="">ഇനി ഹോം സ്ക്രീനിലെ <b>ZEST APP</b> ഐക്കൺ ഞെക്കി തുറക്കാം</p>
-</div>
-
-<div class="and" id="and">ഈ പേജ് iPhone-ന് വേണ്ടിയുള്ളതാണ്.<br>Android ഫോണിൽ ഇവിടെ നിന്ന് ഇൻസ്റ്റാൾ ചെയ്യാം:<br><a href="/app/">ZEST APP ഡൗൺലോഡ്</a></div>
-
-<div class="ar" id="ar">ഇവിടെ ഞെക്കൂ<svg viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6"/></svg></div>
-
+<div class="top"><img src="/icons/apple-touch-icon.png" alt=""><b>ZEST APP</b><div class="lg" id="lg"><b data-l="en">EN</b><b data-l="ml">മ</b></div></div>
+<div id="w" style="display:flex;flex-direction:column"><div class="ill" id="ill"></div><div class="st"><div class="k" id="k"></div><h1 id="h"></h1><p class="d" id="d"></p></div></div>
+<div class="ft" id="ft"><div class="dots" id="dots"></div><button class="bk" id="bk"></button><button class="nx" id="nx"></button></div>
+<div class="and" id="and"></div>
 <script>
-var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-var other = /CriOS|EdgiOS|FxiOS/.test(ua);
-if (!ios) { document.getElementById("ios").style.display = "none"; document.getElementById("ar").style.display = "none"; document.getElementById("and").style.display = "block"; }
-else if (other) { document.getElementById("where").textContent = "മുകളിൽ, അഡ്രസ് ബാറിന്റെ വലതുവശത്ത്"; document.getElementById("ar").className = "ar top"; }
+(function () {
+  var L = "ml"; try { L = localStorage.getItem("zestLang") === "en" ? "en" : "ml"; } catch (e) {}
+  function T(m, e) { return L === "en" ? e : m; }
+  var ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1), chr = /CriOS|EdgiOS|FxiOS/.test(ua);
+  var SH = '<svg class="sh" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>';
+  var PL = '<svg class="sh" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8v8M8 12h8"/></svg>';
+  var LN = '<i class="ln" style="top:24px"></i><i class="ln" style="top:46px;right:60px"></i><i class="ln" style="top:68px"></i><i class="ln" style="top:90px;right:40px"></i>';
+  var S = [
+    function () { return { i: chr
+        ? '<div class="ph">' + LN + '<div class="bar" style="top:-2px;bottom:auto;justify-content:flex-end;padding-right:14px"><div class="hl">' + SH + '</div></div><div class="tap" style="top:44px;right:58px">👆</div></div>'
+        : '<div class="ph">' + LN + '<div class="bar"><span></span><span></span><div class="hl">' + SH + '</div><span></span><span></span></div><div class="tap" style="bottom:-14px;left:50%;margin-left:4px">👆</div></div>',
+      h: T("Share ബട്ടൺ ടാപ്പ് ചെയ്യുക", "Tap the Share button"),
+      d: chr ? T("സ്ക്രീനിന്റെ മുകളിൽ, അഡ്രസ് ബാറിന്റെ വലതുവശത്തുള്ള ചതുരവും ആരോയും ഉള്ള ബട്ടൺ.", "The square-with-arrow button at the top, right of the address bar.")
+             : T("സ്ക്രീനിന്റെ ഏറ്റവും താഴെ, ചതുരവും ആരോയും ഉള്ള ബട്ടൺ. കാണുന്നില്ലെങ്കിൽ താഴെ വലതുവശത്തെ ⋯ ടാപ്പ് ചെയ്ത്, അതിൽ Share ടാപ്പ് ചെയ്യുക.", "The square-with-arrow button at the bottom of the screen. Can't see it? Tap ⋯ at the bottom right, then Share.") }; },
+    function () { return { i: '<div class="ph">' + LN + '<div class="sheet"><div class="r">Copy</div><div class="r">Add to Reading List</div><div class="r on">Add to Home Screen ' + PL + '</div><div class="r">Add Bookmark</div></div><div class="tap" style="bottom:46px;right:-6px">👆</div></div>',
+      h: T("\"Add to Home Screen\" തിരഞ്ഞെടുക്കുക", "Choose \"Add to Home Screen\""),
+      d: T("ലിസ്റ്റ് കുറച്ച് താഴേക്ക് നീക്കിയാൽ കാണാം. ഫോൺ മലയാളത്തിലാണെങ്കിൽ \"ഹോം സ്ക്രീനിലേക്ക് ചേർക്കുക\".", "Scroll the list down a little to find it.") }; },
+    function () { return { i: '<div class="ph"><div class="hdr"><span class="c">Cancel</span><span>Add to Home Screen</span><span class="a">Add</span></div><div class="pv"><img src="/icons/apple-touch-icon.png" alt=""><i></i></div><div class="tap" style="top:44px;right:6px">👆</div></div>',
+      h: T("മുകളിൽ വലതുവശത്തെ \"Add\" ടാപ്പ് ചെയ്യുക", "Tap \"Add\" at the top right"),
+      d: T("പേര് ZEST APP എന്ന് തന്നെ വിടുക.", "Keep the name as ZEST APP.") }; },
+    function () { return { i: '<div class="ph"><div class="home"><span></span><span></span><span></span><span></span><span></span><span class="z"></span><span></span><span></span><span></span><span></span></div><div class="tap" style="top:96px;left:86px">👆</div></div>',
+      h: T("ZEST APP റെഡി! 🎉", "ZEST APP is ready! 🎉"),
+      d: T("ഹോം സ്ക്രീനിലെ ZEST APP ഐക്കൺ ടാപ്പ് ചെയ്ത് തുറക്കാം.", "Open it from the ZEST APP icon on your Home Screen, like any app.") }; }
+  ];
+  var n = 0;
+  function draw() {
+    document.documentElement.lang = L;
+    [].forEach.call(document.querySelectorAll("#lg b"), function (b) { b.className = b.dataset.l === L ? "on" : ""; });
+    if (!ios) { document.getElementById("w").style.display = "none"; document.getElementById("ft").style.display = "none"; var a = document.getElementById("and"); a.style.display = "block"; a.innerHTML = T("ഈ പേജ് iPhone-ന് വേണ്ടിയുള്ളതാണ്.<br>Android ഫോണിൽ ഇവിടെ നിന്ന് ഇൻസ്റ്റാൾ ചെയ്യാം:", "This page is for iPhone.<br>On Android, install from here:") + '<br><a href="/app/?android=1">' + T("ZEST APP ഡൗൺലോഡ്", "Download ZEST APP") + '</a>'; return; }
+    var s = S[n]();
+    document.getElementById("ill").innerHTML = s.i;
+    document.getElementById("k").textContent = n < 3 ? T("ഘട്ടം " + (n + 1) + " / 3", "STEP " + (n + 1) + " OF 3") : T("കഴിഞ്ഞു", "DONE");
+    document.getElementById("h").textContent = s.h;
+    document.getElementById("d").textContent = s.d;
+    document.getElementById("dots").innerHTML = S.map(function (_, i) { return '<i class="' + (i === n ? "on" : "") + '"></i>'; }).join("");
+    var bk = document.getElementById("bk"); bk.textContent = T("← പിന്നോട്ട്", "← Back"); bk.style.visibility = n ? "visible" : "hidden";
+    document.getElementById("nx").textContent = n < 3 ? T("അടുത്തത് →", "Next →") : T("ആദ്യം മുതൽ ↺", "Start again ↺");
+  }
+  document.getElementById("nx").onclick = function () { n = n < 3 ? n + 1 : 0; draw(); };
+  document.getElementById("bk").onclick = function () { if (n) { n--; draw(); } };
+  document.getElementById("lg").onclick = function () { L = L === "ml" ? "en" : "ml"; try { localStorage.setItem("zestLang", L); } catch (e) {} draw(); };
+  draw();
+})();
 </script>
 </body>
 </html>
