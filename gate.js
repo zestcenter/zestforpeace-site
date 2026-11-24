@@ -71,10 +71,23 @@ window.zEntryMap = { "entry.1632416990": "Name", "entry.1816773413": "House", "e
     });
   }
   function notif() {
-    if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) return;
+    var IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    if (!("Notification" in window) || !("serviceWorker" in navigator) || !("PushManager" in window)) {
+      /* older iPhones (below iOS 16.4) cannot get notifications: tell them once how to fix it */
+      if (IOS && !get("zestIosOld")) setTimeout(function () {
+        if (document.getElementById("zgate")) return;
+        var ml = (get("zestLang") || "en") === "ml", tip = document.createElement("div"); tip.className = "zn-box";
+        tip.setAttribute("style", "position:fixed;left:.75rem;right:.75rem;bottom:calc(5.6rem + env(safe-area-inset-bottom));z-index:10050;max-width:26rem;margin:0 auto;padding:1rem;border-radius:1.1rem;background:#fff;border:1px solid #d3e7f3;box-shadow:0 .8rem 2rem -.6rem rgba(11,61,92,.35);font:500 .85rem/1.5 Inter,'Noto Sans Malayalam',sans-serif;color:#33434d");
+        tip.innerHTML = '<b style="display:block;font-size:.95rem;color:#1c2a32;margin-bottom:.3rem">🔔 ' + (ml ? "നോട്ടിഫിക്കേഷൻ കിട്ടാൻ" : "To get notifications") + '</b>' + (ml ? "ഈ iPhone-ൽ നോട്ടിഫിക്കേഷൻ ലഭിക്കാൻ iOS അപ്ഡേറ്റ് ചെയ്യണം (16.4 അല്ലെങ്കിൽ പുതിയത്): Settings → General → Software Update." : "Update this iPhone to iOS 16.4 or later to get notifications: Settings → General → Software Update.") + '<button type="button" style="display:block;width:100%;margin-top:.7rem;min-height:2.6rem;border:0;border-radius:999px;background:#eef6fb;color:#0b5d8f;font:700 .82rem Inter,sans-serif">OK</button>';
+        tip.querySelector("button").onclick = function () { set("zestIosOld", "1"); tip.remove(); };
+        document.body.appendChild(tip);
+      }, 1500);
+      return;
+    }
     if (Notification.permission === "granted") { subscribe().catch(function () {}); return; }
-    if (Notification.permission === "denied" || get("zestNotifNo")) return;
-    var css2 = ".zn-box{position:fixed;left:.75rem;right:.75rem;bottom:.75rem;z-index:9998;max-width:26rem;margin:0 auto;display:flex;flex-direction:column;gap:.7rem;padding:1rem;border-radius:1.1rem;background:#fff;border:1px solid #d3e7f3;box-shadow:0 .8rem 2rem rgba(0,30,50,.28);font-family:Inter,'Noto Sans Malayalam',system-ui,sans-serif}" +
+    var no = +get("zestNotifNo") || 0;
+    if (Notification.permission === "denied" || (no > 1 && Date.now() - no < 3 * 864e5)) return; /* "Not now" → ask again after 3 days */
+    var css2 = ".zn-box{position:fixed;left:.75rem;right:.75rem;bottom:calc(5.6rem + env(safe-area-inset-bottom));z-index:10050;max-width:26rem;margin:0 auto;display:flex;flex-direction:column;gap:.7rem;padding:1rem;border-radius:1.1rem;background:#fff;border:1px solid #d3e7f3;box-shadow:0 .8rem 2rem rgba(0,30,50,.28);font-family:Inter,'Noto Sans Malayalam',system-ui,sans-serif}" +
       ".zn-top{display:flex;gap:.75rem;align-items:center}.zn-top img{width:2.75rem;height:2.75rem;border-radius:.7rem;border:1px solid #d3e7f3;flex:none}" +
       ".zn-top b{display:block;font-size:.95rem;color:#1c2a32}.zn-top span{display:block;font-size:.8rem;line-height:1.4;color:#52636d}" +
       ".zn-row{display:flex;gap:.5rem}.zn-row button{flex:1;min-height:2.75rem;border:0;border-radius:999px;font:700 .82rem/1 Inter,sans-serif;letter-spacing:.05em;cursor:pointer}" +
@@ -85,10 +98,10 @@ window.zEntryMap = { "entry.1632416990": "Name", "entry.1816773413": "House", "e
       '<div class="zn-row"><button type="button" class="zn-no">NOT NOW</button><button type="button" class="zn-on">TURN ON</button></div>';
     var show = function () { if (!document.getElementById("zgate")) document.body.appendChild(box); };
     setTimeout(show, 1500);
-    box.querySelector(".zn-no").addEventListener("click", function () { set("zestNotifNo", "1"); box.remove(); });
+    box.querySelector(".zn-no").addEventListener("click", function () { set("zestNotifNo", String(Date.now())); box.remove(); });
     box.querySelector(".zn-on").addEventListener("click", function () {
       box.remove();
-      Notification.requestPermission().then(function (p) { if (p === "granted") subscribe().catch(function () {}); else set("zestNotifNo", "1"); });
+      Notification.requestPermission().then(function (p) { if (p === "granted") subscribe().catch(function () {}); else set("zestNotifNo", String(Date.now())); });
     });
   }
   if (get("zestAuth")) { document.documentElement.classList.remove("zg-lock"); if (document.body) notif(); else document.addEventListener("DOMContentLoaded", notif); return; }
