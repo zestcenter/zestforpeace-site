@@ -200,8 +200,8 @@
     var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
     var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
     if (!give) {
-      var BC = BCOUNT || {}, tot = 0; G.forEach(function (g) { tot += +BC[g] || 0; });
-      return h + (BCOUNT ? '' : '<style>#zmed .zbav,#zmed .zbtot{display:none!important}</style>') + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
+      var DEMO = !BCOUNT, BC = BCOUNT || { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }, tot = 0; G.forEach(function (g) { tot += +BC[g] || 0; });
+      return h + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + (DEMO ? ' <small style="font:700 10.5px Inter,sans-serif;color:#b26a00;background:#fff4e0;padding:2px 8px;border-radius:999px;vertical-align:middle">' + T("മാതൃക", "Sample") + '</small>' : '') + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
         G.map(function (g) { var n = +BC[g] || 0; return '<div' + (n ? '' : ' class="z"') + '><i class="bgi">' + bagSvg() + '<b>' + g + '</b></i><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
         '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
         '<div class="zbt">🙏 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +

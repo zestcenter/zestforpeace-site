@@ -137,7 +137,7 @@
       var inApp2 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : mh === "#med-drv" ? "drv" : "eq";
-      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=19"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=20"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
       return; }
     var zg = /^#zgo-(home|zest)-(.+)$/.exec(a.getAttribute("href") || "");
     if (zg) { e.preventDefault(); e.stopImmediatePropagation(); hide();
