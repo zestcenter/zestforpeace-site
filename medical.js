@@ -171,7 +171,9 @@
   var BLOOD_LIVE = true; /* set true when the blood service starts – "Need blood" then opens WhatsApp to the main ZEST number */
   var BST = { ready: 1, grp: "", done: 0 };
   function bagSvg() { return '<svg class="zbsv" viewBox="0 0 58 84" aria-hidden="true"><rect class="pt" x="22" y="2" width="14" height="10" rx="3"/><rect class="bd" x="4" y="10" width="50" height="62" rx="14"/><rect class="lqs" x="9" y="44" width="40" height="23" rx="10"/><rect class="lqf" x="9" y="24" width="40" height="43" rx="10"/><rect class="hl" x="14" y="16" width="20" height="3" rx="1.5"/><path class="tb" d="M29 72 V82"/></svg>'; }
-  var BCOUNT = { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }; /* sample numbers – will come from the Google Sheet */
+  /* donor counts per blood group: numbers only (no names), counted in the ZEST FORMS Google Sheet by the Apps Script */
+  var BCOUNT = null; try { BCOUNT = JSON.parse(localStorage.getItem("zestBCount") || "null"); } catch (e) {}
+  function loadCounts(cb) { fetch("https://script.google.com/macros/s/AKfycbyK73G8Mydnrxb4aGWxf1xRfEPHMXEuzoLbtSnMaquZWvnM7kyw0Eh8vWu1Srzes8pO/exec?counts=1").then(function (r) { return r.json(); }).then(function (j) { if (j && j.counts) { BCOUNT = j.counts; try { localStorage.setItem("zestBCount", JSON.stringify(BCOUNT)); } catch (e) {} cb && cb(); } }).catch(function () {}); }
   function ifl(icon, html, dd) { return '<label class="zbf' + (dd ? ' dd' : '') + '"><i>' + icon + '</i>' + html + '<em>*</em></label>'; }
   function bPlace() { var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
     return VAL.bp === "other" ? '<span class="zpo">' + inp("bpo", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("bp", pl).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("സ്ഥലം", "Place")); }
@@ -198,9 +200,9 @@
     var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
     var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
     if (!give) {
-      var tot = 0; G.forEach(function (g) { tot += BCOUNT[g]; });
-      return h + (BLOOD_LIVE ? '<style>#zmed .zbav,#zmed .zbtot{display:none!important}</style>' : '') + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
-        G.map(function (g) { var n = BCOUNT[g]; return '<div' + (n ? '' : ' class="z"') + '><i class="bgi">' + bagSvg() + '<b>' + g + '</b></i><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
+      var BC = BCOUNT || {}, tot = 0; G.forEach(function (g) { tot += +BC[g] || 0; });
+      return h + (BCOUNT ? '' : '<style>#zmed .zbav,#zmed .zbtot{display:none!important}</style>') + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
+        G.map(function (g) { var n = +BC[g] || 0; return '<div' + (n ? '' : ' class="z"') + '><i class="bgi">' + bagSvg() + '<b>' + g + '</b></i><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
         '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
         '<div class="zbt">🙏 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +
         ifl("🙂", inp("rn", "text", T("ആവശ്യമുള്ള ആളുടെ പേര്", "Patient name"))) + ifl("🏠", inp("rh", "text", T("വീട്ടുപേര്", "House name"))) +
@@ -307,6 +309,7 @@
     }
     if (which === "drv") SVC = "drv"; else if (which === "eq") SVC = "eq";
     render(which === "blood" ? "give" : "need");
+    if (which === "blood") loadCounts(function () { if (cur === "need" && document.body.contains(w)) { var y = w.scrollTop; render("need"); w.scrollTop = y; } });
     document.body.appendChild(w);
     try { history.pushState({ zmed: 1 }, ""); } catch (e) {}
     window.addEventListener("popstate", onPop);
