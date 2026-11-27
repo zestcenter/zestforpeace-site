@@ -62,7 +62,7 @@
   function ln(c, h, ic, t) { return '<a class="zdw-mn" style="--c:' + c + '" href="' + h + '"><svg viewBox="0 0 24 24" aria-hidden="true">' + ic + '</svg><span>' + t + '</span><b class="zdw-ch">' + CHEV + '</b></a>'; }
   var ZML = window.ZestLang && ZestLang.get() === "ml"; var ZAPP = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
   var items =
-    (ZAPP ? gp("#1380b8", I.home, "MAIN PAGE", tl("#zgo-home-centre-info", "📢", ZML ? "ZEST<br>ബുള്ളറ്റിൻ" : "ZEST BULLETIN") + tl("#zgo-home-zprime2", "⭐", ZML ? "പ്രൈം<br>സേവനങ്ങൾ" : "PRIME SERVICES") + tl(H("ci-info"), "📌", ZML ? "പ്രധാന<br>അറിയിപ്പുകൾ" : "KEY NOTICES") + tl("#zgo-home-programs", "🧩", ZML ? "പ്രധാന<br>പദ്ധതികൾ" : "OUR PROJECTS") + tl("#zgo-home-clubs", "👥", ZML ? "ZEST<br>ക്ലബ്ബുകൾ" : "ZEST CLUBS")) +
+    (ZAPP ? gp("#1380b8", I.home, "MAIN PAGE", tl("#zgo-home-centre-info", "📢", ZML ? "ZEST<br>ബുള്ളറ്റിൻ" : "ZEST BULLETIN") + tl("#zgo-home-zprime2", "⭐", ZML ? "പ്രൈം<br>സേവനങ്ങൾ" : "PRIME SERVICES") + tl("#zgo-home-programs", "🧩", ZML ? "പ്രധാന<br>പദ്ധതികൾ" : "OUR PROJECTS") + tl("#zgo-home-clubs", "👥", ZML ? "ZEST<br>ക്ലബ്ബുകൾ" : "ZEST CLUBS") + tl("#zch", "🏆", ZML ? "ചലഞ്ച്<br>& വിൻ" : "CHALLENGE<br>& WIN")) +
       gp("#0b3d5c", '<path d="M3 13c3 0 5-2 7-5 1.5 3 4 5 8 5-2 4-6 6-10 6-2.5 0-4-1-5-2"/><path d="M14 6l3-3"/>', "ZEST", tl("#zgo-zest-about", "ℹ️", ZML ? "എന്താണ്<br>ZEST?" : "ABOUT ZEST") + tl("#zgo-zest-zproj", "📚", ZML ? "ZEST<br>പ്രോജക്ടുകൾ" : "ZEST PROJECTS") + tl("#zgo-zest-documentary", "▶️", ZML ? "ZEST<br><b style=\"font:inherit;font-size:9.5px;letter-spacing:-.2px;white-space:nowrap\">ഡോക്യുമെന്ററി</b>" : "ZEST DOCUMENTARY") + tl("#zgo-zest-news", "🛤️", ZML ? "പിന്നിട്ട<br>വഴികൾ" : "OUR JOURNEY") + tl("#zgo-zest-stories", "📸", ZML ? "ദൈനംദിന<br>കാഴ്ചകൾ" : "DAILY MOMENTS"))
     : gp("#1380b8", I.home, "MAIN PAGE", tl(H("about"), "ℹ️", ZML ? "ZEST-നെ<br>കുറിച്ച്" : "ABOUT US") + tl(H("programs"), "🧩", ZML ? "പ്രധാന പദ്ധതികൾ" : "OUR PROJECTS") + tl(H("clubs"), "👥", "ZEST CLUBS") + tl(H("documentary"), "▶️", "DOCUMENTARY") + tl(H("news"), "🛤️", ZML ? "പിന്നിട്ട വഴികൾ" : "OUR JOURNEY"))) +
     gp("#f08a00", I.info, ZML ? "അറിയിപ്പുകൾ" : "SERVICE CENTRE INFO", tl(H("ci-program"), "📅", "ZEST PROGRAMS") + tl(H("ci-info"), "📢", ZML ? "പ്രധാന അറിയിപ്പ്" : "INFO CENTRE") + tl(H("ci-job"), "💼", "JOB UPDATES")) +
@@ -145,6 +145,7 @@
       dispatchEvent(new HashChangeEvent("hashchange"));
       setTimeout(function () { var el = document.getElementById(zg[2]); if (el) { var y = el.getBoundingClientRect().top + scrollY - 90; scrollTo({ top: y, behavior: "smooth" }); } }, 160);
       return; }
+    if (a.getAttribute("href") === "#zch") { e.preventDefault(); e.stopImmediatePropagation(); hide(); if (window.zOpenPV) zOpenPV("ch"); return; }
     if (a.getAttribute("href") === "#zpv") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp4 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp4) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
