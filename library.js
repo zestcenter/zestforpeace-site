@@ -1,4 +1,4 @@
-/* ZEST APP – ZEST Library (sample preview: 5 books; All / Category / Availability filters work; borrowing not yet) */
+/* ZEST APP – ZEST Library (books from the ZEST library Google Sheet; sample list only until it loads; borrowing not yet) */
 (function () {
   var ML = true; /* inner pages: Malayalam first, "English" switch in header */
   var V = "v1";  /* page design */
@@ -11,6 +11,45 @@
     { k: "poe", t: ["രമണൻ", "Ramanan"], a: ["ചങ്ങമ്പുഴ കൃഷ്ണപിള്ള", "Changampuzha Krishna Pillai"], c1: "#0f7d58", c2: "#a8e6c9", m: "🪈", st: 1 },
     { k: "bio", t: ["എന്റെ കഥ", "Ente Katha"], a: ["മാധവിക്കുട്ടി", "Madhavikutty"], c1: "#b5651d", c2: "#ffd59a", m: "✍️", st: 2 }
   ];
+  /* real book list: ZEST library Google Sheet (columns Title, Author, Category, Available = Yes / No) */
+  var SHEET = "https://docs.google.com/spreadsheets/d/1DzLtb58HqebJOrGGo51hX2bVIJj50EOsF0zBYZGEdsA/gviz/tq?tqx=out:csv";
+  var LIVE = false, LOADING = false, REDRAW = null;
+  var PAL = [["#c0392b", "#f39c6b", "📕"], ["#1e5f74", "#7fc8a9", "📘"], ["#6a4bd1", "#c9b8ff", "📗"], ["#0f7d58", "#a8e6c9", "📙"], ["#b5651d", "#ffd59a", "📔"], ["#0b5d8f", "#9fd3f2", "📓"], ["#8e3b6f", "#f2b5d4", "📒"]];
+  var CATM = { nov: /novel|നോവൽ/i, sto: /stor|കഥ/i, poe: /poe|കവിത/i, bio: /auto|ആത്മകഥ/i, lif: /biog|ജീവചരിത്ര/i, kid: /kid|child|ബാല/i, his: /hist|ചരിത്ര/i, sci: /sci|ശാസ്ത്ര/i, trv: /trav|യാത്ര/i, dra: /drama|നാടക/i, ess: /essay|ലേഖന/i, psc: /psc|exam|study|പരീക്ഷ/i };
+  function csv(t) {
+    var rows = [], r = [], f = "", q = false;
+    for (var i = 0; i < t.length; i++) {
+      var c = t[i];
+      if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true; else if (c === ",") { r.push(f); f = ""; } else if (c === "\n" || c === "\r") { if (c === "\r" && t[i + 1] === "\n") i++; r.push(f); rows.push(r); r = []; f = ""; } else f += c;
+    }
+    if (f || r.length) { r.push(f); rows.push(r); }
+    return rows;
+  }
+  function toBooks(t) {
+    var rows = csv(t).filter(function (r) { return r.some(function (x) { return x.trim(); }); });
+    if (rows.length < 2) return [];
+    var h = rows[0].map(function (x) { return x.trim().toLowerCase(); });
+    function col(re) { for (var i = 0; i < h.length; i++) if (re.test(h[i])) return i; return -1; }
+    var ti = col(/title|book|name|പുസ്തക|പേര്/), au = col(/author|writer|എഴുത്ത/), ca = col(/categ|type|genre|വിഭാഗ/), av = col(/avail|status|ലഭ്യ/);
+    if (ti < 0) ti = 0;
+    return rows.slice(1).map(function (r, n) {
+      var title = (r[ti] || "").trim(); if (!title) return null;
+      var cat = ca >= 0 ? (r[ca] || "") : "", k = "nov";
+      Object.keys(CATM).some(function (x) { if (CATM[x].test(cat)) { k = x; return true; } });
+      var a = au >= 0 ? (r[au] || "").trim() : "", v = av >= 0 ? (r[av] || "").trim() : "yes";
+      var hs = 0; for (var i = 0; i < title.length; i++) hs = (hs * 31 + title.charCodeAt(i)) % 997; var pl = PAL[hs % PAL.length];
+      return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: pl[2], st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
+    }).filter(Boolean);
+  }
+  (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
+  function refresh() {
+    if (LOADING) return; LOADING = true;
+    fetch(SHEET + "&_=" + Date.now()).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
+      var b = toBooks(t); LOADING = false;
+      if (b.length) { BOOKS = b; LIVE = true; try { localStorage.setItem("zestLibBooks", JSON.stringify(b)); } catch (e) {} if (REDRAW) REDRAW(); }
+    }).catch(function () { LOADING = false; });
+  }
   function cats() { return [["nov", "📖", T("നോവൽ", "Novel")], ["sto", "📝", T("കഥകൾ", "Stories")], ["poe", "🪶", T("കവിത", "Poetry")], ["bio", "🙋", T("ആത്മകഥ", "Autobiography")], ["lif", "👤", T("ജീവചരിത്രം", "Biography")], ["kid", "🧒", T("ബാലസാഹിത്യം", "Children")], ["his", "🏛️", T("ചരിത്രം", "History")], ["sci", "🔬", T("ശാസ്ത്രം", "Science")], ["trv", "✈️", T("യാത്രാവിവരണം", "Travel")], ["dra", "🎭", T("നാടകം", "Drama")], ["ess", "📰", T("ലേഖനങ്ങൾ", "Essays")], ["psc", "🎯", T("PSC / മത്സരപ്പരീക്ഷ", "PSC / Exams")]]; }
   function sts() { return [[1, "🟢", T("ലഭ്യം", "Available")], [2, "📖", T("വായനയിൽ", "Being read")]]; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
@@ -155,7 +194,7 @@
       var filt = '<div class="sr"><span>🔍</span><input type="search" placeholder="' + T("പുസ്തകം / എഴുത്തുകാരൻ തിരയൂ", "Search book / author") + '" value="' + esc(q) + '"></div><div class="fb"></div><div class="af"></div>';
       w.innerHTML = '<div class="mh"><button type="button" class="bk" aria-label="Back">✕</button><button type="button" class="lsw' + (ML ? '' : ' en') + '" role="switch" aria-checked="' + (!ML) + '">EN <span class="sw"><i></i></span></button>' +
         '<img class="zhimg" src="/img/hero/library.svg" alt=""><h2>' + T("ZEST ലൈബ്രറി", "ZEST Library") + '</h2><p>' + T("വായിക്കാം, വളരാം", "Read and grow") + '</p></div>' +
-        '<div class="soon">👀 ' + T("ഇത് ഒരു മാതൃക മാത്രം – ലൈബ്രറിയിലെ മുഴുവൻ പുസ്തകങ്ങളും ഉടൻ ചേർക്കും", "Sample preview – all library books will be added soon") + '</div>' +
+        (LIVE ? '' : '<div class="soon">👀 ' + T("ഇത് ഒരു മാതൃക മാത്രം – ലൈബ്രറിയിലെ മുഴുവൻ പുസ്തകങ്ങളും ഉടൻ ചേർക്കും", "Sample preview – all library books will be added soon") + '</div>') +
         (V === "v3" ? '<div class="stk">' + filt + '</div>' : filt) +
         '<div class="cnt"></div><div class="bl"></div>' +
         '<div class="nt">' + T("പുതിയ പുസ്തകങ്ങൾ ലൈബ്രറിയിൽ എത്തുമ്പോൾ ഇവിടെ തനിയെ വരും", "New books appear here automatically when they reach the library") + '</div>';
@@ -165,6 +204,8 @@
       bar(); list();
     }
     render();
+    REDRAW = function () { if (!document.body.contains(w)) return; var y = w.scrollTop; render(); w.scrollTop = y; };
+    refresh();
     document.body.appendChild(w);
     try { history.pushState({ zlib: 1 }, ""); } catch (e) {}
     window.addEventListener("popstate", onPop);
