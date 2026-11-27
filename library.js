@@ -30,8 +30,11 @@
     var rows = csv(t).filter(function (r) { return r.some(function (x) { return x.trim(); }); });
     if (rows.length < 2) return [];
     var h = rows[0].map(function (x) { return x.trim().toLowerCase(); });
-    function col(re) { for (var i = 0; i < h.length; i++) if (re.test(h[i])) return i; return -1; }
-    var ti = col(/title|book|name|പുസ്തക|പേര്/), au = col(/author|writer|എഴുത്ത/), ca = col(/categ|type|genre|വിഭാഗ/), av = col(/avail|status|ലഭ്യ/);
+    var NUM = /(^|\b)(sl|s\.?\s*no|no\.?|num|number|#|id|code|ക്രമ)(\b|$)|number|നമ്പർ/;
+    function col(re, skipNum) { for (var i = 0; i < h.length; i++) if (re.test(h[i]) && !(skipNum && NUM.test(h[i]))) return i; return -1; }
+    var ti = col(/title|book|name|പുസ്തക|പേര്/, true);
+    if (ti < 0) for (var i = 0; i < h.length; i++) if (!NUM.test(h[i]) && !/author|writer|categ|type|avail|status/.test(h[i])) { ti = i; break; }
+    var au = col(/author|writer|എഴുത്ത/), ca = col(/categ|type|genre|വിഭാഗ/), av = col(/avail|status|ലഭ്യ/);
     if (ti < 0) ti = 0;
     return rows.slice(1).map(function (r, n) {
       var title = (r[ti] || "").trim(); if (!title) return null;
