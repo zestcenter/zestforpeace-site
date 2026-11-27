@@ -49,7 +49,7 @@
   ready(function () {
     /* project tiles on the home page: small arrow, open the project's own section on /projects/ */
     document.querySelectorAll("#programs .zb-t").forEach(function (t) {
-      var m = (t.getAttribute("style") || "").match(/--i-p-([a-z]+)/); if (!m || t.querySelector(".zgo")) return;
+      var m = ((t.getAttribute("style") || "") + " " + (t.getAttribute("data-zbg") || "")).match(/--i-p-([a-z]+)/); if (!m || t.querySelector(".zgo")) return;
       t.insertAdjacentHTML("beforeend", '<span class="zgo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>');
       t.setAttribute("role", "link"); t.addEventListener("click", function (e) { e.preventDefault(); location.href = "/projects/#pj-" + m[1]; });
     });

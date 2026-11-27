@@ -454,7 +454,7 @@
     (function () { var k = new URLSearchParams(location.search).get("pj"); if (k) setTimeout(function () { zpjOpen(k); }, 400); })();
     /* home project tiles: arrow + open in ZEST tab */
     document.querySelectorAll("#programs .zb-t").forEach(function (t) {
-      var m = (t.getAttribute("style") || "").match(/--i-p-([a-z]+)/); if (!m) return;
+      var m = ((t.getAttribute("style") || "") + " " + (t.getAttribute("data-zbg") || "")).match(/--i-p-([a-z]+)/); if (!m) return;
       t.insertAdjacentHTML("beforeend", '<span class="zgo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>');
       var L2 = { senior: ["സീനിയർ സിറ്റിസൺ", "കോർണർ"], women: ["വുമൺ എംപവർമെന്റ്", "പ്രോഗ്രാം"] }, hd = t.querySelector("h3");
       if (L2[m[1]] && hd && /[\u0D00-\u0D7F]/.test(hd.textContent)) hd.innerHTML = '<span class="zl">' + L2[m[1]][0] + '</span><br><span class="zl">' + L2[m[1]][1] + '</span>';
