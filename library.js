@@ -37,12 +37,12 @@
     var au = col(/author|writer|എഴുത്ത/), ca = col(/categ|type|genre|വിഭാഗ/), av = col(/avail|status|ലഭ്യ/);
     if (ti < 0) ti = 0;
     return rows.slice(1).map(function (r, n) {
-      var title = (r[ti] || "").trim(); if (!title) return null;
+      var title = cap((r[ti] || "").trim(), 1); if (!title) return null;
       var cat = ca >= 0 ? (r[ca] || "") : "", k = "nov";
       Object.keys(CATM).some(function (x) { if (CATM[x].test(cat)) { k = x; return true; } });
       var a = au >= 0 ? (r[au] || "").trim() : "", v = av >= 0 ? (r[av] || "").trim() : "yes";
       var hs = 0; for (var i = 0; i < title.length; i++) hs = (hs * 31 + title.charCodeAt(i)) % 997; var pl = PAL[hs % PAL.length];
-      return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: "", st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
+      a = cap(a); return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: "", st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
     }).filter(Boolean);
   }
   (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks2") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
@@ -55,6 +55,8 @@
   }
   function cats() { return [["nov", "📖", T("നോവൽ", "Novel")], ["sto", "📝", T("കഥകൾ", "Stories")], ["poe", "🪶", T("കവിത", "Poetry")], ["bio", "✍️", T("ആത്മകഥ", "Autobiography")], ["lif", "📜", T("ജീവചരിത്രം", "Biography")], ["kid", "🧒", T("ബാലസാഹിത്യം", "Children")], ["his", "🏛️", T("ചരിത്രം", "History")], ["sci", "🔬", T("ശാസ്ത്രം", "Science")], ["trv", "✈️", T("യാത്രാവിവരണം", "Travel")], ["dra", "🎭", T("നാടകം", "Drama")], ["ess", "📰", T("ലേഖനങ്ങൾ", "Essays")], ["psc", "🎯", T("PSC / മത്സരപ്പരീക്ഷ", "PSC / Exams")]]; }
   function sts() { return [[1, "🟢", T("ലഭ്യം", "Available")], [2, "📖", T("വായനയിൽ", "Being read")]]; }
+  var SMALL = /^(a|an|the|of|and|or|in|on|at|to|for|by|with|from)$/;
+  function cap(x, ttl) { return String(x || "").replace(/(^|[\s.\-(])([a-z])([a-z']*)/g, function (m, p, f, r, i) { return (ttl && i > 0 && p === " " && SMALL.test(f + r)) ? m : p + f.toUpperCase() + r; }); }
   function catIcon(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
