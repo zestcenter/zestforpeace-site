@@ -5,16 +5,16 @@
   function T(m, e) { return ML ? m : e; }
   /* st: 1 = available, 2 = being read, 3 = not available */
   var BOOKS = [
-    { k: "nov", t: ["ബാല്യകാലസഖി", "Balyakalasakhi"], a: ["വൈക്കം മുഹമ്മദ് ബഷീർ", "Vaikom Muhammad Basheer"], c1: "#c0392b", c2: "#f39c6b", m: "🌳", st: 1 },
-    { k: "nov", t: ["ഖസാക്കിന്റെ ഇതിഹാസം", "Khasakkinte Ithihasam"], a: ["ഒ.വി. വിജയൻ", "O.V. Vijayan"], c1: "#1e5f74", c2: "#7fc8a9", m: "🌄", st: 2 },
-    { k: "sto", t: ["പ്രകാശം പരത്തുന്ന ഒരു പെൺകുട്ടി", "Prakasham Parathunna Oru Penkutty"], a: ["ടി. പത്മനാഭൻ", "T. Padmanabhan"], c1: "#6a4bd1", c2: "#c9b8ff", m: "🕯️", st: 1 },
-    { k: "poe", t: ["രമണൻ", "Ramanan"], a: ["ചങ്ങമ്പുഴ കൃഷ്ണപിള്ള", "Changampuzha Krishna Pillai"], c1: "#0f7d58", c2: "#a8e6c9", m: "🪈", st: 1 },
-    { k: "bio", t: ["എന്റെ കഥ", "Ente Katha"], a: ["മാധവിക്കുട്ടി", "Madhavikutty"], c1: "#b5651d", c2: "#ffd59a", m: "✍️", st: 2 }
+    { k: "nov", t: ["ബാല്യകാലസഖി", "Balyakalasakhi"], a: ["വൈക്കം മുഹമ്മദ് ബഷീർ", "Vaikom Muhammad Basheer"], c1: "#c0392b", c2: "#8e2b1f", m: "🌳", st: 1 },
+    { k: "nov", t: ["ഖസാക്കിന്റെ ഇതിഹാസം", "Khasakkinte Ithihasam"], a: ["ഒ.വി. വിജയൻ", "O.V. Vijayan"], c1: "#1f8f6a", c2: "#0f5d47", m: "🌄", st: 2 },
+    { k: "sto", t: ["പ്രകാശം പരത്തുന്ന ഒരു പെൺകുട്ടി", "Prakasham Parathunna Oru Penkutty"], a: ["ടി. പത്മനാഭൻ", "T. Padmanabhan"], c1: "#4c5fd5", c2: "#2d3a8c", m: "🕯️", st: 1 },
+    { k: "poe", t: ["രമണൻ", "Ramanan"], a: ["ചങ്ങമ്പുഴ കൃഷ്ണപിള്ള", "Changampuzha Krishna Pillai"], c1: "#1380b8", c2: "#0b3d5c", m: "🪈", st: 1 },
+    { k: "bio", t: ["എന്റെ കഥ", "Ente Katha"], a: ["മാധവിക്കുട്ടി", "Madhavikutty"], c1: "#b5651d", c2: "#7a3f0c", m: "✍️", st: 2 }
   ];
   /* real book list: ZEST library Google Sheet (columns Title, Author, Category, Available = Yes / No) */
   var SHEET = "https://docs.google.com/spreadsheets/d/1DzLtb58HqebJOrGGo51hX2bVIJj50EOsF0zBYZGEdsA/gviz/tq?tqx=out:csv";
   var LIVE = false, LOADING = false, REDRAW = null;
-  var PAL = [["#c0392b", "#f39c6b", "📕"], ["#1e5f74", "#7fc8a9", "📘"], ["#6a4bd1", "#c9b8ff", "📗"], ["#0f7d58", "#a8e6c9", "📙"], ["#b5651d", "#ffd59a", "📔"], ["#0b5d8f", "#9fd3f2", "📓"], ["#8e3b6f", "#f2b5d4", "📒"]];
+  var PAL = [["#c0392b", "#8e2b1f"], ["#1f8f6a", "#0f5d47"], ["#4c5fd5", "#2d3a8c"], ["#1380b8", "#0b3d5c"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#5b6b2e", "#3a4519"]];
   var CATM = { nov: /novel|നോവൽ/i, sto: /stor|കഥ/i, poe: /poe|കവിത/i, bio: /auto|ആത്മകഥ/i, lif: /biog|ജീവചരിത്ര/i, kid: /kid|child|ബാല/i, his: /hist|ചരിത്ര/i, sci: /sci|ശാസ്ത്ര/i, trv: /trav|യാത്ര/i, dra: /drama|നാടക/i, ess: /essay|ലേഖന/i, psc: /psc|exam|study|പരീക്ഷ/i };
   function csv(t) {
     var rows = [], r = [], f = "", q = false;
@@ -42,15 +42,15 @@
       Object.keys(CATM).some(function (x) { if (CATM[x].test(cat)) { k = x; return true; } });
       var a = au >= 0 ? (r[au] || "").trim() : "", v = av >= 0 ? (r[av] || "").trim() : "yes";
       var hs = 0; for (var i = 0; i < title.length; i++) hs = (hs * 31 + title.charCodeAt(i)) % 997; var pl = PAL[hs % PAL.length];
-      return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: pl[2], st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
+      return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: "", st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
     }).filter(Boolean);
   }
-  (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
+  (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks2") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
   function refresh() {
     if (LOADING) return; LOADING = true;
     fetch(SHEET + "&_=" + Date.now()).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
       var b = toBooks(t); LOADING = false;
-      if (b.length) { BOOKS = b; LIVE = true; try { localStorage.setItem("zestLibBooks", JSON.stringify(b)); } catch (e) {} if (REDRAW) REDRAW(); }
+      if (b.length) { BOOKS = b; LIVE = true; try { localStorage.setItem("zestLibBooks2", JSON.stringify(b)); } catch (e) {} if (REDRAW) REDRAW(); }
     }).catch(function () { LOADING = false; });
   }
   function cats() { return [["nov", "📖", T("നോവൽ", "Novel")], ["sto", "📝", T("കഥകൾ", "Stories")], ["poe", "🪶", T("കവിത", "Poetry")], ["bio", "🙋", T("ആത്മകഥ", "Autobiography")], ["lif", "👤", T("ജീവചരിത്രം", "Biography")], ["kid", "🧒", T("ബാലസാഹിത്യം", "Children")], ["his", "🏛️", T("ചരിത്രം", "History")], ["sci", "🔬", T("ശാസ്ത്രം", "Science")], ["trv", "✈️", T("യാത്രാവിവരണം", "Travel")], ["dra", "🎭", T("നാടകം", "Drama")], ["ess", "📰", T("ലേഖനങ്ങൾ", "Essays")], ["psc", "🎯", T("PSC / മത്സരപ്പരീക്ഷ", "PSC / Exams")]]; }
@@ -84,9 +84,9 @@
     '#zlib.v3 .fb button{border:1.5px solid #d6e3ec;background:#fff;border-radius:999px;padding:8px 14px;font:700 12.5px ' + F + ';color:#3c4d57}#zlib.v3 .fb button.dd{flex:1}#zlib.v3 .fb button.on{background:#0b3d5c;border-color:#0b3d5c;color:#fff}#zlib.v3 .fb button.on.dd{background:#e6f3fb;border-color:#1380b8;color:#0b5d8f}' +
     /* book cards */
     '#zlib .bl{display:grid;gap:10px;padding:0 14px}#zlib .b{display:flex;gap:12px;background:#fff;border-radius:18px;padding:10px;box-shadow:0 2px 0 #e3eaef;animation:zlUp .35s ease both}@keyframes zlUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}' +
-    '#zlib .cv{position:relative;flex:none;width:80px;height:112px;border-radius:6px 10px 10px 6px;padding:8px 6px 6px 10px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;color:#fff;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,.18)}' +
-    '#zlib .cv:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:rgba(0,0,0,.18)}#zlib .cv:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.22),rgba(255,255,255,0) 45%)}' +
-    '#zlib .cv b{position:relative;z-index:1;overflow-wrap:break-word;font:800 9px/1.25 "Noto Sans Malayalam",Inter,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.3)}#zlib .cv i{position:relative;z-index:1;font-style:normal;font-size:20px;text-align:center}#zlib .cv small{position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:600 7.5px/1.2 "Noto Sans Malayalam",Inter,sans-serif;opacity:.95}' +
+    '#zlib .cv{position:relative;flex:none;width:84px;height:118px;border-radius:4px 10px 10px 4px;padding:12px 7px 10px 14px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;color:#fff;overflow:hidden;box-shadow:4px 6px 14px -6px rgba(0,0,0,.45),inset 6px 0 0 rgba(0,0,0,.18),inset 8px 0 0 rgba(255,255,255,.18)}#zlib .cv:before{content:"";position:absolute;left:14px;right:8px;top:62px;height:2px;background:rgba(255,255,255,.5)}#zlib .cv:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.18),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 80%,rgba(0,0,0,.12))}#zlib .cv b{position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;font:800 11.5px/1.25 "Noto Sans Malayalam",Inter,sans-serif;text-shadow:0 1px 2px rgba(0,0,0,.25)}#zlib .cv i{display:none}#zlib .cv small{position:relative;z-index:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;font:700 8.5px/1.25 "Noto Sans Malayalam",Inter,sans-serif;opacity:.92}' +
+    '' +
+    '' +
     '#zlib .in{flex:1;min-width:0;display:flex;flex-direction:column}#zlib .in h4{margin:2px 0 3px;font:800 14.5px/1.35 "Noto Sans Malayalam",Inter,sans-serif;color:#0b3d5c}#zlib .in .au{font-size:12px;color:#5d707c}' +
     '#zlib .tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}#zlib .tg span{font:700 10.5px ' + F + ';padding:3px 8px;border-radius:999px;background:#eef6fb;color:#0b5d8f}#zlib .tg .s1{background:#e8f7ef;color:#0f7d58}#zlib .tg .s2{background:#fff1e2;color:#b5651d}#zlib .tg .s3{background:#fdecef;color:#c0392b}' +
     '#zlib .rq{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:5px;border:0;background:#25d366;color:#fff;border-radius:999px;padding:5px 11px 5px 8px;font:700 11px ' + F + ';cursor:pointer;opacity:.75;box-shadow:0 3px 8px rgba(37,211,102,.25)}#zlib .rq svg{width:14px;height:14px}' +
