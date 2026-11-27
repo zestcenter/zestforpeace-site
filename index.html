@@ -194,16 +194,12 @@ h2.ml{font-family:"Inter","Noto Sans Malayalam",system-ui,sans-serif;font-size:c
 
 /* Clubs logo marquee */
 #clubs{padding:2.5rem 0 2.25rem;overflow:hidden}#clubs .tag{margin-bottom:.4rem}
-.lm{position:relative;overflow:hidden;margin-top:0;padding:.6rem 0}
-.lm::before,.lm::after{content:"";position:absolute;top:0;bottom:0;width:clamp(2rem,10vw,7rem);z-index:2;pointer-events:none}
-.lm::before{left:0;background:linear-gradient(90deg,var(--surface),rgba(238,246,251,0))}
-.lm::after{right:0;background:linear-gradient(270deg,var(--surface),rgba(238,246,251,0))}
-.lm-t{display:flex;width:max-content;mix-blend-mode:multiply;animation:lmv 32s linear infinite}
-.lm:hover .lm-t{animation-play-state:paused}
+.lm{position:relative;overflow-x:auto;overflow-y:hidden;margin-top:0;padding:.6rem 0;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}.lm::-webkit-scrollbar{display:none}
+.lm-t{display:flex;width:max-content;mix-blend-mode:multiply}
 .lm-g{display:flex;align-items:center;gap:clamp(2.5rem,7vw,5rem);padding-right:clamp(2.5rem,7vw,5rem)}
 .cl{flex:none;height:clamp(3.4rem,10vw,5rem);background:var(--i) center/contain no-repeat}
 @keyframes lmv{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.lm{overflow-x:auto}.lm-t{animation:none}.lm-g[aria-hidden]{display:none}.trk{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){.lm-g[aria-hidden]{display:none}.trk{scroll-behavior:auto}}
 @media (prefers-reduced-motion:no-preference){
 html.js .pc.rv.in{transition:opacity .9s ease,transform .35s ease,box-shadow .35s ease}
 html.js .pc.rv.in:hover{transform:translateY(-8px)}
@@ -1498,7 +1494,10 @@ html.zapp #zwh{display:none}
 <section id="clubs" class="alt-bg"><div class="wrap">
 <p class="tag">Our Primary Clubs</p>
 </div>
-<div class="lm"><div class="lm-t"><div class="lm-g"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240" role="img" aria-label="Ideal Students Batch"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240" role="img" aria-label="Zest Kids Club"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240" role="img" aria-label="Zest Golden Girls"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240" role="img" aria-label="Zest Golden Boys"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240" role="img" aria-label="Zest Ladies Club"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240" role="img" aria-label="Zest for Fit Health Club"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240" role="img" aria-label="Zest Senior Citizens Club"></div></div><div class="lm-g" aria-hidden="true"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240"></div></div></div></div><div class="wrap joinrow"><a class="btn lg zjw" href="#join"><span>JOIN WITH US</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
+<div class="lm"><div class="lm-t"><div class="lm-g"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240" role="img" aria-label="Ideal Students Batch"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240" role="img" aria-label="Zest Kids Club"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240" role="img" aria-label="Zest Golden Girls"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240" role="img" aria-label="Zest Golden Boys"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240" role="img" aria-label="Zest Ladies Club"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240" role="img" aria-label="Zest for Fit Health Club"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240" role="img" aria-label="Zest Senior Citizens Club"></div></div><div class="lm-g" aria-hidden="true"><div class="cl" style="--i:var(--i-c1);aspect-ratio:715/240"></div><div class="cl" style="--i:var(--i-c2);aspect-ratio:360/240"></div><div class="cl" style="--i:var(--i-c3);aspect-ratio:362/240"></div><div class="cl" style="--i:var(--i-c4);aspect-ratio:563/240"></div><div class="cl" style="--i:var(--i-c5);aspect-ratio:468/240"></div><div class="cl" style="--i:var(--i-c6);aspect-ratio:691/240"></div><div class="cl" style="--i:var(--i-c7);aspect-ratio:756/240"></div></div></div></div><script>/* clubs logos: auto-scroll + swipe by hand */(function(){var m=document.querySelector("#clubs .lm");if(!m||(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches))return;var t=m.querySelector(".lm-t"),pos=1,last=0,hold=0,resume=0;function half(){return t.scrollWidth/2}function wake(){resume=Date.now()+1800}
+m.addEventListener("touchstart",function(){hold=1},{passive:true});m.addEventListener("touchend",function(){hold=0;wake()},{passive:true});m.addEventListener("touchcancel",function(){hold=0;wake()},{passive:true});m.addEventListener("mouseenter",function(){hold=1});m.addEventListener("mouseleave",function(){hold=0;resume=0});
+m.addEventListener("scroll",function(){var h=half(),x=m.scrollLeft;if(Math.abs(x-pos)>3){if(x>=h)x-=h;else if(x<1)x+=h;if(x!==m.scrollLeft)m.scrollLeft=x;pos=x;if(!hold)wake()}},{passive:true});
+function f(ts){var dt=last?Math.min(ts-last,60):16;last=ts;var h=half();if(h>50&&!hold&&Date.now()>resume){pos+=dt*h/32000;if(pos>=h)pos-=h;m.scrollLeft=pos}requestAnimationFrame(f)}requestAnimationFrame(f)})();</script><div class="wrap joinrow"><a class="btn lg zjw" href="#join"><span>JOIN WITH US</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></section>
 
 <section id="documentary"><div class="wrap">
 <p class="tag">ZEST Documentary</p><h2 class="ml">ഒരു നാടിന്റെ സ്വപ്നസാഫല്യം</h2>
