@@ -126,7 +126,7 @@
       '<p class="zpvn" style="margin:16px 0 0;padding:10px 12px;border-radius:14px;background:#e8f3fa;color:#3b5868;font:600 11.5px/1.5 Inter,\'Noto Sans Malayalam\',sans-serif;text-align:center">🔒 Your details are saved only on this phone. ZEST does not store them anywhere.</p></div>';
     s.querySelector(".x1").onclick = close;
     s.querySelector(".chip").onclick = switcher;
-    s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=6", "ZestRev"); };
+    s.querySelector('[data-go=rev]').onclick = function () { tool("/students.js?v=7", "ZestRev"); };
     s.querySelector('[data-go=mon]').onclick = function () { tool("/money.js?v=5", "ZestMoney"); };
     if (window.__zgo) { var g = s.querySelector('[data-go=' + window.__zgo + ']'); window.__zgo = null; if (g) setTimeout(function () { g.click(); }, 60); }
   }
