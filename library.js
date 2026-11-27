@@ -57,6 +57,8 @@
   function sts() { return [[1, "🟢", T("ലഭ്യം", "Available")], [2, "📖", T("വായനയിൽ", "Being read")]]; }
   var SMALL = /^(a|an|the|of|and|or|in|on|at|to|for|by|with|from)$/;
   function cap(x, ttl) { return String(x || "").replace(/(^|[\s.\-(])([a-z])([a-z']*)/g, function (m, p, f, r, i) { return (ttl && i > 0 && p === " " && SMALL.test(f + r)) ? m : p + f.toUpperCase() + r; }); }
+  var CC = { nov: ["#1f8f6a", "#0f5d47"], sto: ["#1380b8", "#0b3d5c"], poe: ["#c0392b", "#8e2b1f"], bio: ["#b5651d", "#7a3f0c"], lif: ["#8e3b6f", "#5c1f47"], kid: ["#e08a1e", "#b0600a"], his: ["#6d4c41", "#43302a"], sci: ["#4c5fd5", "#2d3a8c"], trv: ["#16a2a2", "#0b6b6b"], dra: ["#a8327a", "#6e1d4f"], ess: ["#5b6b2e", "#3a4519"], psc: ["#455a64", "#263238"] };
+  function catCol(k) { return CC[k] || CC.nov; }
   function catIcon(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -117,7 +119,7 @@
   function i(a) { return ML ? a[0] : a[1]; }
   function stTag(s) { var x = sts().filter(function (y) { return y[0] === s; })[0]; return '<span class="s' + s + '">' + (s === 1 ? "✓ " : "📖 ") + x[2] + '</span>'; }
   function card(b, n) {
-    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + b.c1 + ',' + b.c2 + ')"><span class="wm">' + catIcon(b.k) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
+    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + catCol(b.k)[0] + ',' + catCol(b.k)[1] + ')"><span class="wm">' + catIcon(b.k) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
       '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + catName(b.k) + '</span>' + stTag(b.st) + '</div>' +
       '<button type="button" class="rq"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("പുസ്തകം ചോദിക്കാം", "Request book") + '</button></div></div>';
   }
