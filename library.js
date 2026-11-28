@@ -60,7 +60,17 @@
   var CC = { nov: ["#1f8f6a", "#0f5d47"], sto: ["#1380b8", "#0b3d5c"], poe: ["#c0392b", "#8e2b1f"], bio: ["#b5651d", "#7a3f0c"], lif: ["#8e3b6f", "#5c1f47"], kid: ["#e08a1e", "#b0600a"], his: ["#6d4c41", "#43302a"], sci: ["#4c5fd5", "#2d3a8c"], trv: ["#16a2a2", "#0b6b6b"], dra: ["#a8327a", "#6e1d4f"], ess: ["#5b6b2e", "#3a4519"], psc: ["#455a64", "#263238"] };
   var XC = [["#1f8f6a", "#0f5d47"], ["#1380b8", "#0b3d5c"], ["#c0392b", "#8e2b1f"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#e08a1e", "#b0600a"], ["#4c5fd5", "#2d3a8c"], ["#16a2a2", "#0b6b6b"], ["#a8327a", "#6e1d4f"], ["#5b6b2e", "#3a4519"], ["#455a64", "#263238"], ["#6d4c41", "#43302a"]];
   /* category name exactly as written in the Sheet (sample books use the built-in names) */
-  function cn(b) { return b.c !== undefined ? (b.c || T("മറ്റുള്ളവ", "Other")) : catName(b.k); }
+  /* same category in both languages: Sheet text is shown as written, but switched to the page language when it is a known name */
+  var CDICT = [["Novel", "നോവൽ"], ["Novels", "നോവൽ"], ["Story", "കഥ"], ["Stories", "കഥകൾ"], ["Short Story", "ചെറുകഥ"], ["Short Stories", "ചെറുകഥകൾ"], ["Poem", "കവിത"], ["Poems", "കവിതകൾ"], ["Poetry", "കവിത"],
+    ["Autobiography", "ആത്മകഥ"], ["Biography", "ജീവചരിത്രം"], ["Memoir", "ഓർമ്മക്കുറിപ്പ്"], ["Memoirs", "ഓർമ്മക്കുറിപ്പുകൾ"], ["Children", "ബാലസാഹിത്യം"], ["Kids", "ബാലസാഹിത്യം"], ["Children's Literature", "ബാലസാഹിത്യം"],
+    ["History", "ചരിത്രം"], ["Science", "ശാസ്ത്രം"], ["Travel", "യാത്രാവിവരണം"], ["Travelogue", "യാത്രാവിവരണം"], ["Drama", "നാടകം"], ["Play", "നാടകം"], ["Essay", "ലേഖനം"], ["Essays", "ലേഖനങ്ങൾ"], ["Article", "ലേഖനം"], ["Articles", "ലേഖനങ്ങൾ"],
+    ["Religion", "മതം"], ["Religious", "മതം"], ["Spiritual", "ആത്മീയം"], ["Spirituality", "ആത്മീയം"], ["Agriculture", "കൃഷി"], ["Farming", "കൃഷി"], ["Self Help", "സ്വയം സഹായം"], ["Self-Help", "സ്വയം സഹായം"], ["Motivation", "പ്രചോദനം"], ["Motivational", "പ്രചോദനം"],
+    ["Health", "ആരോഗ്യം"], ["Medicine", "വൈദ്യം"], ["Cookery", "പാചകം"], ["Cooking", "പാചകം"], ["Philosophy", "തത്ത്വചിന്ത"], ["Psychology", "മനശ്ശാസ്ത്രം"], ["Politics", "രാഷ്ട്രീയം"], ["Literature", "സാഹിത്യം"], ["Literary Criticism", "സാഹിത്യ വിമർശനം"],
+    ["Criticism", "നിരൂപണം"], ["Humour", "ഹാസ്യം"], ["Humor", "ഹാസ്യം"], ["Translation", "വിവർത്തനം"], ["Fiction", "ഫിക്ഷൻ"], ["Non Fiction", "നോൺ ഫിക്ഷൻ"], ["Non-Fiction", "നോൺ ഫിക്ഷൻ"], ["Reference", "റഫറൻസ്"], ["Dictionary", "നിഘണ്ടു"],
+    ["General Knowledge", "പൊതുവിജ്ഞാനം"], ["GK", "പൊതുവിജ്ഞാനം"], ["Education", "വിദ്യാഭ്യാസം"], ["Study", "പഠനം"], ["Mathematics", "ഗണിതം"], ["Maths", "ഗണിതം"], ["Environment", "പരിസ്ഥിതി"], ["Nature", "പ്രകൃതി"], ["Law", "നിയമം"], ["Economics", "സാമ്പത്തികം"],
+    ["Sports", "കായികം"], ["Art", "കല"], ["Arts", "കല"], ["Music", "സംഗീതം"], ["Cinema", "സിനിമ"], ["Film", "സിനിമ"], ["Crime", "ക്രൈം"], ["Detective", "കുറ്റാന്വേഷണം"], ["Thriller", "ത്രില്ലർ"], ["Love", "പ്രണയം"], ["Romance", "പ്രണയം"], ["Comics", "കോമിക്സ്"], ["Others", "മറ്റുള്ളവ"], ["Other", "മറ്റുള്ളവ"], ["General", "പൊതു"]];
+  function cdic(x) { var l = x.toLowerCase().replace(/\s+/g, " "), ml = /[\u0D00-\u0D7F]/.test(x); for (var i = 0; i < CDICT.length; i++) { var e = CDICT[i]; if (ml ? e[1] === x : e[0].toLowerCase() === l) return ML ? e[1] : (ml ? e[0] : x.replace(/(^|\s)([a-z])/g, function (m, p, f) { return p + f.toUpperCase(); })); } return x; }
+  function cn(b) { return b.c !== undefined ? (b.c ? cdic(b.c) : T("മറ്റുള്ളവ", "Other")) : catName(b.k); }
   function catCol(b) { if (CC[b.k]) return CC[b.k]; var n = cn(b), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 9973; return XC[h % XC.length]; }
   function catList() { var seen = {}, out = []; BOOKS.forEach(function (b) { var n = cn(b); if (!seen[n]) { seen[n] = 1; out.push([n, catIcon(b.k), esc(n)]); } }); return out; }
   /* spread categories so the same kind doesn't sit together: always take the kind with most books left, never the same as the one just shown */
@@ -217,7 +227,7 @@
         '<div class="cnt"></div><div class="bl"></div>' +
         '<div class="nt">' + T("പുതിയ പുസ്തകങ്ങൾ ലൈബ്രറിയിൽ എത്തുമ്പോൾ ഇവിടെ തനിയെ വരും", "New books appear here automatically when they reach the library") + '</div>';
       w.querySelector(".bk").onclick = close;
-      w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; render(); w.scrollTop = y; };
+      w.querySelector(".lsw").onclick = function () { var y = w.scrollTop; ML = !ML; selC = []; render(); w.scrollTop = y; };
       w.querySelector(".sr input").oninput = function (e) { q = e.target.value; list(); };
       bar(); list();
     }
