@@ -58,7 +58,7 @@
   var SMALL = /^(a|an|the|of|and|or|in|on|at|to|for|by|with|from)$/;
   function cap(x, ttl) { return String(x || "").replace(/(^|[\s.\-(])([a-z])([a-z']*)/g, function (m, p, f, r, i) { return (ttl && i > 0 && p === " " && SMALL.test(f + r)) ? m : p + f.toUpperCase() + r; }); }
   var CC = { nov: ["#1f8f6a", "#0f5d47"], sto: ["#1380b8", "#0b3d5c"], poe: ["#c0392b", "#8e2b1f"], bio: ["#b5651d", "#7a3f0c"], lif: ["#8e3b6f", "#5c1f47"], kid: ["#e08a1e", "#b0600a"], his: ["#6d4c41", "#43302a"], sci: ["#4c5fd5", "#2d3a8c"], trv: ["#16a2a2", "#0b6b6b"], dra: ["#a8327a", "#6e1d4f"], ess: ["#5b6b2e", "#3a4519"], psc: ["#455a64", "#263238"] };
-  var XC = [["#1f8f6a", "#0f5d47"], ["#1380b8", "#0b3d5c"], ["#c0392b", "#8e2b1f"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#e08a1e", "#b0600a"], ["#4c5fd5", "#2d3a8c"], ["#16a2a2", "#0b6b6b"], ["#a8327a", "#6e1d4f"], ["#5b6b2e", "#3a4519"], ["#455a64", "#263238"], ["#6d4c41", "#43302a"]];
+  var XC = [["#1f8f6a", "#0f5d47"], ["#1380b8", "#0b3d5c"], ["#c0392b", "#8e2b1f"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#e08a1e", "#b0600a"], ["#4c5fd5", "#2d3a8c"], ["#16a2a2", "#0b6b6b"], ["#a8327a", "#6e1d4f"], ["#5b6b2e", "#3a4519"], ["#455a64", "#263238"], ["#6d4c41", "#43302a"], ["#d35400", "#8a3600"], ["#2e7d32", "#1b4d1e"], ["#7b4fd6", "#4b2c94"], ["#00838f", "#005057"], ["#ad1457", "#6d0c36"], ["#827717", "#524b0d"], ["#5d4037", "#3a2722"], ["#1565c0", "#0b3c78"]];
   /* category name exactly as written in the Sheet (sample books use the built-in names) */
   /* same category in both languages: Sheet text is shown as written, but switched to the page language when it is a known name */
   var CDICT = [["Novel", "നോവൽ"], ["Novels", "നോവൽ"], ["Story", "കഥ"], ["Stories", "കഥകൾ"], ["Short Story", "ചെറുകഥ"], ["Short Stories", "ചെറുകഥകൾ"], ["Poem", "കവിത"], ["Poems", "കവിതകൾ"], ["Poetry", "കവിത"],
@@ -88,14 +88,30 @@
     var w = l.split(" "); if (w.length > 1 && ML) { var hit = 0, out = w.map(function (y) { var r = cone(y); if (r !== tc(y)) hit++; return r; }); if (hit === w.length) return out.join(" "); }
     return tc(x.trim()); }
   function cdic(x) { var parts = x.split(/\s*(?:&|\/|,|\+|\band\b)\s*/); if (parts.length < 2) return cone(x); return parts.filter(function (y) { return y.trim(); }).map(cone).join(" & "); }
-  function cn(b) { return b.c !== undefined ? (b.c ? cdic(b.c) : T("മറ്റുള്ളവ", "Other")) : catName(b.k); }
-  function catCol(b) { if (CC[b.k]) return CC[b.k]; var n = cn(b), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 9973; return XC[h % XC.length]; }
-  function catList() { var seen = {}, out = []; BOOKS.forEach(function (b) { var n = cn(b); if (!seen[n]) { seen[n] = 1; out.push([n, catIcon(b.k), esc(n)]); } }); return out; }
+  function cn(b) { return b.c !== undefined ? (b.c ? cdic(b.c) : "") : catName(b.k); }
+  /* icon that fits each Sheet category; two categories never share one */
+  var ICR = [[/novel|fiction|നോവൽ/i, "📖"], [/short ?stor|ചെറുകഥ/i, "📝"], [/stor|tale|കഥ/i, "📚"], [/poe|കവിത/i, "🪶"], [/autobio|ആത്മകഥ/i, "✍️"], [/biog|ജീവചരിത്ര/i, "📜"], [/memor|ഓർമ്മ/i, "💭"], [/child|kid|ബാല/i, "🧒"],
+    [/hist|ചരിത്ര/i, "🏛️"], [/agri|farm|കൃഷി/i, "🌾"], [/health|medic|ayur|ആരോഗ്യ|വൈദ്യ/i, "🩺"], [/yoga|യോഗ/i, "🧘"], [/cook|food|പാചക|ഭക്ഷണ/i, "🍳"], [/math|ഗണിത/i, "➗"], [/physic|chem|bio|scien|ശാസ്ത്ര/i, "🔬"],
+    [/general knowl|gk|quiz|പൊതുവിജ്ഞാന|ക്വിസ്/i, "💡"], [/sport|game|കായിക|കളി/i, "⚽"], [/upanish|veda|gita|purana|myth|ഉപനിഷ|വേദ|ഗീത|പുരാണ/i, "🕉️"], [/quran|hadith|islam|ഖുർആൻ|ഹദീസ്|ഇസ്ലാ/i, "☪️"], [/bible|christ|ബൈബിൾ|ക്രിസ്ത്യ/i, "✝️"],
+    [/relig|spirit|മതം|ആത്മീയ/i, "🙏"], [/critic|നിരൂപണ|വിമർശ/i, "🔍"], [/essay|article|ലേഖന/i, "📰"], [/trav|യാത്ര/i, "✈️"], [/drama|play|നാടക/i, "🎭"], [/psc|exam|compet|പരീക്ഷ/i, "🎯"], [/self|motiv|personal|leader|സ്വയം|പ്രചോദന|വ്യക്തിത്വ/i, "🌱"],
+    [/philos|തത്ത്വ/i, "🤔"], [/psych|മനശ്ശാസ്ത്ര/i, "🧠"], [/polit|law|രാഷ്ട്രീയ|നിയമ/i, "⚖️"], [/econ|business|manag|സാമ്പത്തിക|ബിസിനസ്/i, "💼"], [/comput|tech|സാങ്കേതിക|കമ്പ്യൂട്ടർ/i, "💻"], [/lang|gramm|english|dictionar|ഭാഷ|വ്യാകരണ|നിഘണ്ടു/i, "🔤"],
+    [/environ|nature|പരിസ്ഥിതി|പ്രകൃതി/i, "🌳"], [/geog|ഭൂമിശാസ്ത്ര/i, "🗺️"], [/astro|ജ്യോതി/i, "🔭"], [/humo|satir|ഹാസ്യ/i, "😄"], [/love|roman|പ്രണയ/i, "❤️"], [/crime|detect|thrill|ക്രൈം|കുറ്റാന്വേഷണ|ത്രില്ലർ/i, "🕵️"], [/horror|ഹൊറർ/i, "👻"],
+    [/music|സംഗീത/i, "🎵"], [/art|കല/i, "🎨"], [/cinema|film|സിനിമ/i, "🎬"], [/educat|study|career|വിദ്യാഭ്യാസ|പഠന|കരിയർ/i, "🎓"], [/women|family|parent|സ്ത്രീ|കുടുംബ|രക്ഷാ/i, "🏠"], [/social|cultur|സാമൂഹിക|സംസ്കാര/i, "🤝"], [/letter|കത്ത്/i, "✉️"], [/speech|interview|പ്രസംഗ|അഭിമുഖ/i, "🎤"], [/translat|വിവർത്തന/i, "🌐"]];
+  var IPOOL = ["📗", "📘", "📙", "📕", "📓", "📔", "🔖", "🗂️", "🧭", "🌟", "🪴", "🧩", "🎐", "🪁", "🧿", "🔆"];
+  var ICM = null, ICN = -1, ICC = {};
+  function iconMap() { if (ICM && ICN === BOOKS.length) return ICM; ICM = {}; ICC = {}; ICN = BOOKS.length; var used = {}, cnt = {}, raw = {};
+    BOOKS.forEach(function (b) { var key = b.c !== undefined ? b.c.trim().toLowerCase() : b.k; if (!key) return; cnt[key] = (cnt[key] || 0) + 1; raw[key] = b.c !== undefined ? b.c : catName(b.k); });
+    Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a]; }).forEach(function (key) { var x = raw[key], ic = null; for (var i = 0; i < ICR.length; i++) if (ICR[i][0].test(x) && !used[ICR[i][1]]) { ic = ICR[i][1]; break; }
+      if (!ic) for (var j = 0; j < IPOOL.length; j++) if (!used[IPOOL[j]]) { ic = IPOOL[j]; break; } ic = ic || "📖"; used[ic] = 1; ICM[key] = ic;
+      var k2 = null; BOOKS.some(function (b) { var kk = b.c !== undefined ? b.c.trim().toLowerCase() : b.k; if (kk === key) { k2 = b.k; return true; } }); var col = CC[k2] && !used['c' + CC[k2][0]] ? CC[k2] : null; if (!col) for (var c = 0; c < XC.length; c++) if (!used['c' + XC[c][0]]) { col = XC[c]; break; } col = col || XC[0]; used['c' + col[0]] = 1; ICC[key] = col; }); return ICM; }
+  function bIcon(b) { var key = b.c !== undefined ? b.c.trim().toLowerCase() : b.k; return (key && iconMap()[key]) || "📖"; }
+  function catCol(b) { if (b.c === "") return ["#607d8b", "#37474f"]; var key = b.c !== undefined ? b.c.trim().toLowerCase() : b.k; iconMap(); if (key && ICC[key]) return ICC[key]; if (CC[b.k]) return CC[b.k]; var n = cn(b), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 9973; return XC[h % XC.length]; }
+  function catList() { var seen = {}, out = []; BOOKS.forEach(function (b) { var n = cn(b); if (n && !seen[n]) { seen[n] = 1; out.push([n, bIcon(b), esc(n)]); } }); return out; }
   /* spread categories so the same kind doesn't sit together: always take the kind with most books left, never the same as the one just shown */
-  function mix(list) { var g = {}, ord = []; list.forEach(function (b) { var gk = cn(b); if (!g[gk]) { g[gk] = []; ord.push(gk); } g[gk].push(b); }); if (ord.length < 2) return list;
+  function mix(list) { var g = {}, ord = []; list.forEach(function (b) { var gk = "~" + cn(b); if (!g[gk]) { g[gk] = []; ord.push(gk); } g[gk].push(b); }); if (ord.length < 2) return list;
     var out = [], last = null, first = ord.slice().sort(function (a, b) { return g[b].length - g[a].length; }).slice(0, 10);
     first.forEach(function (k) { out.push(g[k].shift()); last = k; }); /* first: one book from each kind (up to 10), no repeats */
-    while (out.length < list.length) { var pick = null; ord.forEach(function (k) { if (g[k].length && k !== last && (!pick || g[k].length > g[pick].length)) pick = k; }); if (!pick) pick = last; out.push(g[pick].shift()); last = pick; } return out; }
+    while (out.length < list.length) { var pick = null; ord.forEach(function (k) { if (g[k].length && k !== last && (pick === null || g[k].length > g[pick].length)) pick = k; }); if (pick === null) pick = last; out.push(g[pick].shift()); last = pick; } return out; }
   function catIcon(k) { var c = k && cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -156,8 +172,8 @@
   function i(a) { return ML ? a[0] : a[1]; }
   function stTag(s) { var x = sts().filter(function (y) { return y[0] === s; })[0]; return '<span class="s' + s + '">' + (s === 1 ? "✓ " : "📖 ") + x[2] + '</span>'; }
   function card(b, n) {
-    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + catCol(b)[0] + ',' + catCol(b)[1] + ')"><span class="wm">' + catIcon(b.k) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
-      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + esc(cn(b)) + '</span>' + stTag(b.st) + '</div>' +
+    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + catCol(b)[0] + ',' + catCol(b)[1] + ')"><span class="wm">' + bIcon(b) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
+      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg">' + (cn(b) ? '<span>' + esc(cn(b)) + '</span>' : '') + stTag(b.st) + '</div>' +
       '<button type="button" class="rq"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("പുസ്തകം ചോദിക്കാം", "Request book") + '</button></div></div>';
   }
 
