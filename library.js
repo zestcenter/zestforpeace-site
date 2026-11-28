@@ -90,9 +90,9 @@
   function cdic(x) { var parts = x.split(/\s*(?:&|\/|,|\+|\band\b)\s*/); if (parts.length < 2) return cone(x); return parts.filter(function (y) { return y.trim(); }).map(cone).join(" & "); }
   function cn(b) { return b.c !== undefined ? (b.c ? cdic(b.c) : "") : catName(b.k); }
   /* icon that fits each Sheet category; two categories never share one */
-  var ICR = [[/novel|fiction|നോവൽ/i, "📖"], [/short ?stor|ചെറുകഥ/i, "📝"], [/stor|tale|കഥ/i, "📚"], [/poe|കവിത/i, "🪶"], [/autobio|ആത്മകഥ/i, "✍️"], [/biog|ജീവചരിത്ര/i, "📜"], [/memor|ഓർമ്മ/i, "💭"], [/child|kid|ബാല/i, "🧒"],
+  var ICR = [[/novel|fiction|നോവൽ/i, "📖"], [/short ?stor|ചെറുകഥ/i, "📝"], [/stor|tale|കഥ/i, "📚"], [/poe|കവിത/i, "🪶"], [/autobio|ആത്മകഥ/i, "✍️"], [/biog|ജീവചരിത്ര/i, "🗒️"], [/memor|ഓർമ്മ/i, "💭"], [/child|kid|ബാല/i, "🧒"],
     [/hist|ചരിത്ര/i, "🏛️"], [/agri|farm|കൃഷി/i, "🌾"], [/health|medic|ayur|ആരോഗ്യ|വൈദ്യ/i, "🩺"], [/yoga|യോഗ/i, "🧘"], [/cook|food|പാചക|ഭക്ഷണ/i, "🍳"], [/math|ഗണിത/i, "➗"], [/physic|chem|bio|scien|ശാസ്ത്ര/i, "🔬"],
-    [/general knowl|gk|quiz|പൊതുവിജ്ഞാന|ക്വിസ്/i, "💡"], [/sport|game|കായിക|കളി/i, "⚽"], [/upanish|veda|gita|purana|myth|ഉപനിഷ|വേദ|ഗീത|പുരാണ/i, "🕉️"], [/quran|hadith|islam|ഖുർആൻ|ഹദീസ്|ഇസ്ലാ/i, "☪️"], [/bible|christ|ബൈബിൾ|ക്രിസ്ത്യ/i, "✝️"],
+    [/general knowl|gk|quiz|പൊതുവിജ്ഞാന|ക്വിസ്/i, "💡"], [/sport|game|കായിക|കളി/i, "⚽"], [/upanish|veda|gita|purana|myth|ഉപനിഷ|വേദ|ഗീത|പുരാണ/i, "📜"], [/quran|hadith|islam|ഖുർആൻ|ഹദീസ്|ഇസ്ലാ/i, "📗"], [/bible|christ|ബൈബിൾ|ക്രിസ്ത്യ/i, "📘"],
     [/relig|spirit|മതം|ആത്മീയ/i, "🙏"], [/critic|നിരൂപണ|വിമർശ/i, "🔍"], [/essay|article|ലേഖന/i, "📰"], [/trav|യാത്ര/i, "✈️"], [/drama|play|നാടക/i, "🎭"], [/psc|exam|compet|പരീക്ഷ/i, "🎯"], [/self|motiv|personal|leader|സ്വയം|പ്രചോദന|വ്യക്തിത്വ/i, "🌱"],
     [/philos|തത്ത്വ/i, "🤔"], [/psych|മനശ്ശാസ്ത്ര/i, "🧠"], [/polit|law|രാഷ്ട്രീയ|നിയമ/i, "⚖️"], [/econ|business|manag|സാമ്പത്തിക|ബിസിനസ്/i, "💼"], [/comput|tech|സാങ്കേതിക|കമ്പ്യൂട്ടർ/i, "💻"], [/lang|gramm|english|dictionar|ഭാഷ|വ്യാകരണ|നിഘണ്ടു/i, "🔤"],
     [/environ|nature|പരിസ്ഥിതി|പ്രകൃതി/i, "🌳"], [/geog|ഭൂമിശാസ്ത്ര/i, "🗺️"], [/astro|ജ്യോതി/i, "🔭"], [/humo|satir|ഹാസ്യ/i, "😄"], [/love|roman|പ്രണയ/i, "❤️"], [/crime|detect|thrill|ക്രൈം|കുറ്റാന്വേഷണ|ത്രില്ലർ/i, "🕵️"], [/horror|ഹൊറർ/i, "👻"],
