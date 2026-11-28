@@ -15,7 +15,7 @@
   var SHEET = "https://docs.google.com/spreadsheets/d/1DzLtb58HqebJOrGGo51hX2bVIJj50EOsF0zBYZGEdsA/gviz/tq?tqx=out:csv";
   var LIVE = false, LOADING = false, REDRAW = null;
   var PAL = [["#c0392b", "#8e2b1f"], ["#1f8f6a", "#0f5d47"], ["#4c5fd5", "#2d3a8c"], ["#1380b8", "#0b3d5c"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#5b6b2e", "#3a4519"]];
-  var CATM = { nov: /novel|നോവൽ/i, sto: /stor|കഥ/i, poe: /poe|കവിത/i, bio: /auto|ആത്മകഥ/i, lif: /biog|ജീവചരിത്ര/i, kid: /kid|child|ബാല/i, his: /hist|ചരിത്ര/i, sci: /sci|ശാസ്ത്ര/i, trv: /trav|യാത്ര/i, dra: /drama|നാടക/i, ess: /essay|ലേഖന/i, psc: /psc|exam|study|പരീക്ഷ/i };
+  var CATM = { nov: /novel|നോവൽ/i, bio: /auto|ആത്മകഥ/i, lif: /biog|ജീവചരിത്ര/i, his: /hist|ചരിത്ര/i, kid: /kid|child|ബാല/i, sto: /\bstor|കഥ/i, poe: /poe|കവിത/i, sci: /sci|ശാസ്ത്ര/i, trv: /trav|യാത്ര/i, dra: /drama|നാടക/i, ess: /essay|ലേഖന/i, psc: /psc|exam|study|പരീക്ഷ/i };
   function csv(t) {
     var rows = [], r = [], f = "", q = false;
     for (var i = 0; i < t.length; i++) {
@@ -59,6 +59,11 @@
   function cap(x, ttl) { return String(x || "").replace(/(^|[\s.\-(])([a-z])([a-z']*)/g, function (m, p, f, r, i) { return (ttl && i > 0 && p === " " && SMALL.test(f + r)) ? m : p + f.toUpperCase() + r; }); }
   var CC = { nov: ["#1f8f6a", "#0f5d47"], sto: ["#1380b8", "#0b3d5c"], poe: ["#c0392b", "#8e2b1f"], bio: ["#b5651d", "#7a3f0c"], lif: ["#8e3b6f", "#5c1f47"], kid: ["#e08a1e", "#b0600a"], his: ["#6d4c41", "#43302a"], sci: ["#4c5fd5", "#2d3a8c"], trv: ["#16a2a2", "#0b6b6b"], dra: ["#a8327a", "#6e1d4f"], ess: ["#5b6b2e", "#3a4519"], psc: ["#455a64", "#263238"] };
   function catCol(k) { return CC[k] || CC.nov; }
+  /* spread categories so the same kind doesn't sit together: always take the kind with most books left, never the same as the one just shown */
+  function mix(list) { var g = {}, ord = []; list.forEach(function (b) { if (!g[b.k]) { g[b.k] = []; ord.push(b.k); } g[b.k].push(b); }); if (ord.length < 2) return list;
+    var out = [], last = null, first = ord.slice().sort(function (a, b) { return g[b].length - g[a].length; }).slice(0, 10);
+    first.forEach(function (k) { out.push(g[k].shift()); last = k; }); /* first: one book from each kind (up to 10), no repeats */
+    while (out.length < list.length) { var pick = null; ord.forEach(function (k) { if (g[k].length && k !== last && (!pick || g[k].length > g[pick].length)) pick = k; }); if (!pick) pick = last; out.push(g[pick].shift()); last = pick; } return out; }
   function catIcon(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -148,6 +153,7 @@
     }
     function list() {
       var r = BOOKS.filter(function (b) { return match(b, selC, selS); });
+      if (selC.length !== 1) r = mix(r);
       w.querySelector(".cnt").textContent = ML ? r.length + " പുസ്തകങ്ങൾ" : r.length + (r.length === 1 ? " book" : " books");
       w.querySelector(".bl").innerHTML = r.length ? r.map(card).join("") : '<div class="no"><i>📭</i>' + T("ഈ ഫിൽട്ടറിൽ പുസ്തകം ഇല്ല", "No books match this filter") + '<br><button type="button">' + T("എല്ലാം കാണിക്കൂ", "Show all") + '</button></div>';
       var nb = w.querySelector(".no button"); if (nb) nb.onclick = function () { selC = []; selS = []; q = ""; w.querySelector(".sr input").value = ""; bar(); list(); };
