@@ -51,7 +51,7 @@
     if (!inApp()) { if (window.ZestDrawer && ZestDrawer.appOnly) ZestDrawer.appOnly(ml); return; }
     if ((k === "pv" || k === "ch") && window.zOpenPV) return zOpenPV(k);
     if (k === "stu") { var a = document.createElement("a"); a.href = "#students"; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); return; }
-    if (k === "lib") { if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=19"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); } return; }
+    if (k === "lib") { if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=20"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); } return; }
     var w = k === "blood" ? "blood" : "eq";
     if (window.ZestMed) ZestMed.open(w); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=20"; sc.onload = function () { ZestMed.open(w); }; document.head.appendChild(sc); }
   });
