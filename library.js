@@ -69,7 +69,25 @@
     ["Criticism", "നിരൂപണം"], ["Humour", "ഹാസ്യം"], ["Humor", "ഹാസ്യം"], ["Translation", "വിവർത്തനം"], ["Fiction", "ഫിക്ഷൻ"], ["Non Fiction", "നോൺ ഫിക്ഷൻ"], ["Non-Fiction", "നോൺ ഫിക്ഷൻ"], ["Reference", "റഫറൻസ്"], ["Dictionary", "നിഘണ്ടു"],
     ["General Knowledge", "പൊതുവിജ്ഞാനം"], ["GK", "പൊതുവിജ്ഞാനം"], ["Education", "വിദ്യാഭ്യാസം"], ["Study", "പഠനം"], ["Mathematics", "ഗണിതം"], ["Maths", "ഗണിതം"], ["Environment", "പരിസ്ഥിതി"], ["Nature", "പ്രകൃതി"], ["Law", "നിയമം"], ["Economics", "സാമ്പത്തികം"],
     ["Sports", "കായികം"], ["Art", "കല"], ["Arts", "കല"], ["Music", "സംഗീതം"], ["Cinema", "സിനിമ"], ["Film", "സിനിമ"], ["Crime", "ക്രൈം"], ["Detective", "കുറ്റാന്വേഷണം"], ["Thriller", "ത്രില്ലർ"], ["Love", "പ്രണയം"], ["Romance", "പ്രണയം"], ["Comics", "കോമിക്സ്"], ["Others", "മറ്റുള്ളവ"], ["Other", "മറ്റുള്ളവ"], ["General", "പൊതു"]];
-  function cdic(x) { var l = x.toLowerCase().replace(/\s+/g, " "), ml = /[\u0D00-\u0D7F]/.test(x); for (var i = 0; i < CDICT.length; i++) { var e = CDICT[i]; if (ml ? e[1] === x : e[0].toLowerCase() === l) return ML ? e[1] : (ml ? e[0] : x.replace(/(^|\s)([a-z])/g, function (m, p, f) { return p + f.toUpperCase(); })); } return x; }
+  CDICT = CDICT.concat([["Knowledge", "വിജ്ഞാനം"], ["Upanishad", "ഉപനിഷത്ത്"], ["Upanishads", "ഉപനിഷത്തുകൾ"], ["Memories", "ഓർമ്മകൾ"], ["Memory", "ഓർമ്മ"], ["Vedas", "വേദങ്ങൾ"], ["Veda", "വേദം"], ["Puranas", "പുരാണങ്ങൾ"], ["Mythology", "പുരാണം"], ["Epic", "ഇതിഹാസം"], ["Epics", "ഇതിഹാസങ്ങൾ"],
+    ["Ramayana", "രാമായണം"], ["Mahabharata", "മഹാഭാരതം"], ["Gita", "ഗീത"], ["Bhagavad Gita", "ഭഗവദ് ഗീത"], ["Quran", "ഖുർആൻ"], ["Hadith", "ഹദീസ്"], ["Islamic", "ഇസ്ലാമിക"], ["Islam", "ഇസ്ലാം"], ["Bible", "ബൈബിൾ"], ["Christian", "ക്രിസ്ത്യൻ"], ["Hindu", "ഹിന്ദു"],
+    ["Technology", "സാങ്കേതികവിദ്യ"], ["Computer", "കമ്പ്യൂട്ടർ"], ["English", "ഇംഗ്ലീഷ്"], ["Malayalam", "മലയാളം"], ["Language", "ഭാഷ"], ["Grammar", "വ്യാകരണം"], ["Career", "കരിയർ"], ["Business", "ബിസിനസ്"], ["Management", "മാനേജ്മെന്റ്"],
+    ["Parenting", "രക്ഷാകർതൃത്വം"], ["Family", "കുടുംബം"], ["Women", "സ്ത്രീകൾ"], ["Social", "സാമൂഹികം"], ["Society", "സമൂഹം"], ["Culture", "സംസ്കാരം"], ["Kerala", "കേരളം"], ["India", "ഇന്ത്യ"], ["World", "ലോകം"], ["Geography", "ഭൂമിശാസ്ത്രം"],
+    ["Astronomy", "ജ്യോതിശാസ്ത്രം"], ["Physics", "ഭൗതികശാസ്ത്രം"], ["Chemistry", "രസതന്ത്രം"], ["Biology", "ജീവശാസ്ത്രം"], ["Ayurveda", "ആയുർവേദം"], ["Yoga", "യോഗ"], ["Quiz", "ക്വിസ്"], ["PSC", "പി.എസ്.സി"], ["Competitive Exams", "മത്സരപ്പരീക്ഷ"], ["Exam", "പരീക്ഷ"], ["Exams", "പരീക്ഷകൾ"],
+    ["Folk", "നാടോടി"], ["Folklore", "നാടോടിക്കഥ"], ["Fairy Tales", "യക്ഷിക്കഥകൾ"], ["Moral Stories", "സാരോപദേശ കഥകൾ"], ["Proverbs", "പഴഞ്ചൊല്ലുകൾ"], ["Quotes", "ഉദ്ധരണികൾ"], ["Leadership", "നേതൃത്വം"], ["Personality Development", "വ്യക്തിത്വ വികസനം"],
+    ["Collection", "സമാഹാരം"], ["Anthology", "സമാഹാരം"], ["Satire", "ആക്ഷേപഹാസ്യം"], ["Horror", "ഹൊറർ"], ["Adventure", "സാഹസികം"], ["Fantasy", "ഫാന്റസി"], ["Science Fiction", "ശാസ്ത്ര കഥ"], ["Letters", "കത്തുകൾ"], ["Interview", "അഭിമുഖം"], ["Interviews", "അഭിമുഖങ്ങൾ"],
+    ["Speech", "പ്രസംഗം"], ["Speeches", "പ്രസംഗങ്ങൾ"], ["Study", "പഠനം"], ["Studies", "പഠനങ്ങൾ"], ["Novelette", "നോവലെറ്റ്"], ["Novella", "നോവലെറ്റ്"], ["Life", "ജീവിതം"], ["Ethics", "സദാചാരം"], ["Moral", "സദാചാരം"], ["Gandhi", "ഗാന്ധി"], ["Freedom Struggle", "സ്വാതന്ത്ര്യ സമരം"], ["Sport", "കായികം"], ["Games", "കളികൾ"], ["Medical", "വൈദ്യം"], ["Food", "ഭക്ഷണം"]]);
+  function lev(a, b) { var m = a.length, n = b.length, d = []; for (var i = 0; i <= m; i++) { d[i] = [i]; for (var j = 1; j <= n; j++) d[i][j] = i ? Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)) : j; } return d[m][n]; }
+  function tc(x) { return x.toLowerCase().replace(/(^|[\s\-])([a-z])/g, function (m, p, f) { return p + f.toUpperCase(); }); }
+  /* one name: exact, then close spelling (typos like KNOWLDGE), then word by word */
+  function cone(x) { var ml = /[\u0D00-\u0D7F]/.test(x), l = x.toLowerCase().replace(/\s+/g, " ").trim(), i, e, best = null, bd = 9;
+    for (i = 0; i < CDICT.length; i++) { e = CDICT[i]; if (ml ? e[1] === x.trim() : e[0].toLowerCase() === l) return ML ? e[1] : e[0]; }
+    if (ml) return x.trim();
+    for (i = 0; i < CDICT.length; i++) { e = CDICT[i]; var k = e[0].toLowerCase(); if (Math.abs(k.length - l.length) > 2 || l.length < 5) continue; var dd = lev(k, l); if (dd < bd && dd <= (l.length > 8 ? 2 : 1)) { bd = dd; best = e; } }
+    if (best) return ML ? best[1] : best[0];
+    var w = l.split(" "); if (w.length > 1 && ML) { var hit = 0, out = w.map(function (y) { var r = cone(y); if (r !== tc(y)) hit++; return r; }); if (hit === w.length) return out.join(" "); }
+    return tc(x.trim()); }
+  function cdic(x) { var parts = x.split(/\s*(?:&|\/|,|\+|\band\b)\s*/); if (parts.length < 2) return cone(x); return parts.filter(function (y) { return y.trim(); }).map(cone).join(" & "); }
   function cn(b) { return b.c !== undefined ? (b.c ? cdic(b.c) : T("മറ്റുള്ളവ", "Other")) : catName(b.k); }
   function catCol(b) { if (CC[b.k]) return CC[b.k]; var n = cn(b), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 9973; return XC[h % XC.length]; }
   function catList() { var seen = {}, out = []; BOOKS.forEach(function (b) { var n = cn(b); if (!seen[n]) { seen[n] = 1; out.push([n, catIcon(b.k), esc(n)]); } }); return out; }
