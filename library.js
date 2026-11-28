@@ -38,19 +38,19 @@
     if (ti < 0) ti = 0;
     return rows.slice(1).map(function (r, n) {
       var title = cap((r[ti] || "").trim(), 1); if (!title) return null;
-      var cat = ca >= 0 ? (r[ca] || "") : "", k = "nov";
+      var cat = ca >= 0 ? (r[ca] || "").trim() : "", k = "";
       Object.keys(CATM).some(function (x) { if (CATM[x].test(cat)) { k = x; return true; } });
       var a = au >= 0 ? (r[au] || "").trim() : "", v = av >= 0 ? (r[av] || "").trim() : "yes";
       var hs = 0; for (var i = 0; i < title.length; i++) hs = (hs * 31 + title.charCodeAt(i)) % 997; var pl = PAL[hs % PAL.length];
-      a = cap(a); return { k: k, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: "", st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
+      a = cap(a); return { k: k, c: cat, t: [title, title], a: [a, a], c1: pl[0], c2: pl[1], m: "", st: /^(no|n|ഇല്ല|0|false)/i.test(v) ? 2 : 1 };
     }).filter(Boolean);
   }
-  (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks2") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
+  (function cached() { try { var c = JSON.parse(localStorage.getItem("zestLibBooks3") || "null"); if (c && c.length) { BOOKS = c; LIVE = true; } } catch (e) {} })();
   function refresh() {
     if (LOADING) return; LOADING = true;
     fetch(SHEET + "&_=" + Date.now()).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
       var b = toBooks(t); LOADING = false;
-      if (b.length) { BOOKS = b; LIVE = true; try { localStorage.setItem("zestLibBooks2", JSON.stringify(b)); } catch (e) {} if (REDRAW) REDRAW(); }
+      if (b.length) { BOOKS = b; LIVE = true; try { localStorage.setItem("zestLibBooks3", JSON.stringify(b)); } catch (e) {} if (REDRAW) REDRAW(); }
     }).catch(function () { LOADING = false; });
   }
   function cats() { return [["nov", "📖", T("നോവൽ", "Novel")], ["sto", "📝", T("കഥകൾ", "Stories")], ["poe", "🪶", T("കവിത", "Poetry")], ["bio", "✍️", T("ആത്മകഥ", "Autobiography")], ["lif", "📜", T("ജീവചരിത്രം", "Biography")], ["kid", "🧒", T("ബാലസാഹിത്യം", "Children")], ["his", "🏛️", T("ചരിത്രം", "History")], ["sci", "🔬", T("ശാസ്ത്രം", "Science")], ["trv", "✈️", T("യാത്രാവിവരണം", "Travel")], ["dra", "🎭", T("നാടകം", "Drama")], ["ess", "📰", T("ലേഖനങ്ങൾ", "Essays")], ["psc", "🎯", T("PSC / മത്സരപ്പരീക്ഷ", "PSC / Exams")]]; }
@@ -58,13 +58,17 @@
   var SMALL = /^(a|an|the|of|and|or|in|on|at|to|for|by|with|from)$/;
   function cap(x, ttl) { return String(x || "").replace(/(^|[\s.\-(])([a-z])([a-z']*)/g, function (m, p, f, r, i) { return (ttl && i > 0 && p === " " && SMALL.test(f + r)) ? m : p + f.toUpperCase() + r; }); }
   var CC = { nov: ["#1f8f6a", "#0f5d47"], sto: ["#1380b8", "#0b3d5c"], poe: ["#c0392b", "#8e2b1f"], bio: ["#b5651d", "#7a3f0c"], lif: ["#8e3b6f", "#5c1f47"], kid: ["#e08a1e", "#b0600a"], his: ["#6d4c41", "#43302a"], sci: ["#4c5fd5", "#2d3a8c"], trv: ["#16a2a2", "#0b6b6b"], dra: ["#a8327a", "#6e1d4f"], ess: ["#5b6b2e", "#3a4519"], psc: ["#455a64", "#263238"] };
-  function catCol(k) { return CC[k] || CC.nov; }
+  var XC = [["#1f8f6a", "#0f5d47"], ["#1380b8", "#0b3d5c"], ["#c0392b", "#8e2b1f"], ["#b5651d", "#7a3f0c"], ["#8e3b6f", "#5c1f47"], ["#e08a1e", "#b0600a"], ["#4c5fd5", "#2d3a8c"], ["#16a2a2", "#0b6b6b"], ["#a8327a", "#6e1d4f"], ["#5b6b2e", "#3a4519"], ["#455a64", "#263238"], ["#6d4c41", "#43302a"]];
+  /* category name exactly as written in the Sheet (sample books use the built-in names) */
+  function cn(b) { return b.c !== undefined ? (b.c || T("മറ്റുള്ളവ", "Other")) : catName(b.k); }
+  function catCol(b) { if (CC[b.k]) return CC[b.k]; var n = cn(b), h = 0; for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 9973; return XC[h % XC.length]; }
+  function catList() { var seen = {}, out = []; BOOKS.forEach(function (b) { var n = cn(b); if (!seen[n]) { seen[n] = 1; out.push([n, catIcon(b.k), esc(n)]); } }); return out; }
   /* spread categories so the same kind doesn't sit together: always take the kind with most books left, never the same as the one just shown */
-  function mix(list) { var g = {}, ord = []; list.forEach(function (b) { if (!g[b.k]) { g[b.k] = []; ord.push(b.k); } g[b.k].push(b); }); if (ord.length < 2) return list;
+  function mix(list) { var g = {}, ord = []; list.forEach(function (b) { var gk = cn(b); if (!g[gk]) { g[gk] = []; ord.push(gk); } g[gk].push(b); }); if (ord.length < 2) return list;
     var out = [], last = null, first = ord.slice().sort(function (a, b) { return g[b].length - g[a].length; }).slice(0, 10);
     first.forEach(function (k) { out.push(g[k].shift()); last = k; }); /* first: one book from each kind (up to 10), no repeats */
     while (out.length < list.length) { var pick = null; ord.forEach(function (k) { if (g[k].length && k !== last && (!pick || g[k].length > g[pick].length)) pick = k; }); if (!pick) pick = last; out.push(g[pick].shift()); last = pick; } return out; }
-  function catIcon(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
+  function catIcon(k) { var c = k && cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[1] : "📖"; }
   function catName(k) { var c = cats().filter(function (x) { return x[0] === k; })[0]; return c ? c[2] : ""; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var F = "Inter,\"Noto Sans Malayalam\",sans-serif";
@@ -124,8 +128,8 @@
   function i(a) { return ML ? a[0] : a[1]; }
   function stTag(s) { var x = sts().filter(function (y) { return y[0] === s; })[0]; return '<span class="s' + s + '">' + (s === 1 ? "✓ " : "📖 ") + x[2] + '</span>'; }
   function card(b, n) {
-    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + catCol(b.k)[0] + ',' + catCol(b.k)[1] + ')"><span class="wm">' + catIcon(b.k) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
-      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + catName(b.k) + '</span>' + stTag(b.st) + '</div>' +
+    return '<div class="b" style="animation-delay:' + (n * 0.05) + 's"><div class="cv" style="background:linear-gradient(155deg,' + catCol(b)[0] + ',' + catCol(b)[1] + ')"><span class="wm">' + catIcon(b.k) + '</span><b data-zfs="">' + esc(b.t[0]) + '</b><svg viewBox="0 0 92 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 C 20 0, 40 26, 60 12 S 85 4, 92 10 L92 46 L0 46Z" fill="#fff"/></svg><small data-zfs="">' + esc(b.a[0]) + '</small></div>' +
+      '<div class="in"><h4>' + esc(i(b.t)) + '</h4><div class="au">' + esc(i(b.a)) + '</div><div class="tg"><span>' + esc(cn(b)) + '</span>' + stTag(b.st) + '</div>' +
       '<button type="button" class="rq"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>' + T("പുസ്തകം ചോദിക്കാം", "Request book") + '</button></div></div>';
   }
 
@@ -135,7 +139,7 @@
     var old = document.getElementById("zlib"); if (old) old.remove();
     var w = document.createElement("div"); w.id = "zlib"; w.className = V; w.setAttribute("data-noi18n", "");
     ML = true; var q = "", selC = [], selS = [];
-    function match(b, C, S) { var qq = q.trim().toLowerCase(); return (!C.length || C.indexOf(b.k) > -1) && (!S.length || S.indexOf(b.st) > -1) && (!qq || (b.t.join(" ") + " " + b.a.join(" ")).toLowerCase().indexOf(qq) > -1); }
+    function match(b, C, S) { var qq = q.trim().toLowerCase(); return (!C.length || C.indexOf(cn(b)) > -1) && (!S.length || S.indexOf(b.st) > -1) && (!qq || (b.t.join(" ") + " " + b.a.join(" ")).toLowerCase().indexOf(qq) > -1); }
     function bar() {
       var all = !selC.length && !selS.length;
       function n(a) { return a.length ? '<em class="n">' + a.length + '</em>' : ''; }
@@ -147,7 +151,7 @@
       w.querySelector('[data-f=sug]').onclick = suggest;
       w.querySelector('[data-f=cat]').onclick = function () { pick("cat"); };
       w.querySelector('[data-f=st]').onclick = function () { pick("st"); };
-      var af = selC.map(function (k) { return '<span>' + catName(k) + ' <b data-c="' + k + '">✕</b></span>'; }).concat(selS.map(function (k) { return '<span>' + sts()[k - 1][2] + ' <b data-s="' + k + '">✕</b></span>'; }));
+      var af = selC.map(function (k) { return '<span>' + esc(k) + ' <b data-c="' + esc(k) + '">✕</b></span>'; }).concat(selS.map(function (k) { return '<span>' + sts()[k - 1][2] + ' <b data-s="' + k + '">✕</b></span>'; }));
       w.querySelector(".af").innerHTML = af.join("");
       w.querySelectorAll(".af b").forEach(function (x) { x.onclick = function () { if (x.dataset.c) selC = selC.filter(function (k) { return k !== x.dataset.c; }); else selS = selS.filter(function (k) { return k !== +x.dataset.s; }); bar(); list(); }; });
     }
@@ -161,13 +165,13 @@
     }
     function pick(type) {
       var isC = type === "cat", tmp = (isC ? selC : selS).slice();
-      var rows = isC ? cats() : sts();
+      var rows = isC ? catList() : sts();
       var bg = document.createElement("div"); bg.className = "zls-bg";
       var sh = document.createElement("div"); sh.className = "zls"; sh.setAttribute("data-noi18n", "");
-      function cnt(key) { return BOOKS.filter(function (b) { return isC ? b.k === key && match(b, [], selS) : b.st === key && match(b, selC, []); }).length; }
+      function cnt(key) { return BOOKS.filter(function (b) { return isC ? cn(b) === key && match(b, [], selS) : b.st === key && match(b, selC, []); }).length; }
       sh.innerHTML = '<div class="gr"></div><div class="sh2"><h4>' + (isC ? "🗂️ " + T("വിഭാഗം", "Category") : "✅ " + T("ലഭ്യത", "Availability")) + '</h4><button type="button" class="x" aria-label="Close">✕</button></div><div class="hs">' + T("ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം", "You can pick more than one") + '</div><div class="ls">' +
         '<div class="r ra' + (tmp.length ? '' : ' on') + '" data-k="__all"><span class="ck"></span><i>' + (isC ? '📚' : '✅') + '</i><span>' + T("എല്ലാം", "All") + '</span><small>' + BOOKS.filter(function (b) { return isC ? match(b, [], selS) : match(b, selC, []); }).length + '</small></div>' +
-        rows.map(function (x) { return '<div class="r' + (tmp.indexOf(x[0]) > -1 ? ' on' : '') + '" data-k="' + x[0] + '"><span class="ck"></span><i>' + x[1] + '</i><span>' + x[2] + '</span><small>' + cnt(x[0]) + '</small></div>'; }).join("") +
+        rows.map(function (x) { return '<div class="r' + (tmp.indexOf(x[0]) > -1 ? ' on' : '') + '" data-k="' + (isC ? esc(x[0]) : x[0]) + '"><span class="ck"></span><i>' + x[1] + '</i><span>' + x[2] + '</span><small>' + cnt(x[0]) + '</small></div>'; }).join("") +
         '</div><div class="ap"><button type="button" class="a">' + T("പുസ്തകങ്ങൾ കാണിക്കൂ", "Show books") + '</button></div>';
       function upd() {}
       sh.querySelectorAll(".r").forEach(function (r) { r.onclick = function () {
