@@ -199,7 +199,7 @@
   function blood(t) {
     var bd = shell("ബ്ലഡ് ബാങ്ക്", "രക്തം വേണ്ടവരും ദാതാക്കളും", "🩸", true);
     var open = D.blood.req.filter(function (r) { return !r.done; }).length;
-    var h = tabs([["req", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["don", "🩸 ദാതാക്കൾ (" + D.blood.don.length + ")"]], t) + dm();
+    var h = tabs([["req", "📩 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["don", "🩸 ദാതാക്കൾ (" + D.blood.don.length + ")"]], t) + dm();
     if (t === "req") {
       h += D.blood.req.map(function (r, i) {
         var av = D.blood.don.filter(function (x) { return x.g === r.g && x.nx <= 0; }).length;
@@ -234,7 +234,7 @@
     MSV = "drv";
     var bd = shell("മെഡിക്കൽ സപ്പോർട്ട്", "ആശുപത്രി യാത്രയ്ക്ക് വളണ്ടിയർ ഡ്രൈവർ", "🚗", true);
     var open = D.drv.req.filter(function (r) { return !r.done; }).length;
-    var h = msv() + '<div class="dtb">' + tabs([["req", "🙏 യാത്ര ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["vol", "🚗 ഡ്രൈവർമാർ (" + D.drv.vol.length + ")"]], t) + '</div>' + dm();
+    var h = msv() + '<div class="dtb">' + tabs([["req", "📩 യാത്ര ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["vol", "🚗 ഡ്രൈവർമാർ (" + D.drv.vol.length + ")"]], t) + '</div>' + dm();
     if (t === "req") {
       h += D.drv.req.map(function (r, i) {
         return '<div class="it' + (r.done ? ' dn' : '') + '"><div class="ih"><span class="eg">🏥</span><div><b>' + r.hs + '</b><small>' + r.n + ' · ' + r.h + ', ' + r.p + '</small></div>' + (r.done ? '<em class="ok">✅ പൂർത്തിയായി</em>' : (r.dr ? '<em class="ok">ഡ്രൈവർ ഉണ്ട്</em>' : '<em class="wt">ഡ്രൈവർ വേണം</em>')) + '</div>' +
@@ -254,7 +254,7 @@
     MSV = "eq";
     var bd = shell("മെഡിക്കൽ സപ്പോർട്ട്", "ഉപകരണങ്ങൾ · ആശുപത്രി യാത്ര", "🦽", true);
     var open = D.eq.need.filter(function (r) { return !r.done; }).length;
-    var h = msv() + '<div class="etb">' + tabs([["need", "🙏 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["give", "🤝 ലഭ്യമായവ (" + D.eq.give.length + ")"]], t) + '</div>' + dm();
+    var h = msv() + '<div class="etb">' + tabs([["need", "📩 ആവശ്യങ്ങൾ" + (open ? " (" + open + ")" : "")], ["give", "🤝 ലഭ്യമായവ (" + D.eq.give.length + ")"]], t) + '</div>' + dm();
     if (t === "need") {
       h += D.eq.need.map(function (r, i) {
         var m = D.eq.give.filter(function (g) { return g.it === r.it; }).length;

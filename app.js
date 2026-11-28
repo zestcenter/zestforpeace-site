@@ -290,8 +290,8 @@
     })();
   });
 
-  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=20"; s.onload = cb; document.head.appendChild(s); }
-  function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=22"; s.onload = cb; document.head.appendChild(s); }
+  function loadMed(cb) { if (window.ZestMed) return cb(); var s = document.createElement("script"); s.src = "/medical.js?v=21"; s.onload = cb; document.head.appendChild(s); }
+  function loadLib(cb) { if (window.ZestLib) return cb(); var s = document.createElement("script"); s.src = "/library.js?v=23"; s.onload = cb; document.head.appendChild(s); }
   function clickHash(h) { var a = document.createElement("a"); a.href = h; a.style.display = "none"; document.body.appendChild(a); a.click(); a.remove(); }
   /* ask name / house / mobile before sending a suggestion (nothing is saved on the phone) */
   function zWho(head, text) {

@@ -79,7 +79,7 @@
     var pl = places().map(function (p, i) { return [i === 3 ? "other" : p, p]; });
     var today = new Date(), iso = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2);
     return '<div class="mhr"><h3>' + T("നാട്ടുകാർ നാട്ടുകാർക്ക്", "Neighbours helping neighbours") + '</h3><p>' + T("വീട്ടിൽ ഉപയോഗിക്കാത്ത ചികിത്സാ ഉപകരണങ്ങൾ ആവശ്യക്കാർക്ക് എത്തിക്കാം", "Pass unused medical equipment to those who need it") + '</p></div>' +
-      '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("എനിക്ക് വേണം", "I need") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🤝 ' + T("ഞാൻ കൊടുക്കാം", "I can give") + '</button></div>' +
+      '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>📩 ' + T("എനിക്ക് വേണം", "I need") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🤝 ' + T("ഞാൻ കൊടുക്കാം", "I can give") + '</button></div>' +
       '<div class="lb">' + (need ? T("ഏത് ഉപകരണമാണ് വേണ്ടത്?", "Which equipment do you need?") : T("നിങ്ങളുടെ കയ്യിൽ ഉള്ളത് (ഒന്നിൽ കൂടുതൽ തിരഞ്ഞെടുക്കാം)", "What do you have? (pick one or more)")) + ' <em class="rqm">*</em></div>' +
       '<div class="g' + (need ? '' : ' multi') + '">' + it.map(function (x, i) { return '<button type="button" class="t' + (sl.indexOf(i) > -1 ? ' sel' : '') + '" data-i="' + i + '"><i style="background:' + x[2] + '">' + x[0] + '</i>' + x[1] + '</button>'; }).join("") + '</div>' +
       '<div class="f oth"' + (othOn ? '' : ' hidden') + '>' + fld("oth", T("ഏത് ഉപകരണം?", "Which equipment?"), inp(need ? "othN" : "othG", "text", T("ഉപകരണത്തിന്റെ പേര് എഴുതൂ", "Type the equipment name"))) + '</div>' +
@@ -104,7 +104,7 @@
   function drvPage(tab) {
     var need = tab !== "give", today = new Date(), iso = today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2) + "T00:00";
     return '<div class="mhr"><h3>' + T("ആശുപത്രി യാത്രയ്ക്ക് വളണ്ടിയർ ഡ്രൈവർ", "Volunteer drivers for hospital trips") + '</h3><p>' + T("വണ്ടിയില്ലാത്തവർക്ക് ആശുപത്രിയിൽ പോകാൻ നാട്ടിലെ വളണ്ടിയർമാർ കൂട്ടിക്കൊണ്ടുപോകും.", "Volunteers from our village take people without a vehicle to hospital.") + '</p></div>' +
-      '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>🙏 ' + T("യാത്ര വേണം", "Need a ride") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🚗 ' + T("ഞാൻ ഡ്രൈവ് ചെയ്യാം", "I can drive") + '</button></div>' +
+      '<div class="tb"><button type="button" data-tab="need"' + (need ? ' class="on"' : '') + '>📩 ' + T("യാത്ര വേണം", "Need a ride") + '</button><button type="button" data-tab="give"' + (!need ? ' class="on"' : '') + '>🚗 ' + T("ഞാൻ ഡ്രൈവ് ചെയ്യാം", "I can drive") + '</button></div>' +
       '<div class="f">' +
       '<div class="r2">' + fld("n", T("പേര്", "Name"), inp("n", "text", T("നിങ്ങളുടെ പേര്", "Your name"))) + fld("h", T("വീട്ടുപേര്", "House name"), inp("h", "text", T("വീട്ടുപേര്", "House name"))) + '</div>' +
       fld("m", T("മൊബൈൽ നമ്പർ", "Mobile number"), inp("m", "tel", T("10 അക്ക നമ്പർ", "10-digit number"), ' inputmode="tel" maxlength="13"')) +
@@ -198,13 +198,13 @@
     return VAL.rp === "other" ? '<span class="zpo">' + inp("rpo", "text", T("സ്ഥലം എഴുതൂ", "Type place")) + '<button type="button" class="zpb" aria-label="Back to list">▾</button></span>' : sel("rp", pl).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("സ്ഥലം", "Place")); }
   function bloodPage(tab) {
     var give = tab !== "need", G = ["A+", "A−", "B+", "B−", "O+", "O−", "AB+", "AB−"];
-    var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>🙏 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
+    var h = '<div class="tb"><button type="button" data-tab="give"' + (give ? ' class="on"' : '') + '>🩸 ' + T("രക്തം നൽകാം", "Give blood") + '</button><button type="button" data-tab="need"' + (!give ? ' class="on"' : '') + '>📩 ' + T("രക്തം വേണം", "Need blood") + '</button></div>';
     if (!give) {
       var DEMO = !BCOUNT, BC = BCOUNT || { "A+": 3, "A−": 0, "B+": 2, "B−": 1, "O+": 2, "O−": 0, "AB+": 1, "AB−": 0 }, tot = 0; G.forEach(function (g) { tot += +BC[g] || 0; });
       return h + '<div class="zbav"><h4>🩸 ' + T("ഇപ്പോൾ ലഭ്യമായ രക്തദാതാക്കൾ", "Donors available now") + (DEMO ? ' <small style="font:700 10.5px Inter,sans-serif;color:#b26a00;background:#fff4e0;padding:2px 8px;border-radius:999px;vertical-align:middle">' + T("മാതൃക", "Sample") + '</small>' : '') + '</h4><p>' + T("ZEST-ൽ ചേർന്ന, ഇപ്പോൾ രക്തം നൽകാൻ കഴിയുന്നവരുടെ എണ്ണം", "Registered donors who can donate right now") + '</p><div class="zbag">' +
         G.map(function (g) { var n = +BC[g] || 0; return '<div' + (n ? '' : ' class="z"') + '><i class="bgi">' + bagSvg() + '<b>' + g + '</b></i><span>' + (n ? (ML ? n + " പേർ" : n + (n > 1 ? " donors" : " donor")) : T("ഇല്ല", "None")) + '</span></div>'; }).join("") + '</div></div>' +
         '<div class="zbtot"><b>' + tot + '</b><span>' + T("രക്തദാതാക്കൾ നാട്ടിൽ തയ്യാറാണ് 💚", "donors are ready in our village 💚") + '<br><small>' + T("പേരും നമ്പറും സുരക്ഷയ്ക്കായി കാണിക്കില്ല", "Names and numbers are kept private") + '</small></span></div>' +
-        '<div class="zbt">🙏 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +
+        '<div class="zbt">📩 ' + T("രക്തം ആവശ്യമുള്ള ആളുടെ വിവരങ്ങൾ", "Patient details") + '</div><div class="f zbfs zbneedf">' +
         ifl("🙂", inp("rn", "text", T("ആവശ്യമുള്ള ആളുടെ പേര്", "Patient name"))) + ifl("🏠", inp("rh", "text", T("വീട്ടുപേര്", "House name"))) +
         '<div class="r2">' + ifl("📍", '<span class="zpc">' + rPlace() + '</span>') + ifl("📱", inp("rm", "tel", T("മൊബൈൽ", "Mobile"), ' inputmode="tel" maxlength="13"')) + '</div>' +
         '<div class="r2">' + ifl("🩸", sel("rg", G.map(function (g) { return [g, g]; })).replace(T("തിരഞ്ഞെടുക്കൂ", "Choose"), T("ഗ്രൂപ്പ്", "Group"))) + ifl("🧪", inp("ru", "number", T("യൂണിറ്റ്", "Units"), ' inputmode="numeric" min="1" max="20"')) + '</div>' +
@@ -229,7 +229,7 @@
       '<div class="zbd"' + (VAL.bl === "lt3" ? '' : ' hidden') + '><div class="zbdl">' + T("ഏത് തീയതിയിലാണ് രക്തം കൊടുത്തത്?", "Which date did you donate?") + '</div>' + ifl("📅", inp("bd", "date", "", ' max="' + isoD(new Date()) + '" min="' + isoD(new Date(Date.now() - 92 * 864e5)) + '"')) + '<div class="zbnx">' + nextTxt() + '</div></div>' +
       '</div><button type="button" class="go zbgo">🩸 ' + T("രക്തദാതാവായി ചേരാം", "Join as a donor") + '</button>' +
       '<p class="pv">🔒 ' + T("ഈ വിവരങ്ങൾ ZEST അഡ്മിന് മാത്രമേ കാണാൻ കഴിയൂ", "Only ZEST admins can see these details") + '</p>'
-      : '<div class="zbno">🙏 ' + T("ശരി, ഒരു പ്രശ്നവുമില്ല. എപ്പോഴെങ്കിലും തയ്യാറാകുമ്പോൾ ഇവിടെ വന്ന് ചേരാം.", "No problem. You can join here whenever you are ready.") + '</div>') +
+      : '<div class="zbno">📩 ' + T("ശരി, ഒരു പ്രശ്നവുമില്ല. എപ്പോഴെങ്കിലും തയ്യാറാകുമ്പോൾ ഇവിടെ വന്ന് ചേരാം.", "No problem. You can join here whenever you are ready.") + '</div>') +
       '';
   }
   function bsheet(html) { var bg = document.createElement("div"); bg.className = "zbs-bg"; var sh = document.createElement("div"); sh.className = "zbs"; sh.setAttribute("data-noi18n", "");

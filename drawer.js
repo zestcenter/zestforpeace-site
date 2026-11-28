@@ -138,7 +138,7 @@
       var inApp2 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp2) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
       var which = mh === "#med-blood" ? "blood" : mh === "#med-drv" ? "drv" : "eq";
-      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=20"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
+      if (window.ZestMed) ZestMed.open(which); else { var sc = document.createElement("script"); sc.src = "/medical.js?v=21"; sc.onload = function () { ZestMed.open(which); }; document.head.appendChild(sc); }
       return; }
     var zg = /^#zgo-(home|zest)-(.+)$/.exec(a.getAttribute("href") || "");
     if (zg) { e.preventDefault(); e.stopImmediatePropagation(); hide();
@@ -155,7 +155,7 @@
     if (a.getAttribute("href") === "#zlib") { e.preventDefault(); e.stopImmediatePropagation(); hide();
       var inApp3 = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
       if (!inApp3) { appOnly(window.ZestLang && ZestLang.get() === "ml"); return; }
-      if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=22"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); }
+      if (window.ZestLib) ZestLib.open(); else { var sl = document.createElement("script"); sl.src = "/library.js?v=23"; sl.onload = function () { ZestLib.open(); }; document.head.appendChild(sl); }
       return; }
     if (a.getAttribute("href") === "#soon") { e.preventDefault(); e.stopImmediatePropagation(); var ml = window.ZestLang && ZestLang.get() === "ml";
       var isApp = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
@@ -187,7 +187,7 @@
   /* admin: hidden entry – tap the ZEST logo in the menu header 5 times; admin item shows only on logged-in admin phones */
   (function () {
     if (!((window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true)) return; /* admin only inside the app */
-    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=8"; s.onload = cb; document.head.appendChild(s); }
+    function loadAdm(cb) { if (window.ZestAdmin) return cb(); var s = document.createElement("script"); s.src = "/admin.js?v=9"; s.onload = cb; document.head.appendChild(s); }
     loadAdm(function () {}); /* testing: admin item visible in app menu */
     var taps = 0, tt; var lg = dw.querySelector(".zdw-hd2 img");
     if (lg) lg.addEventListener("click", function () { taps++; clearTimeout(tt); tt = setTimeout(function () { taps = 0; }, 1500); if (taps >= 5) { taps = 0; hide(); loadAdm(function () { ZestAdmin.open(); }); } });
